@@ -6,6 +6,9 @@ It runs as an app within Google Chrome and allows you to configure the u360gts f
 
 ## Install
 
- 1.- Download the zip file from the repository
+ 1.- Download the zip file from the repository.
+ 
  2.- Open Chrome's extensions page in your browser by pasting chrome://chrome/extensions/ into your address bar and pressing Enter.
+ 
  3.- Drag and drop the extension you just downloaded into the Chrome extensions page.
+ 
