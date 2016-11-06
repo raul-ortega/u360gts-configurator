@@ -22,6 +22,7 @@
 	<script src="jquery-3.1.1.js"></script>
 	<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script src="main.js"></script>
+	<!--<script src="map.js"></script>-->
 	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" href="styles.css">
 
@@ -53,9 +54,13 @@
 	/*.ui-spinner-input {margin: .17em 0; text-align:center;}*/
 	#cli-terminal {display: block;width:100%;padding:5px 5px 5px 5px;margin:15 15 15 15;height:400px;background-color: #000000;color: #ffffff;}
 	#cli-reciever {display: block;width:100%;height:100%;padding:0;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;}
-	#log-reciever {display: block;width:50%;height:100%;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;}
 	#cli-sender {width:100%;height:30px;margin-top:10px;padding:5px 5px 5px 5px;background-color: #000000;color: #ffffff;}
 	.slider {margin-left: 7px; margin-right:7px; margin-top:15px;}
+	#loadmap {position:relative;left:36%;top:0;width:65%;height:100%;z-index:1000;}
+	#log-receiver {position:relative;left:0;top:-100%;display: block;width:35%;max-width:35%;height:50%;max-height:100%;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;z-index:2000;font-size:12px;}
+	
+	
+	
   </style>
   <title>u360gts configurator</title>
 </head>
@@ -296,7 +301,14 @@
     </label>
   </div>-->
   <div id="tabs-5">
-	<textarea id="log-reciever" name="log-reciever" readonly style=""></textarea>
+	<div id="loadmap" style="">
+		<iframe src="map.html" id="map" style="width:100%;height:99%;"></iframe>
+		<div class="controls">
+			  <a href="#" id="zoom_in">+</a>
+			  <a href="#" id="zoom_out">–</a>
+		</div>
+	</div>
+	<textarea id="log-receiver" name="log-receiver" readonly style=" "></textarea>
   </div>
   <div id="tabs-6">
 	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-reciever" name="cli-reciever" readonly></textarea></div>
