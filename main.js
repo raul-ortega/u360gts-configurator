@@ -21,6 +21,8 @@ var connectionId = -1;
 var updateCheckBoxesAllowed = false;
 var serialReceiving = false;
 
+var cliModeEnabled = false;
+
 var bitrates = [1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200];
 
 var commands = {
@@ -38,7 +40,8 @@ String.prototype.contains = function(param)
    return this.indexOf(param) != -1; 
 };
 String.prototype.getParamValue = function(parser) {
-	return this.substr(this.indexOf(parser) + parser.length);
+	var value = this.substr(this.indexOf(parser) + parser.length)
+	return value;
 }
 
 
@@ -93,6 +96,7 @@ var last_sent_command;
 		clearAll();
 		serialSend(connectionId, str2ab('save\n'));
 		setStatus("Saving and rebooting");
+		cliModeEnabled = true;
 	});
 	$("#default").click(function(){
 		serialSend(connectionId, str2ab('defaults\n'));
@@ -100,16 +104,19 @@ var last_sent_command;
 	});
 	$("#enter").click(function(){
 		sendCliEnterCommands();
+		cliModeEnabled = true;
 	});
 	$("#exit").click(function(){
 		clearAll();
 		serialSend(connectionId, str2ab('exit\n'));
 		setStatus("Exiting and rebooting");
+		cliModeEnabled = false;
 	});
 	$("#boot").click(function(){
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
 		chrome.serial.disconnect(connectionId,function(){onClose;setStatus("Ready to load firware");});
+		cliModeEnabled = false;
 	});
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
@@ -194,12 +201,24 @@ function onReceive(receiveInfo) {
 	serialReceiving = true;
 	this.lineBuffer += ab2str(receiveInfo.data);
 	
-	if(last_sent_command == commands.exit || last_sent_command == commands.save ){
-		$("#cli-reciever").append(line+'<br/>');
-		$("#cli-reciever").scrollTop($('#cli-reciever')[0].scrollHeight);
+	var index;
+	
+	if(cliModeEnabled == false){
+		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
+			var line = this.lineBuffer.substr(0, index + 1);
+			$("#log-receiver").append(line+'<br/>');
+			$("#log-receiver").scrollTop($('#log-receiver')[0].scrollHeight);
+			var message = {
+				action: 'center',
+				line: line
+			};
+			var frame = document.getElementById('map');
+			frame.contentWindow.postMessage(message, '*');			
+			this.lineBuffer = this.lineBuffer.substr(index + 1);
+		}
 	}
 	else {
-	var index;
+		
 		
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
@@ -298,12 +317,8 @@ function loadFeatures(data){
 	$("[id*='-feature']").each(function(){
 		var paramId = $(this).attr('id');
 		var param = paramId.slice(0, paramId.indexOf("-feature"));
-		if(data.contains(param)) {
-			var paramValue = (data.getParamValue(param) >= 0)?false:true;
-			setCheckbox("#" + paramId,paramValue);
-		}
-		
-      
+		var paramValue = (data.contains(param))?true:false;
+		setCheckbox("#" + paramId,paramValue);
 	})
 }
 
