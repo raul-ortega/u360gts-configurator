@@ -1,0 +1,62 @@
+# VERSION
+# amv-open360tracker-32bits /NAZE 7.0.1 Nov  5 2016 / 16:21:08 (ecf13ce)
+
+# FEATURE
+Enabled: VBAT SERVO_TILT SOFTSERIAL GPS TELEMETRY DISPLAY EASING EPS
+
+# SERIAL
+serial 0 1 9600 57600 0 115200
+serial 1 2 115200 9600 0 115200
+serial 30 4096 115200 9600 0 115200
+serial 31 0 115200 9600 0 115200
+
+looptime = 3000
+emf_avoidance = ON
+
+pan0 = 1528
+pan0_calibrated = 1
+min_pan_speed = 0
+tilt0 = 500
+tilt90 = 1400
+easing = 1
+easing_steps = 40
+easing_milis = 15
+easing_min_angle = 2
+init_servos = 0
+p = 3200
+i = 50
+d = 200
+max_pid_error = 1
+pid_divider = 15
+max_pid_accumulator = 10000
+max_pid_gain = 500
+offset = 90
+offset_trim = 0
+gps_provider = UBLOX
+gps_sbas_mode = AUTO
+gps_auto_config = ON
+gps_auto_baud = OFF
+gps_min_sats = 6
+start_tracking_distance = 10
+telemetry_protocol = 8
+telemetry_baud = 4
+telemetry_min_sats = 6
+mag_declination = 207
+serial 30 4096 9600 9600 9600 9600
+eps_frequency = 250
+eps_interpolation = OFF
+eps_interpolation_points = 3
+eps_distance_gain = 50
+eps_heading_gain = 50
+eps_speed_gain = 50
+nopid_max_speed = 70
+nopid_min_delta = 0.2
+nopid_map_angle = 90
+vbat_scale = 110
+vbat_min_cell_voltage = 35
+vbat_max_cell_voltage = 38
+vbat_warning_cell_voltage = 36
+
+
+	
+	

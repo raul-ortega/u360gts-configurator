@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--/*
+ * This file is part of u360gts, aka amv-open360tracker 32bits:
+ * https://github.com/raul-ortega/amv-open360tracker-32bits
+ *
+ * u360gts is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * u360gts is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with u360gts.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */-->
+<html>
+<head>
+	<script src="jquery-3.1.1.js"></script>
+	<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+	<script src="main.js"></script>
+	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" href="styles.css">
+
+	
+	  <style>
+	  .ui-tabs .ui-tabs-panel {height:580px;}
+	label {
+		width:auto;
+		margin:0;
+		border:none;
+	}
+	.ui-controlgroup-vertical {
+		width: 150px;
+	}
+	.ui-controlgroup.ui-controlgroup-vertical > button.ui-button,
+	.ui-controlgroup.ui-controlgroup-vertical > .ui-controlgroup-label {
+		text-align: left;
+		width:50px;
+	}
+	.ui-controlgroup-horizontal .ui-spinner-input {
+		width: 55px;
+		margin-right:4px;margin-left:4px;
+		/*padding: 0;*/
+	}
+	/*.ui-controlgroup-item {margin-right:5px;}*/
+	.ui-widget .ui-widget {
+	    font-size: .8em;
+	}
+	/*.ui-spinner-input {margin: .17em 0; text-align:center;}*/
+	#cli-terminal {display: block;width:100%;padding:5px 5px 5px 5px;margin:15 15 15 15;height:400px;background-color: #000000;color: #ffffff;}
+	#cli-reciever {display: block;width:100%;height:100%;padding:0;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;}
+	#log-reciever {display: block;width:50%;height:100%;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;}
+	#cli-sender {width:100%;height:30px;margin-top:10px;padding:5px 5px 5px 5px;background-color: #000000;color: #ffffff;}
+	.slider {margin-left: 7px; margin-right:7px; margin-top:15px;}
+  </style>
+  <title>u360gts configurator</title>
+</head>
+<body style="background-color:#000000;">
+	<img src="logo-u360gts-white.png" width="128px;" style="position:absolute;left:15px;top:15px;">
+  <div id="container" style="background-color:#000000;margin-left:145px;margin-top:10px;">
+	<label>
+	Port:
+	<select id="port-picker"></select>&nbsp;
+	Bauds:
+	<select name="baud-picker" id="baud-picker"></select>
+	&nbsp;<button id="serial-connect">Connect</button>
+	  Status:
+	  <span id="status" style="color:#ffffff;">Loading</span>
+	&nbsp;&nbsp;&nbsp;Version:&nbsp;<span id="firmware-version"style="color:#ffffff;">unknown</span>
+	</label>
+  </div>
+
+  <div class="controlgroup" style="margin:0;padding:5px">
+    <button id="enter">CLI ENTER</button>
+	<button id="exit">CLI EXIT</button>
+	<button id="boot">BOOT MODE</button>
+	<button id="default">DEFAULTS</button>
+	<button id="save">SAVE</button>
+  </div>
+  <div class="controlgroup" style="margin:0;padding:5px">
+	<button id="backup" disabled>BACKUP CONFIG</button>
+	<button id="retore-backup" disabled>RESTORE CONFIG</button>
+  </div>
+
+  <div id="tabs">
+  <ul>
+    <!--<li><a href="#tabs-1">Main</a></li>-->
+    <li><a href="#tabs-2">Basic settings</a></li>
+    <li><a href="#tabs-3">Features</a></li>
+	<!--<li><a href="#tabs-4">Control</a></li>-->
+    <li><a href="#tabs-5">Logs</a></li>
+	<li><a href="#tabs-6">CLI Mode</a></li>
+	<li><a href="#tabs-7">Documentation & Support</a></li>
+  </ul>
+  <!--<div id="tabs-1">
+  </div>-->
+  <div id="tabs-2">
+	<div class="widget">
+		<fieldset>
+			<legend>Magnetometer</legend>
+			<div class="controlgroup">
+				<button id="calibrate_mag">calibrate mag</button>
+				<label for="offset-spinner" class="ui-controlgroup-label">Offset</label>
+				<input id="offset-spinner" class="ui-spinner-input" value="0">
+				<label for="mag_calibrated-checkbox">Calibrated</label>
+				<input type="checkbox" name="mag_calibrated-checkbox" id="mag_calibrated-checkbox">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>PAN</legend>
+			<div class="controlgroup">
+				<button id="calibrate_pan">calibrate pan</button>
+				<label for="pan0-spinner" class="ui-controlgroup-label">Pan 0</label>
+				<input id="pan0-spinner" class="ui-spinner-input" value="0">
+				<label for="min_pan_speed-spinner" class="ui-controlgroup-label">Min Speed</label>
+				<input id="min_pan_speed-spinner" class="ui-spinner-input" value="0">
+				<label for="pan0_calibrated-checkbox">Calibrated</label>
+				<input type="checkbox" name="pan0_calibrated-checkbox" id="pan0_calibrated-checkbox">
+			</div>		
+			<div class="controlgroup">
+				<label for="p-spinner" class="ui-controlgroup-label">P</label>
+				<input id="p-spinner" class="ui-spinner-input" value="0">
+				<label for="i-spinner" class="ui-controlgroup-label">I</label>
+				<input id="i-spinner" class="ui-spinner-input" value="0">
+				<label for="d-spinner" class="ui-controlgroup-label">D</label>
+				<input id="d-spinner" class="ui-spinner-input" value="0">
+				<label for="max_pid_gain-spinner" class="ui-controlgroup-label">Max Gain</label>
+				<input id="max_pid_gain-spinner" class="ui-spinner-input" value="0">
+			</div>
+			<br/>
+			<div id="pan-slider" class="slider"></div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>TILT</legend>
+			<div class="controlgroup">
+				<label for="tilt0-spinner" class="ui-controlgroup-label">Tilt 0</label>
+				<input id="tilt0-spinner" class="ui-spinner-input" value="0">
+				<label for="tilt90-spinner" class="ui-controlgroup-label">Tilt 90</label>
+				<input id="tilt90-spinner" class="ui-spinner-input" value="0">
+			</div>
+			<br/>
+			<div id="tilt-slider" class="slider"></div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>TELEMETRY</legend>
+			<div class="controlgroup">
+				
+				<select name="telemetry_protocol-select" id="telemetry_protocol-select" style="float:left;">
+				  <option value=''>Select protocol</option>
+				  <option value='4'>MFD</option>
+				  <option value='8'>GPS TELEMETRY</option>
+				  <option value='16'>MAVLINK</option>
+				  <option value='32'>RVOSD</option>
+				  <option value='64'>FRSKY D</option>
+				  <option value='128'>FRSKY X</option>
+				  <option value='256'>LTM</option>
+				</select>
+				<!--<label for="telemetry_baud-select" class="ui-controlgroup-label">Protocol</label>-->
+				<select name="telemetry_baud-select" id="telemetry_baud-select" style="float:left;">
+				  <option value=''>Select baudrate</option>
+					<option value='1'>1200</option>
+					<option value='2'>2400</option>
+					<option value='3'>4800</option>
+					<option value='4'>9600</option>
+					<option value='5'>19200</option>
+					<option value='6'>38400</option>
+					<option value='7'>57600</option>
+					<option value='8'>115200</option>
+				</select>
+				&nbsp;
+				<label for="telemetry_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
+				<input id="telemetry_min_sats-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+	</div>
+  </div>
+  <div id="tabs-3">
+		<fieldset>
+			<legend>NOPID control</legend>
+			<div class="controlgroup">
+				<label for="NOPID-feature">Enabled</label>
+				<input type="checkbox" name="NOPID-feature" id="NOPID-feature">
+				<label for="nopid_min_delta-spinner" class="ui-controlgroup-label">Min delta</label>
+				<input id="nopid_min_delta-spinner" class="ui-spinner-input" value="0">
+				<label for="nopid_map_angle-spinner" class="ui-controlgroup-label">Map angle</label>
+				<input id="nopid_map_angle-spinner" class="ui-spinner-input" value="0">
+				<label for="nopid_max_speed-spinner" class="ui-controlgroup-label">Max speed</label>
+				<input id="nopid_max_speed-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>VBAT monitoring</legend>
+			<div class="controlgroup">
+				<label for="VBAT-feature">Enabled</label>
+				<input type="checkbox" name="VBAT-feature" id="VBAT-feature">
+				<label for="vbat_scale-spinner" class="ui-controlgroup-label">Scale</label>
+				<input id="vbat_scale-spinner" class="ui-spinner-input" value="0">
+				<label for="vbat_min_cell_voltage-spinner" class="ui-controlgroup-label">Min cell voltage</label>
+				<input id="vbat_min_cell_voltage-spinner" class="ui-spinner-input" value="0">
+				<label for="vbat_max_cell_voltage-spinner" class="ui-controlgroup-label">Max cell voltage</label>
+				<input id="vbat_max_cell_voltage-spinner" class="ui-spinner-input" value="0">
+				<label for="vbat_warning_cell_voltage-spinner" class="ui-controlgroup-label">Warning cell voltage</label>
+				<input id="vbat_warning_cell_voltage-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>DISPLAY</legend>
+			<div class="controlgroup">
+				<label for="DISPLAY-feature">Enabled</label>
+				<input type="checkbox" name="DISPLAY-feature" id="DISPLAY-feature">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>Local GPS</legend>
+			<div class="controlgroup">
+				<label for="GPS-feature">Enabled</label>
+				<input type="checkbox" name="GPS-feature" id="GPS-feature">
+				<!--<label for="gps_provider-select" class="ui-controlgroup-label">Provider</label>-->
+				<select name="gps_provider-select" id="gps_provider-select">
+				  <option value='' selected='selected'>Select protocol</option>
+				  <option value='NMEA'>NMEA</option>
+				  <option value='UBLOX'>UBLOX</option>
+				</select>
+				<label for="gps_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
+				<input id="gps_min_sats-spinner" class="ui-spinner-input" value="0">
+				<label for="update_home_by_local_gps-checkbox">Update home</label>
+				<input type="checkbox" name="update_home_by_local_gps-checkbox" id="update_home_by_local_gps-checkbox">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>EPS system</legend>
+			<div class="controlgroup">
+				<label for="EPS-feature">Enabled</label>
+				<input type="checkbox" name="EPS-feature" id="EPS-feature">
+				<label for="eps_distance_gain-spinner" class="ui-controlgroup-label">Distance gain</label>
+				<input id="eps_distance_gain-spinner" class="ui-spinner-input" value="0">
+				<label for="eps_frequency-spinner" class="ui-controlgroup-label">Frequency</label>
+				<input id="eps_frequency-spinner" class="ui-spinner-input" value="0">
+			</div>		
+			<div class="controlgroup">
+				<label for="eps_interpolation-checkbox">Interpolation</label>
+				<input type="checkbox" name="eps_interpolation-checkbox" id="eps_interpolation-checkbox">
+				<label for="eps_heading_gain-spinner" class="ui-controlgroup-label">Heading gain</label>
+				<input id="eps_heading_gain-spinner" class="ui-spinner-input" value="0">
+				<label for="eps_speed_gain-spinner" class="ui-controlgroup-label">Speed gain</label>
+				<input id="eps_speed_gain-spinner" class="ui-spinner-input" value="0">
+				<label for="eps_max_speed-spinner" class="ui-controlgroup-label">Max speed filter</label>
+				<input id="eps_max_speed-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>Tilt EASING</legend>
+			<div class="controlgroup">
+				<label for="EASING-feature">Enabled</label>
+				<input type="checkbox" name="EASING-feature" id="EASING-feature">
+				<!--<label for="easing-select"class="ui-controlgroup-label">Provider</label>-->
+				<select name="easing-select" id="easing-select">
+				  <option value='' selected='selected'>Select function</option>
+				  <option value='1'>EASE_OUT_QRT</option>
+				  <option value='2'>EASE_OUT_CIRC</option>
+				  <option value='3'>EASE_OUT_EXPO</option>
+				</select>
+				<label for="easing_steps-spinner" class="ui-controlgroup-label">Steps</label>
+				<input id="easing_steps-spinner" class="ui-spinner-input" value="0">
+				<label for="easing_milis-spinner" class="ui-controlgroup-label">Milliseconds</label>
+				<input id="easing_milis-spinner" class="ui-spinner-input" value="0">
+				<label for="easing_min_angle-spinner" class="ui-controlgroup-label">Min Angle</label>
+				<input id="easing_min_angle-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend>TRACKING</legend>
+			<div class="controlgroup">
+				<label for="start_tracking_distance-spinner" class="ui-controlgroup-label">Start Tracking Distance</label>
+				<input id="start_tracking_distance-spinner" class="ui-spinner-input" value="0">
+			</div>
+		</fieldset>
+  </div>
+  <!--<div id="tabs-4">
+  <label>
+      heading:
+      <input id="position-input" type="range" min="0" max="359" value="0">
+    </label>
+  </div>-->
+  <div id="tabs-5">
+	<textarea id="log-reciever" name="log-reciever" readonly style=""></textarea>
+  </div>
+  <div id="tabs-6">
+	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-reciever" name="cli-reciever" readonly></textarea></div>
+	<input id="cli-sender" type="text"/>
+  </div>
+  <div id="tabs-7">
+	<ul>
+    <!--<li><a href="#tabs-1">Main</a></li>-->
+    <li><a href="http://www.u360gts.com/wiki_es.html" target="_blank">Wiki (Español)</a></li>
+    <li><a href="https://github.com/raul-ortega/amv-open360tracker-32bits/wiki/Home-%28English%29" target="_blank">Wiki (English old repository)</a></li>
+	<li><a href="http://www.aeromodelismovirtual.com/showthread.php?t=34530" target="_blank">Community discussion forum</a></li>
+	<li><a href="https://github.com/raul-ortega/u360gts-configurator" target="_blank">u360gts Configurartor (github repository)</a></li>
+	<li><a href="https://github.com/raul-ortega/u360gts" target="_blank">u360gts Firmware (github repository)</a></li>
+  </ul>
+  </div>
+  
+</div>
+
+</body>
+</html>
