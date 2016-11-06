@@ -1,9 +1,9 @@
 {
   "name": "u360gts - configurator",
-  "version": "1.0",
+  "version": "1.1",
   "author": "Raul Ortega",
   "manifest_version": 2,
-  "minimum_chrome_version": "23",
+  "minimum_chrome_version": "38",
   "short_name": "u360gts",
   "description": "u360gts antenna tracker configurator",
  
@@ -17,10 +17,13 @@
     "16": "assets/u360gts_icon_16.png",
     "128": "assets/u360gts_icon_128.png"
   },
-
+    "sandbox": {
+    "pages": ["map.html"]
+},
   "permissions": [
-	"http://www.u360gts.com/*",
-	"https://maps.googleapis.com/*",
+	"http://*.u360gts.com/*",
+    "https://www.google-analytics.com/",
+	"https://maps.googleapis.com/*", 
 	"https://*.github.com/",
 	"serial",
 	"usb",
