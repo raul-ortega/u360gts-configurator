@@ -96,7 +96,7 @@ var last_sent_command;
 		clearAll();
 		serialSend(connectionId, str2ab('save\n'));
 		setStatus("Saving and rebooting");
-		cliModeEnabled = true;
+		cliModeEnabled = false;
 	});
 	$("#default").click(function(){
 		serialSend(connectionId, str2ab('defaults\n'));
