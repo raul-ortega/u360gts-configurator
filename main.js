@@ -384,10 +384,8 @@ function onOpen(connectionInfo) {
   $("#serial-connect").html('Disconnect');
   connectionId = connectionInfo.connectionId;
   setStatus('Connected');
-  cliModeEnabled = true;
   sendCliEnterCommands();
   enableButtons();
-  //setPosition(0);
 };
 
 function setStatus(status) {
