@@ -103,8 +103,8 @@ var last_sent_command;
 		//setStatus("Default configuration loaded");
 	});
 	$("#enter").click(function(){
-		sendCliEnterCommands();
 		cliModeEnabled = true;
+		sendCliEnterCommands();
 	});
 	$("#exit").click(function(){
 		clearAll();
