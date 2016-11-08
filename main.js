@@ -23,7 +23,21 @@ var serialReceiving = false;
 
 var cliModeEnabled = false;
 
+var configuration = "";
+
 var bitrates = [1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200];
+var features = [
+	"VBAT",
+    "SERVO_TILT",
+	"SOFTSERIAL",
+	"GPS",
+	"TELEMETRY",
+	"DISPLAY",
+	"EASING",
+	"NOPID",
+	"DEBUG",
+	"EPS"
+	];
 
 var commands = {
 	calibrate_mag: 1,
@@ -82,13 +96,13 @@ var last_sent_command;
 	});
 	  
 	$("#calibrate_pan").click(function(){
-		serialSend(connectionId, str2ab('set pan0_calibrated=0\r\ncalibrate pan\r\n'));
+		serialSend(connectionId, str2ab('set pan0_calibrated=0\n\rcalibrate pan\n\r'));
 		last_sent_command = commands.calibrate_pan;
 		setCheckbox("#calibrate_pan","false");
 	});
 
 	$("#calibrate_mag").click(function(){
-		serialSend(connectionId, str2ab('set mag_calibrated=0\r\ncalibrate mag\r\n'));
+		serialSend(connectionId, str2ab('set mag_calibrated=0\n\rcalibrate mag\n\r'));
 		last_sent_command = commands.calibrate_mag;
 	});
 
@@ -105,6 +119,8 @@ var last_sent_command;
 	$("#enter").click(function(){
 		cliModeEnabled = true;
 		sendCliEnterCommands();
+		$("#backup").prop('disabled',true);
+		$("#restore").prop('disabled',true);
 	});
 	$("#exit").click(function(){
 		clearAll();
@@ -137,12 +153,11 @@ var last_sent_command;
 	});
 	
 	$("#backup").click(function(){
-		//Open File
-		
-		//Send commands
+		$("#cli-receiver").html('');
+		$("#cli-sender").html('');
+		$("#backup").prop('disabled',true);
+		$("#restore").prop('disabled',true);
 		sendBackupCommands();
-		
-		// Loop while recieveing
 	});
 	
 	$("[id*='-checkbox']").on( "click", function( event, ui ) {
@@ -181,15 +196,15 @@ var last_sent_command;
 
 function setHeadingPosition(position) {
   var buffer = new ArrayBuffer(1);
-  serialSend(connectionId, str2ab('heading ' + position + '\r\n'));
+  serialSend(connectionId, str2ab('heading ' + position + '\n\r'));
 };
 function setTiltPosition(position) {
   var buffer = new ArrayBuffer(1);
-  serialSend(connectionId, str2ab('tilt ' + position + '\r\n'));
+  serialSend(connectionId, str2ab('tilt ' + position + '\n\r'));
 };
 
 function getParam(param) {
-  chrome.serial.send(connectionId, str2ab('set ' + param + '\r\n'), function() {});
+  chrome.serial.send(connectionId, str2ab('set ' + param + '\n\r'), function() {});
 };
 
 function onReceive(receiveInfo) {
@@ -223,14 +238,29 @@ function onReceive(receiveInfo) {
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
 			if(last_sent_command != commands.backup) {
-				$("#cli-reciever").append(line+'<br/>');
-				$("#cli-reciever").scrollTop($('#cli-reciever')[0].scrollHeight);			
-			} else {
-				backupToFile(line);
+				$("#cli-receiver").append(line + '<br/>');
+			} else if(last_sent_command == commands.backup){
+				backupConfig(line);
 			}
-			//console.log(line);
+			$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
+			
+			
 			switch(last_sent_command) {
+				/*case commands.backup:
+					if(line.startsWith('# status')){
+						$("#backup").prop('disabled',true);
+						$("#restore").prop('disabled',false);
+						var file = new File([$("#cli-receiver").text()], "config-backup.txt", {type: "text/plain;charset=utf-8"});
+						line = line.replace('# status','');
+						saveAs(file);
+					}
+					break;*/
 				case commands.set:
+					if(line.startsWith('# status')){
+						$("#backup").prop('disabled',false);
+						$("#restore").prop('disabled',false);
+						break;
+					}
 					loadSpinners(line);
 					loadCheckboxes(line);
 					if(line.startsWith('Enabled:')){
@@ -259,7 +289,7 @@ function onReceive(receiveInfo) {
 						loadFeatures(line);
 					}
 					break;
-					
+	
 			}
 
 			this.lineBuffer = this.lineBuffer.substr(index + 1);
@@ -269,6 +299,39 @@ function onReceive(receiveInfo) {
 	updateCheckBoxesAllowed = true;
 	
 };
+
+function backupConfig(line){
+	
+	var lineBackup = line;
+	if(line.startsWith('# status')){
+		$("#backup").prop('disabled',false);
+		$("#restore").prop('disabled',false);
+		var file = new File([configuration], "config-backup.txt", {type: "text/plain;charset=utf-8"});
+		saveAs(file);
+	} else if(lineBackup.startsWith('#')){
+		$("#cli-receiver").append('\n' + line);
+		configuration = configuration + '\n\r' + lineBackup + '\n\r';
+	} else if(lineBackup.startsWith('serial')){
+		$("#cli-receiver").append(line + '<br/>');
+		configuration = configuration + lineBackup + '\n\r'
+	} else if(lineBackup.startsWith("Enabled:")){
+		for(var i=0;i<features.length;i++){
+			if(lineBackup.contains(features[i])) {
+				$("#cli-receiver").append('feature ' + features[i] + '\n');
+				configuration = configuration + 'feature ' + features[i] + '\r\n';
+			} else {
+				$("#cli-receiver").append('feature -' + features[i] + '\n');
+				configuration = configuration + 'feature -' + features[i] + '\r\n';
+			}
+		}
+		$("#cli-receiver").append('<br/>');
+		configuration += '\r\n';
+	} else if(!lineBackup.startsWith('Current') && !lineBackup.startsWith('System') && !lineBackup.startsWith('CPU') && !lineBackup.contains('Cycle') && line.length > 2){
+		$("#cli-receiver").append('set '+ line.replace(' = ','=') + '<br/>');
+		configuration += 'set '+ lineBackup.replace(' = ','=') + '\n\r';
+	}
+	console.log(line.length + " " + line);
+}
 
 function showVersion(data){
 	var firmware = data.split("/")[1];
@@ -296,7 +359,7 @@ function loadSpinners(data){
 
 function serialSend(connectionId,strmsg){
 	chrome.serial.send(connectionId,strmsg,function(){
-		//setInterval(function(){$("#cli-reciever").change();}, 500) 
+		//setInterval(function(){$("#cli-receiver").change();}, 500) 
 	});
 }
 function loadCheckboxes(data){
@@ -353,6 +416,7 @@ function clearAll(){
 	$("[id*='-spinner']").each(function(){
 		$(this).val('0');
 	});
+	$("#cli-receiver").html('');
 	$("#firmware-version").html('unknown');
 	updateCheckBoxesAllowed = true;
 }
@@ -384,7 +448,8 @@ function onOpen(connectionInfo) {
   $("#serial-connect").html('Disconnect');
   connectionId = connectionInfo.connectionId;
   setStatus('Connected');
-  sendCliEnterCommands();
+  /*cliModeEnabled = true;
+  sendCliEnterCommands();*/
   enableButtons();
 };
 
@@ -466,23 +531,28 @@ onload = function() {
 };
 function sendCliEnterCommands(){
 	clearAll();
-	serialSend(connectionId, str2ab('RRR\r\n'));
-	serialSend(connectionId, str2ab('version\r\n'));
-	serialSend(connectionId, str2ab('serial\r\n'));
-	serialSend(connectionId, str2ab('feature\r\n'));
-	serialSend(connectionId, str2ab('set\r\n'));
 	last_sent_command=commands.set;
+	serialSend(connectionId, str2ab('RRR\n\r'));
+	serialSend(connectionId, str2ab('version\n\r'));
+	serialSend(connectionId, str2ab('serial\n\r'));
+	serialSend(connectionId, str2ab('feature\n\r'));
+	serialSend(connectionId, str2ab('set\n\r'));
+	serialSend(connectionId, str2ab('status\n\r'));
+	
 }
 function sendBackupCommands(){
+	cliModeEnabled = true;
 	last_sent_command = commands.backup;
-	serialSend(connectionId, str2ab('version\r\n'));
-	serialSend(connectionId, str2ab('feature\r\n'));
-	serialSend(connectionId, str2ab('feature\r\n'));
-	serialSend(connectionId, str2ab('set\r\n'));
+	serialSend(connectionId, str2ab('version\n\r'));
+	serialSend(connectionId, str2ab('serial\n\r'));
+	serialSend(connectionId, str2ab('feature\n\r'));
+	serialSend(connectionId, str2ab('set\n\r'));
+	serialSend(connectionId, str2ab('status\n\r'));
 }
 function enableButtons(){
 	$(":button").each(function(){
-		if($(this).attr('id') != "serial-connect"){
+		var buttonId = $(this).attr('id');
+		if(buttonId != "serial-connect"){
 			$(this).attr('disabled',false);
 		}
 	});
