@@ -1,141 +1,0 @@
-﻿
-# version
-
-
-# amv-open360tracker-32bits /NAZE 7.1.0 Nov  8 2016 / 21:15:56 (cc6bc13)
-
-
-# serial
-
-serial 0 1 9600 57600 0 115200
-
-serial 1 2 115200 9600 0 115200
-
-serial 30 0 115200 57600 0 115200
-
-serial 31 0 115200 57600 0 115200
-
-
-# feature
-
-feature -VBAT
-feature SERVO_TILT
-feature SOFTSERIAL
-feature -GPS
-feature TELEMETRY
-feature DISPLAY
-feature EASING
-feature -NOPID
-feature -DEBUG
-feature EPS
-
-
-# set
-
-set looptime=3000
-set emf_avoidance=ON
-set servo_pwm_rate=50
-
-set gps_baud=4
-
-set gps_provider=NMEA
-
-set gps_sbas_mode=AUTO
-
-set gps_auto_config=ON
-
-set gps_auto_baud=OFF
-
-set gps_min_sats=6
-
-set telemetry_inversion=OFF
-
-set battery_capacity=0
-
-set vbat_scale=110
-
-set vbat_max_cell_voltage=43
-
-set vbat_min_cell_voltage=33
-
-set vbat_warning_cell_voltage=35
-
-set p=2500
-
-set i=50
-
-set d=100
-
-set max_pid_error=10
-
-set max_pid_accumulator=5000
-
-set max_pid_gain=500
-
-set pid_divider=15
-
-set pan0=1528
-
-set pan0_calibrated=1
-
-set pan_calibration_pulse=1300
-
-set min_pan_speed=0
-
-set offset= 90.000
-
-set offset_trim=0
-
-set init_servos=0
-
-set tilt0=500
-
-set tilt90=1400
-
-set easing=2
-
-set easing_steps=40
-
-set easing_min_angle=4
-
-set easing_milis=15
-
-set telemetry_baud=4
-
-set telemetry_protocol=8
-
-set telemetry_min_sats=6
-
-set telemetry_diy_gps=OFF
-
-set start_tracking_distance=10
-
-set mag_declination=0
-
-set mag_calibrated=1
-
-set min_logic_level=15
-
-set nopid_min_delta= 0.200
-
-set nopid_map_angle=90
-
-set nopid_max_speed=200
-
-set eps_distance_gain=100
-
-set eps_heading_gain=50
-
-set eps_speed_gain=60
-
-set eps_frequency=200
-
-set eps_max_speed=0
-
-set eps_interpolation=OFF
-
-set eps_interpolation_points=3
-
-set update_home_by_local_gps=OFF
-
-
