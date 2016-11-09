@@ -153,6 +153,7 @@ var last_sent_command;
 	});
 	
 	$("#backup").click(function(){
+		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
 		$("#backup").prop('disabled',true);

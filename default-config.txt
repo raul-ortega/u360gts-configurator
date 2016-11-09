@@ -7,7 +7,7 @@
 
 # serial
 
-serial 0 1 115200 9600 0 115200
+serial 0 1 9600 57600 0 115200
 
 serial 1 2 115200 9600 0 115200
 
@@ -20,10 +20,10 @@ feature -SOFTSERIAL
 feature -GPS
 feature -TELEMETRY
 feature DISPLAY
-feature -EASING
+feature EASING
 feature NOPID
 feature -DEBUG
-feature EPS
+feature -EPS
 
 
 # set
@@ -63,17 +63,18 @@ feature EPS
 set i=20
 
 set d=250
-set max_pid_error=1
+
+set max_pid_error=10
 
 set max_pid_accumulator=5000
 
-set max_pid_gain=70
+set max_pid_gain=500
 
 set pid_divider=15
 
 set pan0=1500
 
-set pan0_calibrated=1
+set pan0_calibrated=0
 
 set pan_calibration_pulse=1400
 
@@ -85,9 +86,9 @@ feature EPS
 
 set init_servos=0
 
-set tilt0=500
+set tilt0=1050
 
-set tilt90=1400
+set tilt90=2025
 
 set easing=2
 
@@ -110,9 +111,10 @@ feature EPS
 set mag_declination=0
 
 set mag_calibrated=0
+
 set min_logic_level=15
 
-set nopid_min_delta=0.200
+set nopid_min_delta= 0.200
 
 set nopid_map_angle=90
 
@@ -125,6 +127,7 @@ feature EPS
 set eps_speed_gain=60
 
 set eps_frequency=250
+
 set eps_max_speed=0
 
 set eps_interpolation=OFF
@@ -133,3 +136,4 @@ feature EPS
 
 set update_home_by_local_gps=OFF
 
+
