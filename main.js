@@ -46,8 +46,9 @@ var commands = {
 	set_pan: 4,
 	feature: 6,
 	backup: 6,
-	save: 7,
-	exit: 8
+	restore: 7,
+	save: 8,
+	exit: 9
 };
 String.prototype.contains = function(param) 
 { 
@@ -96,13 +97,13 @@ var last_sent_command;
 	});
 	  
 	$("#calibrate_pan").click(function(){
-		serialSend(connectionId, str2ab('set pan0_calibrated=0\n\rcalibrate pan\n\r'));
+		serialSend(connectionId, str2ab('set pan0_calibrated=0\ncalibrate pan\n'));
 		last_sent_command = commands.calibrate_pan;
 		setCheckbox("#calibrate_pan","false");
 	});
 
 	$("#calibrate_mag").click(function(){
-		serialSend(connectionId, str2ab('set mag_calibrated=0\n\rcalibrate mag\n\r'));
+		serialSend(connectionId, str2ab('set mag_calibrated=0\ncalibrate mag\n'));
 		last_sent_command = commands.calibrate_mag;
 	});
 
@@ -156,10 +157,19 @@ var last_sent_command;
 		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
-		$("#backup").prop('disabled',true);
-		$("#restore").prop('disabled',true);
+		//$("#backup").prop('disabled',true);
+		//$("#restore").prop('disabled',false);
 		sendBackupCommands();
 	});
+	$("#restore").click(function(){
+		configuration = '';
+		$("#cli-receiver").html('');
+		$("#cli-sender").html('');
+		//$("#backup").prop('disabled',false);
+		//$("#restore").prop('disabled',true);
+		restoreConfig();
+	});
+	
 	
 	$("[id*='-checkbox']").on( "click", function( event, ui ) {
 		if(updateCheckBoxesAllowed == true) {
@@ -172,7 +182,6 @@ var last_sent_command;
 				paramVamule=($(this).prop('checked') == true)?1:0;
 			var comando = str2ab('set ' + param + '=' + paramVamule + '\n');
 			serialSend(connectionId,comando);
-			//console.log($(this).prop('checked') + " " + paramVamule);
 		}
 	});
 	$("[id*='-feature']").on( "click", function( event, ui ) {
@@ -197,15 +206,15 @@ var last_sent_command;
 
 function setHeadingPosition(position) {
   var buffer = new ArrayBuffer(1);
-  serialSend(connectionId, str2ab('heading ' + position + '\n\r'));
+  serialSend(connectionId, str2ab('heading ' + position + '\n'));
 };
 function setTiltPosition(position) {
   var buffer = new ArrayBuffer(1);
-  serialSend(connectionId, str2ab('tilt ' + position + '\n\r'));
+  serialSend(connectionId, str2ab('tilt ' + position + '\n'));
 };
 
 function getParam(param) {
-  chrome.serial.send(connectionId, str2ab('set ' + param + '\n\r'), function() {});
+  chrome.serial.send(connectionId, str2ab('set ' + param + '\n'), function() {});
 };
 
 function onReceive(receiveInfo) {
@@ -238,24 +247,17 @@ function onReceive(receiveInfo) {
 		
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
-			if(last_sent_command != commands.backup) {
-				$("#cli-receiver").append(line + '<br/>');
+			if(last_sent_command != commands.backup && last_sent_command != commands.restore) {
+				$("#cli-receiver").append(line);
 			} else if(last_sent_command == commands.backup){
 				backupConfig(line);
+			} else if(last_sent_command == commands.restore){
+				//
 			}
 			$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
 			
 			
 			switch(last_sent_command) {
-				/*case commands.backup:
-					if(line.startsWith('# status')){
-						$("#backup").prop('disabled',true);
-						$("#restore").prop('disabled',false);
-						var file = new File([$("#cli-receiver").text()], "config-backup.txt", {type: "text/plain;charset=utf-8"});
-						line = line.replace('# status','');
-						saveAs(file);
-					}
-					break;*/
 				case commands.set:
 					if(line.startsWith('# status')){
 						$("#backup").prop('disabled',false);
@@ -303,41 +305,49 @@ function onReceive(receiveInfo) {
 
 function backupConfig(line){
 	
-	var lineBackup = line;
+	var lineBackup = line.replace(/[\n\r]/g, '');;
 	if(line.startsWith('# status')){
 		$("#backup").prop('disabled',false);
 		$("#restore").prop('disabled',false);
-		var file = new File([configuration], "config-backup.txt", {type: "text/plain;charset=utf-8"});
-		saveAs(file);
+		saveConfigurationFile(configuration);
 	} else if(lineBackup.startsWith('#')){
 		$("#cli-receiver").append('\n' + line);
-		configuration = configuration + '\n\r' + lineBackup + '\n\r';
+		configuration += '\r\n' + lineBackup;
+		if(!lineBackup.contains("version"))
+			configuration += '\r\n';
 	} else if(lineBackup.startsWith('serial')){
 		$("#cli-receiver").append(line + '<br/>');
-		configuration = configuration + lineBackup + '\n\r'
+		configuration += lineBackup + '\r\n';
 	} else if(lineBackup.startsWith("Enabled:")){
 		for(var i=0;i<features.length;i++){
 			if(lineBackup.contains(features[i])) {
 				$("#cli-receiver").append('feature ' + features[i] + '\n');
-				configuration = configuration + 'feature ' + features[i] + '\r\n';
+				configuration += 'feature ' + features[i] + '\r\n';
 			} else {
 				$("#cli-receiver").append('feature -' + features[i] + '\n');
-				configuration = configuration + 'feature -' + features[i] + '\r\n';
+				configuration += 'feature -' + features[i] + '\r\n';
 			}
 		}
 		$("#cli-receiver").append('<br/>');
-		configuration += '\r\n';
 	} else if(!lineBackup.startsWith('Current') && !lineBackup.startsWith('System') && !lineBackup.startsWith('CPU') && !lineBackup.contains('Cycle') && line.length > 2){
 		$("#cli-receiver").append('set '+ line.replace(' = ','=') + '<br/>');
-		configuration += 'set '+ lineBackup.replace(' = ','=') + '\n\r';
+		configuration += 'set '+ lineBackup.replace(' = ','=') + '\r\n';
 	}
-	console.log(line.length + " " + line);
 }
 
 function showVersion(data){
-	var firmware = data.split("/")[1];
+	var firmware = getVersionBoardNumberAndDate(data);
 	$("#firmware-version").html(firmware);
-	console.log(firmware);
+}
+
+function getVersionBoardNumberAndDate(data){
+	var firmware = data.split("/")[1];
+	return  firmware;
+}
+function getVersionNumber(data){
+	var firmware = "" + getVersionBoardNumberAndDate(data) + "";
+	firmware = firmware.split(' ')[1];
+	return  firmware;
 }
 
 function loadSpinners(data){
@@ -360,8 +370,7 @@ function loadSpinners(data){
 
 function serialSend(connectionId,strmsg){
 	chrome.serial.send(connectionId,strmsg,function(){
-		//setInterval(function(){$("#cli-receiver").change();}, 500) 
-	});
+});
 }
 function loadCheckboxes(data){
 	$("[id*='-checkbox']").each(function(){
@@ -370,7 +379,6 @@ function loadCheckboxes(data){
 		if(data.startsWith(param + " = ")) {
 			var paramValue = data.getParamValue(param + " = ");
 			paramValue = paramValue.replace(/[\s\n\r]/g, '');
-			console.log(param + ": " + data.substr(data.indexOf(param + " = ") + param.length) + " vs " + paramValue);
 			paramValue = (paramValue == "ON" || paramValue == "1" )?true:false;
 			setCheckbox("#" + paramId,paramValue);
 		}
@@ -532,23 +540,23 @@ onload = function() {
 };
 function sendCliEnterCommands(){
 	clearAll();
-	last_sent_command=commands.set;
-	serialSend(connectionId, str2ab('RRR\n\r'));
-	serialSend(connectionId, str2ab('version\n\r'));
-	serialSend(connectionId, str2ab('serial\n\r'));
-	serialSend(connectionId, str2ab('feature\n\r'));
-	serialSend(connectionId, str2ab('set\n\r'));
-	serialSend(connectionId, str2ab('status\n\r'));
+	last_sent_command = commands.set;
+	serialSend(connectionId, str2ab('RRR\n'));
+	serialSend(connectionId, str2ab('version\n'));
+	serialSend(connectionId, str2ab('serial\n'));
+	serialSend(connectionId, str2ab('feature\n'));
+	serialSend(connectionId, str2ab('set\n'));
+	serialSend(connectionId, str2ab('status\n'));
 	
 }
 function sendBackupCommands(){
 	cliModeEnabled = true;
 	last_sent_command = commands.backup;
-	serialSend(connectionId, str2ab('version\n\r'));
-	serialSend(connectionId, str2ab('serial\n\r'));
-	serialSend(connectionId, str2ab('feature\n\r'));
-	serialSend(connectionId, str2ab('set\n\r'));
-	serialSend(connectionId, str2ab('status\n\r'));
+	serialSend(connectionId, str2ab('version\n'));
+	serialSend(connectionId, str2ab('serial\n'));
+	serialSend(connectionId, str2ab('feature\n'));
+	serialSend(connectionId, str2ab('set\n'));
+	serialSend(connectionId, str2ab('status\n'));
 }
 function enableButtons(){
 	$(":button").each(function(){
@@ -568,4 +576,190 @@ function disableButtons(){
 function onClose(){
 	clearAll();
 	//disableButtons();
+}
+
+
+function saveConfigurationFileOld(configuration){
+	var file = new File([configuration], "u360gts-configuration-backup.txt", {type: "text/plain;charset=utf-8"});
+		saveAs(file);
+}
+
+function saveConfigurationFile(configuration) {
+        var chosenFileEntry = null;
+
+        var accepts = [{
+            extensions: ['txt']
+        }];
+
+        // generate timestamp for the backup file
+        var d = new Date(),
+            now = (d.getMonth() + 1) + '.' + d.getDate() + '.' + d.getFullYear() + '.' + d.getHours() + '.' + d.getMinutes();
+
+        // create or load the file
+        chrome.fileSystem.chooseEntry({type: 'saveFile', suggestedName: 'u360gts_config_' + now, accepts: accepts}, function (fileEntry) {
+            if (chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError.message);
+                return;
+            }
+
+            if (!fileEntry) {
+                console.log('No file selected, backup aborted.');
+                return;
+            }
+
+            chosenFileEntry = fileEntry;
+
+            // echo/console log path specified
+            chrome.fileSystem.getDisplayPath(chosenFileEntry, function (path) {
+                console.log('Backup file path: ' + path);
+            });
+
+            // change file entry from read only to read/write
+            chrome.fileSystem.getWritableEntry(chosenFileEntry, function (fileEntryWritable) {
+                // check if file is writable
+                chrome.fileSystem.isWritableEntry(fileEntryWritable, function (isWritable) {
+                    if (isWritable) {
+                        chosenFileEntry = fileEntryWritable;
+
+                        // crunch the config object
+                        var serialized_config_object = configuration; //JSON.stringify(configuration);
+                        var blob = new Blob([serialized_config_object], {type: 'text/plain'}); // first parameter for Blob needs to be an array
+
+                        chosenFileEntry.createWriter(function (writer) {
+                            writer.onerror = function (e) {
+                                console.error(e);
+                            };
+
+                            var truncated = false;
+                            writer.onwriteend = function () {
+                                if (!truncated) {
+                                    // onwriteend will be fired again when truncation is finished
+                                    truncated = true;
+                                    writer.truncate(blob.size);
+
+                                    return;
+                                }
+
+                                console.log('Write SUCCESSFUL');
+                                if (callback) callback();
+                            };
+
+                            writer.write(blob);
+                        }, function (e) {
+                            console.error(e);
+                        });
+                    } else {
+                        // Something went wrong or file is set to read only and cannot be changed
+                        console.log('File appears to be read only, sorry.');
+                    }
+                });
+            });
+        });
+    }
+	
+function restoreConfig(callback) {
+    var chosenFileEntry = null;
+
+    var accepts = [{
+        extensions: ['txt']
+    }];
+
+    // load up the file
+    chrome.fileSystem.chooseEntry({type: 'openFile', accepts: accepts}, function (fileEntry) {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError.message);
+            return;
+        }
+
+        if (!fileEntry) {
+            console.log('No file selected, restore aborted.');
+            return;
+        }
+
+        chosenFileEntry = fileEntry;
+
+        // echo/console log path specified
+        chrome.fileSystem.getDisplayPath(chosenFileEntry, function (path) {
+            console.log('Restore file path: ' + path);
+        });
+
+        // read contents into variable
+        chosenFileEntry.file(function (file) {
+            var reader = new FileReader();
+
+            reader.onprogress = function (e) {
+                if (e.total > 1048576) { // 1 MB
+                    // dont allow reading files bigger then 1 MB
+                    console.log('File limit (1 MB) exceeded, aborting');
+                    reader.abort();
+                }
+            };
+
+            reader.onloadend = function (e) {
+                if (e.total != 0 && e.total == e.loaded) {
+                    console.log('Read SUCCESSFUL');
+
+                    try { // check if string provided is a valid JSON
+                        var configuration = e.target.result;//JSON.parse(e.target.result);
+						uploadConfiguration(configuration);
+                    } catch (e) {
+                        // data provided != valid json object
+                        $("#cli-receiver").html('Data provided not valid, restore aborted.');
+
+                        return;
+                    }
+
+                    /*// validate
+                    if (typeof generatedBy !== 'undefined' && compareVersions(generatedBy,backupFileMinVersionAccepted)) {
+                                                
+                        uploadConfiguration(configuration);
+                        
+                    } else {
+                        $('#cli-receiver').html('Configuration file version not accepted, restore aborted.');
+                    }*/
+					//uploadConfiguration(configuration);
+                    
+                }
+            };
+
+            reader.readAsText(file);
+        });
+    });
+
+    function compareVersions(generated, required) {
+        if (generated == undefined) {
+            return false;
+        }
+        return semver.gte(generated, required);
+    }
+}
+function uploadConfiguration(configuration){
+	last_set_command = commands.set;
+	//$("#cli-receiver").append(configuration);
+	//$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
+	var index;
+	while ((index = configuration.indexOf('\n')) >= 0) {
+			if(index==0) {
+				configuration = configuration.substr(1,configuration.length-1);
+			}
+			else{
+				var line = configuration.substr(0, index + 1);
+				line = line.replace(/[\n\r]/g, '');
+				if(!line.startsWith("#") && !line == ""){
+					//$("#cli-receiver").append(line + '\n');
+					//$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
+					serialSend(connectionId, str2ab(line + '\n'));
+					delay(100);
+				}
+				configuration = configuration.substr(index + 1);				
+			}
+		}		
+}
+function delay(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
