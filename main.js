@@ -25,6 +25,8 @@ var cliModeEnabled = false;
 
 var configuration = "";
 
+var cliEnterTimer = 0;
+
 var bitrates = [1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200];
 var features = [
 	"VBAT",
@@ -48,7 +50,8 @@ var commands = {
 	backup: 6,
 	restore: 7,
 	save: 8,
-	exit: 9
+	exit: 9,
+	cli_enter: 10,
 };
 String.prototype.contains = function(param) 
 { 
@@ -61,6 +64,11 @@ String.prototype.getParamValue = function(parser) {
 
 
 var last_sent_command;
+
+var timer;// call every 1000 milliseconds
+
+var uploadConfigurationTimer;
+
 
 
 
@@ -115,11 +123,22 @@ var last_sent_command;
 	});
 	$("#default").click(function(){
 		serialSend(connectionId, str2ab('defaults\n'));
-		//setStatus("Default configuration loaded");
 	});
 	$("#enter").click(function(){
 		cliModeEnabled = true;
 		sendCliEnterCommands();
+		timer = setInterval(function(){
+			if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
+				clearInterval(timer);
+				cliEnterTimer = 0;
+				last_sent_command = commands.set;
+				serialSend(connectionId, str2ab('version\n'));
+				serialSend(connectionId, str2ab('serial\n'));
+				serialSend(connectionId, str2ab('feature\n'));
+				serialSend(connectionId, str2ab('set\n'));
+				serialSend(connectionId, str2ab('status\n'));
+			}	
+		}, 2000); 
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
 	});
@@ -128,6 +147,9 @@ var last_sent_command;
 		serialSend(connectionId, str2ab('exit\n'));
 		setStatus("Exiting and rebooting");
 		cliModeEnabled = false;
+		$("#backup").prop('disabled',true);
+		$("#restore").prop('disabled',true);
+		
 	});
 	$("#boot").click(function(){
 		serialSend(connectionId, str2ab('boot mode\n'));
@@ -157,16 +179,15 @@ var last_sent_command;
 		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
-		//$("#backup").prop('disabled',true);
-		//$("#restore").prop('disabled',false);
 		sendBackupCommands();
 	});
 	$("#restore").click(function(){
 		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
-		//$("#backup").prop('disabled',false);
-		//$("#restore").prop('disabled',true);
+		$("#backup").prop('disabled',true);
+		$("#restore").prop('disabled',true);
+		clearAll();
 		restoreConfig();
 	});
 	
@@ -440,12 +461,6 @@ function onError(errorInfo) {
 
 chrome.serial.onReceive.addListener(onReceive);
 chrome.serial.onReceiveError.addListener(onError);
-/*chrome.serial.onReadLine.addListener(function (line) {
-    //Serial port data recieve event.
-    dataRecieved = dataRecieved +line;
-});*/
-
-
 
 function onOpen(connectionInfo) {
   if (!connectionInfo) {
@@ -524,30 +539,20 @@ function openSelectedPort() {
 onload = function() {
 	window.resizeTo(1100,1170);
 	window.moveTo(0,0); 
-
-	/*document.getElementById('position-input').onchange = function() {
-		setPosition(parseInt(this.value));
-	};*/
-	
-
-
 	chrome.serial.getDevices(function(ports) {
 	buildBaudPicker(bitrates);
 	buildPortPicker(ports);
-	//openSelectedPort();
 	});
 	$( "#tabs" ).tabs();
 };
+
 function sendCliEnterCommands(){
 	clearAll();
-	last_sent_command = commands.set;
 	serialSend(connectionId, str2ab('RRR\n'));
-	serialSend(connectionId, str2ab('version\n'));
-	serialSend(connectionId, str2ab('serial\n'));
-	serialSend(connectionId, str2ab('feature\n'));
-	serialSend(connectionId, str2ab('set\n'));
-	serialSend(connectionId, str2ab('status\n'));
-	
+	if(last_sent_command != commands.cli_enter); {
+		cliEnterTimer = new Date().getTime();
+		last_sent_command = commands.cli_enter
+	}
 }
 function sendBackupCommands(){
 	cliModeEnabled = true;
@@ -575,7 +580,6 @@ function disableButtons(){
 }
 function onClose(){
 	clearAll();
-	//disableButtons();
 }
 
 
@@ -701,7 +705,7 @@ function restoreConfig(callback) {
 
                     try { // check if string provided is a valid JSON
                         var configuration = e.target.result;//JSON.parse(e.target.result);
-						uploadConfiguration(configuration);
+						uploadConfiguration2(configuration);
                     } catch (e) {
                         // data provided != valid json object
                         $("#cli-receiver").html('Data provided not valid, restore aborted.');
@@ -735,8 +739,6 @@ function restoreConfig(callback) {
 }
 function uploadConfiguration(configuration){
 	last_set_command = commands.set;
-	//$("#cli-receiver").append(configuration);
-	//$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
 	var index;
 	while ((index = configuration.indexOf('\n')) >= 0) {
 			if(index==0) {
@@ -746,8 +748,6 @@ function uploadConfiguration(configuration){
 				var line = configuration.substr(0, index + 1);
 				line = line.replace(/[\n\r]/g, '');
 				if(!line.startsWith("#") && !line == ""){
-					//$("#cli-receiver").append(line + '\n');
-					//$("#cli-receiver").scrollTop($('#cli-receiver')[0].scrollHeight);
 					serialSend(connectionId, str2ab(line + '\n'));
 					delay(100);
 				}
@@ -755,6 +755,41 @@ function uploadConfiguration(configuration){
 			}
 		}		
 }
+
+function uploadConfiguration2(configuration){
+	cliModeEnabled = true;
+	last_sent_command = commands.restore;
+	var index;
+	$("#cli-receiver").append("Restoring configuration:\n");
+	uploadConfigurationTimer = setInterval(function(){
+		if((index = configuration.indexOf('\n')) >= 0) {
+			if(index==0) {
+				configuration = configuration.substr(1,configuration.length-1);
+			}
+			else{
+				var line = configuration.substr(0, index + 1);
+				line = line.replace(/[\n\r]/g, '');
+				if(!line.startsWith("#") && !line == ""){
+					serialSend(connectionId, str2ab(line + '\n'));
+					$("#cli-receiver").append(">");	
+				}
+				configuration = configuration.substr(index + 1);				
+			}
+		} else {
+			clearInterval(uploadConfigurationTimer);
+			$("#cli-receiver").append("\nFinished\n\n");
+			last_sent_command = commands.set;
+			serialSend(connectionId, str2ab('version\n'));
+			serialSend(connectionId, str2ab('serial\n'));
+			serialSend(connectionId, str2ab('feature\n'));
+			serialSend(connectionId, str2ab('set\n'));
+			serialSend(connectionId, str2ab('status\n'));
+			
+		}
+			
+	},150);
+}
+
 function delay(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
