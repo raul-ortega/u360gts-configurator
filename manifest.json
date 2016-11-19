@@ -1,6 +1,6 @@
 {
   "name": "u360gts - configurator",
-  "version": "1.1",
+  "version": "1.2",
   "author": "Raul Ortega",
   "manifest_version": 2,
   "minimum_chrome_version": "38",
