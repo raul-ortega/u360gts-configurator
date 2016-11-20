@@ -215,10 +215,16 @@ var uploadConfigurationTimer;
 		}
 	});
 	$("[id*='-select']").on("change",function(){
+		var paramId = $(this).attr('id');
+		var paramVamule = $(this).val();
+		if(paramId == "eps-select"){
+			if(paramVamule == 1)
+				$(".eps-mode-2-3").hide();
+			else
+				$(".eps-mode-2-3").show();
+		}
 		if(updateCheckBoxesAllowed == true) {
-			var paramId = $(this).attr('id');
 			var param = paramId.slice(0, paramId.indexOf("-select"));
-			var paramVamule = $(this).val();
 			var comando = str2ab('set '  + param + '=' + paramVamule  + '\n');
 			serialSend(connectionId, comando);	
 		}
