@@ -427,6 +427,7 @@ function loadSelectmenus(data){
 		var param = paramId.slice(0, paramId.indexOf("-select"));
 		if(data.startsWith(param + " = ")) {
 			var paramValue = data.getParamValue(param + " = ");
+			//console.log(paramId + " " + param + " " + paramValue);
 			paramValue = paramValue.replace(/[\s\n\r]/g, '');
 			$("#" + paramId + " option").each(function() {
 				$(this).attr('selected',false);
