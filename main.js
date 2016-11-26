@@ -69,6 +69,7 @@ var timer;// call every 1000 milliseconds
 
 var uploadConfigurationTimer;
 
+var connected = false;
 
 
 
@@ -125,22 +126,25 @@ var uploadConfigurationTimer;
 		serialSend(connectionId, str2ab('defaults\n'));
 	});
 	$("#enter").click(function(){
-		cliModeEnabled = true;
-		sendCliEnterCommands();
-		timer = setInterval(function(){
-			if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
-				clearInterval(timer);
-				cliEnterTimer = 0;
-				last_sent_command = commands.set;
-				serialSend(connectionId, str2ab('version\n'));
-				serialSend(connectionId, str2ab('serial\n'));
-				serialSend(connectionId, str2ab('feature\n'));
-				serialSend(connectionId, str2ab('set\n'));
-				serialSend(connectionId, str2ab('status\n'));
-			}	
-		}, 2000); 
-		$("#backup").prop('disabled',true);
-		$("#restore").prop('disabled',true);
+		if(connected){
+			cliModeEnabled = true;
+			sendCliEnterCommands();
+			timer = setInterval(function(){
+				if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
+					clearInterval(timer);
+					cliEnterTimer = 0;
+					last_sent_command = commands.set;
+					serialSend(connectionId, str2ab('version\n'));
+					serialSend(connectionId, str2ab('serial\n'));
+					serialSend(connectionId, str2ab('feature\n'));
+					serialSend(connectionId, str2ab('set\n'));
+					serialSend(connectionId, str2ab('status\n'));
+				}	
+			}, 2000); 
+			$("#backup").prop('disabled',true);
+			$("#restore").prop('disabled',true);
+			enableDisableButtons();
+		}
 	});
 	$("#exit").click(function(){
 		clearAll();
@@ -149,7 +153,7 @@ var uploadConfigurationTimer;
 		cliModeEnabled = false;
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
-		
+		enableDisableButtons();
 	});
 	$("#boot").click(function(){
 		serialSend(connectionId, str2ab('boot mode\n'));
@@ -427,7 +431,6 @@ function loadSelectmenus(data){
 		var param = paramId.slice(0, paramId.indexOf("-select"));
 		if(data.startsWith(param + " = ")) {
 			var paramValue = data.getParamValue(param + " = ");
-			//console.log(paramId + " " + param + " " + paramValue);
 			paramValue = paramValue.replace(/[\s\n\r]/g, '');
 			$("#" + paramId + " option").each(function() {
 				$(this).attr('selected',false);
@@ -473,6 +476,8 @@ function onOpen(connectionInfo) {
   if (!connectionInfo) {
     setStatus('Could not open');
 	$("#serial-connect").attr('Caption','Connect');
+	connected = false;
+	enableDisableButtons();
     return;
   }
   $(this).attr('caption','Disonnect');
@@ -482,6 +487,8 @@ function onOpen(connectionInfo) {
   /*cliModeEnabled = true;
   sendCliEnterCommands();*/
   enableButtons();
+  connected = true;
+  enableDisableButtons();
 };
 
 function setStatus(status) {
@@ -587,6 +594,8 @@ function disableButtons(){
 }
 function onClose(){
 	clearAll();
+	connected = false;
+	enableDisableButtons();
 }
 
 
@@ -791,9 +800,7 @@ function uploadConfiguration2(configuration){
 			serialSend(connectionId, str2ab('feature\n'));
 			serialSend(connectionId, str2ab('set\n'));
 			serialSend(connectionId, str2ab('status\n'));
-			
 		}
-			
 	},150);
 }
 
@@ -804,4 +811,13 @@ function delay(milliseconds) {
       break;
     }
   }
+}
+function enableDisableButtons(){
+	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
+	var buttonState = ((connected && cliModeEnabled))?'enable':'disable';
+	$("#exit").button(buttonState);
+	$("#boot").button(buttonState);
+	$("#default").button(buttonState);
+	$("#save").button(buttonState);
+	
 }
