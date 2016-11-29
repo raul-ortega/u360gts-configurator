@@ -22,6 +22,8 @@
 	<script type="text/javascript" src="jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="latlon-spherical.js"></script>
+	<script type="text/javascript" src="simulator.js"></script>
 	<!--<script src="map.js"></script>-->
 	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" href="styles.css">
@@ -58,6 +60,7 @@
 	.slider {margin-left: 7px; margin-right:7px; margin-top:15px;}
 	#loadmap {position:relative;left:36%;top:0;width:65%;height:100%;z-index:1000;}
 	#log-receiver {position:relative;left:0;top:-100%;display: block;width:35%;max-width:35%;height:50%;max-height:100%;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;z-index:2000;font-size:12px;}
+	#simulator-log {position:relative;left:0;top:20px;display: block;width:100%;max-width:100%;height:520px;max-height:520px;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;z-index:2000;font-size:12px;}
 	.eps-mode-2-3 {display:none;}
 	
 	
@@ -94,6 +97,7 @@
 	<!--<li><a href="#tabs-4">Control</a></li>-->
     <li><a href="#tabLogs">Logs</a></li>
 	<li><a href="#tabCliMode">CLI Mode</a></li>
+	<li><a href="#tabSimulator">Simulator</a></li>
 	<li><a href="#tabDocsAndSupport">Documentation & Support</a></li>
   </ul>
   <!--<div id="tabs-1">
@@ -320,6 +324,33 @@
 	<br/>
 	<button id="backup" disabled>BACKUP CONFIG</button>
 	<button id="restore" disabled>RESTORE CONFIG</button>
+  </div>
+  <div id="tabSimulator">
+    <select name="simulation-type" id="simulation-type">
+	  <option value=''>Select flight type</option>
+	  <option value='1' selected='selected'>Circular</option>
+	  <!--<option value='2'>Parallel</option>
+	  <option value='3'>Journey</option>-->
+	</select>
+	<select name="simulation-protocol" id="simulation-protocol">
+	  <option value=''>Select protocol</option>
+	  <option value='1' selected='selected'>NMEA</option>
+	  <!--<option value='2'>MAVLINK</option>
+	  <option value='3'>FMD</option>-->
+	</select>
+	<select name="simulation-frequency" id="simulation-frequency">
+	  <option value=''>Select frequency</option>
+	  <option value='1000' selected='selected'>1 Hz (1000 ms)</option>
+	  <option value='500'>2 Hz (500 ms)</option>
+	  <option value='333'>3 Hz (333 ms)</option>
+	  <option value='250'>4 Hz (250 ms)</option>
+	  <option value='200'>5 Hz (200 ms)</option>
+	  <option value='125'>8 Hz (125 ms)</option>
+	  <option value='100'>10 Hz (100 ms)</option>
+	</select>
+    <button id="simulator-start" disabled>Start</button>
+	<button id="simulator-stop" disabled>Stop</button>
+	<textarea id="simulator-log" name="simulator-log" readonly style=" "></textarea>
   </div>
   <div id="tabDocsAndSupport">
 	<ul>
