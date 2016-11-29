@@ -813,11 +813,16 @@ function delay(milliseconds) {
   }
 }
 function enableDisableButtons(){
+	//Cli
 	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
 	var buttonState = ((connected && cliModeEnabled))?'enable':'disable';
 	$("#exit").button(buttonState);
 	$("#boot").button(buttonState);
 	$("#default").button(buttonState);
 	$("#save").button(buttonState);
+	
+	//Simulator
+	$("#simmulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
+	$("#simmulator-stop").button((simulationStarted)?'enable':'disable');
 	
 }
