@@ -10,7 +10,7 @@ $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
 		simulationStarted = true;
-		enableDisableButtons(true);
+		enableDisableButtons();
 		$("#simulator-log").html('');
 		var timerInterval = $("#simulation-frequency").val();
 	    sendHomeTimer = new Date().getTime();
@@ -52,7 +52,7 @@ $(function(){
 	});
 	$("#simulator-stop").click(function(){
 		simulationStarted = false;
-		enableDisableButtons(true);
+		enableDisableButtons();
 		clearInterval(simulatorTimer);
 	});
 });

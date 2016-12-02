@@ -21,9 +21,9 @@
 <head>
 	<script type="text/javascript" src="jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="latlon-spherical.js"></script>
 	<script type="text/javascript" src="simulator.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 	<!--<script src="map.js"></script>-->
 	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" href="styles.css">
@@ -348,8 +348,8 @@
 	  <option value='125'>8 Hz (125 ms)</option>
 	  <option value='100'>10 Hz (100 ms)</option>
 	</select>
-    <button id="simulator-start" disabled>Start</button>
-	<button id="simulator-stop" disabled>Stop</button>
+    <button id="simulator-start" style="display:none;">Start</button>
+	<button id="simulator-stop" style="display:none;">Stop</button>
 	<textarea id="simulator-log" name="simulator-log" readonly style=" "></textarea>
   </div>
   <div id="tabDocsAndSupport">

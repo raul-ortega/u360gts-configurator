@@ -822,7 +822,22 @@ function enableDisableButtons(){
 	$("#save").button(buttonState);
 	
 	//Simulator
-	$("#simmulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
-	$("#simmulator-stop").button((simulationStarted)?'enable':'disable');
+	//$("#simulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
+	//$("#simulator-stop").button((simulationStarted)?'enable':'disable');
+	if(connected && !cliModeEnabled && !simulationStarted)
+		$("#simulator-start").show();
+	else
+		$("#simulator-start").hide();
+	
+	if(simulationStarted) {
+		$("#simulator-stop").show();
+		$("#simulation-frequency").prop('disabled',true);
+		$("#simulation-protocol").prop('disabled',true);
+		$("#simulation-type").prop('disabled',true);
+	} else {
+		$("#simulator-stop").hide();
+		$("#simulation-frequency").prop('disabled',false);
+		$("#simulation-type").prop('disabled',false);
+	}
 	
 }
