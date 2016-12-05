@@ -16,6 +16,9 @@ $(function(){
 	    sendHomeTimer = new Date().getTime();
 		var home = new LatLon(47.403583,8.535850);
 		var p1 = new LatLon(home.lat,home.lon);
+		var directions = {left:1,right:2};
+		var direction = directions.right;
+		var navDistance = 0;
 		//$("#simulator-log").append(p1.lat + ',' +  p1.lon + '\n');
 		var NMEAGPGGA = buildGPGGA(p1.lat,p1.lon,0);
 		$("#simulator-log").append(NMEAGPGGA + '\n');
@@ -26,6 +29,7 @@ $(function(){
 				heading = 0;
 				p2 = home.destinationPoint(distance, heading);
 			} else {
+				// Speed
 				var varTime = (new Date().getTime() - calculateDistanceTimer);
 				if(calculateDistanceTimer == 0)
 					varTime = 0;//timerInterval;
@@ -35,10 +39,38 @@ $(function(){
 					accDistance += distance;
 					p2 = p1.destinationPoint(distance, heading);
 				} else {
-					heading += degreesPerSecond(distance,radius);
-					p2 = home.destinationPoint(radius, heading);
+					switch($("#simulation-type").val()){
+						case '1': //Circular
+							if(direction == directions.right) {
+								heading += degreesPerSecond(distance,radius);
+								if(heading >= 360*2)
+									direction = directions.left;
+							} else if(direction == directions.left) {
+								heading -= degreesPerSecond(distance,radius);
+								if(heading <= 0)
+									direction = directions.right;
+							}
+							p2 = home.destinationPoint(radius, heading);
+							break;
+						case '2': //Parallel
+							if(navDistance <= 300)
+								navDistance += distance;
+							else {
+								navDistance = -300;
+								if(direction == directions.left)
+									direction = directions.right;
+								else if(direction == directions.right)
+									direction = directions.left;
+							}
+							if(direction == directions.right)
+								heading = 90;
+							else if(direction == directions.left)
+								heading = 270;
+							p2 = p1.destinationPoint(distance, heading);
+							break;
+							
+					}
 				}
-				
 			}
 			
 			//$("#simulator-log").append(p2.lat + ',' +  p2.lon + '\n');
