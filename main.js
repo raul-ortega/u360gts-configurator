@@ -92,7 +92,8 @@ var connected = false;
 		slide: function( event, ui ) {
 			setHeadingPosition(ui.value);
 		}
-   });
+	});
+	
 	$("#tilt-slider").slider({
 		value: 0,
 		min: 0,
@@ -121,6 +122,7 @@ var connected = false;
 		serialSend(connectionId, str2ab('save\n'));
 		setStatus("Saving and rebooting");
 		cliModeEnabled = false;
+		enableDisableButtons();
 	});
 	$("#default").click(function(){
 		serialSend(connectionId, str2ab('defaults\n'));
@@ -233,6 +235,49 @@ var connected = false;
 			serialSend(connectionId, comando);	
 		}
 	});
+	
+	$("#simulator-speed-slider").slider({
+		value: 0,
+		min: 0,
+		max: 50,
+		step: 1,
+		animate:"slow",
+		orientation: "horizontal",
+		slide: function( event, ui ) {
+			setSimulationSpeed(ui.value);
+		}
+	});
+	
+	$("#simulator-speed").on( "spinchange", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		speed = $(this).val();
+	} );
+	$("#simulator-speed").on( "spin", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		speed = $(this).val();
+	} );
+	$("#simulator-distance").on( "spinchange", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		radius = $(this).val();
+	} );
+	$("#simulator-distance").on( "spin", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		radius = $(this).val();
+	} );
+	$("#simulator-altitude").on( "spinchange", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		altitude = $(this).val();
+	} );
+	$("#simulator-altitude").on( "spin", function( event, ui ) {
+		if($(this).val() < 0)
+			$(this).val(0);
+		altitude = $(this).val();
+	} );
   });
 
 function setHeadingPosition(position) {

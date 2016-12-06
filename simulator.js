@@ -1,14 +1,22 @@
 var simulatorTimer = 0;
 var calculateDistanceTimer = 0;
 var speed = 30; // m/s
+var radius = 100; // m
+var altitude = 0; // m
 var distance = 0;
 var sendHomeTimer = 0;
 var simulationStarted = false;
-var radius = 100;
 var accDistance = 0;
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
+		$("#simulator-speed").val(20);
+		speed = 20;
+		$("#simulator-distance").val(100);
+		radius = 100;
+		$("#simulator-altitude").val(0);
+		altitude = 0;
+		
 		simulationStarted = true;
 		enableDisableButtons();
 		$("#simulator-log").html('');
@@ -20,7 +28,7 @@ $(function(){
 		var direction = directions.right;
 		var navDistance = 0;
 		//$("#simulator-log").append(p1.lat + ',' +  p1.lon + '\n');
-		var NMEAGPGGA = buildGPGGA(p1.lat,p1.lon,0);
+		var NMEAGPGGA = buildGPGGA(p1.lat,p1.lon,altitude);
 		$("#simulator-log").append(NMEAGPGGA + '\n');
 		simulatorTimer = setInterval(function(){
 
@@ -74,7 +82,7 @@ $(function(){
 			}
 			
 			//$("#simulator-log").append(p2.lat + ',' +  p2.lon + '\n');
-			NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,0);
+			NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,altitude);
 			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
 			$("#simulator-log").append(NMEAGPGGA + '\n');
 			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
@@ -173,6 +181,9 @@ function buildGPRMC(lat,lon,altitude)
 	return retV;
 }
 
+function setSimulationSpeed(value){
+	speed = value;
+}
 function buildGPGGA(lat,lon,altitude)
 {
 	var dateObj = new Date();
@@ -236,8 +247,8 @@ function buildGPGGA(lat,lon,altitude)
 	var fixquality = "1";
 	var sats = "08";
 	var hordilution = "0.9";
-	var altitude1 = "545.4";
-	var altitude2 = "46.9";
+	var altitude1 = altitude * 1.0;
+	var altitude2 = altitude * 1.0;
 
 	var retV="";
 	retV += "$GPGGA";
