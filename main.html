@@ -62,7 +62,14 @@
 	#log-receiver {position:relative;left:0;top:-100%;display: block;width:35%;max-width:35%;height:50%;max-height:100%;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;z-index:2000;font-size:12px;}
 	#simulator-log {position:relative;left:0;top:20px;display: block;width:100%;max-width:100%;height:520px;max-height:520px;padding:5px 5px 5px 5px;margin:0;overflow-y: scroll;background-color: #000000;color: #ffffff;border:none;z-index:2000;font-size:12px;}
 	.eps-mode-2-3 {display:none;}
-	
+	#pan-custom-handle, #tilt-custom-handle {
+		width: 3em;
+		height: 1.6em;
+		top: 50%;
+		margin-top: -.8em;
+		text-align: center;
+		line-height: 1.6em;
+	}
 	
   </style>
   <title>u360gts configurator</title>
@@ -140,7 +147,7 @@
 				<input id="max_pid_gain-spinner" class="ui-spinner-input" value="0">
 			</div>
 			<br/>
-			<div id="pan-slider" class="slider"></div>
+			<div id="pan-slider" class="slider"><div id="pan-custom-handle" class="ui-slider-handle"></div></div>
 		</fieldset>
 		<br/>
 		<fieldset>
@@ -152,7 +159,7 @@
 				<input id="tilt90-spinner" class="ui-spinner-input" value="0">
 			</div>
 			<br/>
-			<div id="tilt-slider" class="slider"></div>
+			<div id="tilt-slider" class="slider"><div id="tilt-custom-handle" class="ui-slider-handle"></div></div>
 		</fieldset>
 		<br/>
 		<fieldset>
