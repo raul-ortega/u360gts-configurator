@@ -7,6 +7,7 @@ var distance = 0;
 var sendHomeTimer = 0;
 var simulationStarted = false;
 var accDistance = 0;
+var countFrames = 0;
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
@@ -84,6 +85,11 @@ $(function(){
 			//$("#simulator-log").append(p2.lat + ',' +  p2.lon + '\n');
 			NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,altitude);
 			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
+			countFrames++;
+			if(countFrames > 300){
+				countFrames = 0;
+				$("#simulator-log").html('');
+			}countFrames
 			$("#simulator-log").append(NMEAGPGGA + '\n');
 			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
 			p1 = p2;
