@@ -81,7 +81,7 @@ var connected = false;
   } );
   
   $(function(){
-	  
+	var handlePan = $("#pan-custom-handle");  
 	$("#pan-slider").slider({
 		value: 0,
 		min: 0,
@@ -89,11 +89,15 @@ var connected = false;
 		step: 1,
 		animate:"slow",
 		orientation: "horizontal",
+		create: function() {
+			handlePan.text($(this).slider("value"));
+		},
 		slide: function( event, ui ) {
+			handlePan.text(ui.value);
 			setHeadingPosition(ui.value);
 		}
 	});
-	
+	var handleTilt = $("#tilt-custom-handle");
 	$("#tilt-slider").slider({
 		value: 0,
 		min: 0,
@@ -101,7 +105,11 @@ var connected = false;
 		step: 1,
 		animate:"slow",
 		orientation: "horizontal",
+		create: function() {
+			handleTilt.text($(this).slider("value"));
+		},
 		slide: function( event, ui ) {
+			handleTilt.text(ui.value);
 			setTiltPosition(ui.value);
 		}
 	});
