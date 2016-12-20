@@ -27,6 +27,9 @@ var configuration = "";
 
 var cliEnterTimer = 0;
 
+var movingHeading = false;
+var movingTilt = false;
+
 var bitrates = [1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200];
 var features = [
 	"VBAT",
@@ -52,6 +55,8 @@ var commands = {
 	save: 8,
 	exit: 9,
 	cli_enter: 10,
+	heading: 11,
+	tilt: 12
 };
 String.prototype.contains = function(param) 
 { 
@@ -94,6 +99,7 @@ var connected = false;
 		},
 		slide: function( event, ui ) {
 			handlePan.text(ui.value);
+			last_sent_command = commands.tilt;
 			setHeadingPosition(ui.value);
 		}
 	});
@@ -110,6 +116,7 @@ var connected = false;
 		},
 		slide: function( event, ui ) {
 			handleTilt.text(ui.value);
+			last_sent_command = commands.heading;
 			setTiltPosition(ui.value);
 		}
 	});
@@ -376,7 +383,12 @@ function onReceive(receiveInfo) {
 						loadFeatures(line);
 					}
 					break;
-	
+				case commands.tilt:
+
+					break;
+				case commands.heading:
+
+					break;
 			}
 
 			this.lineBuffer = this.lineBuffer.substr(index + 1);
