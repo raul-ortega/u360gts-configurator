@@ -56,7 +56,8 @@ var commands = {
 	exit: 9,
 	cli_enter: 10,
 	heading: 11,
-	tilt: 12
+	tilt: 12,
+	status:13,
 };
 String.prototype.contains = function(param) 
 { 
@@ -397,6 +398,10 @@ function onReceive(receiveInfo) {
 					break;
 				case commands.heading:
 
+					break;
+				case commands.status:
+					if(line.startsWith('# status'))
+						cliModeEnabled = true;
 					break;
 			}
 
@@ -916,4 +921,8 @@ function enableDisableButtons(){
 		$("#simulation-type").prop('disabled',false);
 	}
 	
+}
+function sendStatus(){
+ last_sent_command = commands.status;
+	serialSend(connectionId, str2ab('status\n'));	
 }
