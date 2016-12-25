@@ -76,6 +76,7 @@ var uploadConfigurationTimer;
 
 var connected = false;
 
+var cliHasReplied = false;
 
 
   $( function() {
@@ -145,6 +146,7 @@ var connected = false;
 	$("#enter").click(function(){
 		if(connected){
 			cliModeEnabled = true;
+			cliHasReplied = false;
 			sendCliEnterCommands();
 			timer = setInterval(function(){
 				if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
@@ -177,6 +179,7 @@ var connected = false;
 		clearAll();
 		chrome.serial.disconnect(connectionId,function(){onClose;setStatus("Ready to load firware");});
 		cliModeEnabled = false;
+			cliHasReplied = false;
 	});
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
@@ -363,6 +366,8 @@ function onReceive(receiveInfo) {
 					loadSelectmenus(line);
 					if(line.contains('amv-open360tracker-32bits')){
 						showVersion(line);
+						cliHasReplied = true;
+						enableDisableButtons();
 					}
 					break;
 				case commands.calibrate_pan:
@@ -660,6 +665,7 @@ function disableButtons(){
 function onClose(){
 	clearAll();
 	connected = false;
+	cliModeEnabled = false;
 	enableDisableButtons();
 }
 
@@ -881,6 +887,7 @@ function enableDisableButtons(){
 	//Cli
 	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
 	var buttonState = ((connected && cliModeEnabled))?'enable':'disable';
+	var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
 	$("#exit").button(buttonState);
 	$("#boot").button(buttonState);
 	$("#default").button(buttonState);
