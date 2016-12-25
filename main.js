@@ -149,6 +149,7 @@ var cliHasReplied = false;
 			cliModeEnabled = true;
 			cliHasReplied = false;
 			sendCliEnterCommands();
+			setStatus("Waiting response...");
 			timer = setInterval(function(){
 				if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
 					clearInterval(timer);
@@ -372,6 +373,7 @@ function onReceive(receiveInfo) {
 					if(line.contains('amv-open360tracker-32bits')){
 						showVersion(line);
 						cliHasReplied = true;
+						setStatus("CLI mode enabled");
 						enableDisableButtons();
 					}
 					break;
