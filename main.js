@@ -897,7 +897,6 @@ function delay(milliseconds) {
 function enableDisableButtons(){
 	//Cli
 	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
-	var buttonState = ((connected && cliModeEnabled))?'enable':'disable';
 	var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
 	$("#exit").button(buttonState);
 	$("#boot").button(buttonState);
