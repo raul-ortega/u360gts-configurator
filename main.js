@@ -177,9 +177,13 @@ var cliHasReplied = false;
 	$("#boot").click(function(){
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
-		chrome.serial.disconnect(connectionId,function(){onClose;setStatus("Ready to load firware");});
-		cliModeEnabled = false;
+		chrome.serial.disconnect(connectionId,function(){
+			onClose;
+			setStatus("Ready to load firware");
+			cliModeEnabled = false;
 			cliHasReplied = false;
+			enableDisableButtons();
+		});
 	});
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
