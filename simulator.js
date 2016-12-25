@@ -4,6 +4,7 @@ var speed = 10; // m/s
 var radius = 20; // m
 var altitude = 0; // m
 var distance = 0;
+var startTrackingDistance = 0;
 var sendHomeTimer = 0;
 var simulationStarted = false;
 var accDistance = 0;
@@ -42,7 +43,7 @@ $(function(){
 				if(calculateDistanceTimer == 0)
 					varTime = 0;//timerInterval;
 				distance = speed * (varTime/1000);
-				if(accDistance < radius ) {
+				if(accDistance < startDistance ) {
 					heading = 0;
 					accDistance += distance;
 					p2 = p1.destinationPoint(distance, heading);
