@@ -1,8 +1,8 @@
 var simulatorTimer = 0;
 var calculateDistanceTimer = 0;
-var speed = 10; // m/s
-var radius = 20; // m
-var altitude = 0; // m
+var speed; // m/s
+var radius; // m
+var altitude; // m
 var distance = 0;
 var startTrackingDistance = 0;
 var sendHomeTimer = 0;
@@ -13,11 +13,10 @@ var countFrames = 0;
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
-		$("#simulator-speed").val(speed);
-		$("#simulator-distance").val(radius);
-		$("#simulator-altitude").val(0);
-		altitude = 0;
-		
+		speed = $("#simulator-speed").val();
+		radius = $("#simulator-distance").val();
+		altitude = $("#simulator-altitude").val();
+		startDistance = radius;
 		simulationStarted = true;
 		enableDisableButtons();
 		$("#simulator-log").html('');
