@@ -9,6 +9,7 @@ var sendHomeTimer = 0;
 var simulationStarted = false;
 var accDistance = 0;
 var countFrames = 0;
+var protocol = 2;
 
 $(function(){
 	$("#simulator-start").click(function(){
@@ -28,7 +29,7 @@ $(function(){
 		var direction = directions.right;
 		var navDistance = 0;
 		//$("#simulator-log").append(p1.lat + ',' +  p1.lon + '\n');
-		var NMEAGPGGA = buildGPGGA(p1.lat,p1.lon,altitude);
+		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude); //buildGPGGA(p1.lat,p1.lon,altitude);
 		$("#simulator-log").append(NMEAGPGGA + '\n');
 		simulatorTimer = setInterval(function(){
 
@@ -48,6 +49,7 @@ $(function(){
 					p2 = p1.destinationPoint(distance, heading);
 				} else {
 					switch($("#simulation-type").val()){
+
 						case '1': //Circular
 							if(direction == directions.right) {
 								heading += degreesPerSecond(distance,radius);
@@ -60,6 +62,7 @@ $(function(){
 							}
 							p2 = home.destinationPoint(radius, heading);
 							break;
+
 						case '2': //Parallel
 							if(navDistance <= 300)
 								navDistance += distance;
@@ -76,19 +79,21 @@ $(function(){
 								heading = 270;
 							p2 = p1.destinationPoint(distance, heading);
 							break;
+
+						case '3': //Custom
 							
 					}
 				}
 			}
 			
-			//$("#simulator-log").append(p2.lat + ',' +  p2.lon + '\n');
-			NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,altitude);
-			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
+			/*NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,altitude);
+			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));*/
+			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude);
 			countFrames++;
 			if(countFrames > 300){
 				countFrames = 0;
 				$("#simulator-log").html('');
-			}countFrames
+			}
 			$("#simulator-log").append(NMEAGPGGA + '\n');
 			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
 			p1 = p2;
@@ -101,6 +106,20 @@ $(function(){
 		clearInterval(simulatorTimer);
 	});
 });
+
+function buildPacket(lat,lon,altitude){
+	var packet;
+	var protocol = $("#simulation-protocol").val();
+	if(protocol == 1){
+		packet = buildGPGGA(lat,lon,altitude);
+		serialSend(connectionId, str2ab(packet + '\n'));
+	} else if(protocol ==2 ) {
+		packet = build_mavlink_msg_gps_raw_int(lat,lon,altitude);
+		chrome.serial.send(connectionId,packet.buffer,function(){});
+		serialSend(connectionId, str2ab('\n'));
+	}
+	return packet;
+}
 
 function buildGPRMC(lat,lon,altitude)
 {
