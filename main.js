@@ -849,6 +849,8 @@ function uploadConfiguration2(configuration){
 				var line = configuration.substr(0, index + 1);
 				line = line.replace(/[\n\r]/g, '');
 				if(!line.startsWith("#") && !line == "" && !line.contains("mag_calibrated")){
+					if(line.contains("easing_milis"))
+						line = line.replace('milis','millis');
 					serialSend(connectionId, str2ab(line + '\n'));
 					$("#cli-receiver").append(">");	
 				}
