@@ -819,7 +819,6 @@ function restoreConfig(callback) {
                     } else {
                         $('#cli-receiver').html('Configuration file version not accepted, restore aborted.');
                     }*/
-					//uploadConfiguration(configuration);
                     
                 }
             };
@@ -834,24 +833,6 @@ function restoreConfig(callback) {
         }
         return semver.gte(generated, required);
     }
-}
-function uploadConfiguration(configuration){
-	last_set_command = commands.set;
-	var index;
-	while ((index = configuration.indexOf('\n')) >= 0) {
-			if(index==0) {
-				configuration = configuration.substr(1,configuration.length-1);
-			}
-			else{
-				var line = configuration.substr(0, index + 1);
-				line = line.replace(/[\n\r]/g, '');
-				if(!line.startsWith("#") && !line == ""){
-					serialSend(connectionId, str2ab(line + '\n'));
-					delay(100);
-				}
-				configuration = configuration.substr(index + 1);				
-			}
-		}		
 }
 
 function uploadConfiguration2(configuration){
