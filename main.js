@@ -867,7 +867,7 @@ function uploadConfiguration2(configuration){
 			else{
 				var line = configuration.substr(0, index + 1);
 				line = line.replace(/[\n\r]/g, '');
-				if(!line.startsWith("#") && !line == ""){
+				if(!line.startsWith("#") && !line == "" && !line.contains("mag_calibrated")){
 					serialSend(connectionId, str2ab(line + '\n'));
 					$("#cli-receiver").append(">");	
 				}
