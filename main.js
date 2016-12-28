@@ -902,6 +902,7 @@ function enableDisableButtons(){
 	} else {
 		$("#simulator-stop").hide();
 		$("#simulation-frequency").prop('disabled',false);
+		$("#simulation-protocol").prop('disabled',false);
 		$("#simulation-type").prop('disabled',false);
 	}
 	
