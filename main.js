@@ -483,6 +483,11 @@ function loadSpinners(data){
 	
 	});
 }
+function sendRSSICommand(){
+	last_sent_command = commands.get_rssi;
+	serialSend(connectionId, str2ab('rssi\n'));
+}
+
 
 function rssiSetInterval(){
 	if(rssiUpdating == false && rssiEnabled() && configurationLoaded == true){
