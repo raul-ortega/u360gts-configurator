@@ -60,6 +60,7 @@ var commands = {
 	tilt: 12,
 	status:13,
 	get_rssi:14,
+	cli_command:15
 };
 String.prototype.contains = function(param) 
 { 
@@ -210,6 +211,7 @@ var cliHasReplied = false;
 	$('#cli-sender').keypress(function(e) {
 		if(e.which == 13) {
 			var comando = str2ab($('#cli-sender').val() + '\n');
+			last_sent_command = commands.cli_command;
 			rssiClearInterval();
 			serialSend(connectionId,comando);
 			$('#cli-sender').val('');
