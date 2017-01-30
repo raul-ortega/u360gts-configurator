@@ -198,7 +198,10 @@ var cliHasReplied = false;
 	});
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
-			chrome.serial.disconnect(connectionId,function(){setStatus("Disconnected");onClose();});
+			chrome.serial.disconnect(connectionId,function(){
+				setStatus("Disconnected");
+				disconnectCallBack();
+			});
 			$(this).html('Connect');
 		}
 		else {
