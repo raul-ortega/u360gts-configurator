@@ -58,6 +58,7 @@ var commands = {
 	heading: 11,
 	tilt: 12,
 	status:13,
+	get_rssi:14,
 };
 String.prototype.contains = function(param) 
 { 
@@ -72,6 +73,9 @@ String.prototype.getParamValue = function(parser) {
 var last_sent_command;
 
 var timer;// call every 1000 milliseconds
+
+var rssiTimer;
+var rssiUpdating = false;
 
 var uploadConfigurationTimer;
 
