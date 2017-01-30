@@ -225,6 +225,7 @@ var cliHasReplied = false;
 		$("#cli-sender").html('');
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
+		rssiClearInterval();
 		clearAll();
 		restoreConfig();
 	});
