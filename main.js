@@ -147,6 +147,8 @@ var cliHasReplied = false;
 		setStatus("Saving and rebooting");
 		cliModeEnabled = false;
 		configurationLoaded = false;
+		$("#backup").prop('disabled',true);
+		$("#restore").prop('disabled',true);
 		rssiClearInterval();
 		enableDisableButtons();
 	});
