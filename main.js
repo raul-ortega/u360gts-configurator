@@ -370,6 +370,7 @@ function onReceive(receiveInfo) {
 					if(line.startsWith('# status')){
 						$("#backup").prop('disabled',false);
 						$("#restore").prop('disabled',false);
+						rssiSetInterval();
 						break;
 					}
 					loadSpinners(line);
