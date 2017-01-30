@@ -247,7 +247,21 @@
 			</div>
 		</fieldset>
 		<br/>
-
+		<fieldset>
+			<legend>RSSI monitoring</legend>
+			<div class="controlgroup">
+				<label for="RSSI_ADC-feature">Enabled</label>
+				<input type="checkbox" name="RSSI_ADC-feature" id="RSSI_ADC-feature">
+				<label for="rssi_scale-spinner" class="ui-controlgroup-label">Scale</label>
+				<input id="rssi_scale-spinner" class="ui-spinner-input" value="0">
+				<label for="rssi_zoom-spinner" class="ui-controlgroup-label">Zoom</label>
+				<input id="rssi_zoom-spinner" class="ui-spinner-input" value="0">
+				<!--<label for="rssi_channel-spinner" class="ui-controlgroup-label">Channel</label>
+				<input id="rssi_channel-spinner" class="ui-spinner-input" value="0">-->
+				<span id="rssi-value" style="margin-left:15px;">RSSI: </span>
+			</div>
+		</fieldset>
+		<br/>
 		<fieldset>
 			<legend>Local GPS</legend>
 			<div class="controlgroup">
