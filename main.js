@@ -497,6 +497,12 @@ function rssiSetInterval(){
 		
 }
 
+function rssiClearInterval(){
+	$("#rssi-value").hide();
+	clearInterval(rssiTimer);
+	rssiUpdating = false;
+}
+
 function serialSend(connectionId,strmsg){
 	chrome.serial.send(connectionId,strmsg,function(){
 });
