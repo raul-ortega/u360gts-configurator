@@ -386,6 +386,12 @@ function onReceive(receiveInfo) {
 						enableDisableButtons();
 					}
 					break;
+				case commands.get_rssi:
+					if(line.startsWith("# rssi:")){
+						var rssi = line.split(" ")[3];
+						updateRssi(rssi)
+					}
+					break;
 				case commands.calibrate_pan:
 					if(line.contains('min ')){
 						$("#pan0-spinner").val(line.getParamValue("min "));
