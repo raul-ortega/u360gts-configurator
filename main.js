@@ -492,6 +492,10 @@ function updateRssi(paramValue){
 	$("#rssi-value").html("RSSI: "+ paramValue + "%");
 }
 
+function rssiEnabled(){
+	return (($("#RSSI_ADC-feature").prop('checked') == true))?true:false;
+}
+
 function rssiSetInterval(){
 	if(rssiUpdating == false && rssiEnabled() && configurationLoaded == true){
 		$("#rssi-value").show();
