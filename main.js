@@ -216,6 +216,7 @@ var cliHasReplied = false;
 		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
+		rssiClearInterval();
 		sendBackupCommands();
 	});
 	$("#restore").click(function(){
