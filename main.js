@@ -246,6 +246,10 @@ var cliHasReplied = false;
 			var paramVamule = ($(this).prop('checked') == true)?'':'-';
 			var comando = str2ab('feature '  + paramVamule + param  + '\n');
 			serialSend(connectionId, comando);
+			if(paramId == "RSSI_ADC-feature"){
+				rssiSetInterval();
+			}
+				
 		}
 	});
 	$("[id*='-select']").on("change",function(){
