@@ -355,7 +355,7 @@ function onReceive(receiveInfo) {
 		
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
-			if(last_sent_command != commands.backup && last_sent_command != commands.restore) {
+			if(last_sent_command != commands.backup && last_sent_command != commands.restore && last_sent_command != commands.get_rssi) {
 				$("#cli-receiver").append(line);
 			} else if(last_sent_command == commands.backup){
 				backupConfig(line);
