@@ -143,6 +143,7 @@ var cliHasReplied = false;
 		serialSend(connectionId, str2ab('save\n'));
 		setStatus("Saving and rebooting");
 		cliModeEnabled = false;
+		rssiClearInterval();
 		enableDisableButtons();
 	});
 	$("#default").click(function(){
