@@ -484,6 +484,19 @@ function loadSpinners(data){
 	});
 }
 
+function rssiSetInterval(){
+	if(rssiUpdating == false && rssiEnabled() && configurationLoaded == true){
+		$("#rssi-value").show();
+		rssiTimer = setInterval(function(){
+			sendRSSICommand();
+			rssiUpdating = true;
+		},500);
+	} else {
+		rssiClearInterval();
+	}
+		
+}
+
 function serialSend(connectionId,strmsg){
 	chrome.serial.send(connectionId,strmsg,function(){
 });
