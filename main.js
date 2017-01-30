@@ -24,6 +24,7 @@ var serialReceiving = false;
 var cliModeEnabled = false;
 
 var configurationLoaded = false;
+
 var configuration = "";
 
 var cliEnterTimer = 0;
@@ -149,9 +150,11 @@ var cliHasReplied = false;
 		rssiClearInterval();
 		enableDisableButtons();
 	});
+	
 	$("#default").click(function(){
 		serialSend(connectionId, str2ab('defaults\n'));
 	});
+	
 	$("#enter").click(function(){
 		if(connected){
 			cliModeEnabled = true;
@@ -186,6 +189,7 @@ var cliHasReplied = false;
 		rssiClearInterval();
 		enableDisableButtons();
 	});
+	
 	$("#boot").click(function(){
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
@@ -226,6 +230,7 @@ var cliHasReplied = false;
 		rssiClearInterval();
 		sendBackupCommands();
 	});
+	
 	$("#restore").click(function(){
 		configuration = '';
 		$("#cli-receiver").html('');
