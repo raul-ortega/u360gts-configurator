@@ -230,12 +230,12 @@ var cliHasReplied = false;
 		if(updateCheckBoxesAllowed == true) {
 			var paramId = $(this).attr('id');
 			var param = paramId.slice(0, paramId.indexOf("-checkbox"));
-			var paramVamule;
+			var paramValue;
 			if(param == "eps_interpolation" || param == "update_home_by_local_gps")
-				paramVamule=($(this).prop('checked') == true)?'ON':'OFF';
+				paramValue=($(this).prop('checked') == true)?'ON':'OFF';
 			else
-				paramVamule=($(this).prop('checked') == true)?1:0;
-			var comando = str2ab('set ' + param + '=' + paramVamule + '\n');
+				paramValue=($(this).prop('checked') == true)?1:0;
+			var comando = str2ab('set ' + param + '=' + paramValue + '\n');
 			serialSend(connectionId,comando);
 		}
 	});
@@ -243,8 +243,8 @@ var cliHasReplied = false;
 		if(updateCheckBoxesAllowed == true) {
 			var paramId = $(this).attr('id');
 			var param = paramId.slice(0, paramId.indexOf("-feature"));
-			var paramVamule = ($(this).prop('checked') == true)?'':'-';
-			var comando = str2ab('feature '  + paramVamule + param  + '\n');
+			var paramValue = ($(this).prop('checked') == true)?'':'-';
+			var comando = str2ab('feature '  + paramValue + param  + '\n');
 			serialSend(connectionId, comando);
 			if(paramId == "RSSI_ADC-feature"){
 				rssiSetInterval();
@@ -254,16 +254,16 @@ var cliHasReplied = false;
 	});
 	$("[id*='-select']").on("change",function(){
 		var paramId = $(this).attr('id');
-		var paramVamule = $(this).val();
+		var paramValue = $(this).val();
 		if(paramId == "eps-select"){
-			if(paramVamule == 1)
+			if(paramValue == 1)
 				$(".eps-mode-2-3").hide();
 			else
 				$(".eps-mode-2-3").show();
 		}
 		if(updateCheckBoxesAllowed == true) {
 			var param = paramId.slice(0, paramId.indexOf("-select"));
-			var comando = str2ab('set '  + param + '=' + paramVamule  + '\n');
+			var comando = str2ab('set '  + param + '=' + paramValue  + '\n');
 			serialSend(connectionId, comando);	
 		}
 	});
