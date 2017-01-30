@@ -23,6 +23,7 @@ var serialReceiving = false;
 
 var cliModeEnabled = false;
 
+var configurationLoaded = false;
 var configuration = "";
 
 var cliEnterTimer = 0;
@@ -143,6 +144,7 @@ var cliHasReplied = false;
 		serialSend(connectionId, str2ab('save\n'));
 		setStatus("Saving and rebooting");
 		cliModeEnabled = false;
+		configurationLoaded = false;
 		rssiClearInterval();
 		enableDisableButtons();
 	});
@@ -177,6 +179,7 @@ var cliHasReplied = false;
 		serialSend(connectionId, str2ab('exit\n'));
 		setStatus("Exiting and rebooting");
 		cliModeEnabled = false;
+		configurationLoaded = false;
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
 		rssiClearInterval();
@@ -216,6 +219,7 @@ var cliHasReplied = false;
 		configuration = '';
 		$("#cli-receiver").html('');
 		$("#cli-sender").html('');
+		configurationLoaded = false;
 		rssiClearInterval();
 		sendBackupCommands();
 	});
@@ -225,6 +229,7 @@ var cliHasReplied = false;
 		$("#cli-sender").html('');
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
+		configurationLoaded = false;
 		rssiClearInterval();
 		clearAll();
 		restoreConfig();
@@ -375,6 +380,7 @@ function onReceive(receiveInfo) {
 					if(line.startsWith('# status')){
 						$("#backup").prop('disabled',false);
 						$("#restore").prop('disabled',false);
+						configurationLoaded = true;
 						rssiSetInterval();
 						break;
 					}
