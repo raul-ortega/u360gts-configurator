@@ -206,6 +206,7 @@ var cliHasReplied = false;
 	$('#cli-sender').keypress(function(e) {
 		if(e.which == 13) {
 			var comando = str2ab($('#cli-sender').val() + '\n');
+			rssiClearInterval();
 			serialSend(connectionId,comando);
 			$('#cli-sender').val('');
 		}
