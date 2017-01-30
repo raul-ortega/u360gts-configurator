@@ -321,6 +321,12 @@ var cliHasReplied = false;
 		altitude = $(this).val();
 	} );
   });
+function disconnectCallBack(){
+	onClose();
+	cliHasReplied = false;
+	configurationLoaded = false;
+	rssiClearInterval();
+}
 
 function setHeadingPosition(position) {
   var buffer = new ArrayBuffer(1);
