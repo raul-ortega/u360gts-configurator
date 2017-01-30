@@ -488,6 +488,9 @@ function sendRSSICommand(){
 	serialSend(connectionId, str2ab('rssi\n'));
 }
 
+function updateRssi(paramValue){
+	$("#rssi-value").html("RSSI: "+ paramValue + "%");
+}
 
 function rssiSetInterval(){
 	if(rssiUpdating == false && rssiEnabled() && configurationLoaded == true){
