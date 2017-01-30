@@ -179,6 +179,7 @@ var cliHasReplied = false;
 		cliModeEnabled = false;
 		$("#backup").prop('disabled',true);
 		$("#restore").prop('disabled',true);
+		rssiClearInterval();
 		enableDisableButtons();
 	});
 	$("#boot").click(function(){
