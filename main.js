@@ -543,6 +543,8 @@ function loadFeatures(data){
 		var param = paramId.slice(0, paramId.indexOf("-feature"));
 		var paramValue = (data.contains(param))?true:false;
 		setCheckbox("#" + paramId,paramValue);
+		if(paramId == "RSSI_ADC-feature")
+			rssiSetInterval();
 	})
 }
 
