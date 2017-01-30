@@ -189,11 +189,9 @@ var cliHasReplied = false;
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
 		chrome.serial.disconnect(connectionId,function(){
-			onClose;
 			setStatus("Ready to load firware");
-			cliModeEnabled = false;
-			cliHasReplied = false;
-			enableDisableButtons();
+			$("#serial-connect").html('Connect');
+			disconnectCallBack();
 		});
 	});
 	$("#serial-connect").click(function(){
