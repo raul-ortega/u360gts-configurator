@@ -14,7 +14,7 @@ var protocol = 2;
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
-		speed = $("#simulator-speed").val();
+		speed = kmhToms($("#simulator-speed").val());
 		radius = $("#simulator-distance").val();
 		altitude = $("#simulator-altitude").val();
 		startDistance = radius;
@@ -106,6 +106,10 @@ $(function(){
 		clearInterval(simulatorTimer);
 	});
 });
+
+function kmhToms(speed){
+	return ((speed/3600)*1000)
+}
 
 function buildPacket(lat,lon,altitude){
 	var packet;
@@ -205,9 +209,9 @@ function buildGPRMC(lat,lon,altitude)
 	return retV;
 }
 
-function setSimulationSpeed(value){
+/*function setSimulationSpeed(value){
 	speed = value;
-}
+}*/
 function buildGPGGA(lat,lon,altitude)
 {
 	var dateObj = new Date();
