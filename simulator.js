@@ -1,6 +1,5 @@
 var simulatorTimer = 0;
 var calculateDistanceTimer = 0;
-//var speed; // m/s
 var radius; // m
 var altitude; // m
 var distance = 0;
@@ -19,7 +18,6 @@ function Speed(value){
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
-		//speed = kmhToms($("#simulator-speed").val());
 		radius = $("#simulator-distance").val();
 		altitude = $("#simulator-altitude").val();
 		startDistance = radius;
@@ -33,9 +31,9 @@ $(function(){
 		var directions = {left:1,right:2};
 		var direction = directions.right;
 		var navDistance = 0;
-		//$("#simulator-log").append(p1.lat + ',' +  p1.lon + '\n');
-		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude); //buildGPGGA(p1.lat,p1.lon,altitude);
+		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude);
 		$("#simulator-log").append(NMEAGPGGA + '\n');
+		
 		simulatorTimer = setInterval(function(){
 
 			if(new Date().getTime() - sendHomeTimer < 5000){
@@ -91,8 +89,6 @@ $(function(){
 				}
 			}
 			
-			/*NMEAGPGGA = buildGPGGA(p2.lat,p2.lon,altitude);
-			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));*/
 			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude);
 			countFrames++;
 			if(countFrames > 300){
@@ -157,7 +153,6 @@ function buildGPRMC(lat,lon,altitude)
 	var  lonMin = (Math.abs(lon) - lonDeg) * 60;
 		 lonMin = lonMin.toFixed(4);
 		 lonMin = lonMin.toString();
-	//var longitude= lonDeg.toString()+ lonMin.toString();
 
 	var degStr = "00000" + lonDeg;
 	degStr = degStr.substring(degStr.length - 3);
@@ -184,12 +179,8 @@ function buildGPRMC(lat,lon,altitude)
 
 	var theDate="";
 		theDate += String("0" + day).slice(-2);
-		theDate += String("0" + month).slice(-2);//javascript does month 0-11 not 1-12
+		theDate += String("0" + month).slice(-2); //javascript does month 0-11 not 1-12
 		theDate += String("0" + year - 2000).slice(-2);
-		//theDate += ".000";
-
-
-
 
 	var retV="";
 	retV += "$GPRMC";
@@ -212,9 +203,6 @@ function buildGPRMC(lat,lon,altitude)
 	return retV;
 }
 
-/*function setSimulationSpeed(value){
-	speed = value;
-}*/
 function buildGPGGA(lat,lon,altitude)
 {
 	var dateObj = new Date();
@@ -244,7 +232,6 @@ function buildGPGGA(lat,lon,altitude)
 	var  lonMin = (Math.abs(lon) - lonDeg) * 60;
 		 lonMin = lonMin.toFixed(4);
 		 lonMin = lonMin.toString();
-	//var longitude= lonDeg.toString()+ lonMin.toString();
 
 	var degStr = "00000" + lonDeg;
 	degStr = degStr.substring(degStr.length - 3);
@@ -273,7 +260,6 @@ function buildGPGGA(lat,lon,altitude)
 		theDate += String("0" + day).slice(-2);
 		theDate += String("0" + month).slice(-2);//javascript does month 0-11 not 1-12
 		theDate += String("0" + year - 2000).slice(-2);
-		//theDate += ".000";
 
 	var fixquality = "1";
 	var sats = "08";
