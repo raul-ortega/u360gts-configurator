@@ -1,6 +1,6 @@
 var simulatorTimer = 0;
 var calculateDistanceTimer = 0;
-var speed; // m/s
+//var speed; // m/s
 var radius; // m
 var altitude; // m
 var distance = 0;
@@ -11,10 +11,15 @@ var accDistance = 0;
 var countFrames = 0;
 var protocol = 2;
 
+function Speed(value){
+	var speed = (value/3600)*1000;
+	return speed
+}
+
 $(function(){
 	$("#simulator-start").click(function(){
 		accDistance = 0;
-		speed = kmhToms($("#simulator-speed").val());
+		//speed = kmhToms($("#simulator-speed").val());
 		radius = $("#simulator-distance").val();
 		altitude = $("#simulator-altitude").val();
 		startDistance = radius;
@@ -42,7 +47,7 @@ $(function(){
 				var varTime = (new Date().getTime() - calculateDistanceTimer);
 				if(calculateDistanceTimer == 0)
 					varTime = 0;//timerInterval;
-				distance = speed * (varTime/1000);
+				distance = Speed($("#simulator-speed").val()) * (varTime/1000);
 				if(accDistance < startDistance ) {
 					heading = 0;
 					accDistance += distance;
@@ -107,9 +112,7 @@ $(function(){
 	});
 });
 
-function kmhToms(speed){
-	return ((speed/3600)*1000)
-}
+
 
 function buildPacket(lat,lon,altitude){
 	var packet;
