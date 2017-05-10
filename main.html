@@ -104,7 +104,7 @@
     <li><a href="#tabBasicSettings">Basic settings</a></li>
     <li><a href="#tabFeatures">Features</a></li>
 	<!--<li><a href="#tabs-4">Control</a></li>-->
-    <li><a href="#tabLogs">Logs</a></li>
+    <!--<li><a href="#tabLogs">Logs</a></li>-->
 	<li><a href="#tabCliMode">CLI Mode</a></li>
 	<li><a href="#tabSimulator">Simulator</a></li>
 	<li><a href="#tabDocsAndSupport">Documentation & Support</a></li>
@@ -337,16 +337,16 @@
       <input id="position-input" type="range" min="0" max="359" value="0">
     </label>
   </div>-->
-  <div id="tabLogs">
+  <!--<div id="tabLogs">
 	<div id="loadmap" style="">
-		<iframe src="map.html" id="map" style="width:100%;height:99%;"></iframe>
+		<iframe src="map-2.html" id="map" style="width:100%;height:99%;"></iframe>
 		<div class="controls">
 			  <a href="#" id="zoom_in">+</a>
 			  <a href="#" id="zoom_out">–</a>
 		</div>
 	</div>
 	<textarea id="log-receiver" name="log-receiver" readonly style=" "></textarea>
-  </div>
+  </div>-->
   <div id="tabCliMode">
 	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-receiver" name="cli-receiver" readonly></textarea></div>
 	<input id="cli-sender" type="text"/>
@@ -359,8 +359,7 @@
 	  <option value=''>Select flight type</option>
 	  <option value='1' selected>Circular</option>
 	  <option value='2'>Parallel to runway</option>
-	  <!--<option value='2'>Parallel</option>
-	  <option value='3'>Journey</option>-->
+	  <option value='3'>Custom</option>
 	</select>
 	<select name="simulation-protocol" id="simulation-protocol">
 	  <option value=''>Select protocol</option>
@@ -391,7 +390,9 @@
 	  <label for="simulator-altitude" class="ui-controlgroup-label">Altitude (m)</label>
 	  <input id="simulator-altitude" class="ui-spinner-input" value="0">
 	</div>
-	<textarea id="simulator-log" name="simulator-log" readonly style=" "></textarea>
+	<p></p>
+	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;"></iframe>
+	<textarea id="simulator-log" name="simulator-log" readonly style=" " style="diplay:none;"></textarea>
   </div>
   <div id="tabDocsAndSupport">
 	<ul>
