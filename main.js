@@ -252,6 +252,7 @@ var cliHasReplied = false;
 			var param = paramId.slice(0, paramId.indexOf("-checkbox"));
 			var paramValue;
 			if(param == "eps_interpolation" || param == "update_home_by_local_gps")
+			if(param == "eps_interpolation" || param == "update_home_by_local_gps" || param == "gps_home_beeper")
 				paramValue=($(this).prop('checked') == true)?'ON':'OFF';
 			else
 				paramValue=($(this).prop('checked') == true)?1:0;
