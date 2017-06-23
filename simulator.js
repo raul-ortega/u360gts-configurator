@@ -115,12 +115,18 @@ function buildPacket(lat,lon,altitude){
 	var protocol = $("#simulation-protocol").val();
 	if(protocol == 1){
 		packet = buildGPGGA(lat,lon,altitude);
-		serialSend(connectionId, str2ab(packet + '\n'));
-	} else if(protocol ==2 ) {
+		if(!debugEnabled)
+			serialSend(connectionId, str2ab(packet + '\n'));
+	} else if(protocol == 2 ) {
 		packet = build_mavlink_msg_gps_raw_int(lat,lon,altitude);
 		chrome.serial.send(connectionId,packet.buffer,function(){});
-		serialSend(connectionId, str2ab('\n'));
-	}
+		if(!debugEnabled)
+			serialSend(connectionId, str2ab('\n'));
+	} else if(protocol == 3){
+		packet = Data2Pitlab(11,altitude,lat,lon);
+		if(!debugEnabled)
+			serialSend(connectionId, str2ab(packet + '\n'));
+	}	
 	return packet;
 }
 
