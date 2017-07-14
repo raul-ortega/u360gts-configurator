@@ -337,7 +337,6 @@ function nmeaChecksum(sentence)
   		debugString += tv;
 
 	}
-	console.log(debugString);
 	return checksum;
 }
 
