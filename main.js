@@ -16,6 +16,9 @@
  * along with u360gts.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+var debugEnabled = false;
+
 var dataRecieved="";
 var connectionId = -1;
 var updateCheckBoxesAllowed = false;
@@ -61,7 +64,8 @@ var commands = {
 	tilt: 12,
 	status:13,
 	get_rssi:14,
-	cli_command:15
+	get_vbat:15,
+	cli_command:16
 };
 String.prototype.contains = function(param) 
 { 
@@ -86,6 +90,9 @@ var connected = false;
 
 var cliHasReplied = false;
 
+var customSimulationEnabled = false;
+
+
 
   $( function() {
     $( ".controlgroup" ).controlgroup()
@@ -95,6 +102,9 @@ var cliHasReplied = false;
   } );
   
   $(function(){
+
+	if(debugEnabled) enableDisableButtons();
+
 	var handlePan = $("#pan-custom-handle");  
 	$("#pan-slider").slider({
 		value: 0,
@@ -251,7 +261,7 @@ var cliHasReplied = false;
 			var paramId = $(this).attr('id');
 			var param = paramId.slice(0, paramId.indexOf("-checkbox"));
 			var paramValue;
-			if(param == "eps_interpolation" || param == "update_home_by_local_gps")
+			if(param == "eps_interpolation" || param == "update_home_by_local_gps" || param == "gps_home_beeper")
 				paramValue=($(this).prop('checked') == true)?'ON':'OFF';
 			else
 				paramValue=($(this).prop('checked') == true)?1:0;
@@ -330,6 +340,21 @@ var cliHasReplied = false;
 			$(this).val(0);
 		altitude = $(this).val();
 	} );
+	
+	$("#simulation-type").on("change",function(){
+		customSimulationEnabled = ($(this).val() == 3) ? true : false;
+		if(customSimulationEnabled){
+			$("#simulator-log").hide();
+			$("#map").show();
+		} else{
+			$("#map").hide();
+			$("#simulator-log").show();
+		}
+			
+	});
+
+	$("body").fadeIn();
+
   });
 function disconnectCallBack(){
 	onClose();
@@ -381,7 +406,7 @@ function onReceive(receiveInfo) {
 		
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
-			if(last_sent_command != commands.backup && last_sent_command != commands.restore && last_sent_command != commands.get_rssi) {
+			if(last_sent_command != commands.backup && last_sent_command != commands.restore && last_sent_command != commands.get_rssi && last_sent_command != commands.get_vbat) {
 				$("#cli-receiver").append(line);
 			} else if(last_sent_command == commands.backup){
 				backupConfig(line);
@@ -454,7 +479,6 @@ function onReceive(receiveInfo) {
 		}
 	}
 	updateCheckBoxesAllowed = true;
-	
 };
 
 function backupConfig(line){
@@ -964,7 +988,7 @@ function enableDisableButtons(){
 	//Simulator
 	//$("#simulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
 	//$("#simulator-stop").button((simulationStarted)?'enable':'disable');
-	if(connected && !cliModeEnabled && !simulationStarted)
+	if(connected && !cliModeEnabled && !simulationStarted || debugEnabled)
 		$("#simulator-start").show();
 	else
 		$("#simulator-start").hide();
@@ -982,7 +1006,12 @@ function enableDisableButtons(){
 	}
 	
 }
+
 function sendStatus(){
  last_sent_command = commands.status;
 	serialSend(connectionId, str2ab('status\n'));	
 }
+
+
+
+

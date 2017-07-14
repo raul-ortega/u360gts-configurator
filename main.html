@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <!--/*
  * This file is part of u360gts, aka amv-open360tracker 32bits:
  * https://github.com/raul-ortega/amv-open360tracker-32bits
@@ -23,6 +23,7 @@
 	<script type="text/javascript" src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 	<script type="text/javascript" src="latlon-spherical.js"></script>
 	<script type="text/javascript" src="mavlink-simulator.js"></script>
+	<script type="text/javascript" src="pitlab-simulator.js"></script>
 	<script type="text/javascript" src="simulator.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 	<!--<script src="map.js"></script>-->
@@ -71,12 +72,12 @@
 		text-align: center;
 		line-height: 1.6em;
 	}
-	
+	#simulator-home-position {width: 160px;}
   </style>
   <title>u360gts configurator</title>
   <meta charset="utf-8">
 </head>
-<body style="background-color:#000000;">
+<body style="background-color:#000000;display:none;">
 	<img src="logo-u360gts-white.png" width="128px;" style="position:absolute;left:15px;top:15px;">
   <div id="container" style="background-color:#000000;margin-left:145px;margin-top:10px;">
 	<label>
@@ -104,7 +105,7 @@
     <li><a href="#tabBasicSettings">Basic settings</a></li>
     <li><a href="#tabFeatures">Features</a></li>
 	<!--<li><a href="#tabs-4">Control</a></li>-->
-    <li><a href="#tabLogs">Logs</a></li>
+    <!--<li><a href="#tabLogs">Logs</a></li>-->
 	<li><a href="#tabCliMode">CLI Mode</a></li>
 	<li><a href="#tabSimulator">Simulator</a></li>
 	<li><a href="#tabDocsAndSupport">Documentation & Support</a></li>
@@ -179,6 +180,7 @@
 				  <option value='64'>FRSKY D</option>
 				  <option value='128'>FRSKY X</option>
 				  <option value='256'>LTM</option>
+				  <option value='512'>PITLAB</option>
 				</select>
 				<!--<label for="telemetry_baud-select" class="ui-controlgroup-label">Protocol</label>-->
 				<select name="telemetry_baud-select" id="telemetry_baud-select" style="float:left;">
@@ -247,6 +249,7 @@
 				<input id="vbat_max_cell_voltage-spinner" class="ui-spinner-input" value="0">
 				<label for="vbat_warning_cell_voltage-spinner" class="ui-controlgroup-label">Warning cell voltage</label>
 				<input id="vbat_warning_cell_voltage-spinner" class="ui-spinner-input" value="0">
+				<span id="vabt-value" style="margin-left:15px;display:none;">VBAT: </span>
 			</div>
 		</fieldset>
 		<br/>
@@ -278,8 +281,10 @@
 				</select>
 				<label for="gps_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
 				<input id="gps_min_sats-spinner" class="ui-spinner-input" value="0">
-				<label for="update_home_by_local_gps-checkbox">Update home</label>
+				<label for="update_home_by_local_gps-checkbox" class="ui-controlgroup-label">Update home</label>
 				<input type="checkbox" name="update_home_by_local_gps-checkbox" id="update_home_by_local_gps-checkbox">
+				<label for="gps_home_beeper-checkbox" class="ui-controlgroup-label">Beeper</label>
+				<input type="checkbox" name="gps_home_beeper-checkbox" id="gps_home_beeper-checkbox">
 			</div>
 		</fieldset>
 		<br/>
@@ -337,16 +342,16 @@
       <input id="position-input" type="range" min="0" max="359" value="0">
     </label>
   </div>-->
-  <div id="tabLogs">
+  <!--<div id="tabLogs">
 	<div id="loadmap" style="">
-		<iframe src="map.html" id="map" style="width:100%;height:99%;"></iframe>
+		<iframe src="map-2.html" id="map" style="width:100%;height:99%;"></iframe>
 		<div class="controls">
 			  <a href="#" id="zoom_in">+</a>
 			  <a href="#" id="zoom_out">–</a>
 		</div>
 	</div>
 	<textarea id="log-receiver" name="log-receiver" readonly style=" "></textarea>
-  </div>
+  </div>-->
   <div id="tabCliMode">
 	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-receiver" name="cli-receiver" readonly></textarea></div>
 	<input id="cli-sender" type="text"/>
@@ -359,13 +364,13 @@
 	  <option value=''>Select flight type</option>
 	  <option value='1' selected>Circular</option>
 	  <option value='2'>Parallel to runway</option>
-	  <!--<option value='2'>Parallel</option>
-	  <option value='3'>Journey</option>-->
+	  <option value='3' style="display:none;">Custom</option>
 	</select>
 	<select name="simulation-protocol" id="simulation-protocol">
 	  <option value=''>Select protocol</option>
 	  <option value='1' selected='selected'>NMEA</option>
 	  <option value='2'>MAVLINK</option>
+	  <option value='3'>PITLAB</option>
 	</select>
 	<select name="simulation-frequency" id="simulation-frequency">
 	  <option value=''>Select frequency</option>
@@ -380,7 +385,7 @@
 	  <option value='111'>9 Hz (111 ms)</option>
 	  <option value='100'>10 Hz (100 ms)</option>
 	</select>
-    <button id="simulator-start" style="display:none;">Start</button>
+    	<button id="simulator-start" style="display:none;">Start</button>
 	<button id="simulator-stop" style="display:none;">Stop</button>
 	<br/>
 	<div class="controlgroup">
@@ -390,8 +395,12 @@
 	  <input id="simulator-distance" class="ui-spinner-input" value="20">
 	  <label for="simulator-altitude" class="ui-controlgroup-label">Altitude (m)</label>
 	  <input id="simulator-altitude" class="ui-spinner-input" value="0">
+	  <label id="simulator-home-position" class="ui-controlgroup-label" style="display:none;">Home position: </label>
+	  
 	</div>
-	<textarea id="simulator-log" name="simulator-log" readonly style=" "></textarea>
+	<p></p>
+	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;display:none;"></iframe>
+	<textarea id="simulator-log" name="simulator-log" readonly></textarea>
   </div>
   <div id="tabDocsAndSupport">
 	<ul>
