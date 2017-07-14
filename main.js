@@ -64,7 +64,8 @@ var commands = {
 	tilt: 12,
 	status:13,
 	get_rssi:14,
-	cli_command:15
+	get_vbat:15,
+	cli_command:16
 };
 String.prototype.contains = function(param) 
 { 
