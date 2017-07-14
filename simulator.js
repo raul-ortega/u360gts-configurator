@@ -9,6 +9,9 @@ var simulationStarted = false;
 var accDistance = 0;
 var countFrames = 0;
 var protocol = 2;
+var home0 = [47.403583,8.535850];
+var homePosition;
+
 
 function Speed(value){
 	var speed = (value/3600)*1000;
@@ -16,7 +19,17 @@ function Speed(value){
 }
 
 $(function(){
+
+	window.addEventListener('message', handleResponseFromMissionPlanner, false); 
+
 	$("#simulator-start").click(function(){
+		if($("#simulation-type").val() == 3){
+			sendMessageToMissionPlanner('getHome');
+			//sendMessageToMissionPlanner('getPath');
+		}
+		/*else
+			sendMessageToMissionPlanner('setHome');*/
+
 		accDistance = 0;
 		radius = $("#simulator-distance").val();
 		altitude = $("#simulator-altitude").val();
@@ -26,7 +39,7 @@ $(function(){
 		$("#simulator-log").html('');
 		var timerInterval = $("#simulation-frequency").val();
 	    sendHomeTimer = new Date().getTime();
-		var home = new LatLon(47.403583,8.535850);
+		var home = new LatLon(home0[0],home0[1]);
 		var p1 = new LatLon(home.lat,home.lon);
 		var directions = {left:1,right:2};
 		var direction = directions.right;
@@ -35,7 +48,18 @@ $(function(){
 		$("#simulator-log").append(NMEAGPGGA + '\n');
 		
 		simulatorTimer = setInterval(function(){
+			/*if(debugEnabled) {
+				console.log();
+			}*/
 
+			if($("#simulation-type").val() == 3) {
+				if(typeof homePosition == 'undefined')
+					return;
+				else {
+					p1 = new LatLon(homePosition.x,homePosition.y)
+				}
+			}
+			
 			if(new Date().getTime() - sendHomeTimer < 5000){
 				distance = 0;
 				heading = 0;
@@ -84,7 +108,9 @@ $(function(){
 							break;
 
 						case '3': //Custom
-							
+							if(accDistance == 0) {
+								
+							}
 					}
 				}
 			}
@@ -314,7 +340,29 @@ function nmeaChecksum(sentence)
 	console.log(debugString);
 	return checksum;
 }
+
 function degreesPerSecond(speed,radius){
 	var degrees = speed / (0.0174533 * radius);
 	return degrees;
+}
+
+function sendMessageToMissionPlanner(action){
+	var frame = document.getElementById('map');
+	var message = {action: action, home: home0};
+	var home = frame.contentWindow.postMessage(message, '*');
+}
+
+handleResponseFromMissionPlanner = function(e) {
+	
+	var action = e.data.action;
+	if(action == 'setHome') {
+		homePosition = e.data.home;
+		$("#simulator-home-position").text("Home: " +homePosition.x + "," + homePosition.y);
+	} else if(action == 'setPath'){
+		var mypath = e.data.path;
+		var aaa = 0;
+	} else {
+		console.log("Unknown message: "+e.data);
+	}
+
 }
