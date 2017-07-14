@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <!--/*
  * This file is part of u360gts, aka amv-open360tracker 32bits:
  * https://github.com/raul-ortega/amv-open360tracker-32bits
@@ -72,12 +72,12 @@
 		text-align: center;
 		line-height: 1.6em;
 	}
-	
+	#simulator-home-position {width: 160px;}
   </style>
   <title>u360gts configurator</title>
   <meta charset="utf-8">
 </head>
-<body style="background-color:#000000;">
+<body style="background-color:#000000;display:none;">
 	<img src="logo-u360gts-white.png" width="128px;" style="position:absolute;left:15px;top:15px;">
   <div id="container" style="background-color:#000000;margin-left:145px;margin-top:10px;">
 	<label>
@@ -180,6 +180,7 @@
 				  <option value='64'>FRSKY D</option>
 				  <option value='128'>FRSKY X</option>
 				  <option value='256'>LTM</option>
+				  <option value='512'>PITLAB</option>
 				</select>
 				<!--<label for="telemetry_baud-select" class="ui-controlgroup-label">Protocol</label>-->
 				<select name="telemetry_baud-select" id="telemetry_baud-select" style="float:left;">
@@ -248,7 +249,7 @@
 				<input id="vbat_max_cell_voltage-spinner" class="ui-spinner-input" value="0">
 				<label for="vbat_warning_cell_voltage-spinner" class="ui-controlgroup-label">Warning cell voltage</label>
 				<input id="vbat_warning_cell_voltage-spinner" class="ui-spinner-input" value="0">
-				<span id="vabt-value" style="margin-left:15px;">VBAT: </span>
+				<span id="vabt-value" style="margin-left:15px;display:none;">VBAT: </span>
 			</div>
 		</fieldset>
 		<br/>
@@ -280,7 +281,7 @@
 				</select>
 				<label for="gps_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
 				<input id="gps_min_sats-spinner" class="ui-spinner-input" value="0">
-				<label for="update_home_by_local_gps-checkbox">Update home</label>
+				<label for="update_home_by_local_gps-checkbox" class="ui-controlgroup-label">Update home</label>
 				<input type="checkbox" name="update_home_by_local_gps-checkbox" id="update_home_by_local_gps-checkbox">
 				<label for="gps_home_beeper-checkbox" class="ui-controlgroup-label">Beeper</label>
 				<input type="checkbox" name="gps_home_beeper-checkbox" id="gps_home_beeper-checkbox">
@@ -384,7 +385,7 @@
 	  <option value='111'>9 Hz (111 ms)</option>
 	  <option value='100'>10 Hz (100 ms)</option>
 	</select>
-    <button id="simulator-start" style="display:none;">Start</button>
+    	<button id="simulator-start" style="display:none;">Start</button>
 	<button id="simulator-stop" style="display:none;">Stop</button>
 	<br/>
 	<div class="controlgroup">
@@ -394,10 +395,12 @@
 	  <input id="simulator-distance" class="ui-spinner-input" value="20">
 	  <label for="simulator-altitude" class="ui-controlgroup-label">Altitude (m)</label>
 	  <input id="simulator-altitude" class="ui-spinner-input" value="0">
+	  <label id="simulator-home-position" class="ui-controlgroup-label" style="display:none;">Home position: </label>
+	  
 	</div>
 	<p></p>
-	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;"></iframe>
-	<textarea id="simulator-log" name="simulator-log" readonly style=" " style="diplay:none;"></textarea>
+	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;display:none;"></iframe>
+	<textarea id="simulator-log" name="simulator-log" readonly></textarea>
   </div>
   <div id="tabDocsAndSupport">
 	<ul>
