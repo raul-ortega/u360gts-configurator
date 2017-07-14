@@ -18,7 +18,7 @@
     "128": "assets/u360gts_icon_128.png"
   },
     "sandbox": {
-    "pages": ["map.html"]
+    "pages": ["mission-planner/map-2.html"]
 },
   "permissions": [
 	"http://*.u360gts.com/*",
