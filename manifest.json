@@ -1,10 +1,10 @@
 {
   "name": "u360gts - configurator",
-  "version": "2.3",
+  "version": "2.4",
   "author": "Raul Ortega",
   "manifest_version": 2,
   "minimum_chrome_version": "38",
-  "short_name": "u360gts v2.3",
+  "short_name": "u360gts v2.4",
   "description": "u360gts antenna tracker configurator version 2.3",
  
   "app": {
