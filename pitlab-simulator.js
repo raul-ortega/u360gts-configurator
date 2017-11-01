@@ -23,6 +23,32 @@ function Altitude2Pitlab(number)
 	return "$B00" + hex.toUpperCase() + "00";
 }
 
+function Altitude2PitlabOld(number)
+{
+	if (number < 0)
+	{
+		number = 0xFFFF + number + 1;
+	}
+	if (number > 65535) number = 65535;
+
+	var hex = parseInt(number).toString(16);
+	hex = "0000".substr(0, 4 - hex.length) + hex;
+	return "$B00" + hex.toUpperCase() + "00";
+}
+
+function Altitude2Pitlab(number)
+{
+	if (number < 0)
+	{
+		number = 0xFFFF + number + 1;
+	}
+	if (number > 65535) number = 65535;
+
+	var hex = parseInt(number).toString(16);
+	hex = "0000".substr(0, 4 - hex.length) + hex;
+	return "$K" + hex.toUpperCase() + "0000";
+}
+
 function Sats2Pitlab(number)
 {
 	if(number > 15) number = 15;

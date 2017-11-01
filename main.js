@@ -118,7 +118,6 @@ var customSimulationEnabled = false;
 		},
 		slide: function( event, ui ) {
 			handlePan.text(ui.value);
-			last_sent_command = commands.tilt;
 			setHeadingPosition(ui.value);
 		}
 	});
@@ -135,7 +134,6 @@ var customSimulationEnabled = false;
 		},
 		slide: function( event, ui ) {
 			handleTilt.text(ui.value);
-			last_sent_command = commands.heading;
 			setTiltPosition(ui.value);
 		}
 	});
@@ -364,10 +362,12 @@ function disconnectCallBack(){
 }
 
 function setHeadingPosition(position) {
+  last_sent_command = commands.heading;
   var buffer = new ArrayBuffer(1);
   serialSend(connectionId, str2ab('heading ' + position + '\n'));
 };
 function setTiltPosition(position) {
+  last_sent_command = commands.tilt;
   var buffer = new ArrayBuffer(1);
   serialSend(connectionId, str2ab('tilt ' + position + '\n'));
 };
@@ -436,6 +436,7 @@ function onReceive(receiveInfo) {
 						cliHasReplied = true;
 						setStatus("CLI mode enabled");
 						enableDisableButtons();
+						break;
 					}
 					break;
 				case commands.get_rssi:
@@ -463,10 +464,10 @@ function onReceive(receiveInfo) {
 					}
 					break;
 				case commands.tilt:
-
+					
 					break;
 				case commands.heading:
-
+					
 					break;
 				case commands.status:
 					if(line.startsWith('# status'))
