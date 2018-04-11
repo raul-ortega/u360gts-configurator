@@ -176,11 +176,7 @@ var customSimulationEnabled = false;
 					clearInterval(timer);
 					cliEnterTimer = 0;
 					last_sent_command = commands.set;
-					serialSend(connectionId, str2ab('version\n'));
-					serialSend(connectionId, str2ab('serial\n'));
-					serialSend(connectionId, str2ab('feature\n'));
-					serialSend(connectionId, str2ab('set\n'));
-					serialSend(connectionId, str2ab('status\n'));
+					serialSend(connectionId, str2ab('version\nserial\nfeature\nset\n\status\n'));
 				}	
 			}, 2000); 
 			$("#backup").prop('disabled',true);
