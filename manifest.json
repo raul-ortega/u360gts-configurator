@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "minimum_chrome_version": "38",
   "short_name": "u360gts v2.4.2",
-  "description": "u360gts antenna tracker configurator version 2.4.2",
+  "description": "u360gts configurator v2.4.2",
  
   "app": {
     "background": {
@@ -15,7 +15,10 @@
 
   "icons": {
     "16": "assets/u360gts_icon_16.png",
-    "128": "assets/u360gts_icon_128.png"
+	"32": "assets/u360gts_icon_32.png",
+	"64": "assets/u360gts_icon_64.png",
+    "128": "assets/u360gts_icon_128.png",
+	"256": "assets/u360gts_icon_256.png"
   },
     "sandbox": {
     "pages": ["mission-planner/map-2.html"]
