@@ -748,11 +748,7 @@ function sendCliEnterCommands(){
 function sendBackupCommands(){
 	cliModeEnabled = true;
 	last_sent_command = commands.backup;
-	serialSend(connectionId, str2ab('version\n'));
-	serialSend(connectionId, str2ab('serial\n'));
-	serialSend(connectionId, str2ab('feature\n'));
-	serialSend(connectionId, str2ab('set\n'));
-	serialSend(connectionId, str2ab('status\n'));
+	serialSend(connectionId, str2ab('version\nserial\nfeature\nset\nstatus\n'));
 }
 function enableButtons(){
 	$(":button").each(function(){
