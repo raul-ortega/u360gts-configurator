@@ -288,7 +288,13 @@ var customSimulationEnabled = false;
 		if(updateCheckBoxesAllowed == true) {
 			var param = paramId.slice(0, paramId.indexOf("-select"));
 			var comando = str2ab('set '  + param + '=' + paramValue  + '\n');
-			serialSend(connectionId, comando);	
+			serialSend(connectionId, comando);
+			if(param.contains('gps_baud') && paramValue == '0')
+				paramValue='ON';
+			else
+				paramValue='OFF';
+			var comando = str2ab('set gps_autobaud=' + paramValue  + '\n');
+			serialSend(connectionId, comando);
 		}
 	});
 	
