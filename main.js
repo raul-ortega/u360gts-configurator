@@ -703,6 +703,7 @@ function buildBaudPicker(bitrates){
 		var baudOption = document.createElement('option');
 		baudOption.value = baudOption.innerText = bitrate;
 		baudPicker.appendChild(baudOption);
+		if(baudOption.value == 115200) baudOption.selected = true;
 	});
 }
 var str2ab = function(str) {
