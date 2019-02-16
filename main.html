@@ -263,6 +263,42 @@
 				<input type="checkbox" name="SOFTSERIAL-feature" id="SOFTSERIAL-feature">
 			</div>
 		</fieldset>
+		<fieldset style="display:inline-block;">
+			<legend>RELAY TELEMETRY</legend>
+			<div class="controlgroup" id="relay_telemetry">
+				<label for="TELEMETRY-feature">Enabled</label>
+				<input type="checkbox" name="TELEMETRY-feature" id="TELEMETRY-feature">
+				<label class="ui-controlgroup-label">Port</label>
+				<select name="relay_telemetry_port-select" id="relay_telemetry_port-select" style="float:left;">
+				  <option value='' selected='selected'>Select port</option>
+				</select>
+				&nbsp;
+				<label class="ui-controlgroup-label">Protocol</label>
+				<select name="relay_telemetry_protocol-select" id="relay_telemetry_protocol-select" style="float:left;">
+				  <option value='' selected='selected'>Select protocol</option>
+				  <option value='256'>MFD</option>
+				  <option value='512'>MAVLINK</option>
+				  <option value='1024'>NMEA</option>
+				  <option value='2048'>LTM</option>
+				</select>
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
+				<select name="relay_telemetry_baud-select" id="relay_telemetry_baud-select" style="float:left;">
+				    <option value='' selected='selected'>Select Baudrate</option>
+					<option value='1200'>1200</option>
+					<option value='2400'>2400</option>
+					<option value='4800'>4800</option>
+					<option value='9600'>9600</option>
+					<option value='19200'>19200</option>
+					<option value='38400'>38400</option>
+					<option value='57600'>57600</option>
+					<option value='115200'>115200</option>
+					<option value='230400'>230400</option>
+					<option value='250000'>250000</option>
+				</select>
+			</div>
+		</fieldset>
+		<br/><br/>
 		<fieldset>
 			<legend>VBAT monitoring</legend>
 			<div class="controlgroup">
