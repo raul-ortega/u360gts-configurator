@@ -652,6 +652,7 @@ function enableDisableRelayOptions(paramValue){
 }
 function loadSelectmenus(data){
 	$("[id*='-select']").each(function(){
+		var thisSelect = $(this);
 		var paramId = $(this).attr('id');
 		var param = paramId.slice(0, paramId.indexOf("-select"));
 		if(data.startsWith(param + " = ")) {
@@ -660,7 +661,7 @@ function loadSelectmenus(data){
 			$("#" + paramId + " option").each(function() {
 				$(this).attr('selected',false);
 				if($(this).val() == paramValue) {
-					$(this).attr('selected', true);
+					$(thisSelect).val(paramValue);//$(this).attr('selected', true);
 				}
 			});
 			$("#" + paramId + " option[value='"+ paramValue + "']").attr("selected", true);
@@ -680,6 +681,9 @@ function clearAll(){
 	});
 	$("[id*='-spinner']").each(function(){
 		$(this).val('0');
+	});
+	$("[id*='-select']").each(function(){
+		$(this).val("");
 	});
 	$("#cli-receiver").html('');
 	$("#firmware-version").html('unknown');
