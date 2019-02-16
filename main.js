@@ -46,7 +46,8 @@ var features = [
 	"EASING",
 	"NOPID",
 	"DEBUG",
-	"EPS"
+	"EPS",
+	"AUTODETECT"
 	];
 
 var commands = {
