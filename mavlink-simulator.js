@@ -24,7 +24,7 @@ function build_mavlink_msg_gps_raw_int(lat,lon,altitude){
 	var system_id = 100;
 	var component_id = 200;
 	var timeUsec = 0; //new Date().getTime() * 1000;
-	var fixType = 2;
+	var fixType = $("#simulation-fixtype").val();
 	var latitude = lat * 10000000; //474035790;
 	var longitude = lon * 10000000; //85358460;
 	var altitude = altitude * 1000;
@@ -32,7 +32,7 @@ function build_mavlink_msg_gps_raw_int(lat,lon,altitude){
 	var epv = 0;
 	var vel = 1000;
 	var cog = 0;
-	var satellites = 8;
+	var satellites = $("#simulation-sats").val();;
 
 	seq++;
 	if(seq > 255) seq = 0;

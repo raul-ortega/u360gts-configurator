@@ -1,6 +1,6 @@
 /*
- * This file is part of u360gts, aka amv-open360tracker 32bits:
- * https://github.com/raul-ortega/amv-open360tracker-32bits
+ * This file is part of u360gts:
+ * https://github.com/raul-ortega/u360gts
  *
  * u360gts is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,8 @@ var features = [
 	"EASING",
 	"NOPID",
 	"DEBUG",
-	"EPS"
+	"EPS",
+	"AUTODETECT"
 	];
 
 var commands = {
@@ -65,7 +66,9 @@ var commands = {
 	status:13,
 	get_rssi:14,
 	get_vbat:15,
-	cli_command:16
+	cli_command:16,
+	get_serial:17,
+	set_serial:18
 };
 String.prototype.contains = function(param) 
 { 
@@ -273,9 +276,12 @@ var customSimulationEnabled = false;
 			if(paramId == "RSSI_ADC-feature"){
 				rssiSetInterval();
 			}
-				
+			if(paramId == "TELEMETRY-feature"){
+				enableDisableRelayOptions($(this).prop('checked'));
+			}
 		}
 	});
+	
 	$("[id*='-select']").on("change",function(){
 		var paramId = $(this).attr('id');
 		var paramValue = $(this).val();
@@ -286,9 +292,20 @@ var customSimulationEnabled = false;
 				$(".eps-mode-2-3").show();
 		}
 		if(updateCheckBoxesAllowed == true) {
-			var param = paramId.slice(0, paramId.indexOf("-select"));
-			var comando = str2ab('set '  + param + '=' + paramValue  + '\n');
-			serialSend(connectionId, comando);	
+			if(paramId.contains("relay_telemetry")){
+				setSerialRelay2(paramId,paramValue);
+			} else {
+				var param = paramId.slice(0, paramId.indexOf("-select"));
+				var comando = str2ab('set '  + param + '=' + paramValue  + '\n');
+				serialSend(connectionId, comando);
+				if(param.contains('gps_baud') && paramValue == '0')
+					paramValue='ON';
+				else
+					paramValue='OFF';
+				var comando = str2ab('set gps_autobaud=' + paramValue  + '\n');
+				serialSend(connectionId, comando);				
+			}
+
 		}
 	});
 	
@@ -347,6 +364,16 @@ var customSimulationEnabled = false;
 			
 	});
 
+	/*$("[id*='relay_telemetry_']").each(function(selectParam){
+		$(this).on("change",function(item){
+			var str="";
+			$( "select option:selected" ).each(function() {
+				str += $( this ).text() + " ";
+			});
+			//setSerialRelay(item);
+		});	
+	});*/
+	
 	$("body").fadeIn();
 
   });
@@ -427,12 +454,15 @@ function onReceive(receiveInfo) {
 						loadFeatures(line);
 					}
 					loadSelectmenus(line);
-					if(line.contains('amv-open360tracker-32bits')){
+					if(line.contains('u360gts')){
 						showVersion(line);
 						cliHasReplied = true;
 						setStatus("CLI mode enabled");
 						enableDisableButtons();
 						break;
+					}
+					if(line.startsWith('serial')){
+						loadSSerial(line);
 					}
 					break;
 				case commands.get_rssi:
@@ -464,6 +494,11 @@ function onReceive(receiveInfo) {
 					break;
 				case commands.heading:
 					
+					break;
+				case commands.get_serial:
+					/*if(line.startsWith('serial')){
+						loadSSerial(line);
+					}*/
 					break;
 				case commands.status:
 					if(line.startsWith('# status'))
@@ -599,11 +634,25 @@ function loadFeatures(data){
 		setCheckbox("#" + paramId,paramValue);
 		if(paramId == "RSSI_ADC-feature")
 			rssiSetInterval();
-	})
+		if(paramId == "TELEMETRY-feature"){
+			enableDisableRelayOptions(paramValue);
+			$("#relay_telemetry")
+		}
+	});
+	
 }
-
+function enableDisableRelayOptions(paramValue){
+	if(paramValue == false){
+		$("#relay_telemetry .ui-controlgroup-label").hide();
+		$("[id*='relay_telemetry_']").hide();
+	} else {
+		$("#relay_telemetry .ui-controlgroup-label").show();
+		$("[id*='relay_telemetry_']").show();
+	}
+}
 function loadSelectmenus(data){
 	$("[id*='-select']").each(function(){
+		var thisSelect = $(this);
 		var paramId = $(this).attr('id');
 		var param = paramId.slice(0, paramId.indexOf("-select"));
 		if(data.startsWith(param + " = ")) {
@@ -612,7 +661,7 @@ function loadSelectmenus(data){
 			$("#" + paramId + " option").each(function() {
 				$(this).attr('selected',false);
 				if($(this).val() == paramValue) {
-					$(this).attr('selected', true);
+					$(thisSelect).val(paramValue);//$(this).attr('selected', true);
 				}
 			});
 			$("#" + paramId + " option[value='"+ paramValue + "']").attr("selected", true);
@@ -632,6 +681,9 @@ function clearAll(){
 	});
 	$("[id*='-spinner']").each(function(){
 		$(this).val('0');
+	});
+	$("[id*='-select']").each(function(){
+		$(this).val("");
 	});
 	$("#cli-receiver").html('');
 	$("#firmware-version").html('unknown');
@@ -703,6 +755,7 @@ function buildBaudPicker(bitrates){
 		var baudOption = document.createElement('option');
 		baudOption.value = baudOption.innerText = bitrate;
 		baudPicker.appendChild(baudOption);
+		if(baudOption.value == 115200) baudOption.selected = true;
 	});
 }
 var str2ab = function(str) {
@@ -994,13 +1047,89 @@ function enableDisableButtons(){
 		$("#simulation-type").prop('disabled',false);
 	}
 	
+	cleanSerials();
 }
 
 function sendStatus(){
- last_sent_command = commands.status;
-	serialSend(connectionId, str2ab('status\n'));	
+  last_sent_command = commands.status;
+  serialSend(connectionId, str2ab('status\n'));	
 }
 
+function sendSerialCommand(){
+  last_sent_command = commands.get_serial;
+  serialSend(connectionId, str2ab('serial\n'));
+}
 
+function loadSSerial(line) {
+  var portNumber = line.split(' ')[1];
+  var portFunction = Number(line.split(' ')[2]);
+  var portProtocol = Number(line.split(' ')[3]);
+  var portBaudRate = Number(line.split(' ')[5]);
+  var selectPicker = document.getElementById('relay_telemetry_port-select');
+  if(portFunction == 0 || portFunction >= 256){
+	  var portOption = document.createElement('option');
+	  portOption.value = portOption.innerText = portNumber;
+	  if (portFunction >= 256) portOption.selected = true;
+	  selectPicker.appendChild(portOption);
+  }
+  if(portFunction >= 256){
+	  $("#relay_telemetry_protocol-select option").each(function() {
+	   $(this).attr('selected',false);
+		 if($(this).val() == portFunction) {
+		   $("#relay_telemetry_protocol-select").val(portFunction);//$(this).attr('selected', true);
+		 }
+	   });
+	   $("#relay_telemetry_baud-select option").each(function() {
+	   $(this).attr('selected',false);
+		 if($(this).val() == portBaudRate) {
+		   $("#relay_telemetry_baud-select").val(portBaudRate);//$(this).attr('selected', true);
+		 }
+	   });
+  }
+}
+function cleanSerials(){
+	$("#relay_telemetry_port-select option").remove();
+	$("#relay_telemetry_port-select").append(new Option("Select port", "-1"));
+	$("#relay_telemetry_port-select option").first().attr('selected',true);
+	$("#relay_telemetry_protocols-select option").each(function(protocolOption){
+		protocolOption.selected = false;
+	});
+		$("#relay_telemetry_baud-select option").each(function(baudOption){
+		baudOption.selected = false;
+	});
+}
 
+function setSerialRelay2(paramId,paramValue){
+	var portPicker = document.getElementById('relay_telemetry_port-select');
+	var selectedPort = portPicker.options[portPicker.selectedIndex].value;
+	var protocolPicker = document.getElementById('relay_telemetry_protocol-select');
+	var selectedProtocol = protocolPicker.options[protocolPicker.selectedIndex].value;
+	var baudPicker = document.getElementById('relay_telemetry_baud-select');
+	var selectedBaud = baudPicker.options[baudPicker.selectedIndex].value;
+	var defaultBaudRate = "57600";
+	var serialCommand = "";
+	
+	if(paramId.contains("port"))
+		selectedPort = paramValue;
+	else if(paramId.contains("protocl"))
+		selectedProtocol = paramValue;
+	else if(paramId.contains("baud"))
+		selectedBaud = paramValue;
+	
+	$("#relay_telemetry_port-select option").each(function(){
+		if($(this).val() != "" && selectedProtocol !="" && selectedBaud !=""){
+			if(selectedPort == $(this).val())
+				serialCommand += buildSerialCommand(selectedPort,selectedProtocol,selectedBaud,selectedBaud,selectedBaud,selectedBaud);
+			else
+				serialCommand += buildSerialCommand($(this).val(),0,defaultBaudRate,defaultBaudRate,defaultBaudRate,defaultBaudRate);
+		}
+	});
+	if(serialCommand != ""){
+		last_sent_command = commands.cli_command;
+		serialSend(connectionId, str2ab(serialCommand + "serial\n"));
+	}
+}
 
+function buildSerialCommand(port,protocol,baud1,baud2,baud3,baud4){
+	return "serial " + port + " " + protocol + " " + baud1 + " " + baud2+ " " + baud3+ " " + baud4 + "\n";
+}

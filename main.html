@@ -38,6 +38,7 @@
 		margin:0;
 		border:none;
 	}
+
 	.ui-controlgroup-vertical {
 		width: 150px;
 	}
@@ -74,7 +75,7 @@
 	}
 	#simulator-home-position {width: 160px;}
   </style>
-  <title>u360gts configurator 2.4.2</title>
+  <title>u360gts configurator 2.5.0</title>
   <meta charset="utf-8">
 </head>
 <body style="background-color:#000000;display:none;">
@@ -160,6 +161,8 @@
 				<input id="tilt0-spinner" class="ui-spinner-input" value="0">
 				<label for="tilt90-spinner" class="ui-controlgroup-label">Tilt 90</label>
 				<input id="tilt90-spinner" class="ui-spinner-input" value="0">
+				<label for="tilt_max_angle-spinner" class="ui-controlgroup-label">Max Angle (0 - 90)</label>
+				<input id="tilt_max_angle-spinner" class="ui-spinner-input" value="0">
 			</div>
 			<br/>
 			<div id="tilt-slider" class="slider"><div id="tilt-custom-handle" class="ui-slider-handle"></div></div>
@@ -171,6 +174,7 @@
 			    <label for="AUTODETECT-feature">AUTODETECT PROTOCOL</label>
 				<input type="checkbox" name="AUTODETECT-feature" id="AUTODETECT-feature">
 				&nbsp;
+				<label class="ui-controlgroup-label">Protocol</label>
 				<select name="telemetry_protocol-select" id="telemetry_protocol-select" style="float:left;">
 				  <option value=''>Select protocol</option>
 				  <option value='4'>MFD</option>
@@ -182,7 +186,8 @@
 				  <option value='256'>LTM</option>
 				  <option value='512'>PITLAB</option>
 				</select>
-				<!--<label for="telemetry_baud-select" class="ui-controlgroup-label">Protocol</label>-->
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
 				<select name="telemetry_baud-select" id="telemetry_baud-select" style="float:left;">
 				  <option value=''>Select baudrate</option>
 					<option value='1'>1200</option>
@@ -195,8 +200,25 @@
 					<option value='8'>115200</option>
 				</select>
 				&nbsp;
+				<label class="ui-controlgroup-label">Provider</label>
+				<select name="telemetry_provider-select" id="telemetry_provider-select" style="float:left;">
+				  <option value=''>Select provider</option>
+					<option value='NONE'>None</option>
+					<option value='DIY_GPS'>DIY GPS</option>
+					<option value='INAV'>iNav</option>
+					<option value='APM10'>Passthrough FrSky (Ardupilot)</option>
+				</select>
+            </div>
+			<br/>
+			<div class="controlgroup">
 				<label for="telemetry_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
 				<input id="telemetry_min_sats-spinner" class="ui-spinner-input" value="0">
+				<label class="ui-controlgroup-label">Home</label>
+				<select name="telemetry_home-select" id="telemetry_home-select" style="float:left;">
+				  <option value=''>Select home method</option>
+					<option value='DEFAULT'>DEFAULT</option>
+					<option value='AUTO'>AUTO (from telemetry)</option>
+				</select>
 			</div>
 		</fieldset>
 		<br/>
@@ -228,14 +250,56 @@
 			</div>
 		</fieldset>
 		<br/>
-		<fieldset>
+		<fieldset style="display:inline-block;">
 			<legend>DISPLAY</legend>
 			<div class="controlgroup">
 				<label for="DISPLAY-feature">Enabled</label>
 				<input type="checkbox" name="DISPLAY-feature" id="DISPLAY-feature">
 			</div>
 		</fieldset>
-		<br/>
+				<fieldset style="display:inline-block;">
+			<legend>SOFTSERIAL</legend>
+			<div class="controlgroup">
+				<label for="SOFTSERIAL-feature">Enabled</label>
+				<input type="checkbox" name="SOFTSERIAL-feature" id="SOFTSERIAL-feature">
+			</div>
+		</fieldset>
+		<fieldset style="display:inline-block;">
+			<legend>RELAY TELEMETRY</legend>
+			<div class="controlgroup" id="relay_telemetry">
+				<label for="TELEMETRY-feature">Enabled</label>
+				<input type="checkbox" name="TELEMETRY-feature" id="TELEMETRY-feature">
+				<label class="ui-controlgroup-label">Port</label>
+				<select name="relay_telemetry_port-select" id="relay_telemetry_port-select" style="float:left;">
+				  <option value='' selected='selected'>Select port</option>
+				</select>
+				&nbsp;
+				<label class="ui-controlgroup-label">Protocol</label>
+				<select name="relay_telemetry_protocol-select" id="relay_telemetry_protocol-select" style="float:left;">
+				  <option value='' selected='selected'>Select protocol</option>
+				  <option value='256'>MFD</option>
+				  <option value='512'>MAVLINK</option>
+				  <option value='1024'>NMEA</option>
+				  <option value='2048'>LTM</option>
+				</select>
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
+				<select name="relay_telemetry_baud-select" id="relay_telemetry_baud-select" style="float:left;">
+				    <option value='' selected='selected'>Select Baudrate</option>
+					<option value='1200'>1200</option>
+					<option value='2400'>2400</option>
+					<option value='4800'>4800</option>
+					<option value='9600'>9600</option>
+					<option value='19200'>19200</option>
+					<option value='38400'>38400</option>
+					<option value='57600'>57600</option>
+					<option value='115200'>115200</option>
+					<option value='230400'>230400</option>
+					<option value='250000'>250000</option>
+				</select>
+			</div>
+		</fieldset>
+		<br/><br/>
 		<fieldset>
 			<legend>VBAT monitoring</legend>
 			<div class="controlgroup">
@@ -273,11 +337,27 @@
 			<div class="controlgroup">
 				<label for="GPS-feature">Enabled</label>
 				<input type="checkbox" name="GPS-feature" id="GPS-feature">
-				<!--<label for="gps_provider-select" class="ui-controlgroup-label">Provider</label>-->
-				<select name="gps_provider-select" id="gps_provider-select">
+				<label class="ui-controlgroup-label">Provider</label>
+				<select name="gps_provider-select" id="gps_provider-select" style="float:left;">
 				  <option value='' selected='selected'>Select protocol</option>
 				  <option value='NMEA'>NMEA</option>
 				  <option value='UBLOX'>UBLOX</option>
+				</select>
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
+				<select name="gps_baud-select" id="gps_baud-select" style="float:left;">
+				  <option value=''>Select baudrate</option>
+					<option value='0'>AUTO</option>
+					<option value='1'>1200</option>
+					<option value='2'>2400</option>
+					<option value='3'>4800</option>
+					<option value='4'>9600</option>
+					<option value='5'>19200</option>
+					<option value='6'>38400</option>
+					<option value='7'>57600</option>
+					<option value='8'>115200</option>
+					<option value='9'>230400</option>
+					<option value='10'>250000</option>
 				</select>
 				<label for="gps_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
 				<input id="gps_min_sats-spinner" class="ui-spinner-input" value="0">
@@ -293,7 +373,9 @@
 			<div class="controlgroup">
 				<label for="EPS-feature">Enabled</label>
 				<input type="checkbox" name="EPS-feature" id="EPS-feature">
-				<select name="eps-select" id="eps-select">
+				&nbsp;
+				<label class="ui-controlgroup-label">Mode</label>
+				<select name="eps-select" id="eps-select" style="float:left;">
 				  <option value='' selected='selected'>Select EPS mode</option>
 				  <option value='1'>Mode 1</option>
 				  <option value='2'>Mode 2</option>
@@ -319,8 +401,9 @@
 			<div class="controlgroup">
 				<label for="EASING-feature">Enabled</label>
 				<input type="checkbox" name="EASING-feature" id="EASING-feature">
-				<!--<label for="easing-select"class="ui-controlgroup-label">Provider</label>-->
-				<select name="easing-select" id="easing-select">
+				&nbsp;
+				<label class="ui-controlgroup-label">Function</label>
+				<select name="easing-select" id="easing-select" style="float:left;">
 				  <option value='' selected='selected'>Select function</option>
 				  <option value='1'>EASE_OUT_QRT</option>
 				  <option value='2'>EASE_OUT_CIRC</option>
@@ -374,17 +457,35 @@
 	</select>
 	<select name="simulation-frequency" id="simulation-frequency">
 	  <option value=''>Select frequency</option>
-	  <option value='1000' selected='selected'>1 Hz (1000 ms)</option>
+	  <option value='1000'>1 Hz (1000 ms)</option>
 	  <option value='500'>2 Hz (500 ms)</option>
 	  <option value='333'>3 Hz (333 ms)</option>
 	  <option value='250'>4 Hz (250 ms)</option>
-	  <option value='200'>5 Hz (200 ms)</option>
+	  <option value='200' selected='selected'>5 Hz (200 ms)</option>
 	  <option value='166'>6 Hz (166 ms)</option>
 	  <option value='142'>7 Hz (142 ms)</option>
 	  <option value='125'>8 Hz (125 ms)</option>
 	  <option value='111'>9 Hz (111 ms)</option>
 	  <option value='100'>10 Hz (100 ms)</option>
 	</select>
+	<div class="controlgroup">
+	  <label for="simulation-sats" class="ui-controlgroup-label">Satellites</label>
+	  <input id="simulation-sats" class="ui-spinner-input" value="6">
+	  &nbsp;
+	  <label class="ui-controlgroup-label">Fix type</label>
+	  <select name="simulation-fixtype" id="simulation-fixtype">
+	  <option value=''>Select fixtype</option>
+	  <option value='0'>0</option>
+	  <option value='1'>1</option>
+	  <option value='2'>2</option>
+	  <option value='3' selected='selected'>3</option>
+	  <option value='4'>4</option>
+	  <option value='5'>5</option>
+	  <option value='6'>6</option>
+	  <option value='7'>7</option>
+	  <option value='8'>8</option>
+	</select>
+	</div>
     	<button id="simulator-start" style="display:none;">Start</button>
 	<button id="simulator-stop" style="display:none;">Stop</button>
 	<br/>

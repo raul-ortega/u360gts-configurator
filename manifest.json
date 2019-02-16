@@ -1,11 +1,11 @@
 {
   "name": "u360gts - configurator",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "author": "Raul Ortega",
   "manifest_version": 2,
   "minimum_chrome_version": "38",
-  "short_name": "u360gts v2.4.2",
-  "description": "u360gts configurator v2.4.2",
+  "short_name": "u360gts v2.5.0",
+  "description": "u360gts configurator v2.5.0",
  
   "app": {
     "background": {

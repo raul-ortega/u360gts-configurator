@@ -293,8 +293,8 @@ function buildGPGGA(lat,lon,altitude)
 		theDate += String("0" + month).slice(-2);//javascript does month 0-11 not 1-12
 		theDate += String("0" + year - 2000).slice(-2);
 
-	var fixquality = "1";
-	var sats = "08";
+	var fixquality = $("#simulation-fixtype").val();
+	var sats = $("#simulation-sats").val();
 	var hordilution = "0.9";
 	var altitude1 = altitude * 1.0;
 	var altitude2 = altitude * 1.0;
