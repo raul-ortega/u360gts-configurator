@@ -66,7 +66,9 @@ var commands = {
 	status:13,
 	get_rssi:14,
 	get_vbat:15,
-	cli_command:16
+	cli_command:16,
+	get_serial:17,
+	set_serial:18
 };
 String.prototype.contains = function(param) 
 { 
