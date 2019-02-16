@@ -173,6 +173,7 @@
 			    <label for="AUTODETECT-feature">AUTODETECT PROTOCOL</label>
 				<input type="checkbox" name="AUTODETECT-feature" id="AUTODETECT-feature">
 				&nbsp;
+				<label class="ui-controlgroup-label">Protocol</label>
 				<select name="telemetry_protocol-select" id="telemetry_protocol-select" style="float:left;">
 				  <option value=''>Select protocol</option>
 				  <option value='4'>MFD</option>
@@ -184,7 +185,8 @@
 				  <option value='256'>LTM</option>
 				  <option value='512'>PITLAB</option>
 				</select>
-				<!--<label for="telemetry_baud-select" class="ui-controlgroup-label">Protocol</label>-->
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
 				<select name="telemetry_baud-select" id="telemetry_baud-select" style="float:left;">
 				  <option value=''>Select baudrate</option>
 					<option value='1'>1200</option>
@@ -197,14 +199,24 @@
 					<option value='8'>115200</option>
 				</select>
 				&nbsp;
-				<label for="telemetry_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
-				<input id="telemetry_min_sats-spinner" class="ui-spinner-input" value="0">
-				&nbsp;
+				<label class="ui-controlgroup-label">Provider</label>
 				<select name="telemetry_provider-select" id="telemetry_provider-select" style="float:left;">
 				  <option value=''>Select provider</option>
 					<option value='NONE'>None</option>
 					<option value='DIY_GPS'>DIY GPS</option>
 					<option value='INAV'>iNav</option>
+					<option value='APM10'>Passthrough FrSky (Ardupilot)</option>
+				</select>
+            </div>
+			<br/>
+			<div class="controlgroup">
+				<label for="telemetry_min_sats-spinner" class="ui-controlgroup-label">Min sats</label>
+				<input id="telemetry_min_sats-spinner" class="ui-spinner-input" value="0">
+				<label class="ui-controlgroup-label">Home</label>
+				<select name="telemetry_home-select" id="telemetry_home-select" style="float:left;">
+				  <option value=''>Select home method</option>
+					<option value='DEFAULT'>DEFAULT</option>
+					<option value='AUTO'>AUTO (from telemetry)</option>
 				</select>
 			</div>
 		</fieldset>
@@ -237,7 +249,7 @@
 			</div>
 		</fieldset>
 		<br/>
-		<fieldset>
+		<fieldset style="display:inline-block;">
 			<legend>DISPLAY</legend>
 			<div class="controlgroup">
 				<label for="DISPLAY-feature">Enabled</label>
@@ -282,13 +294,15 @@
 			<div class="controlgroup">
 				<label for="GPS-feature">Enabled</label>
 				<input type="checkbox" name="GPS-feature" id="GPS-feature">
-				<!--<label for="gps_provider-select" class="ui-controlgroup-label">Provider</label>-->
-				<select name="gps_provider-select" id="gps_provider-select">
+				<label class="ui-controlgroup-label">Provider</label>
+				<select name="gps_provider-select" id="gps_provider-select" style="float:left;">
 				  <option value='' selected='selected'>Select protocol</option>
 				  <option value='NMEA'>NMEA</option>
 				  <option value='UBLOX'>UBLOX</option>
 				</select>
-				<select name="gps_baud-select" id="gps_baud-select" style="">
+				&nbsp;
+				<label class="ui-controlgroup-label">Baudrate</label>
+				<select name="gps_baud-select" id="gps_baud-select" style="float:left;">
 				  <option value=''>Select baudrate</option>
 					<option value='0'>AUTO</option>
 					<option value='1'>1200</option>
@@ -316,7 +330,9 @@
 			<div class="controlgroup">
 				<label for="EPS-feature">Enabled</label>
 				<input type="checkbox" name="EPS-feature" id="EPS-feature">
-				<select name="eps-select" id="eps-select">
+				&nbsp;
+				<label class="ui-controlgroup-label">Mode</label>
+				<select name="eps-select" id="eps-select" style="float:left;">
 				  <option value='' selected='selected'>Select EPS mode</option>
 				  <option value='1'>Mode 1</option>
 				  <option value='2'>Mode 2</option>
@@ -342,8 +358,9 @@
 			<div class="controlgroup">
 				<label for="EASING-feature">Enabled</label>
 				<input type="checkbox" name="EASING-feature" id="EASING-feature">
-				<!--<label for="easing-select"class="ui-controlgroup-label">Provider</label>-->
-				<select name="easing-select" id="easing-select">
+				&nbsp;
+				<label class="ui-controlgroup-label">Function</label>
+				<select name="easing-select" id="easing-select" style="float:left;">
 				  <option value='' selected='selected'>Select function</option>
 				  <option value='1'>EASE_OUT_QRT</option>
 				  <option value='2'>EASE_OUT_CIRC</option>
