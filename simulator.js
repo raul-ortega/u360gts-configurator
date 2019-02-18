@@ -9,7 +9,7 @@ var simulationStarted = false;
 var accDistance = 0;
 var countFrames = 0;
 var protocol = 2;
-var home0 = [47.403583,8.535850];
+var home0 = [0,0];
 var homePosition;
 
 
@@ -23,6 +23,8 @@ $(function(){
 	window.addEventListener('message', handleResponseFromMissionPlanner, false); 
 
 	$("#simulator-start").click(function(){
+		home0[0] = $("#simulator-home-lat").val();
+		home0[1] = $("#simulator-home-lon").val();
 		if($("#simulation-type").val() == 3){
 			sendMessageToMissionPlanner('getHome');
 			//sendMessageToMissionPlanner('getPath');
