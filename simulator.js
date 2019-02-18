@@ -12,6 +12,8 @@ var protocol = 2;
 var home0 = [0,0];
 var homePosition;
 
+var lastPoint;
+var course;
 
 function Speed(value){
 	var speed = (value/3600)*1000;
@@ -41,6 +43,8 @@ $(function(){
 		$("#simulator-log").html('');
 		var timerInterval = $("#simulation-frequency").val();
 	    sendHomeTimer = new Date().getTime();
+		lastPoint = new LatLon(home0[0],home0[1]);
+		course = 0;
 		var home = new LatLon(home0[0],home0[1]);
 		var p1 = new LatLon(home.lat,home.lon);
 		var directions = {left:1,right:2};
@@ -116,6 +120,11 @@ $(function(){
 					}
 				}
 			}
+			
+			course = lastPoint.bearingTo(p2);
+			$("#course").val(Math.round(course * 10) / 10);
+			lastPoint.lat = p2.lat;
+			lastPoint.lon = p2.lon;
 			
 			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude);
 			countFrames++;
