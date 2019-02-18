@@ -11,9 +11,13 @@ var countFrames = 0;
 var protocol = 2;
 var home0 = [0,0];
 var homePosition;
-
 var lastPoint;
 var course;
+var nmeaPackets = {
+	gga:1,
+	rmc:2
+};
+var lastNmeaPacket = nmeaPackets.rmc;
 
 function Speed(value){
 	var speed = (value/3600)*1000;
@@ -80,7 +84,7 @@ $(function(){
 					heading = 0;
 					accDistance += distance;
 					p2 = p1.destinationPoint(distance, heading);
-				} else {
+					} else {
 					switch($("#simulation-type").val()){
 
 						case '1': //Circular
@@ -151,7 +155,8 @@ function buildPacket(lat,lon,altitude){
 	var packet;
 	var protocol = $("#simulation-protocol").val();
 	if(protocol == 1){
-		packet = buildGPGGA(lat,lon,altitude);
+		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course) : buildGPGGA(lat,lon,altitude);
+		lastNmeaPacket = (lastNmeaPacket == nmeaPackets.gga) ? nmeaPackets.rmc : nmeaPackets.gga;
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab(packet + '\n'));
 	} else if(protocol == 2 ) {
@@ -167,7 +172,7 @@ function buildPacket(lat,lon,altitude){
 	return packet;
 }
 
-function buildGPRMC(lat,lon,altitude)
+function buildGPRMC(lat,lon,altitude,course)
 {
 	var dateObj = new Date();
 	
@@ -234,7 +239,7 @@ function buildGPRMC(lat,lon,altitude)
 	retV += "," + lonStr; //lon
 	retV += "," + ew;// E or W
 	retV += ",0.0";//speed in Knots
-	retV += ",0.0";//course
+	retV += "," + course;//course
 	retV += "," + theDate;//date
 	retV += ",0.0";// magnetic variation
 	retV += ",W*";//magnetic variation E or W
