@@ -9,9 +9,15 @@ var simulationStarted = false;
 var accDistance = 0;
 var countFrames = 0;
 var protocol = 2;
-var home0 = [47.403583,8.535850];
+var home0 = [0,0];
 var homePosition;
-
+var lastPoint;
+var course;
+var nmeaPackets = {
+	gga:1,
+	rmc:2
+};
+var lastNmeaPacket = nmeaPackets.rmc;
 
 function Speed(value){
 	var speed = (value/3600)*1000;
@@ -23,6 +29,8 @@ $(function(){
 	window.addEventListener('message', handleResponseFromMissionPlanner, false); 
 
 	$("#simulator-start").click(function(){
+		home0[0] = $("#simulator-home-lat").val();
+		home0[1] = $("#simulator-home-lon").val();
 		if($("#simulation-type").val() == 3){
 			sendMessageToMissionPlanner('getHome');
 			//sendMessageToMissionPlanner('getPath');
@@ -39,6 +47,8 @@ $(function(){
 		$("#simulator-log").html('');
 		var timerInterval = $("#simulation-frequency").val();
 	    sendHomeTimer = new Date().getTime();
+		lastPoint = new LatLon(home0[0],home0[1]);
+		course = 0;
 		var home = new LatLon(home0[0],home0[1]);
 		var p1 = new LatLon(home.lat,home.lon);
 		var directions = {left:1,right:2};
@@ -74,7 +84,7 @@ $(function(){
 					heading = 0;
 					accDistance += distance;
 					p2 = p1.destinationPoint(distance, heading);
-				} else {
+					} else {
 					switch($("#simulation-type").val()){
 
 						case '1': //Circular
@@ -115,6 +125,11 @@ $(function(){
 				}
 			}
 			
+			course = lastPoint.bearingTo(p2);
+			$("#course").val(Math.round(course * 10) / 10);
+			lastPoint.lat = p2.lat;
+			lastPoint.lon = p2.lon;
+			
 			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude);
 			countFrames++;
 			if(countFrames > 300){
@@ -140,7 +155,8 @@ function buildPacket(lat,lon,altitude){
 	var packet;
 	var protocol = $("#simulation-protocol").val();
 	if(protocol == 1){
-		packet = buildGPGGA(lat,lon,altitude);
+		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course) : buildGPGGA(lat,lon,altitude);
+		lastNmeaPacket = (lastNmeaPacket == nmeaPackets.gga) ? nmeaPackets.rmc : nmeaPackets.gga;
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab(packet + '\n'));
 	} else if(protocol == 2 ) {
@@ -156,7 +172,7 @@ function buildPacket(lat,lon,altitude){
 	return packet;
 }
 
-function buildGPRMC(lat,lon,altitude)
+function buildGPRMC(lat,lon,altitude,course)
 {
 	var dateObj = new Date();
 	
@@ -223,7 +239,7 @@ function buildGPRMC(lat,lon,altitude)
 	retV += "," + lonStr; //lon
 	retV += "," + ew;// E or W
 	retV += ",0.0";//speed in Knots
-	retV += ",0.0";//course
+	retV += "," + course;//course
 	retV += "," + theDate;//date
 	retV += ",0.0";// magnetic variation
 	retV += ",W*";//magnetic variation E or W
