@@ -1020,12 +1020,28 @@ function delay(milliseconds) {
 }
 function enableDisableButtons(){
 	//Cli
+	var display = (!cliModeEnabled && connected)?"inline-block":"none";
+	$("#enter").css("display",display);
 	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
 	var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
+	
+	display = (cliModeEnabled)?"inline-block":"none";
+	$("#exit").css("display",display);
 	$("#exit").button(buttonState);
+	$("#boot").css("display",display);
 	$("#boot").button(buttonState);
 	$("#default").button(buttonState);
+	$("#default").css("display",display);
+	$("#save").css("display",display);
 	$("#save").button(buttonState);
+
+	display = (cliModeEnabled)?"block":"none";
+	$("#liBasicSettings").css("display",display);
+	$("#liFeatures").css("display",display);
+	$("#liCliMode").css("display",display);
+	
+	display = (!cliModeEnabled)?"block":"none";
+	$("#liSimulator").css("display",display);
 	
 	//Simulator
 	//$("#simulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
