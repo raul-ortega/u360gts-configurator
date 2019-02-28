@@ -102,13 +102,12 @@
   </div>
   <div id="tabs">
   <ul>
-    <!--<li><a href="#tabs-1">Main</a></li>-->
-    <li><a href="#tabBasicSettings">Basic settings</a></li>
-    <li><a href="#tabFeatures">Features</a></li>
+    <li id="liBasicSettings" style="display:none;"><a href="#tabBasicSettings">Basic settings</a></li>
+    <li id="liFeatures" style="display:none;"><a href="#tabFeatures">Features</a></li>
 	<!--<li><a href="#tabs-4">Control</a></li>-->
     <!--<li><a href="#tabLogs">Logs</a></li>-->
-	<li><a href="#tabCliMode">CLI Mode</a></li>
-	<li><a href="#tabSimulator">Simulator</a></li>
+	<li id="liCliMode" style="display:none;"><a href="#tabCliMode">CLI Mode</a></li>
+	<li id="liSimulator" style="display:none;"><a href="#tabSimulator">Simulator</a></li>
 	<li><a href="#tabDocsAndSupport">Documentation & Support</a></li>
   </ul>
   <!--<div id="tabs-1">
@@ -235,7 +234,7 @@
 		</fieldset>
 	</div>
   </div>
-  <div id="tabFeatures">
+  <div id="tabFeatures" style="display:none;">
 		<fieldset>
 			<legend>NOPID control</legend>
 			<div class="controlgroup">
@@ -435,7 +434,7 @@
 	</div>
 	<textarea id="log-receiver" name="log-receiver" readonly style=" "></textarea>
   </div>-->
-  <div id="tabCliMode">
+  <div id="tabCliMode" style="display:none;">
 	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-receiver" name="cli-receiver" readonly></textarea></div>
 	<input id="cli-sender" type="text"/>
 	<br/>
