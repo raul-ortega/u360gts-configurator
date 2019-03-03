@@ -68,7 +68,8 @@ var commands = {
 	get_vbat:15,
 	cli_command:16,
 	get_serial:17,
-	set_serial:18
+	set_serial:18,
+	get_version:19
 };
 String.prototype.contains = function(param) 
 { 
@@ -426,6 +427,10 @@ function onReceive(receiveInfo) {
 			var frame = document.getElementById('map');
 			frame.contentWindow.postMessage(message, '*');			
 			this.lineBuffer = this.lineBuffer.substr(index + 1);
+			if(line.contains('u360gts')){
+				$("#enter").click();
+				break;
+			}
 		}
 	}
 	else {
@@ -722,6 +727,8 @@ function onOpen(connectionInfo) {
   enableButtons();
   connected = true;
   enableDisableButtons();
+  last_sent_command = commands.get_version;
+  serialSend(connectionId, str2ab('version\n'));
 };
 
 function setStatus(status) {
