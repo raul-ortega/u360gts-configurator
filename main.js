@@ -382,6 +382,10 @@ function disconnectCallBack(){
 	cliHasReplied = false;
 	configurationLoaded = false;
 	rssiClearInterval();
+	if(simulationStarted)
+		$("#simulator-stop").click();
+	else
+		enableDisableButtons();
 }
 
 function setHeadingPosition(position) {
