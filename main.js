@@ -1019,39 +1019,56 @@ function delay(milliseconds) {
   }
 }
 function enableDisableButtons(){
-	//Cli
-	var display = (!cliModeEnabled && connected)?"inline-block":"none";
-	$("#enter").css("display",display);
-	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
-	var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
-	
-	display = (cliModeEnabled)?"inline-block":"none";
-	$("#exit").css("display",display);
-	$("#exit").button(buttonState);
-	$("#boot").css("display",display);
-	$("#boot").button(buttonState);
-	$("#default").button(buttonState);
-	$("#default").css("display",display);
-	$("#save").css("display",display);
-	$("#save").button(buttonState);
+	if(!simulationStarted){
+		var display = (!cliModeEnabled && connected)?"inline-block":"none";
+		$("#enter").css("display",display);
+		$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
+		var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
+		
+		display = (cliModeEnabled)?"inline-block":"none";
+		$("#exit").css("display",display);
+		$("#exit").button(buttonState);
+		$("#boot").css("display",display);
+		$("#boot").button(buttonState);
+		$("#default").button(buttonState);
+		$("#default").css("display",display);
+		$("#save").css("display",display);
+		$("#save").button(buttonState);
 
-	display = (cliModeEnabled)?"block":"none";
-	$("#liBasicSettings").css("display",display);
-	$("#liFeatures").css("display",display);
-	$("#liCliMode").css("display",display);
+		if(cliModeEnabled && connected){
+			$("#tabs").tabs({ active: 2 });
+			$('[href="#tabBasicSettings"]').closest('li').show();
+			$('[href="#tabFeatures"]').closest('li').show();
+			$('[href="#tabCliMode"]').closest('li').show();
+			$('[href="#tabFirwareFlasher"]').closest('li').hide();
+			$('[href="#tabSimulator"]').closest('li').hide();
+		} else if(!cliModeEnabled && connected){
+			$("#tabs").tabs({ active: 0 });
+			$('[href="#tabBasicSettings"]').closest('li').hide();
+			$('[href="#tabFeatures"]').closest('li').hide();
+			$('[href="#tabCliMode"]').closest('li').hide();
+			$('[href="#tabFirwareFlasher"]').closest('li').show();
+			$('[href="#tabSimulator"]').closest('li').show();
+		} else if(!connected){
+			$("#tabs").tabs({ active: 0 });
+			$('[href="#tabBasicSettings"]').closest('li').hide();
+			$('[href="#tabFeatures"]').closest('li').hide();
+			$('[href="#tabCliMode"]').closest('li').hide();
+			$('[href="#tabFirwareFlasher"]').closest('li').show();
+			$('[href="#tabSimulator"]').closest('li').hide();		
+		}
+	}
 	
-	display = (!cliModeEnabled)?"block":"none";
-	$("#liSimulator").css("display",display);
-	
-	//Simulator
-	//$("#simulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
-	//$("#simulator-stop").button((simulationStarted)?'enable':'disable');
 	if(connected && !cliModeEnabled && !simulationStarted || debugEnabled)
 		$("#simulator-start").show();
 	else
 		$("#simulator-start").hide();
 	
-	if(simulationStarted) {
+	cleanSerials();
+}
+
+function enableDisableSimulationButtons(){
+	if(simulationStarted){
 		$("#simulator-stop").show();
 		$("#simulation-frequency").prop('disabled',true);
 		$("#simulation-protocol").prop('disabled',true);
@@ -1062,10 +1079,7 @@ function enableDisableButtons(){
 		$("#simulation-protocol").prop('disabled',false);
 		$("#simulation-type").prop('disabled',false);
 	}
-	
-	cleanSerials();
 }
-
 function sendStatus(){
   last_sent_command = commands.status;
   serialSend(connectionId, str2ab('status\n'));	
