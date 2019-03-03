@@ -98,8 +98,8 @@ var customSimulationEnabled = false;
 
 
   $( function() {
-    $( ".controlgroup" ).controlgroup()
-    $( ".controlgroup-vertical" ).controlgroup({
+    $(".controlgroup" ).controlgroup()
+    $(".controlgroup-vertical" ).controlgroup({
       "direction": "vertical"
     });
   } );
@@ -367,7 +367,7 @@ var customSimulationEnabled = false;
 	/*$("[id*='relay_telemetry_']").each(function(selectParam){
 		$(this).on("change",function(item){
 			var str="";
-			$( "select option:selected" ).each(function() {
+			$("select option:selected" ).each(function() {
 				str += $( this ).text() + " ";
 			});
 			//setSerialRelay(item);
@@ -787,7 +787,7 @@ onload = function() {
 	buildBaudPicker(bitrates);
 	buildPortPicker(ports);
 	});
-	$( "#tabs" ).tabs();
+	$("#tabs").tabs();
 };
 
 function sendCliEnterCommands(){
