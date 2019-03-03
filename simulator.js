@@ -43,7 +43,7 @@ $(function(){
 		altitude = $("#simulator-altitude").val();
 		startDistance = radius;
 		simulationStarted = true;
-		enableDisableButtons();
+		enableDisableSimulationButtons();
 		$("#simulator-log").html('');
 		var timerInterval = $("#simulation-frequency").val();
 	    sendHomeTimer = new Date().getTime();
@@ -144,7 +144,7 @@ $(function(){
 	});
 	$("#simulator-stop").click(function(){
 		simulationStarted = false;
-		enableDisableButtons();
+		enableDisableSimulationButtons()
 		clearInterval(simulatorTimer);
 	});
 });
