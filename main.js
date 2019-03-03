@@ -413,8 +413,8 @@ function onReceive(receiveInfo) {
 	if(cliModeEnabled == false){
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
-			$("#log-receiver").append(line+'<br/>');
-			$("#log-receiver").scrollTop($('#log-receiver')[0].scrollHeight);
+			//$("#log-receiver").append(line+'<br/>');
+			//$("#log-receiver").scrollTop($('#log-receiver')[0].scrollHeight);
 			var message = {
 				action: 'center',
 				line: line
