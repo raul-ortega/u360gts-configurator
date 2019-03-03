@@ -376,6 +376,10 @@ var customSimulationEnabled = false;
 	});*/
 	
 	$("body").fadeIn();
+	
+	//$("a[href*='#tab']").click(function(){
+	//	console.log($(this).text());
+	//});
 
   });
 function disconnectCallBack(){
