@@ -377,9 +377,12 @@ var customSimulationEnabled = false;
 	
 	$("body").fadeIn();
 	
-	//$("a[href*='#tab']").click(function(){
-	//	console.log($(this).text());
-	//});
+	$("a[href*='#tab']").click(function(){
+		console.log($(this).text());
+		if($(this).text().contains("Firmware")){
+			TABS.firmware_flasher.initialize();
+		}
+	});
 
   });
 function disconnectCallBack(){
