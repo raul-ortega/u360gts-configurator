@@ -26,8 +26,10 @@
   "permissions": [
 	"http://*.u360gts.com/*",
     "https://www.google-analytics.com/",
-	"https://maps.googleapis.com/*", 
-	"https://*.github.com/",
+	"https://maps.googleapis.com/*",     
+    "https://*.github.com/",
+    "https://*.githubusercontent.com/",
+    "https://*.amazonaws.com/",
 	"serial",
 	"usb",
 	"storage",
