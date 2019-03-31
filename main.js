@@ -156,7 +156,7 @@ var customSimulationEnabled = false;
 	$("#save").click(function(){
 		clearAll();
 		serialSend(connectionId, str2ab('save\n'));
-		setStatus("Saving and rebooting");
+		writeLog("Saving and rebooting");
 		cliModeEnabled = false;
 		configurationLoaded = false;
 		$("#backup").prop('disabled',true);
@@ -174,7 +174,7 @@ var customSimulationEnabled = false;
 			cliModeEnabled = true;
 			cliHasReplied = false;
 			sendCliEnterCommands();
-			setStatus("Waiting response...");
+			writeLog("Waiting response...");
 			timer = setInterval(function(){
 				if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
 					clearInterval(timer);
@@ -191,7 +191,7 @@ var customSimulationEnabled = false;
 	$("#exit").click(function(){
 		clearAll();
 		serialSend(connectionId, str2ab('exit\n'));
-		setStatus("Exiting and rebooting");
+		writeLog("Exiting and rebooting");
 		cliModeEnabled = false;
 		configurationLoaded = false;
 		$("#backup").prop('disabled',true);
@@ -204,7 +204,7 @@ var customSimulationEnabled = false;
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
 		chrome.serial.disconnect(connectionId,function(){
-			setStatus("Ready to load firware");
+			writeLog("Ready to load firware");
 			$("#serial-connect").html('Connect');
 			disconnectCallBack();
 		});
@@ -212,7 +212,7 @@ var customSimulationEnabled = false;
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
 			chrome.serial.disconnect(connectionId,function(){
-				setStatus("Disconnected");
+				writeLog("Disconnected");
 				disconnectCallBack();
 			});
 			$(this).html('Connect');
@@ -383,6 +383,42 @@ var customSimulationEnabled = false;
 			TABS.firmware_flasher.initialize();
 		}
 	});
+	
+	$("#showlog").on('click', function() {
+    var state = $(this).data('state'),
+        $log = $("#log");
+
+    if (state) {
+        $log.animate({height: 27}, 200, function() {
+             var command_log = $('div#log');
+             //noinspection JSValidateTypes
+            command_log.scrollTop($(command_log).height());
+        });
+        $log.removeClass('active');
+        $("#content").removeClass('logopen');
+        $(".tab_container").removeClass('logopen');
+        $("#scrollicon").removeClass('active');
+        chrome.storage.local.set({'logopen': false});
+
+        state = false;
+    }else{
+        $log.animate({height: 111}, 200);
+        $log.addClass('active');
+        $("#content").addClass('logopen');
+        $(".tab_container").addClass('logopen');
+        $("#scrollicon").addClass('active');
+        chrome.storage.local.set({'logopen': true});
+
+        state = true;
+    }
+    $(this).text(state ? 'Hide Log' : 'Show Log');
+    $(this).data('state', state);
+
+});
+	
+	GUI.log('Running - OS: <strong>' + GUI.operating_system + '</strong>, ' +
+        'Chrome: <strong>' + window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1") + '</strong>, ' +
+'Configurator: <strong>' + chrome.runtime.getManifest().version + '</strong>');
 
   });
 function disconnectCallBack(){
@@ -470,10 +506,10 @@ function onReceive(receiveInfo) {
 						loadFeatures(line);
 					}
 					loadSelectmenus(line);
-					if(line.contains('u360gts')){
-						showVersion(line);
+					if(line.contains('u360gts') || line.contains('amv-open360tracker')){
 						cliHasReplied = true;
-						setStatus("CLI mode enabled");
+						writeLog("CLI mode enabled");
+						showVersion(line);
 						enableDisableButtons();
 						break;
 					}
@@ -562,8 +598,7 @@ function backupConfig(line){
 }
 
 function showVersion(data){
-	var firmware = getVersionBoardNumberAndDate(data);
-	$("#firmware-version").html(firmware);
+	writeLog('Firmware version: ' + getVersionBoardNumberAndDate(data))
 }
 
 function getVersionBoardNumberAndDate(data){
@@ -719,7 +754,7 @@ chrome.serial.onReceiveError.addListener(onError);
 
 function onOpen(connectionInfo) {
   if (!connectionInfo) {
-    setStatus('Could not open');
+    writeLog('Could not open');
 	$("#serial-connect").attr('Caption','Connect');
 	connected = false;
 	enableDisableButtons();
@@ -728,7 +763,7 @@ function onOpen(connectionInfo) {
   $(this).attr('caption','Disonnect');
   $("#serial-connect").html('Disconnect');
   connectionId = connectionInfo.connectionId;
-  setStatus('Connected');
+  writeLog('Connected');
   /*cliModeEnabled = true;
   sendCliEnterCommands();*/
   enableButtons();
@@ -738,8 +773,8 @@ function onOpen(connectionInfo) {
   serialSend(connectionId, str2ab('version\n'));
 };
 
-function setStatus(status) {
-  document.getElementById('status').innerText = status;
+function writeLog(status) {
+  GUI.log(status);
 }
 
 function buildPortPicker(ports) {
