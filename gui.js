@@ -72,8 +72,8 @@ GUI_control.prototype.log = function (message) {
                             );*/
 							
 	var formattedDate = year + "-" + month + "-" + date + " @" + time;
-    $('div.wrapper', command_log).append('<p>' + formattedDate + ' -- ' + message + '</p>');
-    command_log.scrollTop($('div.wrapper', command_log).height());
+    $('div.wrapper',command_log).append('<p>' + formattedDate + ' -- ' + message + '</p>');
+    command_log.scrollTop($('div.wrapper',command_log).height());
 };
 
 // Method is called every time a valid tab change event is received
