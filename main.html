@@ -24,6 +24,7 @@
 	<script type="text/javascript" src="latlon-spherical.js"></script>
 	<script type="text/javascript" src="mavlink-simulator.js"></script>
 	<script type="text/javascript" src="pitlab-simulator.js"></script>
+	<script type="text/javascript" src="mfd-simulator.js"></script>
 	<script type="text/javascript" src="simulator.js"></script>
 	<script type="text/javascript" src="semver.js"></script>
 	<script type="text/javascript" src="port_handler.js"></script>
@@ -39,10 +40,11 @@
 	<!--<script src="map.js"></script>-->
 	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="firmware_flasher.css">
 
 	
 	  <style>
-	 body {font-size:0.8em;min-width:1280px;min-height:480px}
+	 body {font-size:0.7em;min-width:1024px;min-height:480px}
 	.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
 		border: 1px solid #2b2b2a;
 		background: #f07f1c;
@@ -70,8 +72,8 @@
 		/*padding: 0;*/
 	}
 	/*.ui-controlgroup-item {margin-right:5px;}*/
-	.ui-widget .ui-widget {
-	    font-size: .8em;
+	.ui-widget .ui-widget,  {
+	    font-size: .9em;
 	}
 	/*.ui-spinner-input {margin: .17em 0; text-align:center;}*/
 	#cli-terminal {display: block;width:100%;padding:5px 5px 5px 5px;margin:15 15 15 15;height:400px;background-color: #000000;color: #ffffff;}
@@ -91,26 +93,105 @@
 		line-height: 1.6em;
 	}
 	#simulator-home-position {width: 160px;}
+	.ui-controlgroup .ui-controlgroup-label {padding: 0.577em 1em;font-size:.9em;}
+	.ui-spinner-input {padding: .232em 0;}
+	.ui-controlgroup .ui-controlgroup-label {
+		padding: 0.577em 1em;
+		font-size: 1em;
+	}
+	.controlgroup select {height: 2.15em;}
+	.ui-widget ui-button ui-controlgroup-item {height:2.2em;}
+	
+	#log {
+		margin-bottom: 0;
+		border: 0 solid silver;
+		background-color: #242424;
+		color: #ccc;
+		color: rgba(255, 255, 255, 0.60);
+		/*line-height: 21px;*/
+		height: 27px;
+		overflow-y: hidden;
+		text-align:top;
+	}
+
+	.com_params span {color:#FFF;font-weight:bold;};
+	.com_params select {};
+	
+
+	#scrollicon {
+		position: fixed;
+		right: 10px;
+		top: 113px;
+		height: 27px;
+		width: 27px;
+		background: url("../images/icons/scroll.svg") no-repeat;
+		background-size: 100%;
+		opacity: 0.0;
+		transition: all ease 0.3s;
+	}
+
+	#scrollicon.active {
+		height: 110px;
+		margin-top: 10px;
+		margin-right: 20px;
+		width: 110px;
+		opacity: 0.15;
+		background-size: 80%;
+		box-shadow: inset 0 0 5px #000000;
+		transition: all ease 0.3s;
+	}
+
+	#log.active {
+		overflow-y: auto;
+		box-shadow: inset 0 0 15px #000000;
+	}
+
+	#log .wrapper {
+		padding: 5px 5px 0px 10px;
+		-webkit-user-select: text;
+		position: relative;
+		bottom: 0;
+	}
+
+	/* Log switch */
+	.logswitch {
+		position: absolute;
+		right: 20px;
+		margin-top: -1px;
+		float: right;
+		padding: 2px;
+		z-index: 10;
+	}
+
+	.logswitch a {
+		color: #656565 !important;
+		transition: all 0.3s;
+	}
+
+	.logswitch a:hover {
+		color: #959595 !important;
+		text-decoration: none !important;
+		transition: all 0.3s;
+	}
   </style>
-  <title>u360gts configurator 2.5.0</title>
+  <title>u360gts configurator 3.0.0</title>
   <meta charset="utf-8">
 </head>
 <body style="background-color:#2b2b2a;display:none;margin:0;padding:0;">
   <div style="display:inline-block;margin:15 15 15 15;"><img src="assets/u360gts_183_black.png" width="183px;"></div>
-  <div style="display:inline-block;float:right;margin:15 15 0 0;margin-right:10%;">
-	<label>
-	Port:
-	<select id="port-picker"></select>&nbsp;
-	Bauds:
-	<select name="baud-picker" id="baud-picker"></select>
-	&nbsp;<button id="serial-connect">Connect</button>
-	  Status:
-	  <span id="status" style="color:#ffffff;">Disconnected</span>
-	&nbsp;&nbsp;&nbsp;Version:&nbsp;<span id="firmware-version"style="color:#ffffff;">unknown</span>
-	</label>
+  <div class="com_params" style="display:inline-block;float:right;margin:15 15 0 0;margin-right:10%;">
+	<span>Port: </span><select id="port-picker"></select>&nbsp;
+	<span>Bauds: </span><select name="baud-picker" id="baud-picker"></select>
+	<button id="serial-connect">Connect</button>
   </div>
-
-  <div class="controlgroup" style="margin:0;padding:5px;display:block;width:100%">
+  <div id="log">
+        <div class="logswitch">
+            <a href="#" id="showlog">Show Log</a>
+        </div>
+        <div id="scrollicon"></div>
+        <div class="wrapper"></div>
+  </div>
+  <div class="controlgroup" style="margin:0;display:block;width:100%">
     <button id="enter" disabled=true style="display:none;">CONFIGURE</button>
 	<button id="exit" disabled=true style="display:none;">EXIT</button>
 	<button id="boot" disabled=true style="display:none;">BOOT MODE</button>
@@ -541,7 +622,10 @@ height="30" /></div></a>
 	  <input id="simulator-home-lon" type="text" value="8.535850" style="width:100px;float:left">
 	  <label for="simulator-home-lon-label" class="ui-controlgroup-label">Course:</label>
 	  <input id="course" type="text" readonly style="width:50px;float:left">
-	  
+	</div>
+	<div class="controlgroup">
+	  <label for="simulator-force-error">Force error</label>
+      <input type="checkbox" name="simulator-force-error" id="simulator-force-error">
 	</div>
 	<p></p>
 	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;display:none;"></iframe>
