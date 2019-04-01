@@ -13,6 +13,12 @@ var home0 = [0,0];
 var homePosition;
 var lastPoint;
 var course;
+var protocols = {
+	NMEA:1,
+	MAVLINK:2,
+	PITLAB:3,
+	MFD:4
+};
 var nmeaPackets = {
 	gga:1,
 	rmc:2
@@ -56,8 +62,15 @@ $(function(){
 		var directions = {left:1,right:2};
 		var direction = directions.right;
 		var navDistance = 0;
-		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude);
+		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude,0,0);
+		var distance2Home = 0;
 		$("#simulator-log").append(NMEAGPGGA + '\n');
+		
+		if(protocol == protocols.MFD) {
+			NMEAGPGGA = setHome2MFD();
+			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
+			showPacket(NMEAGPGGA);
+		}
 		
 		simulatorTimer = setInterval(function(){
 			/*if(debugEnabled) {
@@ -128,18 +141,15 @@ $(function(){
 			}
 			
 			course = lastPoint.bearingTo(p2);
+			distance2target = 
 			$("#course").val(Math.round(course * 10) / 10);
 			lastPoint.lat = p2.lat;
 			lastPoint.lon = p2.lon;
+			distance2Home = home.distanceTo(p2);
+			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude,distance2Home,course);
 			
-			NMEAGPGGA = buildPacket(p2.lat,p2.lon,altitude);
-			countFrames++;
-			if(countFrames > 300){
-				countFrames = 0;
-				$("#simulator-log").html('');
-			}
-			$("#simulator-log").append(NMEAGPGGA + '\n');
-			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
+			showPacket(NMEAGPGGA);
+			
 			p1 = p2;
 			calculateDistanceTimer = new Date().getTime();
 		},timerInterval);
@@ -151,24 +161,36 @@ $(function(){
 	});
 });
 
+function sendPacket(packet){
+	countFrames++;
+			if(countFrames > 300){
+				countFrames = 0;
+				$("#simulator-log").html('');
+			}
+			$("#simulator-log").append(NMEAGPGGA + '\n');
+			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
+}
 
-
-function buildPacket(lat,lon,altitude){
+function buildPacket(lat,lon,altitude,distance,heading){
 	var packet;
 	var protocol = $("#simulation-protocol").val();
-	if(protocol == 1){
 	var forceError = $("#simulator-force-error").prop('checked');
+	if(protocol == protocols.NMEA){
 		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course,forceError) : buildGPGGA(lat,lon,altitude,forceError);
 		lastNmeaPacket = (lastNmeaPacket == nmeaPackets.gga) ? nmeaPackets.rmc : nmeaPackets.gga;
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab(packet + '\n'));
-	} else if(protocol == 2 ) {
+	} else if(protocol == protocols.MAVLINK ) {
 		packet = build_mavlink_msg_gps_raw_int(lat,lon,altitude,Speed($("#simulator-speed").val()),forceError);
 		chrome.serial.send(connectionId,packet.buffer,function(){});
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab('\n'));
-	} else if(protocol == 3){
+	} else if(protocol == protocols.PITLAB){
 		packet = Data2Pitlab(11,altitude,lat,lon);
+		if(!debugEnabled)
+			serialSend(connectionId, str2ab(packet + '\n'));
+	} else if(protocol == protocols.MFD){
+		packet = Data2MFD(distance,altitude,heading,forceError);
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab(packet + '\n'));
 	}	
@@ -254,7 +276,6 @@ function buildGPRMC(lat,lon,altitude,course)
 	return retV;
 }
 
-function buildGPGGA(lat,lon,altitude)
 function buildGPGGA(lat,lon,altitude,force_error)
 {
 	var dateObj = new Date();
