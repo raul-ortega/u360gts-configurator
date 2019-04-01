@@ -470,7 +470,7 @@ function onReceive(receiveInfo) {
 			var frame = document.getElementById('map');
 			frame.contentWindow.postMessage(message, '*');			
 			this.lineBuffer = this.lineBuffer.substr(index + 1);
-			if(line.contains('u360gts')){
+			if(line.contains('u360gts') || line.contains('amv-open360tracker')){
 				$("#enter").click();
 				break;
 			}
