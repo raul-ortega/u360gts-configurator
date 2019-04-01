@@ -27,7 +27,9 @@ function Speed(value){
 $(function(){
 
 	window.addEventListener('message', handleResponseFromMissionPlanner, false); 
-
+    $("#simulator-force-error").click(function(){
+		
+	});
 	$("#simulator-start").click(function(){
 		home0[0] = $("#simulator-home-lat").val();
 		home0[1] = $("#simulator-home-lon").val();
@@ -155,12 +157,13 @@ function buildPacket(lat,lon,altitude){
 	var packet;
 	var protocol = $("#simulation-protocol").val();
 	if(protocol == 1){
-		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course) : buildGPGGA(lat,lon,altitude);
+	var forceError = $("#simulator-force-error").prop('checked');
+		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course,forceError) : buildGPGGA(lat,lon,altitude,forceError);
 		lastNmeaPacket = (lastNmeaPacket == nmeaPackets.gga) ? nmeaPackets.rmc : nmeaPackets.gga;
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab(packet + '\n'));
 	} else if(protocol == 2 ) {
-		packet = build_mavlink_msg_gps_raw_int(lat,lon,altitude);
+		packet = build_mavlink_msg_gps_raw_int(lat,lon,altitude,Speed($("#simulator-speed").val()),forceError);
 		chrome.serial.send(connectionId,packet.buffer,function(){});
 		if(!debugEnabled)
 			serialSend(connectionId, str2ab('\n'));
@@ -252,6 +255,7 @@ function buildGPRMC(lat,lon,altitude,course)
 }
 
 function buildGPGGA(lat,lon,altitude)
+function buildGPGGA(lat,lon,altitude,force_error)
 {
 	var dateObj = new Date();
 	
@@ -334,6 +338,9 @@ function buildGPGGA(lat,lon,altitude)
 
 	checksum = nmeaChecksum(retV.substring(1,retV.length));
 
+	if(force_error)
+		checksum = 0xff;
+	
 	retV += "*" + checksum.toString(16);
 	
 	return retV;
