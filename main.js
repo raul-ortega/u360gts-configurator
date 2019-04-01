@@ -788,9 +788,9 @@ function buildPortPicker(ports) {
     portOption.value = portOption.innerText = port.path;
     portPicker.appendChild(portOption);
   });
-  portOption = document.createElement('option');
+  /*portOption = document.createElement('option');
   portOption.value = portOption.innerText = '/dev/ttyS98';
-  portPicker.appendChild(portOption);
+  portPicker.appendChild(portOption);*/
   
 
   /*portPicker.onchange = function() {
