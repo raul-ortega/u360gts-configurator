@@ -1123,11 +1123,13 @@ function enableDisableButtons(){
 function enableDisableSimulationButtons(){
 	if(simulationStarted){
 		$("#simulator-stop").show();
+		$("#simulator-start").hide();
 		$("#simulation-frequency").prop('disabled',true);
 		$("#simulation-protocol").prop('disabled',true);
 		$("#simulation-type").prop('disabled',true);
 	} else {
 		$("#simulator-stop").hide();
+		$("#simulator-start").show();
 		$("#simulation-frequency").prop('disabled',false);
 		$("#simulation-protocol").prop('disabled',false);
 		$("#simulation-type").prop('disabled',false);
