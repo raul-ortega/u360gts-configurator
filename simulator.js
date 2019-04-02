@@ -13,6 +13,7 @@ var home0 = [0,0];
 var homePosition;
 var lastPoint;
 var course;
+var protocol;
 var protocols = {
 	NMEA:1,
 	MAVLINK:2,
@@ -62,15 +63,16 @@ $(function(){
 		var directions = {left:1,right:2};
 		var direction = directions.right;
 		var navDistance = 0;
-		var NMEAGPGGA = buildPacket(p1.lat,p1.lon,altitude,0,0);
+		var NMEAGPGGA;
 		var distance2Home = 0;
-		$("#simulator-log").append(NMEAGPGGA + '\n');
-		
+		protocol = $("#simulation-protocol").val();
 		if(protocol == protocols.MFD) {
 			NMEAGPGGA = setHome2MFD();
 			serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
 			showPacket(NMEAGPGGA);
 		}
+		NMEAGPGGA= buildPacket(p1.lat,p1.lon,altitude,0,0);
+		$("#simulator-log").append(NMEAGPGGA + '\n');
 		
 		simulatorTimer = setInterval(function(){
 			/*if(debugEnabled) {
@@ -161,19 +163,18 @@ $(function(){
 	});
 });
 
-function sendPacket(packet){
+function showPacket(packet){
 	countFrames++;
 			if(countFrames > 300){
 				countFrames = 0;
 				$("#simulator-log").html('');
 			}
-			$("#simulator-log").append(NMEAGPGGA + '\n');
+			$("#simulator-log").append(packet + '\n');
 			$("#simulator-log").scrollTop($('#simulator-log')[0].scrollHeight);
 }
 
 function buildPacket(lat,lon,altitude,distance,heading){
 	var packet;
-	var protocol = $("#simulation-protocol").val();
 	var forceError = $("#simulator-force-error").prop('checked');
 	if(protocol == protocols.NMEA){
 		packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat,lon,altitude,course,forceError) : buildGPGGA(lat,lon,altitude,forceError);
