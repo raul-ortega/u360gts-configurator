@@ -31,6 +31,13 @@
 		border-radius: 5px;
 		border: 1px solid silver;
 	}*/
+	.tab-firmware_flasher table tr td {
+		padding-left:30px;
+	}
+	.tab-firmware_flasher table tr td span.description {
+		font-style: italic;
+		font-size: 0.7em;
+	}
 </style>
 <div class="tab-firmware_flasher toolbar_fixed_bottom">
     <div class="content_wrapper">
@@ -41,31 +48,31 @@
                         <td><select name="board">
                                 <option value="0">Loading ...</option>
                         </select></td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectBoardDescription">Select your board to see available online firmware releases - Select the correct firmware appropriate for your board</span></td>
                     </tr>
                     <tr>
                         <td><select name="firmware_version">
                                 <option value="0">Loading ...</option>
                         </select></td>
-                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherOnlineSelectFirmwareVersionDescription">Select firmware version for your board.</span></td>
                     </tr>
                     <tr>
                         <td><label> <input class="updating toggle" type="checkbox" /> <span
                                 i18n="firmwareFlasherNoReboot">No reboot sequence.</span>
                         </label></td>
-                        <td><span class="description" i18n="firmwareFlasherNoRebootDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherNoRebootDescription">Enable if you powered your FC while the bootloader pins are jumpered or have your FC's BOOT button pressed.</span></td>
                     </tr>
                     <tr class="option flash_on_connect_wrapper">
                         <td><label> <input class="flash_on_connect toggle" type="checkbox" /> <span
                                 i18n="firmwareFlasherFlashOnConnect">Flash on connect.</span></label></td>
 
-                        <td><span class="description" i18n="firmwareFlasherFlashOnConnectDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherFlashOnConnectDescription">Attempt to flash the board automatically (triggered by newly detected serial port).</span></td>
                     </tr>
                     <tr class="option">
                         <td><label> <input class="erase_chip toggle" type="checkbox" /> <span
                                 i18n="firmwareFlasherFullChipErase">Full chip erase.</span>
                         </label></td>
-                        <td><span class="description" i18n="firmwareFlasherFullChipEraseDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherFullChipEraseDescription">Wipes all configuration data currently stored on the board.</span></td>
                     </tr>
                     <tr class="option manual_baud_rate">
                         <td><label> <input class="flash_manual_baud toggle" type="checkbox" /> <span
@@ -82,13 +89,13 @@
                                     <option value="19200">19200</option>
                             </select>
                         </label></td>
-                        <td><span class="description" i18n="firmwareFlasherManualBaudDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherManualBaudDescription">Manual selection of baud rate for boards that don't support the default speed or for flashing via bluetooth.<br/>Note: Not used when flashing via USB DFU</span></td>
                     </tr>
                     <tr class="option noboarder">
                         <td><label> <input class="show_development_releases toggle" type="checkbox" /> <span
                                 i18n="firmwareFlasherShowDevelopmentReleases">Show unstable releases.</span>
                         </label></td>
-                        <td><span class="description" i18n="firmwareFlasherShowDevelopmentReleasesDescription"></span></td>
+                        <td><span class="description" i18n="firmwareFlasherShowDevelopmentReleasesDescription">Show Release-Candidates and Development Releases.</span></td>
                     </tr>
                 </table>
             </div>
@@ -143,7 +150,22 @@
                 </div>
             </div>
             <div class="spacer" style="margin-bottom: 10px;">
-                <p i18n="firmwareFlasherRecoveryText"></p>
+                <!-- <p i18n="firmwareFlasherRecoveryText">If you have lost communication with your board follow these steps to restore communication:
+					<ul>
+						<li>Power off</li>
+						<li>Enable 'No reboot sequence', enable 'Full chip erase'.</li>
+						<li>Jumper the BOOT pins or hold BOOT button.</li>
+						<li>Power on (activity LED will NOT flash if done correctly).</li>
+						<li>Install all STM32 drivers and Zadig if required (see USB Flashing section of INAV manual).</li>
+						<li>Close configurator, Close all running chrome instances, Cl</li>ose all Chrome apps, Restart Configurator.</li>
+						<li>Release BOOT button if your FC has one.
+						<li>Flash with correct firmware (using manual baud rate if specified in your FC's manual).</li>
+						<li>Power off.</li>
+						<li>Remove BOOT jumper.</li>
+						<li>Power on (activity LED should flash).</li>
+						<li>Connect normally.</li>
+					</ul>
+				</p>-->
             </div>
         </div>
 
