@@ -1,11 +1,11 @@
 {
-  "name": "u360gts - configurator",
-  "version": "2.5.0",
+  "name": "u360gts-configurator",
+  "version": "3.0.0",
   "author": "Raul Ortega",
   "manifest_version": 2,
   "minimum_chrome_version": "38",
-  "short_name": "u360gts v2.5.0",
-  "description": "u360gts configurator v2.5.0",
+  "short_name": "u360gts v3.0.0",
+  "description": "u360gts configurator v3.0.0",
  
   "app": {
     "background": {
@@ -16,6 +16,7 @@
   "icons": {
     "16": "assets/u360gts_icon_16.png",
 	"32": "assets/u360gts_icon_32.png",
+	"48": "assets/u360gts_icon_48.png",
 	"64": "assets/u360gts_icon_64.png",
     "128": "assets/u360gts_icon_128.png",
 	"256": "assets/u360gts_icon_256.png"
@@ -26,8 +27,10 @@
   "permissions": [
 	"http://*.u360gts.com/*",
     "https://www.google-analytics.com/",
-	"https://maps.googleapis.com/*", 
-	"https://*.github.com/",
+	"https://maps.googleapis.com/*",     
+    "https://*.github.com/",
+    "https://*.githubusercontent.com/",
+    "https://*.amazonaws.com/",
 	"serial",
 	"usb",
 	"storage",

@@ -20,7 +20,7 @@ var seq = -1;
 	});
 })*/
 
-function build_mavlink_msg_gps_raw_int(lat,lon,altitude){
+function build_mavlink_msg_gps_raw_int(lat,lon,altitude,ground_speed,force_error){
 	var system_id = 100;
 	var component_id = 200;
 	var timeUsec = 0; //new Date().getTime() * 1000;
@@ -30,18 +30,18 @@ function build_mavlink_msg_gps_raw_int(lat,lon,altitude){
 	var altitude = altitude * 1000;
 	var eph = 0;
 	var epv = 0;
-	var vel = 1000;
+	var vel = ground_speed * 100;
 	var cog = 0;
 	var satellites = $("#simulation-sats").val();;
 
 	seq++;
 	if(seq > 255) seq = 0;
 
-	msg = new mavlink_msg_gps_raw_int(system_id,component_id,seq,timeUsec,fixType,latitude,longitude,altitude,eph,epv,vel,cog,satellites);
+	msg = new mavlink_msg_gps_raw_int(system_id,component_id,seq,timeUsec,fixType,latitude,longitude,altitude,eph,epv,vel,cog,satellites,force_error);
 	return msg;	
 }
 	
-mavlink_msg_gps_raw_int = function(system_id, component_id, seq, timeUsec, fixType, latitude, longitude, altitude, eph, epv, vel, cog, satellites, msgBuffer) {
+mavlink_msg_gps_raw_int = function(system_id, component_id, seq, timeUsec, fixType, latitude, longitude, altitude, eph, epv, vel, cog, satellites, force_error) {
 
 	var payload_length = 30;
 	var crc = 65535;
@@ -70,6 +70,9 @@ mavlink_msg_gps_raw_int = function(system_id, component_id, seq, timeUsec, fixTy
 	msgBuffer = packToBuffer(numberToBuffer(fixType,1), msgBuffer);
 	msgBuffer = packToBuffer(numberToBuffer(satellites,1), msgBuffer);
 
+	if(force_error)
+		crc = 0xab01;
+	
 	crc = calculateCRC(msgBuffer,crc)
 	crc = calculateCRC([crc_extra],crc)
 	

@@ -1,7 +1,7 @@
 {
   "name": "u360gts-configurator",
-  "description": "u360gs Configurator",
-  "version": "2.5.0",
+  "description": "u360gts Configurator",
+  "version": "3.0.0",
   "main": "main.html",
   "scripts": {
     "start": "node_modules/gulp/bin/gulp.js build && node_modules/nw/bin/nw ."
@@ -11,7 +11,7 @@
     "icon": "assets/u360gts_icon_128.png",
     "toolbar": true,
     "width": 1024,
-    "height": 800
+    "height": 600
   },
   "repository": {
     "type": "git",

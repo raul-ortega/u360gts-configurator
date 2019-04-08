@@ -24,15 +24,34 @@
 	<script type="text/javascript" src="latlon-spherical.js"></script>
 	<script type="text/javascript" src="mavlink-simulator.js"></script>
 	<script type="text/javascript" src="pitlab-simulator.js"></script>
+	<script type="text/javascript" src="mfd-simulator.js"></script>
 	<script type="text/javascript" src="simulator.js"></script>
+	<script type="text/javascript" src="semver.js"></script>
+	<script type="text/javascript" src="port_handler.js"></script>
+	<script type="text/javascript" src="hex_parser.js"></script>
+	<script type="text/javascript" src="intervals.js"></script>
+	<script type="text/javascript" src="helper.js"></script>
+	<script type="text/javascript" src="serial.js"></script>
+	<script type="text/javascript" src="stm32usbdfu.js"></script>
+	<script type="text/javascript" src="stm32.js"></script>
+	<script type="text/javascript" src="gui.js"></script>
+	<script type="text/javascript" src="firmware_flasher.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 	<!--<script src="map.js"></script>-->
 	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="firmware_flasher.css">
 
 	
 	  <style>
-	  .ui-tabs .ui-tabs-panel {height:580px;}
+	 body {font-size:0.7em;min-width:1024px;min-height:480px}
+	.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+		border: 1px solid #2b2b2a;
+		background: #f07f1c;
+		font-weight: normal;
+		color: #ffffff;
+	}
+	  .ui-tabs .ui-tabs-panel {height:100%;}
 	label {
 		width:auto;
 		margin:0;
@@ -53,8 +72,8 @@
 		/*padding: 0;*/
 	}
 	/*.ui-controlgroup-item {margin-right:5px;}*/
-	.ui-widget .ui-widget {
-	    font-size: .8em;
+	.ui-widget .ui-widget,  {
+	    font-size: .9em;
 	}
 	/*.ui-spinner-input {margin: .17em 0; text-align:center;}*/
 	#cli-terminal {display: block;width:100%;padding:5px 5px 5px 5px;margin:15 15 15 15;height:400px;background-color: #000000;color: #ffffff;}
@@ -74,46 +93,147 @@
 		line-height: 1.6em;
 	}
 	#simulator-home-position {width: 160px;}
+	.ui-controlgroup .ui-controlgroup-label {padding: 0.577em 1em;font-size:.9em;}
+	.ui-spinner-input {padding: .232em 0;}
+	.ui-controlgroup .ui-controlgroup-label {
+		padding: 0.577em 1em;
+		font-size: 1em;
+	}
+	.controlgroup select {height: 2.15em;}
+	.ui-widget ui-button ui-controlgroup-item {height:2.2em;}
+	
+	#log {
+		margin-bottom: 0;
+		border: 0 solid silver;
+		background-color: #242424;
+		color: #ccc;
+		color: rgba(255, 255, 255, 0.60);
+		/*line-height: 21px;*/
+		height: 27px;
+		overflow-y: hidden;
+		text-align:top;
+	}
+
+	.com_params span {color:#FFF;font-weight:bold;};
+	.com_params select {};
+	
+
+	#scrollicon {
+		position: fixed;
+		right: 10px;
+		top: 113px;
+		height: 27px;
+		width: 27px;
+		background: url("../images/icons/scroll.svg") no-repeat;
+		background-size: 100%;
+		opacity: 0.0;
+		transition: all ease 0.3s;
+	}
+
+	#scrollicon.active {
+		height: 110px;
+		margin-top: 10px;
+		margin-right: 20px;
+		width: 110px;
+		opacity: 0.15;
+		background-size: 80%;
+		box-shadow: inset 0 0 5px #000000;
+		transition: all ease 0.3s;
+	}
+
+	#log.active {
+		overflow-y: auto;
+		box-shadow: inset 0 0 15px #000000;
+	}
+
+	#log .wrapper {
+		padding: 5px 5px 0px 10px;
+		-webkit-user-select: text;
+		position: relative;
+		bottom: 0;
+	}
+
+	/* Log switch */
+	.logswitch {
+		position: absolute;
+		right: 20px;
+		margin-top: -1px;
+		float: right;
+		padding: 2px;
+		z-index: 10;
+	}
+
+	.logswitch a {
+		color: #656565 !important;
+		transition: all 0.3s;
+	}
+
+	.logswitch a:hover {
+		color: #959595 !important;
+		text-decoration: none !important;
+		transition: all 0.3s;
+	}
   </style>
-  <title>u360gts configurator 2.5.0</title>
+  <title>u360gts configurator 3.0.0</title>
   <meta charset="utf-8">
 </head>
-<body style="background-color:#000000;display:none;">
-	<img src="logo-u360gts-white.png" width="128px;" style="position:absolute;left:15px;top:15px;">
-  <div id="container" style="background-color:#000000;margin-left:145px;margin-top:10px;">
-	<label>
-	Port:
-	<select id="port-picker"></select>&nbsp;
-	Bauds:
-	<select name="baud-picker" id="baud-picker"></select>
-	&nbsp;<button id="serial-connect">Connect</button>
-	  Status:
-	  <span id="status" style="color:#ffffff;">Loading</span>
-	&nbsp;&nbsp;&nbsp;Version:&nbsp;<span id="firmware-version"style="color:#ffffff;">unknown</span>
-	</label>
+<body style="background-color:#2b2b2a;display:none;margin:0;padding:0;">
+  <div style="display:inline-block;margin:15 15 15 15;"><img src="assets/u360gts_183_black.png" width="183px;"></div>
+  <div class="com_params" style="display:inline-block;float:right;margin:15 15 0 0;margin-right:10%;">
+	<span>Port: </span><select id="port-picker"></select>&nbsp;
+	<span>Bauds: </span><select name="baud-picker" id="baud-picker"></select>
+	<button id="serial-connect">Connect</button>
   </div>
-
-  <div class="controlgroup" style="margin:0;padding:5px">
-    <button id="enter" disabled=true>CLI ENTER</button>
-	<button id="exit" disabled=true>CLI EXIT</button>
-	<button id="boot" disabled=true>BOOT MODE</button>
-	<button id="default" disabled=true>DEFAULTS</button>
-	<button id="save" disabled=true>SAVE</button>
+  <div id="log">
+        <div class="logswitch">
+            <a href="#" id="showlog">Show Log</a>
+        </div>
+        <div id="scrollicon"></div>
+        <div class="wrapper"></div>
+  </div>
+  <div class="controlgroup" style="margin:0;display:block;width:100%">
+    <button id="enter" disabled=true style="display:none;">CONFIGURE</button>
+	<button id="exit" disabled=true style="display:none;">EXIT</button>
+	<button id="boot" disabled=true style="display:none;">BOOT MODE</button>
+	<button id="default" disabled=true style="display:none;">DEFAULTS</button>
+	<button id="save" disabled=true style="display:none;">SAVE</button>
   </div>
   <div id="tabs">
   <ul>
-    <!--<li><a href="#tabs-1">Main</a></li>-->
-    <li><a href="#tabBasicSettings">Basic settings</a></li>
-    <li><a href="#tabFeatures">Features</a></li>
+    <li id="liWelcome"><a href="#tabWelcome">Welcome</a></li>
+	<li id="liFirwareFlasher"><a href="#tabFirwareFlasher">Firmware Flash</a></li>
+    <li id="liBasicSettings" style="display:none;"><a href="#tabBasicSettings">Basic settings</a></li>
+    <li id="liFeatures" style="display:none;"><a href="#tabFeatures">Features</a></li>
 	<!--<li><a href="#tabs-4">Control</a></li>-->
     <!--<li><a href="#tabLogs">Logs</a></li>-->
-	<li><a href="#tabCliMode">CLI Mode</a></li>
-	<li><a href="#tabSimulator">Simulator</a></li>
+	<li id="liCliMode" style="display:none;"><a href="#tabCliMode">CLI Mode</a></li>
+	<li id="liSimulator" style="display:none;"><a href="#tabSimulator">Simulator</a></li>
 	<li><a href="#tabDocsAndSupport">Documentation & Support</a></li>
   </ul>
   <!--<div id="tabs-1">
   </div>-->
-  <div id="tabBasicSettings">
+  <div id="tabWelcome" style="display:none;">
+    <div class="widget" style="width:100%">
+	  <div style="width: 50%;margin: 0 auto;margin-top:40px;margin-bottom:20px;"><img src="assets/u360gts_400_white.png" style="width:400px"/></div>
+	  <div style="height:50px;">
+		  <ul class="communityTelegramSupport"><a href="https://chat.whatsapp.com/G0K9P6Flr4U4NqX6aqjHry" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i><span i18n="communityTelegramSupport"></span></a></ul>
+		  <ul class="communityFacebookSupport"><a href="https://www.facebook.com/groups/u360gts/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i><span i18n="communityFacebookSupport"></span></a></ul>
+		  <ul class="communityRCGroupsSupport"><a href="https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker" target="_blank"><i class="fa fa-users" aria-hidden="true"></i><span i18n="communityRCGroupsSupport"></span></a></ul>
+	  </div>
+	  <div style="display:inline-block;vertical-align:top;width:33%;margin:15 15 15 15;"><b>Hardware</b><br/><br/>The application supports NAZE32, FLIP32, BLUEPILL, SPRACINGF3 & CC3D.<br/>The wiring schematics are available <a href="https://github.com/raul-ortega/u360gts/blob/master/wiki/install-wiring-schematics.md" target="_blank">here</a>.<br/>The firmware source code can be downloaded from <a href="https://github.com/raul-ortega/u360gts" title="www.github.com" target="_blank">here</a><br/>The newest binary firmware image is available <a href="https://github.com/raul-ortega/u360gts/releases" title="www.github.com" target="_blank">here</a>.<br/><br/>Latest <strong>CP210x Drivers</strong> can be downloaded from <a href="http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx" title="http://www.silabs.com" target="_blank">here</a><br/>Latest <strong>STM USB VCP Drivers</strong> can be downloaded from <a href="http://www.st.com/web/en/catalog/tools/PF257938" title="http://www.st.com" target="_blank">here</a><br/>Latest <strong>Zadig</strong> for Windows DFU flashing can be downloaded from <a href="http://zadig.akeo.ie/" title="http://zadig.akeo.ie" target="_blank">here</a><br/>
+	  </div>
+      <div style="display:inline-block;width:33%;margin:15 15 15 15;vertical-align:top;"><b>Contributing</b><br /><br/>If you would like to help make u360gts even better you can help in many ways, including:<br/><ul><li>Answering other users questions on the forums and IRC.</li><li>Contributing code to the firmware and configurator - new features, fixes, improvements</li><li>Testing <a href="https://github.com/raul-ortega/u360gts/pulls" target="_blank">new features/fixes</a> and providing feedback.</li><li>Helping out with <a href="https://github.com/raul-ortega/u360gts/issues" target="_blank">issues and commenting on feature requests</a>.</li></ul></div>
+	  <div style="display:inline-block;width:20%;margin:15 15 15 15;vertical-align:top;"><div style="display:block;width:200px;height:200px;border: 1px #f07f1c solid;border-radius: 5px;padding:15 15 15 15;"><b>Open Source / Donation Notice</b><br/><br/>This utility is fully open source and is available free of charge to all users. If you found the u360gs or u360gts-configurator useful, please consider supporting its development by donating.<br /><div style="text-align:center;margin-top:20px;margin-bottom:20px"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HWJ8MX4GNKYFL&source=url" target="_blank" title="Donate"><img src="assets/donate_paypal_button.png" alt="Paypal"
+height="30" /></div></a>
+	  </div>
+   </div>
+</div>
+</div>
+  <div id="tabFirwareFlasher"  class="tab-firmware_flasher toolbar_fixed_bottom" style="display:none;">
+    <div class="widget">
+    </div>
+  </div>
+  <div id="tabBasicSettings" style="display:none;">
 	<div class="widget">
 		<fieldset>
 			<legend>Magnetometer</legend>
@@ -235,7 +355,7 @@
 		</fieldset>
 	</div>
   </div>
-  <div id="tabFeatures">
+  <div id="tabFeatures" style="display:none;">
 		<fieldset>
 			<legend>NOPID control</legend>
 			<div class="controlgroup">
@@ -435,7 +555,7 @@
 	</div>
 	<textarea id="log-receiver" name="log-receiver" readonly style=" "></textarea>
   </div>-->
-  <div id="tabCliMode">
+  <div id="tabCliMode" style="display:none;">
 	<div id="cli-terminal" style="font-size: 12px;"><textarea id="cli-receiver" name="cli-receiver" readonly></textarea></div>
 	<input id="cli-sender" type="text"/>
 	<br/>
@@ -454,6 +574,7 @@
 	  <option value='1' selected='selected'>NMEA</option>
 	  <option value='2'>MAVLINK</option>
 	  <option value='3'>PITLAB</option>
+	  <option value='4'>MFD</option>
 	</select>
 	<select name="simulation-frequency" id="simulation-frequency">
 	  <option value=''>Select frequency</option>
@@ -502,7 +623,10 @@
 	  <input id="simulator-home-lon" type="text" value="8.535850" style="width:100px;float:left">
 	  <label for="simulator-home-lon-label" class="ui-controlgroup-label">Course:</label>
 	  <input id="course" type="text" readonly style="width:50px;float:left">
-	  
+	</div>
+	<div class="controlgroup">
+	  <label for="simulator-force-error">Force error</label>
+      <input type="checkbox" name="simulator-force-error" id="simulator-force-error">
 	</div>
 	<p></p>
 	<iframe src="mission-planner/map-2.html" id="map" style="width:100%;height:97%;display:none;"></iframe>

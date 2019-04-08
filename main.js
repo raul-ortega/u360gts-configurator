@@ -68,7 +68,8 @@ var commands = {
 	get_vbat:15,
 	cli_command:16,
 	get_serial:17,
-	set_serial:18
+	set_serial:18,
+	get_version:19
 };
 String.prototype.contains = function(param) 
 { 
@@ -98,8 +99,8 @@ var customSimulationEnabled = false;
 
 
   $( function() {
-    $( ".controlgroup" ).controlgroup()
-    $( ".controlgroup-vertical" ).controlgroup({
+    $(".controlgroup" ).controlgroup()
+    $(".controlgroup-vertical" ).controlgroup({
       "direction": "vertical"
     });
   } );
@@ -155,7 +156,7 @@ var customSimulationEnabled = false;
 	$("#save").click(function(){
 		clearAll();
 		serialSend(connectionId, str2ab('save\n'));
-		setStatus("Saving and rebooting");
+		writeLog("Saving and rebooting");
 		cliModeEnabled = false;
 		configurationLoaded = false;
 		$("#backup").prop('disabled',true);
@@ -173,7 +174,7 @@ var customSimulationEnabled = false;
 			cliModeEnabled = true;
 			cliHasReplied = false;
 			sendCliEnterCommands();
-			setStatus("Waiting response...");
+			writeLog("Waiting response...");
 			timer = setInterval(function(){
 				if(last_sent_command == commands.cli_enter && (new Date().getTime() - cliEnterTimer) > 2000) {
 					clearInterval(timer);
@@ -190,7 +191,7 @@ var customSimulationEnabled = false;
 	$("#exit").click(function(){
 		clearAll();
 		serialSend(connectionId, str2ab('exit\n'));
-		setStatus("Exiting and rebooting");
+		writeLog("Exiting and rebooting");
 		cliModeEnabled = false;
 		configurationLoaded = false;
 		$("#backup").prop('disabled',true);
@@ -203,7 +204,7 @@ var customSimulationEnabled = false;
 		serialSend(connectionId, str2ab('boot mode\n'));
 		clearAll();
 		chrome.serial.disconnect(connectionId,function(){
-			setStatus("Ready to load firware");
+			writeLog("Ready to load firware");
 			$("#serial-connect").html('Connect');
 			disconnectCallBack();
 		});
@@ -211,7 +212,7 @@ var customSimulationEnabled = false;
 	$("#serial-connect").click(function(){
 		if($(this).html() == 'Disconnect'){
 			chrome.serial.disconnect(connectionId,function(){
-				setStatus("Disconnected");
+				writeLog("Disconnected");
 				disconnectCallBack();
 			});
 			$(this).html('Connect');
@@ -367,7 +368,7 @@ var customSimulationEnabled = false;
 	/*$("[id*='relay_telemetry_']").each(function(selectParam){
 		$(this).on("change",function(item){
 			var str="";
-			$( "select option:selected" ).each(function() {
+			$("select option:selected" ).each(function() {
 				str += $( this ).text() + " ";
 			});
 			//setSerialRelay(item);
@@ -375,6 +376,49 @@ var customSimulationEnabled = false;
 	});*/
 	
 	$("body").fadeIn();
+	
+	$("a[href*='#tab']").click(function(){
+		console.log($(this).text());
+		if($(this).text().contains("Firmware")){
+			TABS.firmware_flasher.initialize();
+		}
+	});
+	
+	$("#showlog").on('click', function() {
+    var state = $(this).data('state'),
+        $log = $("#log");
+
+    if (state) {
+        $log.animate({height: 27}, 200, function() {
+             var command_log = $('div#log');
+             //noinspection JSValidateTypes
+            command_log.scrollTop($(command_log).height());
+        });
+        $log.removeClass('active');
+        $("#content").removeClass('logopen');
+        $(".tab_container").removeClass('logopen');
+        $("#scrollicon").removeClass('active');
+        chrome.storage.local.set({'logopen': false});
+
+        state = false;
+    }else{
+        $log.animate({height: 111}, 200);
+        $log.addClass('active');
+        $("#content").addClass('logopen');
+        $(".tab_container").addClass('logopen');
+        $("#scrollicon").addClass('active');
+        chrome.storage.local.set({'logopen': true});
+
+        state = true;
+    }
+    $(this).text(state ? 'Hide Log' : 'Show Log');
+    $(this).data('state', state);
+
+});
+	
+	GUI.log('Running - OS: <strong>' + GUI.operating_system + '</strong>, ' +
+        'Chrome: <strong>' + window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1") + '</strong>, ' +
+'Configurator: <strong>' + chrome.runtime.getManifest().version + '</strong>');
 
   });
 function disconnectCallBack(){
@@ -382,6 +426,10 @@ function disconnectCallBack(){
 	cliHasReplied = false;
 	configurationLoaded = false;
 	rssiClearInterval();
+	if(simulationStarted)
+		$("#simulator-stop").click();
+	else
+		enableDisableButtons();
 }
 
 function setHeadingPosition(position) {
@@ -413,8 +461,8 @@ function onReceive(receiveInfo) {
 	if(cliModeEnabled == false){
 		while ((index = this.lineBuffer.indexOf('\n')) >= 0) {
 			var line = this.lineBuffer.substr(0, index + 1);
-			$("#log-receiver").append(line+'<br/>');
-			$("#log-receiver").scrollTop($('#log-receiver')[0].scrollHeight);
+			//$("#log-receiver").append(line+'<br/>');
+			//$("#log-receiver").scrollTop($('#log-receiver')[0].scrollHeight);
 			var message = {
 				action: 'center',
 				line: line
@@ -422,6 +470,10 @@ function onReceive(receiveInfo) {
 			var frame = document.getElementById('map');
 			frame.contentWindow.postMessage(message, '*');			
 			this.lineBuffer = this.lineBuffer.substr(index + 1);
+			if(line.contains('u360gts') || line.contains('amv-open360tracker')){
+				$("#enter").click();
+				break;
+			}
 		}
 	}
 	else {
@@ -454,10 +506,10 @@ function onReceive(receiveInfo) {
 						loadFeatures(line);
 					}
 					loadSelectmenus(line);
-					if(line.contains('u360gts')){
-						showVersion(line);
+					if(line.contains('u360gts') || line.contains('amv-open360tracker')){
 						cliHasReplied = true;
-						setStatus("CLI mode enabled");
+						writeLog("CLI mode enabled");
+						showVersion(line);
 						enableDisableButtons();
 						break;
 					}
@@ -546,8 +598,7 @@ function backupConfig(line){
 }
 
 function showVersion(data){
-	var firmware = getVersionBoardNumberAndDate(data);
-	$("#firmware-version").html(firmware);
+	writeLog('Firmware version: ' + getVersionBoardNumberAndDate(data))
 }
 
 function getVersionBoardNumberAndDate(data){
@@ -703,7 +754,7 @@ chrome.serial.onReceiveError.addListener(onError);
 
 function onOpen(connectionInfo) {
   if (!connectionInfo) {
-    setStatus('Could not open');
+    writeLog('Could not open');
 	$("#serial-connect").attr('Caption','Connect');
 	connected = false;
 	enableDisableButtons();
@@ -712,16 +763,18 @@ function onOpen(connectionInfo) {
   $(this).attr('caption','Disonnect');
   $("#serial-connect").html('Disconnect');
   connectionId = connectionInfo.connectionId;
-  setStatus('Connected');
+  writeLog('Connected');
   /*cliModeEnabled = true;
   sendCliEnterCommands();*/
   enableButtons();
   connected = true;
   enableDisableButtons();
+  last_sent_command = commands.get_version;
+  serialSend(connectionId, str2ab('version\n'));
 };
 
-function setStatus(status) {
-  document.getElementById('status').innerText = status;
+function writeLog(status) {
+  GUI.log(status);
 }
 
 function buildPortPicker(ports) {
@@ -735,9 +788,9 @@ function buildPortPicker(ports) {
     portOption.value = portOption.innerText = port.path;
     portPicker.appendChild(portOption);
   });
-  portOption = document.createElement('option');
+  /*portOption = document.createElement('option');
   portOption.value = portOption.innerText = '/dev/ttyS98';
-  portPicker.appendChild(portOption);
+  portPicker.appendChild(portOption);*/
   
 
   /*portPicker.onchange = function() {
@@ -787,7 +840,7 @@ onload = function() {
 	buildBaudPicker(bitrates);
 	buildPortPicker(ports);
 	});
-	$( "#tabs" ).tabs();
+	$("#tabs").tabs();
 };
 
 function sendCliEnterCommands(){
@@ -1019,37 +1072,69 @@ function delay(milliseconds) {
   }
 }
 function enableDisableButtons(){
-	//Cli
-	$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
-	var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
-	$("#exit").button(buttonState);
-	$("#boot").button(buttonState);
-	$("#default").button(buttonState);
-	$("#save").button(buttonState);
+	if(!simulationStarted){
+		var display = (!cliModeEnabled && connected)?"inline-block":"none";
+		$("#enter").css("display",display);
+		$("#enter").button((!connected || (connected && cliModeEnabled))?'disable':'enable');
+		var buttonState = ((connected && cliModeEnabled && cliHasReplied))?'enable':'disable';
+		
+		display = (cliModeEnabled)?"inline-block":"none";
+		$("#exit").css("display",display);
+		$("#exit").button(buttonState);
+		$("#boot").css("display",display);
+		$("#boot").button(buttonState);
+		$("#default").button(buttonState);
+		$("#default").css("display",display);
+		$("#save").css("display",display);
+		$("#save").button(buttonState);
+
+		if(cliModeEnabled && connected){
+			$("#tabs").tabs({ active: 2 });
+			$('[href="#tabBasicSettings"]').closest('li').show();
+			$('[href="#tabFeatures"]').closest('li').show();
+			$('[href="#tabCliMode"]').closest('li').show();
+			$('[href="#tabFirwareFlasher"]').closest('li').hide();
+			$('[href="#tabSimulator"]').closest('li').hide();
+		} else if(!cliModeEnabled && connected){
+			$("#tabs").tabs({ active: 0 });
+			$('[href="#tabBasicSettings"]').closest('li').hide();
+			$('[href="#tabFeatures"]').closest('li').hide();
+			$('[href="#tabCliMode"]').closest('li').hide();
+			$('[href="#tabFirwareFlasher"]').closest('li').show();
+			$('[href="#tabSimulator"]').closest('li').show();
+		} else if(!connected){
+			$("#tabs").tabs({ active: 0 });
+			$('[href="#tabBasicSettings"]').closest('li').hide();
+			$('[href="#tabFeatures"]').closest('li').hide();
+			$('[href="#tabCliMode"]').closest('li').hide();
+			$('[href="#tabFirwareFlasher"]').closest('li').show();
+			$('[href="#tabSimulator"]').closest('li').hide();		
+		}
+	}
 	
-	//Simulator
-	//$("#simulator-start").button((connected && !cliModeEnabled && !simulationStarted)?'enable':'disable');
-	//$("#simulator-stop").button((simulationStarted)?'enable':'disable');
 	if(connected && !cliModeEnabled && !simulationStarted || debugEnabled)
 		$("#simulator-start").show();
 	else
 		$("#simulator-start").hide();
 	
-	if(simulationStarted) {
+	cleanSerials();
+}
+
+function enableDisableSimulationButtons(){
+	if(simulationStarted){
 		$("#simulator-stop").show();
+		$("#simulator-start").hide();
 		$("#simulation-frequency").prop('disabled',true);
 		$("#simulation-protocol").prop('disabled',true);
 		$("#simulation-type").prop('disabled',true);
 	} else {
 		$("#simulator-stop").hide();
+		$("#simulator-start").show();
 		$("#simulation-frequency").prop('disabled',false);
 		$("#simulation-protocol").prop('disabled',false);
 		$("#simulation-type").prop('disabled',false);
 	}
-	
-	cleanSerials();
 }
-
 function sendStatus(){
   last_sent_command = commands.status;
   serialSend(connectionId, str2ab('status\n'));	
