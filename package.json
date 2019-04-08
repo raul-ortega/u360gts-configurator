@@ -11,7 +11,7 @@
     "icon": "assets/u360gts_icon_128.png",
     "toolbar": true,
     "width": 1024,
-    "height": 800
+    "height": 600
   },
   "repository": {
     "type": "git",
