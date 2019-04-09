@@ -627,7 +627,7 @@
       "message": "Velocidad PWM del motor independiente de velocidad PID"
    },
    "configuratorUpdateNotice": {
-      "message": "Estás utilizando una versión desactualizada de \u003Cb>u360gts Configurator\u003C/b>.\u003Cbr>La versión \u003Cb>$1\u003C/b> está disponible, por favor visita \u003Ca href=\"$2\" target=\"_blank\">la página de versiones\u003C/a> para descargar e instalar la última versión con correcciones y mejoras.\u003Cbr>Por favor, cierra la ventana del configurador antes de actualizar."
+      "message": "Estás utilizando una versión desactualizada de \u003Cb>Cleanflight Configurator\u003C/b>.\u003Cbr>La versión \u003Cb>$1\u003C/b> está disponible, por favor visita \u003Ca href=\"$2\" target=\"_blank\">la página de versiones\u003C/a> para descargar e instalar la última versión con correcciones y mejoras.\u003Cbr>Por favor, cierra la ventana del configurador antes de actualizar."
    },
    "configuratorUpdateWebsite": {
       "message": "Ir a la Web de Versiones"
@@ -774,16 +774,16 @@
       "message": "Contribuir"
    },
    "defaultContributingText": {
-      "message": "Si quieres ayudar a hacer u360gts incluso mejor puedes hacerlo de diferentes maneras, incluyendo:\u003Cbr />\u003Cul>\u003Cli>Responder a preguntas de otros usuarios en foros e IRC.\u003C/li>\u003Cli>Contribuyendo con código al firmware y al configurador- nuevas funcionalidades, correcciones, mejoras.\u003C/li>\u003Cli>Testeando \u003Ca href=\"https://github.com/raul-ortega/u360gts/pulls\" target=\"_blank\">nuevas funcionalidades/correcciones\u003C/a> y comentando resultados.\u003C/li>\u003Cli>Ayudando con \u003Ca href=\"https://github.com/raul-ortega/u360gts/issues\" target=\"_blank\">problemas y opinando sobre las solicitudes de funcionalidades\u003C/a>.\u003C/li>\u003Cli>Colaborando en \u003Ca href=\"https://crowdin.com/project/u360gts-configurator\" target=\"_blank\">la traducción de la aplicación del configurador\u003C/a> a tu idioma.\u003C/li>\u003Cli>\u003C/li>\u003C/ul>"
+      "message": "Si quieres ayudar a hacer Cleanflight incluso mejor puedes hacerlo de diferentes maneras, incluyendo:\u003Cbr />\u003Cul>\u003Cli>Responder a preguntas de otros usuarios en foros e IRC.\u003C/li>\u003Cli>Contribuyendo con código al firmware y al configurador- nuevas funcionalidades, correcciones, mejoras.\u003C/li>\u003Cli>Testeando \u003Ca href=\"https://github.com/Cleanflight/cleanflight/pulls\" target=\"_blank\">nuevas funcionalidades/correcciones\u003C/a> y comentando resultados.\u003C/li>\u003Cli>Ayudando con \u003Ca href=\"https://github.com/cleanflight/cleanflight/issues\" target=\"_blank\">problemas y opinando sobre las solicitudes de funcionalidades\u003C/a>.\u003C/li>\u003Cli>Colaborando en \u003Ca href=\"https://crowdin.com/project/cleanflight-configurator\" target=\"_blank\">la traducción de la aplicación del configurador\u003C/a> a tu idioma.\u003C/li>\u003Cli>\u003C/li>\u003C/ul>"
    },
    "defaultDocumentation": {
-      "message": "La documentación de u360gts está disponible en las notas de la versión y en la wiki.\u003Cbr />\u003Cbr />"
+      "message": "La documentación de Cleanflight está disponible en las notas de la versión y en la wiki.\u003Cbr />\u003Cbr />"
    },
    "defaultDocumentation1": {
-      "message": "La wiki de u360gts es un gran recurso de información, puedes encontrarla \u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">aquí\u003C/a>."
+      "message": "La wiki de Cleanflight es un gran recurso de información, puedes encontrarla \u003Ca href=\"https://github.com/cleanflight/cleanflight/wiki\" target=\"_blank\">aquí\u003C/a>."
    },
    "defaultDocumentation2": {
-      "message": "Las notas de la versión del firmware pueden leerse en la página de versiones de GitHub, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">aquí\u003C/a>."
+      "message": "Las notas de la versión del firmware pueden leerse en la página de versiones de GitHub, \u003Ca href=\"https://github.com/Cleanflight/Cleanflight/releases\" target=\"_blank\">aquí\u003C/a>."
    },
    "defaultDocumentationHead": {
       "message": "Documentación / Manual"
@@ -795,7 +795,7 @@
       "message": "Código Abierto / Aviso de Donación"
    },
    "defaultDonateText": {
-      "message": "Esta utilidad es completamente de \u003Cstrong>código abierto\u003C/strong> y está disponible gratuitamente para todos los usuarios de \u003Cstrong>u360gts\u003C/strong>.\u003Cbr />Si encuentras u360gts o u360gts Configurator útil, por favor considera \u003Cstrong>ayudar\u003C/strong> al desarrollo donando."
+      "message": "Esta utilidad es completamente de \u003Cstrong>código abierto\u003C/strong> y está disponible gratuitamente para todos los usuarios de \u003Cstrong>Cleanflight\u003C/strong>.\u003Cbr />Si encuentras Cleanflight o Cleanflight Configurator útil, por favor considera \u003Cstrong>ayudar\u003C/strong> al desarrollo donando."
    },
    "defaultSponsorsHead": {
       "message": "Patrocinadores"
@@ -807,16 +807,16 @@
       "message": "\u003Ca href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\">Hilo de RC Groups\u003C/a>"
    },
    "defaultSupport2": {
-      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">Wiki de u360gts\u003C/a>"
+      "message": "\u003Ca href=\"https://github.com/cleanflight/cleanflight/wiki\" target=\"_blank\">Wiki de Cleanflight\u003C/a>"
    },
    "defaultSupport3": {
-      "message": "\u003Ca href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Vídeos u360gts de Joshua Bardwell\u003C/a>"
+      "message": "\u003Ca href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Vídeos Cleanflight de Joshua Bardwell\u003C/a>"
    },
    "defaultSupport4": {
-      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts\" target=\"_blank\">GitHub\u003C/a>"
+      "message": "\u003Ca href=\"https://github.com/Cleanflight\" target=\"_blank\">GitHub\u003C/a>"
    },
    "defaultSupport5": {
-      "message": "\u003Ca href=\"http://u360gts.com/slack\" target=\"_blank\">Desarrolladores de u360gts en slack\u003C/a>"
+      "message": "\u003Ca href=\"http://cleanflight.com/slack\" target=\"_blank\">Desarrolladores de Cleanflight en slack\u003C/a>"
    },
    "defaultSupportHead": {
       "message": "Soporte"
@@ -831,10 +831,10 @@
       "message": "Hardware"
    },
    "defaultWelcomeIntro": {
-      "message": "Bienvenido a \u003Cstrong>u360gts - configurator\u003C/strong>, una utilidad diseñada para simplificar el actualizar, configurar y ajustar tu seguidor de antena."
+      "message": "Bienvenido a \u003Cstrong>Cleanflight - Configurator\u003C/strong>, una utilidad diseñada para simplificar el actualizar, configurar y ajustar tu controlador de vuelo."
    },
    "defaultWelcomeText": {
-      "message": "La aplicación soporta todo el hardware que puede ejecutar u360gts. Mira el apartado Instalar Firmware para una lista completa del hardware.\u003Cbr>\u003Cbr> \u003Ca href=\"https://chrome.google.com/webstore/detail/u360gts-blackbox-explo/canpiagfkeefejklcojkhojdijglnghc\" target=\"_blank\"> Descargar u360gts Blackbox\u003C/a>\u003Cbr />\u003Cbr />El código fuente del firmware puede descargarse desde \u003Ca href=\"https://github.com/raul-ortega/u360gts\" title=\"www.github.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />La imagen binaria más reciente del firmware está disponible \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" title=\"www.github.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />\u003Cbr />Los últimos \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">Drivers CP210x\u003C/a> pueden descargarse desde \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />Los últimos \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">Drivers STM USB VCP\u003C/a> pueden descargarse desde \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />Ultimo driver \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig\u003C/a> para instalación del driver USB de Windows puede descargarse desde \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">aquí\u003C/a>\u003Cbr />"
+      "message": "La aplicación soporta todo el hardware que puede ejecutar Cleanflight. Mira el apartado Instalar Firmware para una lista completa del hardware.\u003Cbr>\u003Cbr> \u003Ca href=\"https://chrome.google.com/webstore/detail/cleanflight-blackbox-explo/canpiagfkeefejklcojkhojdijglnghc\" target=\"_blank\"> Descargar Cleanflight Blackbox\u003C/a>\u003Cbr />\u003Cbr />El código fuente del firmware puede descargarse desde \u003Ca href=\"https://github.com/cleanflight/cleanflight\" title=\"www.github.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />La imagen binaria más reciente del firmware está disponible \u003Ca href=\"https://github.com/cleanflight/cleanflight/releases\" title=\"www.github.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />\u003Cbr />Los últimos \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">Drivers CP210x\u003C/a> pueden descargarse desde \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />Los últimos \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">Drivers STM USB VCP\u003C/a> pueden descargarse desde \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">aquí\u003C/a>\u003Cbr />Ultimo driver \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig\u003C/a> para instalación del driver USB de Windows puede descargarse desde \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">aquí\u003C/a>\u003Cbr />"
    },
    "deviceReady": {
       "message": "Dispositivo - \u003Cspan class=\"message-positive\">Preparado\u003C/span>"
@@ -918,7 +918,7 @@
       "message": "El Modo de Seguridad tiene dos etapas. \u003Cstrong>Etapa 1\u003C/strong> se ejecuta cuando un canal de vuelo tiene una longitud de pulso no válida, el receptor informa de Modo de Seguridad o no hay señal del receptor, se aplican ajustes de seguridad a \u003Cspan class=\"message-negative\">todos los canales\u003C/span> y se proporciona una pequeña cantidad de tiempo para permitir recuperar el estado. \u003Cstrong>Etapa 2\u003C/strong> se ejecuta cuando la condición de error dura más que el tiempo configurado de guarda mientras la aeronave esté \u003Cspan class=\"message-negative\">armada\u003C/span>, todos los canales se mantienen en el ajuste de seguridad a menos que se las reglas se modifiquen en el procedimiento elegido. \u003Cbr />\u003Cstrong>Nota:\u003C/strong> Antes de entrar en Etapa 1, se aplican ajustes de seguridad también a los canales AUX individuales que tienen pulsos inválidos."
    },
    "failsafeFeaturesHelpOld": {
-      "message": "La configuración del Modo de Seguridad ha cambiado considerablemente. Usa u360gts\u003Cstrong>v1.12.0+\u003C/strong> para activar el panel de configuración mejorado."
+      "message": "La configuración del Modo de Seguridad ha cambiado considerablemente. Usa Cleanflight\u003Cstrong>v1.12.0+\u003C/strong> para activar el panel de configuración mejorado."
    },
    "failsafeKillSwitchHelp": {
       "message": "Ajustar esta opción para usar un interruptor de modo de seguridad o FAILSAFE (apartado Modos). Actúa como un conmutador directo, saltando el procedimiento del modo de seguridad seleccionado. \u003Cstrong>Nota:\u003C/strong> El armado está bloqueado cuando el modo de seguridad está en la posición ENCENDIDO"
@@ -1254,7 +1254,7 @@
       "message": "\u003Cstrong>Recuperación / Pérdida de comunicación\u003C/strong>"
    },
    "firmwareFlasherRecoveryText": {
-      "message": "Si has perdido la comunicación con tu placa sigue estos pasos para restaurar la comunicación: \u003Cul>\u003Cli>Apagar.\u003C/li>\u003Cli>Activar 'No reiniciar', activar 'Borrado completo del chip'.\u003C/li>\u003Cli>Unir los pins BOOT o pulsar el botón BOOT.\u003C/li>\u003Cli>Encender (el LED de actividad NO parpadeará si se hace correctamente).\u003C/li>\u003Cli>Instalar todos los drivers para STM32 y Zadig si es necesario (ver sección \u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki/Installing-u360gts\"target=\"_blank\">Instalación por USB\u003C/a> del manual).\u003C/li>\u003Cli>Cerrar el Configurator, Cerrar todas las instancias en ejecución de chrome, Cerrar todas las aplicaciones Chrome, Reiniciar Configurator.\u003C/li>\u003Cli>Soltar botón BOOT si tu FC tiene uno.\u003C/li>\u003Cli>Instalar el firmware correcto (configurando la velocidad de transmisión si viene especificada en el manual de tu FC).\u003C/li>\u003Cli>Apagar.\u003C/li>\u003Cli>Liberar pins BOOT.\u003C/li>\u003Cli>Encender (el LED de actividad debe parpadear).\u003C/li>\u003Cli>Conectar normalmente.\u003C/li>\u003C/ul>"
+      "message": "Si has perdido la comunicación con tu placa sigue estos pasos para restaurar la comunicación: \u003Cul>\u003Cli>Apagar.\u003C/li>\u003Cli>Activar 'No reiniciar', activar 'Borrado completo del chip'.\u003C/li>\u003Cli>Unir los pins BOOT o pulsar el botón BOOT.\u003C/li>\u003Cli>Encender (el LED de actividad NO parpadeará si se hace correctamente).\u003C/li>\u003Cli>Instalar todos los drivers para STM32 y Zadig si es necesario (ver sección \u003Ca href=\"https://github.com/cleanflight/cleanflight/wiki/Installing-Cleanflight\"target=\"_blank\">Instalación por USB\u003C/a> del manual).\u003C/li>\u003Cli>Cerrar el Configurator, Cerrar todas las instancias en ejecución de chrome, Cerrar todas las aplicaciones Chrome, Reiniciar Configurator.\u003C/li>\u003Cli>Soltar botón BOOT si tu FC tiene uno.\u003C/li>\u003Cli>Instalar el firmware correcto (configurando la velocidad de transmisión si viene especificada en el manual de tu FC).\u003C/li>\u003Cli>Apagar.\u003C/li>\u003Cli>Liberar pins BOOT.\u003C/li>\u003Cli>Encender (el LED de actividad debe parpadear).\u003C/li>\u003Cli>Conectar normalmente.\u003C/li>\u003C/ul>"
    },
    "firmwareFlasherReleaseDate": {
       "message": "Fecha:"
@@ -1308,13 +1308,13 @@
       "message": "Ir a GitHub para revisar este cambio..."
    },
    "firmwareFlasherWarningText": {
-      "message": "Por favor \u003Cspan class=\"message-negative\">no\u003C/span> intentes usar este instalador de firmware en hardware \u003Cstrong>no-u360gts\u003C/strong>.\u003Cbr />\u003Cspan class=\"message-negative\">No\u003C/span> \u003Cstrong>desconectes\u003C/strong> la placa o \u003Cstrong>apagues\u003C/strong> tu ordenador mientras se está instalando.\u003Cbr />\u003Cbr />\u003Cstrong>Nota: \u003C/strong>El gestor de arranque del STM32 está almacenado en ROM, por lo que no puede quedarse inutilizado.\u003Cbr />\u003Cstrong>Nota: \u003C/strong>\u003Cspan class=\"message-negative\">Auto-Conectar\u003C/span> siempre está desactivado mientras estés dentro del instalador de firmware.\u003Cbr />\u003Cstrong>Nota: \u003C/strong>Asegúrate de que tienes una copia de seguridad; algunas actualizaciones borrarán tu configuración.\u003Cbr />\u003Cstrong>Nota:\u003C/strong> Si tienes problemas al instalar \u003Cstrong>intenta desconectar todos los cable de tu FC\u003C/strong> primero, intenta reiniciar, actualizar chrome, actualizar drivers.\u003Cbr />\u003Cstrong>Nota:\u003C/strong> Al instalar en placas que tienen directamente conectados puertos USB (la mayoría de placas nuevas) asegúrate de que has leído la sección de Instalación por USB del manual de u360gts y tienes el software y drivers correctos instalados."
+      "message": "Por favor \u003Cspan class=\"message-negative\">no\u003C/span> intentes usar este instalador de firmware en hardware \u003Cstrong>no-Cleanflight\u003C/strong>.\u003Cbr />\u003Cspan class=\"message-negative\">No\u003C/span> \u003Cstrong>desconectes\u003C/strong> la placa o \u003Cstrong>apagues\u003C/strong> tu ordenador mientras se está instalando.\u003Cbr />\u003Cbr />\u003Cstrong>Nota: \u003C/strong>El gestor de arranque del STM32 está almacenado en ROM, por lo que no puede quedarse inutilizado.\u003Cbr />\u003Cstrong>Nota: \u003C/strong>\u003Cspan class=\"message-negative\">Auto-Conectar\u003C/span> siempre está desactivado mientras estés dentro del instalador de firmware.\u003Cbr />\u003Cstrong>Nota: \u003C/strong>Asegúrate de que tienes una copia de seguridad; algunas actualizaciones borrarán tu configuración.\u003Cbr />\u003Cstrong>Nota:\u003C/strong> Si tienes problemas al instalar \u003Cstrong>intenta desconectar todos los cable de tu FC\u003C/strong> primero, intenta reiniciar, actualizar chrome, actualizar drivers.\u003Cbr />\u003Cstrong>Nota:\u003C/strong> Al instalar en placas que tienen directamente conectados puertos USB (la mayoría de placas nuevas) asegúrate de que has leído la sección de Instalación por USB del manual de Cleanflight y tienes el software y drivers correctos instalados."
    },
    "firmwareFlasherWritePermissions": {
       "message": "No tienes \u003Cspan class=\"message-negative\">permisos de escritura\u003C/span> para este archivo"
    },
    "firmwareTypeNotSupported": {
-      "message": "No - u360gts/u360gts firmware \u003Cspan class=\"message-negative\"> no soportado\u003C/span>, excepto modo CLI."
+      "message": "No - Cleanflight/Cleanflight firmware \u003Cspan class=\"message-negative\"> no soportado\u003C/span>, excepto modo CLI."
    },
    "firmwareUpgradeRequired": {
       "message": "El firmware de este dispositivo necesita actualizarse a una nueva versión. Use CLI para hacer una copia de seguridad antes de flashear. El proceso de copia/restauración con CLI está en la documentación.\u003Cbr />Alternativamente puede descargar y usar una versión anterior del configurador si no está preparado para actualizar."
@@ -2211,7 +2211,7 @@
       "message": "Unidades"
    },
    "osdSetupUnsupportedNote1": {
-      "message": "Tu controlador de vuelo no está respondiendo a los comandos OSD. Esto probablemente significa que no tiene un OSD u360gts integrado."
+      "message": "Tu controlador de vuelo no está respondiendo a los comandos OSD. Esto probablemente significa que no tiene un OSD Cleanflight integrado."
    },
    "osdSetupUnsupportedNote2": {
       "message": "Ten en cuenta que algunos controladores de vuelo tienen un \u003Ca href=\"https://www.youtube.com/watch?v=ikKH_6SQ-Tk\" target=\"_blank\">MinimOSD\u003C/a> integrado que puede ser flasheado y configurado con \u003Ca href=\"https://github.com/ShikOfTheRa/scarab-osd/releases/latest\" target='_blank'>scarab-osd\u003C/a>, sin embargo el MinimOSD no puede ser configurado desde esta interfaz."
@@ -2451,7 +2451,7 @@
       "message": "El Filtro Notch tiene un Centro y un Corte. El filtro es simétrico. La Frecuencia Central es el centro del filtro y la Frecuencia de Corte es donde el filtro Notch empieza. Por ejemplo con una Frecuencia de Corte de 160 y una Frecuencia Central de 260 el rango es 160-360Hz con la mayor atenuación en torno al centro"
    },
    "pidTuningPidControllerTip": {
-      "message": "\u003Cb>Tradicional vs u360gts (flotante):\u003C/b> La escala y la lógica del PID son exactamente las mismas. No se necesita reajustar. Tradicional es el antiguo u360gts evolucionado a rewrite, que es controlador PID básico basado en matemáticas de enteros. El controlador PID de u360gts PID usa matemáticas en punto flotante y tiene muchas nuevas funcionalidades especialmente diseñadas para aplicaciones multirotor\u003Cbr> \u003Cb>Flotante vs Entero:\u003C/b> La escala y la lógica del PID son exactamente las mismas. No se necesita reajustar. Las placas F1 no tienen FPU integrada y el cálculo en punto flotante incrementa la carga de CPU y la matemática entera mejoraría el rendimiento, pero la matemática en punto flotante puede dar algo más de precisión."
+      "message": "\u003Cb>Tradicional vs Cleanflight (flotante):\u003C/b> La escala y la lógica del PID son exactamente las mismas. No se necesita reajustar. Tradicional es el antiguo cleanflight evolucionado a rewrite, que es controlador PID básico basado en matemáticas de enteros. El controlador PID de Cleanflight PID usa matemáticas en punto flotante y tiene muchas nuevas funcionalidades especialmente diseñadas para aplicaciones multirotor\u003Cbr> \u003Cb>Flotante vs Entero:\u003C/b> La escala y la lógica del PID son exactamente las mismas. No se necesita reajustar. Las placas F1 no tienen FPU integrada y el cálculo en punto flotante incrementa la carga de CPU y la matemática entera mejoraría el rendimiento, pero la matemática en punto flotante puede dar algo más de precisión."
    },
    "pidTuningPidSettings": {
       "message": "Ajustes del Controlador PID"
@@ -2505,7 +2505,7 @@
       "message": "Potencia Expo RC"
    },
    "pidTuningRcExpoPowerHelp": {
-      "message": "El exponente que se usa al calcular el RC Expo. En versiones de u360gts anteriores a 3.0, este valor está fijado en 3."
+      "message": "El exponente que se usa al calcular el RC Expo. En versiones de Cleanflight anteriores a 3.0, este valor está fijado en 3."
    },
    "pidTuningRcRate": {
       "message": "Tasa RC"
@@ -2787,7 +2787,7 @@
       "message": "Guardar"
    },
    "powerFirmwareUpgradeRequired": {
-      "message": "Se \u003Cspan class=\"message-negative\">requiere\u003C/span> actualización de firmware. Configuración de Batería/Amperaje/Voltaje usando API &lt; 1.33.0 (u360gts versión &lt;= 3.17) no está soportado."
+      "message": "Se \u003Cspan class=\"message-negative\">requiere\u003C/span> actualización de firmware. Configuración de Batería/Amperaje/Voltaje usando API &lt; 1.33.0 (Cleanflight versión &lt;= 3.17) no está soportado."
    },
    "powerMahValue": {
       "message": "$1 mAh"
@@ -2934,7 +2934,7 @@
       "message": "Activar controles"
    },
    "receiverMspWarningText": {
-      "message": "Estos controles permiten armar y probar u360gts sin que haya un transmisor o receptor presente. Sin embargo, \u003Cstrong>esta característica no está diseñada para el vuelo y las hélices no deben estar puestas.\u003C/strong> \u003Cbr>\u003Cbr>Esta funcionalidad no garantiza un control fiable de la aeronave. \u003Cstrong>Pueden producirse lesiones graves si se dejan las hélices puestas.\u003C/strong>"
+      "message": "Estos controles permiten armar y probar Cleanflight sin que haya un transmisor o receptor presente. Sin embargo, \u003Cstrong>esta característica no está diseñada para el vuelo y las hélices no deben estar puestas.\u003C/strong> \u003Cbr>\u003Cbr>Esta funcionalidad no garantiza un control fiable de la aeronave. \u003Cstrong>Pueden producirse lesiones graves si se dejan las hélices puestas.\u003C/strong>"
    },
    "receiverRcInterpolation": {
       "message": "Interpolación de RC"
@@ -3377,7 +3377,7 @@
       "message": "Necesitas \u003Cstrong>conectar\u003C/strong> antes de que puedas ver cualquiera de los apartados."
    },
    "tabSwitchUpgradeRequired": {
-      "message": "Necesitas \u003Cstrong>actualizar\u003C/strong> tu firmware a la última versión de u360gts antes de que puedas usar el apartado $1."
+      "message": "Necesitas \u003Cstrong>actualizar\u003C/strong> tu firmware a la última versión de Cleanflight antes de que puedas usar el apartado $1."
    },
    "tabSwitchWaitForOperation": {
       "message": "\u003Cspan class=\"message-negative\">No\u003C/span> puedes hacer esto ahora mismo, espere a que la operación actual finalice..."
