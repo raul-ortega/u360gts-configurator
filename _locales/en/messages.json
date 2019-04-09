@@ -792,22 +792,22 @@
       "message": "Contributing"
    },
    "defaultContributingText": {
-      "message": "If you would like to help make Cleanflight even better you can help in many ways, including:\u003Cbr />\u003Cul>\u003Cli>Answering other users questions on the forums and IRC.\u003C/li>\u003Cli>Contributing code to the firmware and configurator - new features, fixes, improvements\u003C/li>\u003Cli>Testing \u003Ca href=\"https://github.com/cleanflight/cleanflight/pulls\" target=\"_blank\">new features/fixes\u003C/a> and providing feedback.\u003C/li>\u003Cli>Helping out with \u003Ca href=\"https://github.com/cleanflight/cleanflight/issues\" target=\"_blank\">issues and commenting on feature requests\u003C/a>.\u003C/li>\u003Cli>\u003Ca href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TSQKVT6UYKGL6\" target=\"_blank\" title=\"Donate\">Donating\u003C/a>, \u003Ca href=\"http://www.cafepress.com/cleanflight\" title=\"www.cafepress.com/cleanflight\" target=\"_blank\">buying a T-Shirt\u003C/a>\u003C/li>\u003C/ul>"
+      "message": "If you would like to help make u360gts even better you can help in many ways, including:\u003Cbr />\u003Cul>\u003Cli>Answering other users questions on the forums and IRC.\u003C/li>\u003Cli>Contributing code to the firmware and configurator - new features, fixes, improvements\u003C/li>\u003Cli>Testing \u003Ca href=\"https://github.com/raul-ortega/u360gts/pulls\" target=\"_blank\">new features/fixes\u003C/a> and providing feedback.\u003C/li>\u003Cli>Helping out with \u003Ca href=\"https://github.com/raul-ortega/u360gts/issues\" target=\"_blank\">issues and commenting on feature requests\u003C/a>.\u003C/li>\u003Cli>\u003Ca href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TSQKVT6UYKGL6\" target=\"_blank\" title=\"Donate\">Donating\u003C/a>, \u003Ca href=\"http://www.cafepress.com/u360gts\" title=\"www.cafepress.com/u360gts\" target=\"_blank\">buying a T-Shirt\u003C/a>\u003C/li>\u003C/ul>"
    },
    "defaultDocumentation": {
-      "message": "Cleanflight documentation is available in Markdown and PDF formats.\u003Cbr />\u003Cbr />"
+      "message": "u360gts documentation is available in Markdown and PDF formats.\u003Cbr />\u003Cbr />"
    },
    "defaultDocumentation1": {
-      "message": "The wiki is a great resource for information, it can be found \u003Ca href=\"https://github.com/cleanflight/cleanflight/wiki\" target=\"_blank\">here\u003C/a>."
+      "message": "The wiki is a great resource for information, it can be found \u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">here\u003C/a>."
    },
    "defaultDocumentation2": {
-      "message": "The release notes for the firmware can be read at github releases page, \u003Ca href=\"https://github.com/cleanflight/cleanflight/releases\" target=\"_blank\">here\u003C/a>."
+      "message": "The release notes for the firmware can be read at github releases page, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">here\u003C/a>."
    },
    "defaultDocumentation3": {
-      "message": "The PDF manual appropriate to the firmware can be downloaded from the github releases page, \u003Ca href=\"https://github.com/cleanflight/cleanflight/releases\" target=\"_blank\">here\u003C/a>."
+      "message": "The PDF manual appropriate to the firmware can be downloaded from the github releases page, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">here\u003C/a>."
    },
    "defaultDocumentation4": {
-      "message": "The Markdown latest online documentation is available \u003Ca href=\"https://github.com/cleanflight/cleanflight/tree/master/docs\" target=\"_blank\">here\u003C/a> - you can switch to the appropriate version of the documentation by selecting the tag."
+      "message": "The Markdown latest online documentation is available \u003Ca href=\"https://github.com/raul-ortega/u360gts/tree/master/docs\" target=\"_blank\">here\u003C/a> - you can switch to the appropriate version of the documentation by selecting the tag."
    },
    "defaultDocumentationHead": {
       "message": "Documentation / Manual"
@@ -831,16 +831,16 @@
       "message": "\u003Ca href=\"http://www.rcgroups.com/forums/showthread.php?t=2249574&page=1\" target=\"_blank\">RC Groups thread\u003C/a>"
    },
    "defaultSupport2": {
-      "message": "\u003Ca href=\"https://github.com/cleanflight/cleanflight/wiki\" target=\"_blank\">Cleanflight Wiki\u003C/a>"
+      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">u360gts Wiki\u003C/a>"
    },
    "defaultSupport3": {
       "message": "\u003Ca href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Joshua Bardwell Betaflight Videos\u003C/a>"
    },
    "defaultSupport4": {
-      "message": "\u003Ca href=\"https://github.com/cleanflight\" target=\"_blank\">GitHub\u003C/a>"
+      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts\" target=\"_blank\">GitHub\u003C/a>"
    },
    "defaultSupport5": {
-      "message": "\u003Ca href=\"http://cleanflight.com/slack\" target=\"_blank\">Cleanflight devs on slack\u003C/a>"
+      "message": "\u003Ca href=\"http://u360gts.com/slack\" target=\"_blank\">u360gts devs on slack\u003C/a>"
    },
    "defaultSupportHead": {
       "message": "Support"
@@ -855,10 +855,10 @@
       "message": "Hardware"
    },
    "defaultWelcomeIntro": {
-      "message": "Welcome to \u003Cstrong>Cleanflight - Configurator\u003C/strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
+      "message": "Welcome to \u003Cstrong>u360gts - Configurator\u003C/strong>, a utility designed to simplify updating, configuring and tuning of your flight controller."
    },
    "defaultWelcomeText": {
-      "message": "The application supports all hardware that can run Cleanflight. Check Firmware Flasher for full list of hardware.\u003Cbr>\u003Cbr> \u003Ca href=\"https://github.com/cleanflight/blackbox-log-viewer/releases\" target=\"_blank\"> Download Cleanflight Blackbox\u003C/a>\u003Cbr />\u003Cbr />The firmware source code can be downloaded from \u003Ca href=\"https://github.com/cleanflight/cleanflight\" title=\"www.github.com\" target=\"_blank\">here\u003C/a>\u003Cbr />The newest binary firmware image is available \u003Ca href=\"https://github.com/cleanflight/cleanflight/releases\" title=\"www.github.com\" target=\"_blank\">here\u003C/a>\u003Cbr />\u003Cbr />Latest \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">CP210x Drivers\u003C/a> can be downloaded from \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">here\u003C/a>\u003Cbr />Latest \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">STM USB VCP Drivers\u003C/a> can be downloaded from \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">here\u003C/a>\u003Cbr />Latest \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig\u003C/a> for Windows USB driver installation can be downloaded from \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">here\u003C/a>\u003Cbr />"
+      "message": "The application supports all hardware that can run u360gts. Check Firmware Flasher for full list of hardware.\u003Cbr>\u003Cbr> \u003Ca href=\"https://github.com/raul-ortega/u360gts/blackbox-log-viewer/releases\" target=\"_blank\"> Download u360gts Blackbox\u003C/a>\u003Cbr />\u003Cbr />The firmware source code can be downloaded from \u003Ca href=\"https://github.com/raul-ortega/u360gts\" title=\"www.github.com\" target=\"_blank\">here\u003C/a>\u003Cbr />The newest binary firmware image is available \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" title=\"www.github.com\" target=\"_blank\">here\u003C/a>\u003Cbr />\u003Cbr />Latest \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">CP210x Drivers\u003C/a> can be downloaded from \u003Ca href=\"http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx\" title=\"http://www.silabs.com\" target=\"_blank\">here\u003C/a>\u003Cbr />Latest \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">STM USB VCP Drivers\u003C/a> can be downloaded from \u003Ca href=\"http://www.st.com/web/en/catalog/tools/PF257938\" title=\"http://www.st.com\" target=\"_blank\">here\u003C/a>\u003Cbr />Latest \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">Zadig\u003C/a> for Windows USB driver installation can be downloaded from \u003Ca href=\"http://zadig.akeo.ie/\" title=\"http://zadig.akeo.ie\" target=\"_blank\">here\u003C/a>\u003Cbr />"
    },
    "deviceReady": {
       "message": "Device - \u003Cspan class=\"message-positive\">Ready\u003C/span>"
@@ -918,10 +918,10 @@
       "message": "Error: {{errorMessage}}"
    },
    "extraSupport1": {
-      "message": "\u003Ca href=\"irc://irc.freenode.net/#cleanflight\" target=\"_blank\">#Cleanflight IRC channel on freenode\u003C/a>"
+      "message": "\u003Ca href=\"irc://irc.freenode.net/#u360gts\" target=\"_blank\">#u360gts IRC channel on freenode\u003C/a>"
    },
    "extraSupport2": {
-      "message": "\u003Ca href=\"http://webchat.freenode.net/?channels=cleanflight\" target=\"_blank\">Cleanflight IRC (Join via WebClient)\u003C/a>"
+      "message": "\u003Ca href=\"http://webchat.freenode.net/?channels=u360gts\" target=\"_blank\">u360gts IRC (Join via WebClient)\u003C/a>"
    },
    "failsafeChannelFallbackSettingsAuto": {
       "message": "\u003Cstrong>Auto\u003C/strong> means Roll, Pitch and Yaw to center and Throttle low. \u003Cstrong>Hold\u003C/strong> means maintain the last good value received"
@@ -1281,7 +1281,7 @@
       "message": "\u003Cstrong>Recovery / Lost communication\u003C/strong>"
    },
    "firmwareFlasherRecoveryText": {
-      "message": "If you have lost communication with your board follow these steps to restore communication: \u003Cul>\u003Cli>Power off\u003C/li>\u003Cli>Enable 'No reboot sequence', enable 'Full chip erase'.\u003C/li>\u003Cli>Jumper the BOOT pins or hold BOOT button.\u003C/li>\u003Cli>Power on (activity LED will NOT flash if done correctly).\u003C/li>\u003Cli>Install all STM32 drivers and Zadig if required (see \u003Ca href=\"https://github.com/cleanflight/cleanflight/blob/master/docs/USB%20Flashing.md\"target=\"_blank\">USB Flashing\u003C/a> section of the manual).\u003C/li>\u003Cli>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.\u003C/li>\u003Cli>Release BOOT button if your FC has one.\u003C/li>\u003Cli>Flash with correct firmware (using manual baud rate if specified in your FC's manual).\u003C/li>\u003Cli>Power off.\u003C/li>\u003Cli>Remove BOOT jumper.\u003C/li>\u003Cli>Power on (activity LED should flash).\u003C/li>\u003Cli>Connect normally.\u003C/li>\u003C/ul>"
+      "message": "If you have lost communication with your board follow these steps to restore communication: \u003Cul>\u003Cli>Power off\u003C/li>\u003Cli>Enable 'No reboot sequence', enable 'Full chip erase'.\u003C/li>\u003Cli>Jumper the BOOT pins or hold BOOT button.\u003C/li>\u003Cli>Power on (activity LED will NOT flash if done correctly).\u003C/li>\u003Cli>Install all STM32 drivers and Zadig if required (see \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/docs/USB%20Flashing.md\"target=\"_blank\">USB Flashing\u003C/a> section of the manual).\u003C/li>\u003Cli>Close configurator, Close all running chrome instances, Close all Chrome apps, Restart Configurator.\u003C/li>\u003Cli>Release BOOT button if your FC has one.\u003C/li>\u003Cli>Flash with correct firmware (using manual baud rate if specified in your FC's manual).\u003C/li>\u003Cli>Power off.\u003C/li>\u003Cli>Remove BOOT jumper.\u003C/li>\u003Cli>Power on (activity LED should flash).\u003C/li>\u003Cli>Connect normally.\u003C/li>\u003C/ul>"
    },
    "firmwareFlasherReleaseDate": {
       "message": "Date:"
@@ -2514,7 +2514,7 @@
       "message": "The Notch Filter has a Center and a Cutoff. The filter is symmetrical. The Center Frequency is the center of the filter and the Cutoff Frequency is where Notch filter starts. For example with Notch Cutoff of 160 and Notch Center of 260 it means the range is 160-360Hz with most attenuation around center"
    },
    "pidTuningPidControllerTip": {
-      "message": "\u003Cb>Legacy vs Latest (float):\u003C/b> PID scaling and PID logic is exactly the same. Not necessarily retune needed. Legacy is old cleanflight evolved rewrite, which is basic PID controller based on integer math. Cleanflight PID controller uses floating point math and has many new features specifically designed for multirotor applications \u003Cbr> \u003Cb>Float vs Integer:\u003C/b> PID scaling and PID logic is exactly the same. No retune needed. F1 boards have no onboard FPU and floating point math increases CPU load and integer math will improve performance, but float math might gain slightly more precision."
+      "message": "\u003Cb>Legacy vs Latest (float):\u003C/b> PID scaling and PID logic is exactly the same. Not necessarily retune needed. Legacy is old u360gts evolved rewrite, which is basic PID controller based on integer math. u360gts PID controller uses floating point math and has many new features specifically designed for multirotor applications \u003Cbr> \u003Cb>Float vs Integer:\u003C/b> PID scaling and PID logic is exactly the same. No retune needed. F1 boards have no onboard FPU and floating point math increases CPU load and integer math will improve performance, but float math might gain slightly more precision."
    },
    "pidTuningPidSettings": {
       "message": "PID Controller Settings"
@@ -3558,7 +3558,7 @@
    },
    "windowTitle": {
       "description": "Title of the application window, usually not translated",
-      "message": "Cleanflight Configurator"
+      "message": "u360gts Configurator"
    },
    "cliWelcome": {
       "message": "Board on CLI mode."
