@@ -76,8 +76,12 @@ TABS.sim.initialize = function (callback) {
 
             NMEAGPGGA = buildPacket(p1.lat, p1.lon, altitude, 0, 0);
             $("#simulator-log").append(NMEAGPGGA + '\n');
-//
-            simulatorTimer = setInterval(function () {
+//          
+            GUI.interval_add("sim_interval", function () {
+                
+            
+            
+            //simulatorTimer = setInterval(function () {
 //                /*if(debugEnabled) {
 //                 console.log();
 //                 }*/
@@ -157,14 +161,17 @@ TABS.sim.initialize = function (callback) {
                 p1 = p2;
                 calculateDistanceTimer = new Date().getTime();
 
-            }, timerInterval);
-
+            //}, timerInterval);
+            
+            }, $("#simulation-frequency").val(), false);
+            
         });
 
 
         $(".simulator-stop").on('click', function (e) {
             simulationStarted = false;
-            clearInterval(simulatorTimer);
+            //clearInterval(simulatorTimer);
+            GUI.interval_remove("sim_interval");
 
             $('.simulator-stop').hide();
             $('.simulator-start').show();

@@ -29,13 +29,7 @@ var GUI_control = function () {
         'sim'
 
     ];
-//    this.defaultAllowedOSDTabsWhenConnected = [
-//        'setup_osd',
-//        'osd',
-//        'power',
-//        'sensors',
-//        'transponder',
-//    ];
+
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
 
     // check which operating system is user running
