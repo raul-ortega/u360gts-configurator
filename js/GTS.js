@@ -28,8 +28,8 @@ var GTS = {
                 GUI.log(line);
             }
 
-            // Acciones al recibir estando en la pestaña Configuration
-            if (GUI.active_tab === 'configuration') {
+            // Acciones al recibir estando en la pestaña Configuration o Settings
+            if (GUI.active_tab === 'configuration' || GUI.active_tab === 'settings') {
 
                 switch (TABS.configuration.lastCommand) {
 
