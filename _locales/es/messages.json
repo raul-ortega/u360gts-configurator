@@ -3555,6 +3555,9 @@
     },
     "simSelectFixType": {
         "message": "Seleccionar Modo FIX"
-    }
+    },
+    "tabSettings": {
+        "message": "Avanzado"
+    }  
     
 }

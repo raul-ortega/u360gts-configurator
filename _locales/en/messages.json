@@ -3622,5 +3622,8 @@
     },
     "simSelectFixType": {
         "message": "Select Fix Type"
+    },
+    "tabSettings": {
+        "message": "Settings"
     }  
 }

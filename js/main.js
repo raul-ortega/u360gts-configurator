@@ -123,6 +123,9 @@ function startProcess() {
                     case 'configuration':
                         TABS.configuration.initialize(content_ready);
                         break;
+                    case 'settings':
+                        TABS.settings.initialize(content_ready);
+                        break;
                     case 'cli':
                         TABS.cli.initialize(content_ready);
                         break;
@@ -338,8 +341,8 @@ function startProcess() {
     });
 
     $("#simModeSwitch").on('click', function () {
-            GUI.simModeEnabled = $(this).is(':checked');
-            console.log("Sim Mode: " + GUI.simModeEnabled);
+        GUI.simModeEnabled = $(this).is(':checked');
+        console.log("Sim Mode: " + GUI.simModeEnabled);
     });
 }
 

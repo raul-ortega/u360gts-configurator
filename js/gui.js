@@ -24,6 +24,7 @@ var GUI_control = function () {
     ];
     this.defaultAllowedFCTabsWhenConnected = [
         'configuration',
+        'settings',
         'cli',
         'sim'
 
