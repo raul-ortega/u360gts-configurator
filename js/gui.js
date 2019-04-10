@@ -264,10 +264,14 @@ GUI_control.prototype.switchery = function () {
         GUI.switcheries[elem.getAttribute('id')] = switchery;
 
         $(elem).on("change", function (evt) {
-            //switchery.setPosition();
-            TABS.configuration.switcheryChange(this);
+
+            // Fire switcher event by tab
+            if (GUI.active_tab === 'configuration') {
+                TABS.configuration.switcheryChange(this);
+            }
+
         });
-        
+
         $(elem).removeClass('toggle');
     });
 
