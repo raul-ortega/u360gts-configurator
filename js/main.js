@@ -346,10 +346,6 @@ function startProcess() {
         console.log("Sim Mode: " + GUI.simModeEnabled);
     });
     
-    $("#configurationButtonSave").on('click', function () {
-        GTS.save();
-    });
-    
 }
 
 function checkForConfiguratorUpdates() {

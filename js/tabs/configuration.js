@@ -18,11 +18,11 @@ TABS.configuration.initialize = function (callback) {
         TABS.configuration.getData();
 
         // SAVE
-//        $("#configurationButtonSave").click(function () {
-//
-//            GTS.save();
-//
-//        });
+        $("#configurationButtonSave").click(function () {
+
+            GTS.save();
+
+        });
 
 
 
