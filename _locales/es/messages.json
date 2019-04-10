@@ -3510,5 +3510,51 @@
     },
     "simTypeParallel": {
         "message": "Paralelo a pista"
-    }     
+    },
+    "simSatellites": {
+        "message": "Satélites"
+    },
+    "simFixType": {
+        "message": "Modo GPS Fix"
+    },
+    "simSpeed": {
+        "message": "Velocidad (Km/h)"
+    },
+    "simRadius": {
+        "message": "Radio (m)"
+    },
+    "simAltitude": {
+        "message": "Altitud (m)"
+    },
+    "simCourse": {
+        "message": "Rumbo"
+    },   
+    "simLatitude": {
+        "message": "Latitud"
+    },
+    "simLongitude": {
+        "message": "Longitud"
+    },
+    "simForceError": {
+        "message": "Forzar Error"
+    },
+    "simControl": {
+        "message": "Control"
+    },
+    "simStart": {
+        "message": "Iniciar Simulación"
+    },
+    "simStop": {
+        "message": "Detener Simulación"
+    },
+    "simSelectProtocol": {
+        "message": "Seleccionar Protocolo"
+    },
+    "simSelectFrequency": {
+        "message": "Seleccionar Frecuencia"
+    },
+    "simSelectFixType": {
+        "message": "Seleccionar Modo FIX"
+    }
+    
 }
