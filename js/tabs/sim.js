@@ -68,13 +68,12 @@ TABS.sim.initialize = function (callback) {
 
 
 
-//            if (protocol == protocols.MFD) {
-//                NMEAGPGGA = setHome2MFD();
-//                serialSend(connectionId, str2ab(NMEAGPGGA + '\n'));
-//                showPacket(NMEAGPGGA);
-//            }
+            if (protocol == protocols.MFD)
+                NMEAGPGGA = setHome2MFD();
+			else
+				NMEAGPGGA = buildPacket(p1.lat, p1.lon, altitude, 0, 0);
 
-            NMEAGPGGA = buildPacket(p1.lat, p1.lon, altitude, 0, 0);
+            GTS.send(NMEAGPGGA + '\n');
             $("#simulator-log").append(NMEAGPGGA + '\n');
 //          
             GUI.interval_add("sim_interval", function () {
