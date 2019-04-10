@@ -50,27 +50,21 @@ function buildPacket(lat, lon, altitude, distance, heading) {
         
         packet = (lastNmeaPacket == nmeaPackets.gga) ? buildGPRMC(lat, lon, altitude, course, forceError) : buildGPGGA(lat, lon, altitude, forceError);
         lastNmeaPacket = (lastNmeaPacket == nmeaPackets.gga) ? nmeaPackets.rmc : nmeaPackets.gga;
-        
-        // Raul esto lo desativo de momento
-        //console.log("Mandamos packet");
-        //if (!debugEnabled)
-        //    serialSend(connectionId, str2ab(packet + '\n'));
-        
-        GTS.send(packet + '\n');
-        
+        if (!debugEnabled)
+			GTS.send(packet + '\n');
     } else if (protocol == protocols.MAVLINK) {
         packet = build_mavlink_msg_gps_raw_int(lat, lon, altitude, Speed($("#simulator-speed").val()), forceError);
-        chrome.serial.send(connectionId, packet.buffer, function () {});
+        GTS.send(ab2str(packet) + '\n');
         if (!debugEnabled)
-            serialSend(connectionId, str2ab('\n'));
+            GTS.send('\n');
     } else if (protocol == protocols.PITLAB) {
         packet = Data2Pitlab(11, altitude, lat, lon);
         if (!debugEnabled)
-            serialSend(connectionId, str2ab(packet + '\n'));
+            GTS.send(packet + '\n');
     } else if (protocol == protocols.MFD) {
         packet = Data2MFD(distance, altitude, heading, forceError);
         if (!debugEnabled)
-            serialSend(connectionId, str2ab(packet + '\n'));
+            GTS.send(packet + '\n');
     }
     return packet;
 }

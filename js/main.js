@@ -11,6 +11,7 @@ $(document).ready(function () {
     });
 });
 
+var debugEnabled = false;
 //Process to execute to real start the app
 function startProcess() {
 
