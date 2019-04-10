@@ -774,7 +774,7 @@
       "message": "Contribuir"
    },
    "defaultContributingText": {
-      "message": "Si quieres ayudar a hacer u360gts incluso mejor puedes hacerlo de diferentes maneras, incluyendo:\u003Cbr />\u003Cul>\u003Cli>Responder a preguntas de otros usuarios en foros e IRC.\u003C/li>\u003Cli>Contribuyendo con código al firmware y al configurador- nuevas funcionalidades, correcciones, mejoras.\u003C/li>\u003Cli>Testeando \u003Ca href=\"https://github.com/raul-ortega/u360gts/pulls\" target=\"_blank\">nuevas funcionalidades/correcciones\u003C/a> y comentando resultados.\u003C/li>\u003Cli>Ayudando con \u003Ca href=\"https://github.com/raul-ortega/u360gts/issues\" target=\"_blank\">problemas y opinando sobre las solicitudes de funcionalidades\u003C/a>.\u003C/li>\u003Cli>Colaborando en \u003Ca href=\"https://crowdin.com/project/u360gts-configurator\" target=\"_blank\">la traducción de la aplicación del configurador\u003C/a> a tu idioma.\u003C/li>\u003Cli>Ayudando en el \u003Ca href=\"http://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o/\" target=\"_blank\">foro de ZONA FPV\u003C/a> a otros usuarios en la fabricación y puesta a punto de su seguidor de antena.\u003C/li>\u003Cli>\u003C/li>\u003C/ul>"
+      "message": "Si quieres ayudar a hacer u360gts incluso mejor puedes hacerlo de diferentes maneras, incluyendo:\u003Cbr />\u003Cul>\u003Cli>Responder a preguntas de otros usuarios en foros y redes sociales.\u003C/li>\u003Cli>Contribuyendo con código al firmware y al configurador- nuevas funcionalidades, correcciones, mejoras.\u003C/li>\u003Cli>Testeando \u003Ca href=\"https://github.com/raul-ortega/u360gts/pulls\" target=\"_blank\">nuevas funcionalidades/correcciones\u003C/a> y comentando resultados.\u003C/li>\u003Cli>Ayudando con \u003Ca href=\"https://github.com/raul-ortega/u360gts/issues\" target=\"_blank\">problemas y opinando sobre las solicitudes de funcionalidades\u003C/a>.\u003C/li>\u003Cli>Colaborando en \u003Ca href=\"https://crowdin.com/project/u360gts-configurator\" target=\"_blank\">la traducción de la aplicación del configurador\u003C/a> a tu idioma.\u003C/li>\u003Cli>Ayudando en el \u003Ca href=\"http://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o/\" target=\"_blank\">foro de ZONA FPV\u003C/a> a otros usuarios en la fabricación y puesta a punto de su seguidor de antena.\u003C/li>\u003Cli>\u003C/li>\u003C/ul>"
    },
    "defaultDocumentation": {
       "message": "La documentación de u360gts está disponible en las notas de la versión y en la wiki.\u003Cbr />\u003Cbr />"
@@ -804,19 +804,19 @@
       "message": "Para soporte por favor busca primero en los foros y en la wiki o contacta con tu vendedor.\u003Cbr />\u003Cbr />"
    },
    "defaultSupport1": {
-      "message": "\u003Ca href=\"http://www.rcgroups.com/forums/showthread.php?t=2464844&page=1\" target=\"_blank\">Hilo de RC Groups\u003C/a>"
+      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/index.md\" target=\"_blank\">Wiki de u360gts\u003C/a>"
    },
    "defaultSupport2": {
-      "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">Wiki de u360gts\u003C/a>"
+      "message": "\u003Ca href=\"https://www.facebook.com/groups/u360gts\" target=\"_blank\">Grupo Facebook u360gts\u003C/a>"
    },
    "defaultSupport3": {
-      "message": "\u003Ca href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Vídeos u360gts de Joshua Bardwell\u003C/a>"
+	  "message": "\u003Ca href=\"https://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o\" target=\"_blank\">Foro de ZONA FPV\u003C/a>"
    },
    "defaultSupport4": {
       "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts\" target=\"_blank\">GitHub\u003C/a>"
    },
    "defaultSupport5": {
-      "message": "\u003Ca href=\"http://u360gts.com/slack\" target=\"_blank\">Desarrolladores de u360gts en slack\u003C/a>"
+      "message": "\u003Ca href=\"https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker\" target=\"_blank\">Hilo de RC Groups\u003C/a>"
    },
    "defaultSupportHead": {
       "message": "Soporte"
