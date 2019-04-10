@@ -170,7 +170,6 @@ TABS.sim.initialize = function (callback) {
 
         $(".simulator-stop").on('click', function (e) {
             simulationStarted = false;
-            //clearInterval(simulatorTimer);
             GUI.interval_remove("sim_interval");
 
             $('.simulator-stop').hide();

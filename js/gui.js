@@ -264,7 +264,7 @@ GUI_control.prototype.switchery = function () {
         $(elem).on("change", function (evt) {
 
             // Fire switcher event by tab
-            if (GUI.active_tab === 'configuration') {
+            if (GUI.active_tab === 'configuration' || GUI.active_tab === 'settings') {
                 TABS.configuration.switcheryChange(this);
             }
 
