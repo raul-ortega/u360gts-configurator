@@ -73,6 +73,10 @@ function initializeSerialBackend() {
 
                     // Exit del modo cli o sim
                     if (GUI.simModeEnabled) {
+
+                        if (simulationStarted)
+                            clearInterval(simulatorTimer);
+
                         $("#simModeSwitch").click();
                         finishClose(toggleStatus);
                     } else {
