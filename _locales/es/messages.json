@@ -3492,5 +3492,8 @@
    },
    "cliWelcome": {
       "message": "Placa en modo CLI."
-   }
+   },
+      "tabSim": {
+      "message": "Simulador"
+   } 
 }

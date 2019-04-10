@@ -3562,5 +3562,9 @@
    },
    "cliWelcome": {
       "message": "Board on CLI mode."
-   }
+   },
+   "tabSim": {
+      "message": "Simulator"
+   } 
+   
 }

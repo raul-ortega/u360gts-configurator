@@ -5,7 +5,7 @@ openNewWindowsInExternalBrowser();
 //Asynchronous configuration to be done.
 //When finish the startProcess() function must be called 
 $(document).ready(function () {
-    i18n.init(function() {
+    i18n.init(function () {
         startProcess();
         initializeSerialBackend();
     });
@@ -18,9 +18,9 @@ function startProcess() {
     i18n.localizePage();
 
     // alternative - window.navigator.appVersion.match(/Chrome\/([0-9.]*)/)[1];
-    GUI.log(i18n.getMessage('infoVersions',{operatingSystem: GUI.operating_system, 
-                                            chromeVersion: window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1"), 
-                                            configuratorVersion: getManifestVersion()}));
+    GUI.log(i18n.getMessage('infoVersions', {operatingSystem: GUI.operating_system,
+        chromeVersion: window.navigator.appVersion.replace(/.*Chrome\/([0-9.]*).*/, "$1"),
+        configuratorVersion: getManifestVersion()}));
 
     $('#logo .version').text(getManifestVersion());
     updateStatusBarVersion();
@@ -65,7 +65,7 @@ function startProcess() {
     $('a', ui_tabs).click(function () {
         if ($(this).parent().hasClass('active') == false && !GUI.tab_switch_in_progress) { // only initialize when the tab isn't already active
             var self = this,
-                tabClass = $(self).parent().prop('class');
+                    tabClass = $(self).parent().prop('class');
 
             var tabRequiresConnection = $(self).parent().hasClass('mode-connected');
 
@@ -111,6 +111,9 @@ function startProcess() {
                     case 'landing':
                         TABS.landing.initialize(content_ready);
                         break;
+                    case 'sim':
+                        TABS.sim.initialize(content_ready);
+                        break;
                     case 'firmware_flasher':
                         TABS.firmware_flasher.initialize(content_ready);
                         break;
@@ -142,7 +145,7 @@ function startProcess() {
             el.after('<div id="options-window"></div>');
 
             $('div#options-window').load('./tabs/options.html', function () {
-                
+
 
                 // translate to user-selected language
                 i18n.localizePage();
@@ -156,7 +159,7 @@ function startProcess() {
 
                 $('div.notifications input').change(function () {
                     var checked = $(this).is(':checked');
-                    
+
 
                     chrome.storage.local.set({'update_notify': check});
                 });
@@ -196,15 +199,15 @@ function startProcess() {
                     var languagesAvailables = i18n.getLanguagesAvailables();
                     userLanguage_e.append('<option value="DEFAULT">' + i18n.getMessage('language_default') + '</option>');
                     userLanguage_e.append('<option disabled>------</option>');
-                    languagesAvailables.forEach(function(element) {
+                    languagesAvailables.forEach(function (element) {
                         var languageName = i18n.getMessage('language_' + element);
                         userLanguage_e.append('<option value="' + element + '">' + languageName + '</option>');
                     });
-                    
+
                     if (result.userLanguageSelect) {
                         userLanguage_e.val(result.userLanguageSelect);
                     }
-                    
+
                     userLanguage_e.change(function () {
                         var languageSelected = $(this).val();
 
@@ -234,7 +237,7 @@ function startProcess() {
     // listen to all input change events and adjust the value within limits if necessary
     $("#content").on('focus', 'input[type="number"]', function () {
         var element = $(this),
-            val = element.val();
+                val = element.val();
 
         if (!isNaN(val)) {
             element.data('previousValue', parseFloat(val));
@@ -258,11 +261,11 @@ function startProcess() {
 
     $("#content").on('change', 'input[type="number"]', function () {
         var element = $(this),
-            min = parseFloat(element.prop('min')),
-            max = parseFloat(element.prop('max')),
-            step = parseFloat(element.prop('step')),
-            val = parseFloat(element.val()),
-            decimal_places;
+                min = parseFloat(element.prop('min')),
+                max = parseFloat(element.prop('max')),
+                step = parseFloat(element.prop('step')),
+                val = parseFloat(element.val()),
+                decimal_places;
 
         // only adjust minimal end if bound is set
         if (element.prop('min')) {
@@ -347,12 +350,12 @@ function notifyOutdatedVersion(releaseData) {
         if (result.checkForConfiguratorUnstableVersions) {
             showUnstableReleases = true;
         }
-         var versions = releaseData.filter(function (version) {
-             var semVerVersion = semver.parse(version.tag_name);
-             if (semVerVersion && (showUnstableReleases || semVerVersion.prerelease.length === 0)) {
-                 return version;
-             }
-         }).sort(function (v1, v2) {
+        var versions = releaseData.filter(function (version) {
+            var semVerVersion = semver.parse(version.tag_name);
+            if (semVerVersion && (showUnstableReleases || semVerVersion.prerelease.length === 0)) {
+                return version;
+            }
+        }).sort(function (v1, v2) {
             try {
                 return semver.compare(v2.tag_name, v1.tag_name);
             } catch (e) {
@@ -367,11 +370,11 @@ function notifyOutdatedVersion(releaseData) {
 
             $('.dialogConfiguratorUpdate-content').html(i18n.getMessage('configuratorUpdateNotice', [versions[0].tag_name, versions[0].html_url]));
 
-            $('.dialogConfiguratorUpdate-closebtn').click(function() {
+            $('.dialogConfiguratorUpdate-closebtn').click(function () {
                 dialog.close();
             });
 
-            $('.dialogConfiguratorUpdate-websitebtn').click(function() {
+            $('.dialogConfiguratorUpdate-websitebtn').click(function () {
                 dialog.close();
 
                 window.open(versions[0].html_url, '_blank');
@@ -436,17 +439,17 @@ function generateFilename(prefix, suffix) {
         if (CONFIG.flightControllerIdentifier) {
             filename = CONFIG.flightControllerIdentifier + '_' + filename;
         }
-        if(CONFIG.name && CONFIG.name.trim() !== '') {
+        if (CONFIG.name && CONFIG.name.trim() !== '') {
             filename = filename + '_' + CONFIG.name.trim().replace(' ', '_');
         }
     }
 
     filename = filename + '_' + date.getFullYear()
-        + zeroPad(date.getMonth() + 1, 2)
-        + zeroPad(date.getDate(), 2)
-        + '_' + zeroPad(date.getHours(), 2)
-        + zeroPad(date.getMinutes(), 2)
-        + zeroPad(date.getSeconds(), 2);
+            + zeroPad(date.getMonth() + 1, 2)
+            + zeroPad(date.getDate(), 2)
+            + '_' + zeroPad(date.getHours(), 2)
+            + zeroPad(date.getMinutes(), 2)
+            + zeroPad(date.getSeconds(), 2);
 
     return filename + '.' + suffix;
 }
@@ -458,7 +461,7 @@ function getFirmwareVersion(firmwareVersion, firmwareId, hardwareId) {
         versionText += i18n.getMessage('versionLabelFirmware') + ': ' + firmwareId + ' ' + firmwareVersion;
 
         if (hardwareId) {
-           versionText += ' (' + i18n.getMessage('versionLabelTarget') + ': ' + hardwareId + ')';
+            versionText += ' (' + i18n.getMessage('versionLabelTarget') + ': ' + hardwareId + ')';
         }
     }
 
@@ -513,8 +516,8 @@ function openNewWindowsInExternalBrowser() {
 
         //Listen to the new window event
         win.on('new-win-policy', function (frame, url, policy) {
-          gui.Shell.openExternal(url);
-          policy.ignore();
+            gui.Shell.openExternal(url);
+            policy.ignore();
         });
     } catch (ex) {
         console.log("require does not exist, maybe inside chrome");
