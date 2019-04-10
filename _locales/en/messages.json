@@ -3623,6 +3623,9 @@
     "simSelectFixType": {
         "message": "Select Fix Type"
     },
+    "simNotAvailable": {
+        "message": "You must to be connected on \u003Cb>Simulator Mode\u003C/b> for use this tab."
+    },    
     "tabSettings": {
         "message": "Settings"
     }  

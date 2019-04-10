@@ -198,7 +198,7 @@ li.active .ic_welcome {
 }
 
 .tab-landing .content_wrapper {
-    background-color: #EF7F1A;
+    background-color: #eaeaea;
 }
 
 .tab-landing .content_top {
@@ -206,7 +206,13 @@ li.active .ic_welcome {
 }
 
 .tab-landing .content_mid {
-    background-color: #eaeaea;
+    background-color: #EF7F1A;
+    color: white;
+}
+
+.tab-landing .content_mid a {
+    font-weight: bold;
+    color: white;
 }
 
 .tab-landing .logowrapper {
@@ -230,7 +236,7 @@ li.active .ic_welcome {
 }
 
 .tab-help li span a {
-    color: #59aa29;
+    color: #EF7F1A;
 }
 
 .tab-help li {

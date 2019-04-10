@@ -3556,6 +3556,9 @@
     "simSelectFixType": {
         "message": "Seleccionar Modo FIX"
     },
+    "simNotAvailable": {
+        "message": "Tiene que estar conectado en \u003Cb>Modo Simulador\u003C/b> para usar esta pestaña."
+    },      
     "tabSettings": {
         "message": "Avanzado"
     }  
