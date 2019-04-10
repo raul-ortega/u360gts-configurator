@@ -5,31 +5,31 @@
          "scripts": [ "js/eventPage.js" ]
       }
    },
-   "author": "Cleanflight Project",
+   "author": "u360gts Project",
    "default_locale": "en",
-   "description": "Crossplatform configuration tool for Cleanflight flight control system",
+   "description": "Crossplatform configuration tool for u360gts flight control system",
    "icons": {
-      "128": "images/cf/cf_icon_128.png"
+      "128": "images/gts/gts_icon_128.png"
    },
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn78lctmOHVZShiQ8N3Va2xTBTb6pTbH0/qX0EqJJUJv63AoIoLu5KIHGroQ7EK28WdNOli6vIgBENTvHlgb4O3PvVtbzRBdrTm8AxdzIB4kgdJe4TNZ1A/l/CF0MK56tyQ0m/NzDR8et1WQXC7saROQCOs8+yTcsCezFhsldYx80IKvEp95CbQjsOM/QNzyEE/AZIV3aRxa/OOPZvzhfMUzjWcm2Zgk0vlxl6phw/H/ncXP64uJslduTMbYnJ23AT9KVVn+R/nrU7LbR38tmAPJXSv4bG02gj6JC0ah5a1+7OwdjqFVzv+NvTzhSjtRcUTldEy0MmsP+OGYWuMBQ1wIDAQAB",
    "manifest_version": 2,
    "minimum_chrome_version": "38",
-   "name": "Cleanflight - Configurator",
+   "name": "u360gts - Configurator",
    "offline_enabled": true,
-   "permissions": [ "https://www.google-analytics.com/", "https://maps.googleapis.com/*", "https://*.github.com/", "https://*.githubusercontent.com/", "http://*.cleanflight.com/", "https://*.amazonaws.com/", "https://cleanflight.slack.com/*", "serial", "usb", "storage", "fileSystem", "fileSystem.write", "fileSystem.retainEntries", "notifications", "alwaysOnTopWindows", {
+   "permissions": [ "https://www.google-analytics.com/", "https://maps.googleapis.com/*", "https://*.github.com/", "https://*.githubusercontent.com/", "http://*.u360gts.com/", "https://*.amazonaws.com/", "https://u360gts.slack.com/*", "serial", "usb", "storage", "fileSystem", "fileSystem.write", "fileSystem.retainEntries", "notifications", "alwaysOnTopWindows", {
       "usbDevices": [ {
          "productId": 57105,
          "vendorId": 1155
       } ]
    }, "webview", "unlimitedStorage" ],
-   "short_name": "Cleanflight",
+   "short_name": "u360gts v4.0.0",
    "sockets": {
       "tcp": {
          "connect": "*:*"
       }
    },
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.4.0",
+   "version": "4.0.0",
    "webview": {
       "partitions": [ {
          "accessible_resources": [ "tabs/map.html", "js/tabs/map.js", "/images/icons/cf_icon_position.png" ],

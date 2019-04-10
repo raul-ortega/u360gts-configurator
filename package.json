@@ -1,6 +1,6 @@
 {
-  "name": "cleanflight-configurator",
-  "description": "Crossplatform configuration tool for Cleanflight flight control system.",
+  "name": "u360gts-configurator",
+  "description": "Crossplatform configuration tool for u360gts flight control system.",
   "version": "3.1.0",
   "main": "main_nwjs.html",
   "bg-script": "js/eventPage.js",
@@ -14,11 +14,11 @@
   },
   "window": {
     "show": false,
-    "icon": "images/cf/cf_icon_128.png"
+    "icon": "images/gts/gts_icon_128.png"
   },
   "repository": {
     "type": "git",
-    "url": "github.com/cleanflight/cleanflight-configurator"
+    "url": "github.com/raul-ortega/u360gts-configurator"
   },
   "webview": {
     "partitions": [
@@ -27,12 +27,12 @@
         "accessible_resources": [
           "tabs/map.html",
           "js/tabs/map.js",
-          "/images/icons/cf_icon_position.png"
+          "/images/gts/gts_icon_position.png"
         ]
       }
     ]
   },
-  "author": "The Cleanflight open source project.",
+  "author": "The u360gts open source project.",
   "license": "GPL-3.0",
   "dependencies": {
     "i18next": "^10.3.0",
