@@ -336,6 +336,11 @@ function startProcess() {
         $(this).text(state ? i18n.getMessage('logActionHide') : i18n.getMessage('logActionShow'));
         $(this).data('state', state);
     });
+
+    $("#simModeSwitch").on('click', function () {
+            GUI.simModeEnabled = $(this).is(':checked');
+            console.log("Sim Mode: " + GUI.simModeEnabled);
+    });
 }
 
 function checkForConfiguratorUpdates() {

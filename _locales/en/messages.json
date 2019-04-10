@@ -3565,6 +3565,10 @@
    },
    "tabSim": {
       "message": "Simulator"
+   },
+   "simMode": {
+      "message": "Simulator Mode"
    } 
+   
    
 }

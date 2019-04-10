@@ -10,16 +10,18 @@ TABS.sim.initialize = function (callback) {
     }
 
     $('#content').load("./tabs/sim.html", function () {
+        // translate to user-selected language
+        i18n.localizePage();
 
-        if (simModeEnabled) {
+        if (GUI.simModeEnabled) {
             $('#simDisableDiv').hide();
             $('#simDiv').show();
         }
 
-        window.addEventListener('message', handleResponseFromMissionPlanner, false);
-        $("#simulator-force-error").click(function () {
-
-        });
+//        window.addEventListener('message', handleResponseFromMissionPlanner, false);
+//        $("#simulator-force-error").click(function () {
+//
+//        });
 
         $(".simulator-start").on('click', function (e) {
 

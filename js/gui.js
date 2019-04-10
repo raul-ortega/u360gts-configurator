@@ -8,6 +8,7 @@ var GUI_control = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.simModeEnabled = false;
     this.active_tab;
     this.tab_switch_in_progress = false;
     this.operating_system;
@@ -249,8 +250,8 @@ GUI_control.prototype.switchery = function () {
             secondaryColor: '#c4c4c4',
             size: 'small'
         });
-        $(elem).on("change", function (evt) {
-            switchery.setPosition();
+        $(elem).on("change", function (evt) {        
+            switchery.setPosition();          
         });
         $(elem).removeClass('togglesmall');
     });
