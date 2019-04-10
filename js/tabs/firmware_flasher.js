@@ -2,7 +2,7 @@
 
 TABS.firmware_flasher = {
     releases: null,
-    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/cleanflight/cleanflight/releases')
+    releaseChecker: new ReleaseChecker('firmware', 'https://api.github.com/repos/raul-ortega/u360gts/releases')
 };
 
 TABS.firmware_flasher.initialize = function (callback) {
@@ -144,7 +144,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                 var unsortedTargets = [];
                 releaseData.forEach(function(release){
                     release.assets.forEach(function(asset){
-                        var targetFromFilenameExpression = /cleanflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
+                        var targetFromFilenameExpression = /amv-open360tracker_([\d.]+(?:-rc\d+)?)?_?([^.]+)\.(.*)/;
                         var match = targetFromFilenameExpression.exec(asset.name);
 
                         if ((!showDevReleases && release.prerelease) || !match) {
@@ -167,7 +167,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     var version = matchVersionFromTag[1];
 
                     release.assets.forEach(function(asset){
-                        var targetFromFilenameExpression = /cleanflight_([\d.]+)?_?(\w+)(\-.*)?\.(.*)/;
+                        var targetFromFilenameExpression = /amv-open360tracker_([\d.]+(?:-rc\d+)?)?_?([^.]+)\.(.*)/;
                         var match = targetFromFilenameExpression.exec(asset.name);
 
                         if ((!showDevReleases && release.prerelease) || !match) {
@@ -175,7 +175,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                         }
 
                         var target = match[2];
-                        var format = match[4];
+                        var format = match[3];
 
                         if (format != 'hex') {
                             return;
