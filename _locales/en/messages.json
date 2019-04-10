@@ -3568,7 +3568,19 @@
    },
    "simMode": {
       "message": "Simulator Mode"
-   } 
+   },
+   "settings": {
+      "message": "Settings"
+   },
+   "simType": {
+      "message": "Sim type"
+   },
+   "simTypeCircle": {
+      "message": "Circle"
+   },
+   "simTypeParallel": {
+      "message": "Parallel to runway"
+   }         
    
    
 }

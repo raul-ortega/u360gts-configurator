@@ -3498,5 +3498,17 @@
     },
     "simMode": {
         "message": "Modo Simulador"
-    } 
+    },
+    "settings": {
+        "message": "Configuración"
+    },
+    "simType": {
+        "message": "Tipo"
+    },
+    "simTypeCircle": {
+        "message": "Circular"
+    },
+    "simTypeParallel": {
+        "message": "Paralelo a pista"
+    }     
 }
