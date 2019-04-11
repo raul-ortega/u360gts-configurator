@@ -3605,5 +3605,17 @@
 	,
 	"configurationTelemetryHome": {
 		"message": "Establecer Home"
+	},
+	"configurationTracking": {
+		"message": "Seguimiento"
+	},
+	"configurationStartTrackingDistance": {
+		"message": "Distancia para Iniciar el Seguimiento (m)"
+	},
+	"configurationStartTrackingAltitude": {
+		"message": "Altitud para Iniciar el Seguimiento (m)"
+	},
+	"configurationMaxSpeedFilter": {
+		"message": "Filtro de Velócidad Máxima (m/s)"
 	}
 }
