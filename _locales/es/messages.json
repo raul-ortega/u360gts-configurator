@@ -3569,10 +3569,10 @@
         "message": "Brújula (MAG)"
     },
 	"configurationCalibrateMagButton": {
-        "message": "Calibrar Mag"
+        "message": "Calibrar MAG"
     },
     "configurationMagCalibratedCheckbox": {
-        "message": "Calibrado"
+        "message": "Calibración Realizada"
     },
 	"configurationMagOffset": {
         "message": "Desplazamiento (grados)"

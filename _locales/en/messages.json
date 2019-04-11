@@ -3633,13 +3633,13 @@
         "message": "Settings"
     },
     "configurationMag": {
-        "message": "Compass (Mag)"
+        "message": "Compass (MAG)"
     },
 	"configurationMagCalibrateButton": {
         "message": "Calibrate Mag"
     },
     "configurationMagCalibratedCheckbox": {
-        "message": "Calibrated"
+        "message": "Calibration Done"
     },
 	"configurationMagOffset": {
         "message": "Offset (degrees)"
