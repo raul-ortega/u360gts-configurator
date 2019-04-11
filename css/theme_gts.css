@@ -85,13 +85,13 @@
 }
 
 .default_btn a:hover {
-    background-color: #6ac435;
+    background-color: #EF7F1A;
     color: #fff;
     text-shadow: 0px 1px rgba(0, 0, 0, 0.25);
 }
 
 .default_btn a:active {
-    background-color: #4d9324;
+    background-color: #EF7F1A;
 }
 
 .small a:hover {
@@ -156,15 +156,15 @@ button.active {
 }
 
 .ic_welcome {
-    background-image: url(../images/cf/icons/cf_icon_welcome_grey.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-grey.svg);
 }
 
 .ic_welcome:hover {
-    background-image: url(../images/cf/icons/cf_icon_welcome_white.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-white.svg);
 }
 
 li.active .ic_welcome {
-    background-image: url(../images/cf/icons/cf_icon_welcome_white.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-white.svg);
 }
 
 .gyroicon.active {
@@ -198,7 +198,7 @@ li.active .ic_welcome {
 }
 
 .tab-landing .content_wrapper {
-    background-color: #EF7F1A;
+    background-color: #eaeaea;
 }
 
 .tab-landing .content_top {
@@ -206,7 +206,13 @@ li.active .ic_welcome {
 }
 
 .tab-landing .content_mid {
-    background-color: #eaeaea;
+    background-color: #EF7F1A;
+    color: white;
+}
+
+.tab-landing .content_mid a {
+    font-weight: bold;
+    color: white;
 }
 
 .tab-landing .logowrapper {
@@ -230,7 +236,7 @@ li.active .ic_welcome {
 }
 
 .tab-help li span a {
-    color: #59aa29;
+    color: #EF7F1A;
 }
 
 .tab-help li {

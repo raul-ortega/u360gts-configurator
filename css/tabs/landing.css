@@ -179,14 +179,14 @@
 }
 
 .tab-landing .content_mid .text3 .wrap2 {
-    border: 1px solid silver;
     border-radius: 5px;
     background: white;
     margin-right: 25px;
     margin-left: 20px;
-    margin-top: 5px;
+    margin-top: 25px;
     min-height: 187px;
     font-size: 11px;
+    color: black;
 }
 
 .tab-landing .content_mid .text3 .donate {

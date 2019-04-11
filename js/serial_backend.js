@@ -71,8 +71,14 @@ function initializeSerialBackend() {
                         finishClose(toggleStatus);
                     }
 
-                    // Exit del modo cli
-                    GTS.send("exit\n", onFinishCallback);
+                    // Exit del modo cli o sim
+                    if (GUI.simModeEnabled) {
+                        $("#simModeSwitch").click();
+                        finishClose(toggleStatus);
+                    } else {
+                        GTS.send("exit\n", onFinishCallback);
+                    }
+
 
                 }
             }
@@ -311,25 +317,22 @@ function finishOpen() {
 
     GUI.allowedTabs = GUI.defaultAllowedFCTabsWhenConnected.slice();
 
-//    switch (CONFIG.boardType) {
-//        case 0:
-//        case 2:
-//            GUI.allowedTabs = GUI.defaultAllowedFCTabsWhenConnected.slice();
-//            if (semver.lt(CONFIG.apiVersion, "1.4.0")) {
-//                GUI.allowedTabs.splice(GUI.allowedTabs.indexOf('led_strip'), 1);
-//            }
-//            break;
-//            
-//        case 1:
-//            GUI.allowedTabs = GUI.defaultAllowedOSDTabsWhenConnected.slice();
-//            break;
-//    }
-
     onConnect();
 
     var defaultTab = GUI.allowedTabs[0];
+    var defaultTabMode = "mode-connected";
 
-    $('#tabs ul.mode-connected .tab_' + defaultTab + ' a').click();
+    if (GUI.simModeEnabled) {
+        defaultTab = "sim";
+        defaultTabMode = "mode-disconnected";
+        TABS.sim.initialize();
+
+    } else {
+        // Una vez completada la conexión, solicitamos entrar en el CLI
+        GTS.send("RRR");
+    }
+
+    $('#tabs ul.' + defaultTabMode + ' .tab_' + defaultTab + ' a').click();
 }
 
 function connectCli() {
@@ -344,51 +347,29 @@ function onConnect() {
     $('div#connectbutton a.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
     $('div#connectbutton a.connect').addClass('active');
 
-    $('#tabs ul.mode-disconnected').hide();
-    $('#tabs ul.mode-connected-cli').show();
+    if (!GUI.simModeEnabled) {
 
+        $('#tabs ul.mode-disconnected').hide();
+        $('#tabs ul.mode-connected-cli').show();
 
-    // show only appropriate tabs
-    $('#tabs ul.mode-connected li').hide();
-    $('#tabs ul.mode-connected li').filter(function (index) {
-        var classes = $(this).attr("class").split(/\s+/);
-        var found = false;
-        $.each(GUI.allowedTabs, function (index, value) {
-            var tabName = "tab_" + value;
-            if ($.inArray(tabName, classes) >= 0) {
-                found = true;
-            }
-        });
+        // show only appropriate tabs
+        $('#tabs ul.mode-connected li').hide();
+        $('#tabs ul.mode-connected li').filter(function (index) {
+            var classes = $(this).attr("class").split(/\s+/);
+            var found = false;
+            $.each(GUI.allowedTabs, function (index, value) {
+                var tabName = "tab_" + value;
+                if ($.inArray(tabName, classes) >= 0) {
+                    found = true;
+                }
+            });
+            return found;
+        }).show();
 
-//        if (CONFIG.boardType == 0) {
-//            if (classes.indexOf("osd-required") >= 0) {
-//                found = false;
-//            }
-//        }
+        // show connected tabs list
+        $('#tabs ul.mode-connected').show();
 
-        return found;
-    }).show();
-
-    // NO COMPROBAMOS PLACA MOSTRAMOS LISTA IGUALMENTE
-    $('#tabs ul.mode-connected').show();
-
-//    if (CONFIG.flightControllerVersion !== '') {
-//        FEATURE_CONFIG.features = new Features(CONFIG);
-//        BEEPER_CONFIG.beepers = new Beepers(CONFIG);
-//        BEEPER_CONFIG.dshotBeaconConditions = new Beepers(CONFIG, [ "RX_LOST", "RX_SET" ]);
-//
-//        $('#tabs ul.mode-connected').show();
-//
-//        if (semver.gte(CONFIG.apiVersion, "1.33.0")) {
-//            MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
-//        }
-//        MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false);
-//        MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false);
-//
-//        if (CONFIG.boardType == 0 || CONFIG.boardType == 2) {
-//            startLiveDataRefreshTimer();
-//        }
-//    }
+    }
 
     //var sensor_state = $('#sensor-status');
     //sensor_state.show();
@@ -396,13 +377,9 @@ function onConnect() {
     var port_picker = $('#portsinput');
     port_picker.hide();
 
-    var dataflash = $('#dataflash_wrapper_global');
-    dataflash.show();
-    
-    
-    // Una vez completada la conexión, solicitamos entrar en el CLI
-    GTS.send("RRR");
-    
+    //var dataflash = $('#dataflash_wrapper_global');
+    //dataflash.show();
+
 }
 
 function onClosed(result) {
@@ -425,11 +402,11 @@ function onClosed(result) {
     var port_picker = $('#portsinput');
     port_picker.show();
 
-    var dataflash = $('#dataflash_wrapper_global');
-    dataflash.hide();
+    //var dataflash = $('#dataflash_wrapper_global');
+    //dataflash.hide();
 
-    var battery = $('#quad-status_wrapper');
-    battery.hide();
+    //var battery = $('#quad-status_wrapper');
+    //battery.hide();
 
     //MSP.clearListeners();
 
@@ -439,10 +416,10 @@ function onClosed(result) {
 }
 
 function read_serial(info) {
-    
+
     if (GUI.active_tab != 'cli') {
         GTS.read(info);
-    }else{
+    } else {
         TABS.cli.read(info);
     }
 

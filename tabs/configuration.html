@@ -7,7 +7,122 @@
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationEscFeatures">TILT</div>
+                    <div class="spacer_box_title" i18n="configurationMag"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="default_btn">
+                        <div style="left:0;float:right;">
+                            <a class="calibrateMag" href="#" i18n="configurationCalibrateMagButton"></a>
+                        </div>
+                    </div>
+
+                    <div class="checkbox">
+                        <label for="mag_calibrated-checkbox" i18n="configurationMagCalibratedCheckbox" ></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="mag_calibrated-checkbox" name="mag_calibrated-checkbox" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="offset-spinner">
+                            <span class="alignicon yaw" style="padding-left: 6px;"></span>
+                            <span i18n="configurationMagOffset"></span>
+                        </label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="offset-spinner" name="board_align_yaw" step="1" min="-180" max="360" value="0" style="margin-right: 0;" />
+                        </div>
+                    </div>                    
+
+                </div>
+            </div>
+
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="configurationPan"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="number">
+                        <input type="range" id="pan-slider" name="pan-slider" min="0" max="360" style="width:80%;" value="0" data-rangeslider />
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="pan-output" name="pan-output" min="0" max="360" value="0" style="margin-right: 0;" />
+                        </div>
+                    </div>
+					
+                    <div class="number">
+                        <label for="pan_calibration_pulse-spinner" style="left:0;" i18n="configurationPanCalibrationPulse"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="pan_calibration_pulse-spinner" name="pan_calibration_pulse-spinner" min="0" max="2000" style="margin-right: 0;" />
+                        </div>
+                    </div>				
+				
+                    <div class="default_btn">
+                        <div style="left:0;float:right;">
+                            <a class="calibratePan" href="#" i18n="configurationCalibratePanButton"></a>
+                        </div>
+                    </div>
+
+                    <div class="checkbox">
+                        <label for="pan0_calibrated-checkbox" style="left:0;" i18n="configurationPanCalibrated"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="pan0_calibrated-checkbox" name="pan0_calibrated-checkbox" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="pan0-spinner" style="left:0;" i18n="configurationPan0"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="pan0-spinner" name="pan0-spinner" min="0" max="2000" style="margin-right: 0;" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="min_pan_speed-spinner" style="left:0;" i18n="configurationPanMinSpeed"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="min_pan_speed-spinner" name="min_pan_speed-spinner" min="0" max="2000" style="margin-right: 0;" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="max_pid_gain-spinner" style="left:0;" i18n="configurationPanMaxGain"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="max_pid_gain-spinner" name="max_pid_gain-spinner" min="0" max="2000" style="margin-right: 0;" />
+                        </div>
+                    </div>                    
+
+                    <div class="number">
+
+                        <label for="p-spinner" style="left:0;">P</label>
+                        <label for="i-spinner" style="left:0;">I</label>
+                        <label for="d-spinner" style="left:0;">D</label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="p-spinner" name="p-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
+                            <input type="number" id="i-spinner" name="i-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
+                            <input type="number" id="d-spinner" name="d-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="configurationTilt"></div>
                 </div>
                 <div class="spacer_box">
                     <div class="number">
@@ -19,7 +134,7 @@
                     </div>
 
                     <div class="number">
-                        <label for="tilt0-spinner" style="left:0;">Tilt 0</label>
+                        <label for="tilt0-spinner" style="left:0;" i18n="configurationTilt0"></label>
 
                         <div style="left:0;float:right;">
                             <input type="number" id="tilt0-spinner" name="tilt0-spinner" min="0" max="2000" style="margin-right: 0;" />
@@ -27,7 +142,7 @@
                     </div>
 
                     <div class="number">
-                        <label for="tilt90-spinner" style="left:0;">Tilt 90</label>
+                        <label for="tilt90-spinner" style="left:0;" i18n="configurationTilt90"></label>
 
                         <div style="left:0;float:right;">
                             <input type="number" id="tilt90-spinner" name="tilt90-spinner" min="0" max="2000" style="margin-right: 0;" />
@@ -37,49 +152,20 @@
                 </div>
             </div>
 
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationBoardAlignment">Magnetometer</div>
-                    <div class="helpicon cf_tip" data-i18n_title="configHelp2"></div>
-                </div>
-                <div class="spacer_box">
+        </div>
 
-                    <div class="checkbox">
-                        <label for="mag_calibrated-checkbox" style="left:0;">Calibrado</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="mag_calibrated-checkbox" name="mag_calibrated-checkbox" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="offset-spinner" style="left:0;"><span class="alignicon yaw" style="padding-left: 6px;"></span></label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="offset-spinner" name="board_align_yaw" step="1" min="-180" max="360" value="0" style="margin-right: 0;" />
-                        </div>
-                    </div>                    
-
-
-                    <div class="default_btn">
-                        <div style="left:0;float:right;">
-                            <a class="calibrateMag" href="#" data-i18n="calibrate_mag"> Calibrar MAG </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <div class="rightWrapper">
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationTelemetry">Telemetry</div>
+                    <div class="spacer_box_title" i18n="configurationTelemetry"></div>
                 </div>
                 <div class="spacer_box">
 
 
 
                     <div class="checkbox">
-                        <label for="AUTODETECT-feature" style="left:0;">Autodetect Protocol</label>
+                        <label for="AUTODETECT-feature" style="left:0;" i18n="configurationAutoDetect"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="AUTODETECT-feature" name="AUTODETECT-feature" class="toggle" />
@@ -88,7 +174,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_protocol-select" style="left:0;">Protocol Type </label>
+                        <label for="telemetry_protocol-select" style="left:0;" i18n="configurationTelemetryProtocol"></label>
 
                         <select name="telemetry_protocol-select" id="telemetry_protocol-select" style="float:right; width: 200px;">
                             <option value=''>Select protocol</option>
@@ -106,7 +192,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_baud-select" style="left:0;"> Baudrate </label>
+                        <label for="telemetry_baud-select" style="left:0;" i18n="configurationTelemetryBaud"></label>
 
                         <select name="telemetry_baud-select" id="telemetry_baud-select" style="float:right; width: 200px;">
                             <option value=''>Select baudrate</option>
@@ -124,7 +210,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_provider-select" style="left:0;">Provider </label>
+                        <label for="telemetry_provider-select" style="left:0;" i18n="configurationTelemetryProvider"></label>
 
                         <select name="telemetry_provider-select" id="telemetry_provider-select" style="float:right; width: 200px;">
                             <option value='NONE'>None</option>
@@ -133,511 +219,50 @@
                             <option value='APM10'>Passthrough FrSky (Ardupilot)</option>
                         </select>
 
-
-
                     </div>                        
-
-                </div>
-            </div>
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationTelemetry">Telemetry Out</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="TELEMETRY-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="TELEMETRY-feature" name="TELEMETRY-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="select">
-
-                        <label for="relay_telemetry_port-select" style="left:0;">Port</label>
-
-                        <select name="relay_telemetry_port-select" id="relay_telemetry_port-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select port</option>
-                        </select>
-
-                    </div>
-
-                    <div class="select">
-
-                        <label for="relay_telemetry_protocol-select" style="left:0;">Protocol</label>
-
-                        <select name="relay_telemetry_protocol-select" id="relay_telemetry_protocol-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select protocol</option>
-                            <option value='256'>MFD</option>
-                            <option value='512'>MAVLINK</option>
-                            <option value='1024'>NMEA</option>
-                            <option value='2048'>LTM</option>
-                        </select>
-
-                    </div>    
-
-                    <div class="select">
-
-                        <label for="relay_telemetry_baud-select" style="left:0;">Baudrate</label>
-
-                        <select name="relay_telemetry_baud-select" id="relay_telemetry_baud-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select baudrate</option>
-                            <option value='1200'>1200</option>
-                            <option value='2400'>2400</option>
-                            <option value='4800'>4800</option>
-                            <option value='9600'>9600</option>
-                            <option value='19200'>19200</option>
-                            <option value='38400'>38400</option>
-                            <option value='57600'>57600</option>
-                            <option value='115200'>115200</option>
-                            <option value='230400'>230400</option>
-                            <option value='250000'>250000</option>
-                        </select>
-
-                    </div>    
-
-                </div>
-            </div>    
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">NOPID control</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="NOPID-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="NOPID-feature" name="NOPID-feature" class="toggle" />
-                        </div>
-                    </div>
-
                     <div class="number">
-                        <label for="nopid_min_delta-spinner" style="left:0;">Min Delta</label>
-                        <input type="text" id="nopid_min_delta-spinner" name="nopid_min_delta-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="nopid_map_angle-spinner" style="left:0;">Map Angle</label>
-                        <input type="number" id="nopid_map_angle-spinner" name="nopid_map_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>   
-
-                    <div class="number">
-                        <label for="nopid_max_speed-spinner" style="left:0;">Max speed</label>
-                        <input type="number" id="nopid_max_speed-spinner" name="nopid_max_speed-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>                     
-
-                </div>
-            </div> 
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">RSSI monitoring</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="RSSI_ADC-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="RSSI_ADC-feature" name="RSSI_ADC-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="rssi_scale-spinner" style="left:0;">Scale</label>
-                        <input type="text" id="rssi_scale-spinner" name="rssi_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="rssi_zoom-spinner" style="left:0;">Zoom</label>
-                        <input type="number" id="rssi_zoom-spinner" name="rssi_zoom-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>                      
-
-                </div>
-            </div>      
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">EPS system</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="EPS-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="EPS-feature" name="EPS-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="select">
-
-                        <label for="eps-select" style="left:0;">Mode</label>
-
-                        <select name="eps-select" id="eps-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select EPS mode</option>
-                            <option value='1'>Mode 1</option>
-                            <option value='2'>Mode 2</option>
-                            <option value='3'>Mode 1 + 2</option>
-                        </select>
-
-                    </div> 
-
-                    <div class="number">
-                        <label for="eps_distance_gain-spinner" style="left:0;">Distance Gain</label>
-                        <input type="text" id="eps_distance_gain-spinner" name="eps_distance_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="eps_frequency-spinner" style="left:0;">Frequency</label>
-                        <input type="number" id="eps_frequency-spinner" name="eps_frequency-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>   
-
-                    <div class="checkbox">
-                        <label for="eps_interpolation-checkbox" style="left:0;">Interpolation</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="eps_interpolation-checkbox" name="eps_interpolation-checkbox" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="eps_heading_gain-spinner" style="left:0;">Heading Gain</label>
-                        <input type="text" id="eps_heading_gain-spinner" name="eps_heading_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="eps_speed_gain-spinner" style="left:0;">Speed Gain</label>
-                        <input type="number" id="eps_speed_gain-spinner" name="eps_speed_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>                     
-
-                </div>
-            </div>           
-
-        </div>
-
-        <div class="rightWrapper">
-
-
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationEscFeatures">PAN</div>
-                </div>
-                <div class="spacer_box">
-                    <div class="number">
-                        <input type="range" id="pan-slider" name="pan-slider" min="0" max="360" style="width:80%;" value="0" data-rangeslider />
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="pan-output" name="pan-output" min="0" max="360" value="0" style="margin-right: 0;" />
-                        </div>
-                    </div>
-
-                    <div class="checkbox">
-                        <label for="pan0_calibrated-checkbox" style="left:0;">Calibrado</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="pan0_calibrated-checkbox" name="pan0_calibrated-checkbox" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="pan0-spinner" style="left:0;">Pan 0</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="pan0-spinner" name="pan0-spinner" min="0" max="2000" style="margin-right: 0;" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="min_pan_speed-spinner" style="left:0;">Min Speed</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="min_pan_speed-spinner" name="min_pan_speed-spinner" min="0" max="2000" style="margin-right: 0;" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="pan_calibration_pulse-spinner" style="left:0;">Calibration Pulse</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="pan_calibration_pulse-spinner" name="pan_calibration_pulse-spinner" min="0" max="2000" style="margin-right: 0;" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="max_pid_gain-spinner" style="left:0;">Max Gain</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="max_pid_gain-spinner" name="max_pid_gain-spinner" min="0" max="2000" style="margin-right: 0;" />
-                        </div>
-                    </div>                    
-
-
-
-                    <div class="number">
-
-                        <label for="p-spinner" style="left:0;">P</label>
-                        <label for="i-spinner" style="left:0;">I</label>
-                        <label for="d-spinner" style="left:0;">D</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="p-spinner" name="p-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
-                            <input type="number" id="i-spinner" name="i-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
-                            <input type="number" id="d-spinner" name="d-spinner" min="0" max="2000" style="margin-right: 0; margin-left: 10px;"/>
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="default_btn">
-                        <div style="left:0;float:right;">
-                            <a class="calibratePan" href="#" data-i18n="calibrate_pan"> Calibrar PAN </a>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Home Setup</div>
-                </div>
-                <div class="spacer_box">                      
-
-                    <div class="number">
-                        <label for="telemetry_min_sats-spinner" style="left:0;"> Min Sats</label>
+                        <label for="telemetry_min_sats-spinner" style="left:0;" i18n="configurationTelemetryMinSats"></label>
                         <input type="number" id="telemetry_min_sats-spinner" name="telemetry_min_sats" step="1" min="-0" max="40" value="0" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="select">
 
-                        <label for="telemetry_home-select" style="left:0;">Home set method</label>
+                        <label for="telemetry_home-select" style="left:0;" i18n="configurationTelemetryHome"></label>
 
                         <select name="telemetry_home-select" id="telemetry_home-select" style="float:right; width: 160px;">
                             <option value='DEFAULT'>DEFAULT</option>
                             <option value='AUTO'>AUTO (from telemetry)</option>
                         </select>
 
-
-
                     </div> 
-
-
                 </div>
+
             </div>
+
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Tracking</div>
+                    <div class="spacer_box_title" data-i18n="configurationHome" i18n="configurationTracking"></div>
                 </div>
                 <div class="spacer_box">                      
 
                     <div class="number">
-                        <label for="start_tracking_distance-spinner" style="left:0;">Start Tracking Distance</label>
+                        <label for="start_tracking_distance-spinner" style="left:0;" i18n="configurationStartTrackingDistance"></label>
                         <input type="number" id="start_tracking_distance-spinner" name="start_tracking_distance-spinner" value="0" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="number">
-                        <label for="start_tracking_altitude-spinner" style="left:0;">Start Tracking Altitude</label>
+                        <label for="start_tracking_altitude-spinner" style="left:0;" i18n="configurationStartTrackingAltitude"></label>
                         <input type="number" id="start_tracking_altitude-spinner" name="start_tracking_altitude-spinner" value="0" style="float:right;margin-right: 0px;" />
                     </div>   
 
                     <div class="number">
-                        <label for="max_speed_filter-spinner" style="left:0;">Max speed filter</label>
+                        <label for="max_speed_filter-spinner" style="left:0;" i18n="configurationMaxSpeedFilter"></label>
                         <input type="number" id="max_speed_filter-spinner" name="max_speed_filter-spinner" value="0" style="float:right;margin-right: 0px;" />
                     </div>                     
 
                 </div>
             </div>
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Features</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="DISPLAY-feature" style="left:0;">DISPLAY</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="DISPLAY-feature" name="DISPLAY-feature" class="toggle" />
-                        </div>
-                    </div> 
-
-                    <div class="checkbox">
-                        <label for="SOFTSERIAL-feature" style="left:0;">SOFTSERIAL</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="SOFTSERIAL-feature" name="SOFTSERIAL-feature" class="toggle" />
-                        </div>
-                    </div>                      
-
-                </div>
-            </div>  
-
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">VBAT monitoring</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="VBAT-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="VBAT-feature" name="VBAT-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="vbat_scale-spinner" style="left:0;">Scale</label>
-                        <input type="text" id="vbat_scale-spinner" name="vbat_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div> 
-
-                    <div class="number">
-                        <label for="vbat_min_cell_voltage-spinner" style="left:0;">Min cell voltage</label>
-                        <input type="text" id="vbat_min_cell_voltage-spinner" name="vbat_min_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div> 
-
-                    <div class="number">
-                        <label for="vbat_max_cell_voltage-spinner" style="left:0;">Min cell voltage</label>
-                        <input type="text" id="vbat_max_cell_voltage-spinner" name="vbat_max_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div> 
-
-                    <div class="number">
-                        <label for="vbat_warning_cell_voltage-spinner" style="left:0;">Warning cell voltage</label>
-                        <input type="text" id="vbat_warning_cell_voltage-spinner" name="vbat_warning_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div> 
-
-                </div>
-            </div>  
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Local GPS</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="GPS-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="GPS-feature" name="GPS-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="select">
-
-                        <label for="gps_provider-select" style="left:0;">Provider</label>
-
-                        <select name="gps_provider-select" id="gps_provider-select" style="float:right; width: 160px;">
-                            <option value='' selected='selected'>Select provider</option>
-                            <option value='NMEA'>NMEA</option>
-                            <option value='UBLOX'>UBLOX</option>
-                        </select>
-
-                    </div>
-
-                    <div class="select">
-
-                        <label for="gps_baud-select" style="left:0;">Baudrate</label>
-
-                        <select name="gps_baud-select" id="gps_baud-select" style="float:right; width: 160px;">                        <option value=''>Select baudrate</option>
-                            <option value='0'>AUTO</option>
-                            <option value='1'>1200</option>
-                            <option value='2'>2400</option>
-                            <option value='3'>4800</option>
-                            <option value='4'>9600</option>
-                            <option value='5'>19200</option>
-                            <option value='6'>38400</option>
-                            <option value='7'>57600</option>
-                            <option value='8'>115200</option>
-                            <option value='9'>230400</option>
-                            <option value='10'>250000</option>
-                        </select>
-
-                    </div>                     
-
-                    <div class="number">
-                        <label for="gps_min_sats-spinner" style="left:0;">Min Sats</label>
-                        <input type="number" id="gps_min_sats-spinner" name="gps_min_sats-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="checkbox">
-                        <label for="update_home_by_local_gps-checkbox" style="left:0;">Update Home</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="update_home_by_local_gps-checkbox" name="update_home_by_local_gps-checkbox" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="checkbox">
-                        <label for="gps_home_beeper-checkbox" style="left:0;">Beeper</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="gps_home_beeper-checkbox" name="gps_home_beeper-checkbox" class="toggle" />
-                        </div>
-                    </div>
-
-                </div>
-            </div>  
-
-            <div class="config-section gui_box grey">
-                <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Tilt EASING</div>
-                </div>
-                <div class="spacer_box">
-
-                    <div class="checkbox">
-                        <label for="EASING-feature" style="left:0;">Enabled</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="EASING-feature" name="EASING-feature" class="toggle" />
-                        </div>
-                    </div>
-
-                    <div class="select">
-
-                        <label for="gps_provider-select" style="left:0;">Function</label>
-
-                        <select name="easing-select" id="easing-select" style="float:right; width: 160px;">
-                            <option value='' selected='selected'>Select function</option>
-                            <option value='1'>EASE_OUT_QRT</option>
-                            <option value='2'>EASE_OUT_CIRC</option>
-                            <option value='3'>EASE_OUT_EXPO</option>
-                            <option value='4'>EASE_OUT_CUBIC</option>
-                        </select>
-
-                    </div>                
-
-                    <div class="number">
-                        <label for="easing_steps-spinner" style="left:0;">Steps</label>
-                        <input type="number" id="easing_steps-spinner" name="easing_steps-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="easing_millis-spinner" style="left:0;">Milliseconds</label>
-                        <input type="number" id="easing_millis-spinner" name="easing_millis-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-                    <div class="number">
-                        <label for="easing_min_angle-spinner" style="left:0;">Min Angle</label>
-                        <input type="number" id="easing_min_angle-spinner" name="easing_min_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
-                    </div>
-
-
-
-                </div>
-            </div>              
 
         </div>
 

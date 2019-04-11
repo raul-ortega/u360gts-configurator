@@ -11,6 +11,7 @@
         <link type="text/css" rel="stylesheet" href="./css/tabs/configuration.css" media="all"/>
         <link type="text/css" rel="stylesheet" href="./css/tabs/cli.css" media="all"/>
         <link type="text/css" rel="stylesheet" href="./css/tabs/firmware_flasher.css" media="all"/>
+        <link type="text/css" rel="stylesheet" href="./css/tabs/sim.css" media="all"/>
         <link type="text/css" rel="stylesheet" href="./css/font-awesome/css/font-awesome.min.css" media="all">
         <link type="text/css" rel="stylesheet" href="./css/opensans_webfontkit/fonts.css" media="all"/>
         <link type="text/css" rel="stylesheet" href="./css/dropdown-lists/css/style_lists.css" media="all"/>
@@ -45,6 +46,11 @@
         <script type="text/javascript" src="./js/port_handler.js"></script>
         <script type="text/javascript" src="./js/port_usage.js"></script>
         <script type="text/javascript" src="./js/serial.js"></script>
+        <script type="text/javascript" src="./js/mfd-simulator.js"></script>
+        <script type="text/javascript" src="./js/latlon-spherical.js"></script>
+        <script type="text/javascript" src="./js/pitlab-simulator.js"></script>
+        <script type="text/javascript" src="./js/mavlink-simulator.js"></script>
+        <script type="text/javascript" src="./js/simulator.js"></script>
         <script type="text/javascript" src="./js/GTS.js"></script>
         <script type="text/javascript" src="./js/gui.js"></script>
         <script type="text/javascript" src="./js/huffman.js"></script>
@@ -59,15 +65,19 @@
         <script type="text/javascript" src="./js/release_checker.js"></script>
         <script type="text/javascript" src="./js/jenkins_loader.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
+
         <script type="text/javascript" src="./js/tabs/landing.js"></script>
         <script type="text/javascript" src="./js/tabs/help.js"></script>
         <script type="text/javascript" src="./js/tabs/configuration.js"></script>
+        <script type="text/javascript" src="./js/tabs/settings.js"></script>
         <script type="text/javascript" src="./js/tabs/cli.js"></script>
+        <script type="text/javascript" src="./js/tabs/sim.js"></script>
+
         <script type="text/javascript" src="./js/FirmwareCache.js"></script>
         <script type="text/javascript" src="./js/tabs/firmware_flasher.js"></script>
         <script type="text/javascript" src="./js/LogoManager.js"></script>
 
-        
+
 
         <title i18n="windowTitle"></title>
     </head>
@@ -117,8 +127,8 @@
                                                                                                          value="/dev/rfcomm0"/></label>
                         </div>
                         <div>
-                            <label><input class="auto_connect togglesmall" type="checkbox"/><span
-                                    class="auto_connect" i18n="autoConnect"></span></label>
+                            <!--<label><input class="auto_connect togglesmall" type="checkbox"/><span class="auto_connect" i18n="autoConnect"></span></label>-->
+                            <label><input id="simModeSwitch" class="togglesmall" type="checkbox"/><span class="sim_mode" i18n="simMode"></span></label>
                         </div>
                     </div>
                 </div>
@@ -180,16 +190,14 @@
             <div class="tab_container">
                 <div id="tabs">
                     <ul class="mode-disconnected">
-                        <li class="tab_landing"><a href="#" i18n="tabLanding" class="tabicon ic_welcome" i18n_title="tabLanding"></a>
-                        </li>
-                        <li class="tab_help"><a href="#" i18n="tabHelp" class="tabicon ic_help"
-                                                i18n_title="tabHelp"></a></li>
-                        <li class="tab_firmware_flasher"><a href="#" i18n="tabFirmwareFlasher" class="tabicon ic_flasher"
-                                                            i18n_title="tabFirmwareFlasher"></a></li>
+                        <li class="tab_landing"><a href="#" i18n="tabLanding" class="tabicon ic_welcome" i18n_title="tabLanding"></a></li>
+                        <li class="tab_sim"><a href="#" i18n="tabSim" class="tabicon ic_airplane" i18n_title="tabSim"></a></li>
+                        <li class="tab_help"><a href="#" i18n="tabHelp" class="tabicon ic_help" i18n_title="tabHelp"></a></li>
+                        <li class="tab_firmware_flasher"><a href="#" i18n="tabFirmwareFlasher" class="tabicon ic_flasher" i18n_title="tabFirmwareFlasher"></a></li>
                     </ul>
                     <ul class="mode-connected">
-                        <li class="tab_configuration"><a href="#" i18n="tabConfiguration" class="tabicon ic_config"
-                                                         i18n_title="tabConfiguration"></a></li>
+                        <li class="tab_configuration"><a href="#" i18n="tabConfiguration" class="tabicon ic_config" i18n_title="tabConfiguration"></a></li>
+                        <li class="tab_settings"><a href="#" i18n="tabSettings" class="tabicon ic_advanced" i18n_title="tabSettings"></a></li>
                     </ul>
                     <ul class="mode-connected mode-connected-cli">
                         <li class="tab_cli"><a href="#" i18n="tabCLI" class="tabicon ic_cli" i18n_title="tabCLI"></a></li>

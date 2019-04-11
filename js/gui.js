@@ -8,6 +8,7 @@ var GUI_control = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.simModeEnabled = false;
     this.active_tab;
     this.tab_switch_in_progress = false;
     this.operating_system;
@@ -17,21 +18,18 @@ var GUI_control = function () {
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
+        'sim',
         'firmware_flasher',
         'help'
     ];
     this.defaultAllowedFCTabsWhenConnected = [
         'configuration',
-        'cli'
+        'settings',
+        'cli',
+        'sim'
 
     ];
-//    this.defaultAllowedOSDTabsWhenConnected = [
-//        'setup_osd',
-//        'osd',
-//        'power',
-//        'sensors',
-//        'transponder',
-//    ];
+
     this.allowedTabs = this.defaultAllowedTabsWhenDisconnected;
 
     // check which operating system is user running
@@ -248,8 +246,8 @@ GUI_control.prototype.switchery = function () {
             secondaryColor: '#c4c4c4',
             size: 'small'
         });
-        $(elem).on("change", function (evt) {
-            switchery.setPosition();
+        $(elem).on("change", function (evt) {        
+            switchery.setPosition();          
         });
         $(elem).removeClass('togglesmall');
     });
@@ -264,10 +262,14 @@ GUI_control.prototype.switchery = function () {
         GUI.switcheries[elem.getAttribute('id')] = switchery;
 
         $(elem).on("change", function (evt) {
-            //switchery.setPosition();
-            TABS.configuration.switcheryChange(this);
+
+            // Fire switcher event by tab
+            if (GUI.active_tab === 'configuration' || GUI.active_tab === 'settings') {
+                TABS.configuration.switcheryChange(this);
+            }
+
         });
-        
+
         $(elem).removeClass('toggle');
     });
 
