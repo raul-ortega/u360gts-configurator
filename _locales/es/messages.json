@@ -3565,15 +3565,18 @@
     "tabSettings": {
         "message": "Avanzado"
     },
-    "Offset": {
-        "message": "Offset"
-    },
-    "magnetometer": {
+    "configurationMag": {
         "message": "Brújula (MAG)"
     },
-    "configurationCalibratedCheckbox": {
+	"configurationCalibrateMagButton": {
+        "message": "Calibrar Mag"
+    },
+    "configurationMagCalibratedCheckbox": {
         "message": "Calibrado"
-    }, 
+    },
+	"configurationMagOffset": {
+        "message": "Desplazamiento (grados)"
+    },
     "DISPLAY": {
         "message": "MONITOR"
     }, 

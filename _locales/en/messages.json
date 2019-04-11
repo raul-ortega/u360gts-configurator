@@ -3632,18 +3632,18 @@
     "tabSettings": {
         "message": "Settings"
     },
-    "Offset": {
-        "message": "Offset"
-    },
-    "Offset": {
-        "message": "Offset"
-    },
-    "magnetometer": {
+    "configurationMag": {
         "message": "Magnetometer (MAG)"
     },
-    "configurationCalibratedCheckbox": {
+	"configurationMagCalibrateButton": {
+        "message": "Calibrate Mag"
+    },
+    "configurationMagCalibratedCheckbox": {
         "message": "Calibrated"
-    }, 
+    },
+	"configurationMagOffset": {
+        "message": "Offset (degrees)"
+    },
     "DISPLAY": {
         "message": "DISPLAY"
     }, 
@@ -3655,8 +3655,7 @@
     },
 	"configurationTelemetry": {
         "message": "Telemetry"
-    }
-	,
+    },
 	"configurationAutoDetect": {
         "message": "Auto detect protocol"
     },
