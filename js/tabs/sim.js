@@ -93,6 +93,8 @@ TABS.sim.initialize = function (callback) {
 //                    }
 //                }
 //
+				radius = $("#simulator-distance").val();
+				altitude = $("#simulator-altitude").val();
                 if (new Date().getTime() - sendHomeTimer < 5000) {
                     distance = 0;
                     heading = 0;
