@@ -377,8 +377,8 @@ function onConnect() {
     var port_picker = $('#portsinput');
     port_picker.hide();
 
-    var dataflash = $('#dataflash_wrapper_global');
-    dataflash.show();
+    //var dataflash = $('#dataflash_wrapper_global');
+    //dataflash.show();
 
 }
 
@@ -402,11 +402,11 @@ function onClosed(result) {
     var port_picker = $('#portsinput');
     port_picker.show();
 
-    var dataflash = $('#dataflash_wrapper_global');
-    dataflash.hide();
+    //var dataflash = $('#dataflash_wrapper_global');
+    //dataflash.hide();
 
-    var battery = $('#quad-status_wrapper');
-    battery.hide();
+    //var battery = $('#quad-status_wrapper');
+    //battery.hide();
 
     //MSP.clearListeners();
 

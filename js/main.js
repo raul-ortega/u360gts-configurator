@@ -84,7 +84,7 @@ function startProcess() {
             }
 
             if (GUI.allowedTabs.indexOf(tab) < 0) {
-                GUI.log(i18n.getMessage('tabSwitchUpgradeRequired', [tabName]));
+                GUI.log(i18n.getMessage('tabSwitchDeniedOnSim', [tabName]));
                 return;
             }
 

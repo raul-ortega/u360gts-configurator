@@ -3379,6 +3379,9 @@
     "tabSwitchUpgradeRequired": {
         "message": "Necesitas \u003Cstrong>actualizar\u003C/strong> tu firmware a la última versión de u360gts antes de que puedas usar el apartado $1."
     },
+    "tabSwitchDeniedOnSim": {
+        "message": "Desabilitado en Modo Simulador."
+    },
     "tabSwitchWaitForOperation": {
         "message": "\u003Cspan class=\"message-negative\">No\u003C/span> puedes hacer esto ahora mismo, espere a que la operación actual finalice..."
     },
@@ -3561,6 +3564,25 @@
     },      
     "tabSettings": {
         "message": "Avanzado"
-    }  
+    },
+    "Offset": {
+        "message": "Offset"
+    },
+    "magnetometer": {
+        "message": "Brújula (MAG)"
+    },
+    "configurationCalibratedCheckbox": {
+        "message": "Calibrado"
+    }, 
+    "DISPLAY": {
+        "message": "MONITOR"
+    }, 
+    "featureEnabled": {
+        "message": "Habilitado"
+    },
+    "portsSoftSerial": {
+        "message": "Puertos (SOFTSERIAL)"
+    }      
+    
     
 }

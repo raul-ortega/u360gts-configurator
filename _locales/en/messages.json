@@ -3442,6 +3442,9 @@
     "tabSwitchUpgradeRequired": {
         "message": "You need to \u003Cstrong>upgrade\u003C/strong> your firmware before you can use the $1 tab."
     },
+    "tabSwitchDeniedOnSim": {
+        "message": "Disable on Simulator Mode."
+    },    
     "tabSwitchWaitForOperation": {
         "message": "You \u003Cspan class=\"message-negative\">can't\u003C/span> do this right now, please wait for current operation to finish ..."
     },
@@ -3628,5 +3631,27 @@
     },    
     "tabSettings": {
         "message": "Settings"
-    }  
+    },
+    "Offset": {
+        "message": "Offset"
+    },
+    "Offset": {
+        "message": "Offset"
+    },
+    "magnetometer": {
+        "message": "Magnetometer (MAG)"
+    },
+    "configurationCalibratedCheckbox": {
+        "message": "Calibrated"
+    }, 
+    "DISPLAY": {
+        "message": "DISPLAY"
+    }, 
+    "featureEnabled": {
+        "message": "Enabled"
+    },
+    "portsSoftSerial": {
+        "message": "Ports (SOFTSERIAL)"
+    } 
+
 }

@@ -156,15 +156,15 @@ button.active {
 }
 
 .ic_welcome {
-    background-image: url(../images/cf/icons/cf_icon_welcome_grey.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-grey.svg);
 }
 
 .ic_welcome:hover {
-    background-image: url(../images/cf/icons/cf_icon_welcome_white.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-white.svg);
 }
 
 li.active .ic_welcome {
-    background-image: url(../images/cf/icons/cf_icon_welcome_white.svg);
+    background-image: url(../images/gts/icons/u360gts-tab-white.svg);
 }
 
 .gyroicon.active {
