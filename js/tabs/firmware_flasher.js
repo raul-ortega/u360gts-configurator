@@ -69,7 +69,7 @@ TABS.firmware_flasher.initialize = function (callback) {
                     $('div.release_info .status').text(summary.status);
                     $('div.release_info .file').text(summary.file).prop('href', summary.url);
 
-                    var formattedNotes = summary.notes.replace(/#(\d+)/g, '[#$1](https://github.com/cleanflight/cleanflight/pull/$1)');
+                    var formattedNotes = summary.notes.replace(/#(\d+)/g, '[#$1](https://github.com/raul-ortega/u360gts/pull/$1)');
                     formattedNotes = marked(formattedNotes);
                     $('div.release_info .notes').html(formattedNotes);
                     $('div.release_info .notes').find('a').each(function() {
