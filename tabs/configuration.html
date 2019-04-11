@@ -158,14 +158,14 @@
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationTelemetry">Telemetry</div>
+                    <div class="spacer_box_title" i18n="configurationTelemetry"></div>
                 </div>
                 <div class="spacer_box">
 
 
 
                     <div class="checkbox">
-                        <label for="AUTODETECT-feature" style="left:0;">Autodetect Protocol</label>
+                        <label for="AUTODETECT-feature" style="left:0;" i18n="configurationAutoDetect"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="AUTODETECT-feature" name="AUTODETECT-feature" class="toggle" />
@@ -174,7 +174,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_protocol-select" style="left:0;">Protocol Type </label>
+                        <label for="telemetry_protocol-select" style="left:0;" i18n="configurationTelemetryProtocol"></label>
 
                         <select name="telemetry_protocol-select" id="telemetry_protocol-select" style="float:right; width: 200px;">
                             <option value=''>Select protocol</option>
@@ -192,7 +192,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_baud-select" style="left:0;"> Baudrate </label>
+                        <label for="telemetry_baud-select" style="left:0;" i18n="configurationTelemetryBaud"></label>
 
                         <select name="telemetry_baud-select" id="telemetry_baud-select" style="float:right; width: 200px;">
                             <option value=''>Select baudrate</option>
@@ -210,7 +210,7 @@
 
                     <div class="select">
 
-                        <label for="telemetry_provider-select" style="left:0;">Provider </label>
+                        <label for="telemetry_provider-select" style="left:0;" i18n="configurationTelemetryProvider"></label>
 
                         <select name="telemetry_provider-select" id="telemetry_provider-select" style="float:right; width: 200px;">
                             <option value='NONE'>None</option>
@@ -219,17 +219,15 @@
                             <option value='APM10'>Passthrough FrSky (Ardupilot)</option>
                         </select>
 
-
-
                     </div>                        
                     <div class="number">
-                        <label for="telemetry_min_sats-spinner" style="left:0;"> Min Sats</label>
+                        <label for="telemetry_min_sats-spinner" style="left:0;" i18n="configurationTelemetryMinSats"></label>
                         <input type="number" id="telemetry_min_sats-spinner" name="telemetry_min_sats" step="1" min="-0" max="40" value="0" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="select">
 
-                        <label for="telemetry_home-select" style="left:0;">Home set method</label>
+                        <label for="telemetry_home-select" style="left:0;" i18n="configurationTelemetryHome"></label>
 
                         <select name="telemetry_home-select" id="telemetry_home-select" style="float:right; width: 160px;">
                             <option value='DEFAULT'>DEFAULT</option>

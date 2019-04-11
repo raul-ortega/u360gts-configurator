@@ -3652,6 +3652,29 @@
     },
     "portsSoftSerial": {
         "message": "Ports (SOFTSERIAL)"
-    } 
-
+    },
+	"configurationTelemetry": {
+        "message": "Telemetry"
+    }
+	,
+	"configurationAutoDetect": {
+        "message": "Auto detect protocol"
+    },
+	"configurationTelemetryProtocol": {
+		"message": "Protocol (default)"
+	},
+	"configurationTelemetryBaud": {
+		"message": "Baudrate"
+	},
+	"configurationTelemetryMinSats": {
+		"message": "Minimum number of satellites"
+	}
+	,
+	"configurationTelemetryProvider": {
+		"message": "Provider"
+	}
+	,
+	"configurationTelemetryHome": {
+		"message": "Set Home"
+	}
 }

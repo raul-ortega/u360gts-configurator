@@ -3582,7 +3582,28 @@
     },
     "portsSoftSerial": {
         "message": "Puertos (SOFTSERIAL)"
-    }      
-    
-    
+    },
+	"configurationTelemetry": {
+        "message": "Telemetría"
+    },
+	"configurationAutoDetect": {
+        "message": "Detectar Protocolo Automáticamente"
+    },
+	"configurationTelemetryProtocol": {
+		"message": "Protocolo Por Defecto"
+	},
+	"configurationTelemetryBaud": {
+		"message": "Velocidad de Transmisión (Baudios)"
+	},
+	"configurationTelemetryMinSats": {
+		"message": "Número Mínimo de Satélites"
+	}
+	,
+	"configurationTelemetryProvider": {
+		"message": "Proveedor"
+	}
+	,
+	"configurationTelemetryHome": {
+		"message": "Establecer Home"
+	}
 }
