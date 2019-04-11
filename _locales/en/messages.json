@@ -3644,6 +3644,27 @@
 	"configurationMagOffset": {
         "message": "Offset (degrees)"
     },
+	"configurationPan": {
+		"message": "PAN Servo"
+	},
+	"configurationPanCalibrationPulse": {
+		"message": "Starting Calibration Pulse (usec)"
+	},
+	"configurationCalibratePanButton": {
+		"message": "Calibrate PAN"
+	},
+	"configurationPanCalibrated": {
+		"message": "Calibration Done"
+	},
+	"configurationPan0": {
+		"message": "Stop pulse (usec)"
+	},
+	"configurationPanMinSpeed": {
+		"message": "Minimum Increment to Start Movement (usec)"
+	},
+	"configurationPanMaxGain": {
+		"message": "Max Gain (usec)"
+	},
     "DISPLAY": {
         "message": "DISPLAY"
     }, 

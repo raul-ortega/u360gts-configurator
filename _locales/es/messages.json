@@ -3577,6 +3577,27 @@
 	"configurationMagOffset": {
         "message": "Desplazamiento (grados)"
     },
+	"configurationPan": {
+		"message": "PAN Servo"
+	},
+	"configurationPanCalibrationPulse": {
+		"message": "Pulso Inicial de Calibración (usec)"
+	},
+	"configurationCalibratePanButton": {
+		"message": "Calibrar PAN"
+	},
+	"configurationPanCalibrated": {
+		"message": "Calibración Realizada"
+	},
+	"configurationPan0": {
+		"message": "Pulso Central de Parada (usec)"
+	},
+	"configurationPanMinSpeed": {
+		"message": "Incremento Mínimo para Moverse (usec)"
+	},
+	"configurationPanMaxGain": {
+		"message": "Ganancia Máxima (usec)"
+	},
     "DISPLAY": {
         "message": "MONITOR"
     }, 

@@ -8,7 +8,6 @@
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
                     <div class="spacer_box_title" i18n="configurationMag"></div>
-                    <div class="helpicon cf_tip" data-i18n_title="configHelp2"></div>
                 </div>
                 <div class="spacer_box">
 
@@ -43,14 +42,9 @@
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationEscFeatures">PAN</div>
+                    <div class="spacer_box_title" i18n="configurationPan"></div>
                 </div>
                 <div class="spacer_box">
-                    <div class="default_btn">
-                        <div style="left:0;float:right;">
-                            <a class="calibratePan" href="#" data-i18n="calibrate_pan"> Calibrar PAN </a>
-                        </div>
-                    </div>
 
                     <div class="number">
                         <input type="range" id="pan-slider" name="pan-slider" min="0" max="360" style="width:80%;" value="0" data-rangeslider />
@@ -59,9 +53,23 @@
                             <input type="number" id="pan-output" name="pan-output" min="0" max="360" value="0" style="margin-right: 0;" />
                         </div>
                     </div>
+					
+                    <div class="number">
+                        <label for="pan_calibration_pulse-spinner" style="left:0;" i18n="configurationPanCalibrationPulse"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="number" id="pan_calibration_pulse-spinner" name="pan_calibration_pulse-spinner" min="0" max="2000" style="margin-right: 0;" />
+                        </div>
+                    </div>				
+				
+                    <div class="default_btn">
+                        <div style="left:0;float:right;">
+                            <a class="calibratePan" href="#" i18n="configurationCalibratePanButton"></a>
+                        </div>
+                    </div>
 
                     <div class="checkbox">
-                        <label for="pan0_calibrated-checkbox" style="left:0;">Calibrado</label>
+                        <label for="pan0_calibrated-checkbox" style="left:0;" i18n="configurationPanCalibrated"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="pan0_calibrated-checkbox" name="pan0_calibrated-checkbox" class="toggle" />
@@ -69,7 +77,7 @@
                     </div>
 
                     <div class="number">
-                        <label for="pan0-spinner" style="left:0;">Pan 0</label>
+                        <label for="pan0-spinner" style="left:0;" i18n="configurationPan0"></label>
 
                         <div style="left:0;float:right;">
                             <input type="number" id="pan0-spinner" name="pan0-spinner" min="0" max="2000" style="margin-right: 0;" />
@@ -77,7 +85,7 @@
                     </div>
 
                     <div class="number">
-                        <label for="min_pan_speed-spinner" style="left:0;">Min Speed</label>
+                        <label for="min_pan_speed-spinner" style="left:0;" i18n="configurationPanMinSpeed"></label>
 
                         <div style="left:0;float:right;">
                             <input type="number" id="min_pan_speed-spinner" name="min_pan_speed-spinner" min="0" max="2000" style="margin-right: 0;" />
@@ -85,15 +93,7 @@
                     </div>
 
                     <div class="number">
-                        <label for="pan_calibration_pulse-spinner" style="left:0;">Calibration Pulse</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="number" id="pan_calibration_pulse-spinner" name="pan_calibration_pulse-spinner" min="0" max="2000" style="margin-right: 0;" />
-                        </div>
-                    </div>
-
-                    <div class="number">
-                        <label for="max_pid_gain-spinner" style="left:0;">Max Gain</label>
+                        <label for="max_pid_gain-spinner" style="left:0;" i18n="configurationPanMaxGain"></label>
 
                         <div style="left:0;float:right;">
                             <input type="number" id="max_pid_gain-spinner" name="max_pid_gain-spinner" min="0" max="2000" style="margin-right: 0;" />
