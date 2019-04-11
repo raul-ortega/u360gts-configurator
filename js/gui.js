@@ -15,6 +15,7 @@ var GUI_control = function () {
     this.interval_array = [];
     this.timeout_array = [];
     this.switcheries = [];
+    this.softserial_count = 0;
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',

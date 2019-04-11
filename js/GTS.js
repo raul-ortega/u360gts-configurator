@@ -43,6 +43,10 @@ var GTS = {
 
 
             }
+            
+//            if (line.startsWith('serial')) {
+//                loadSSerial(line);
+//            }
 
             // ------- --------------------- ----------- //
 
@@ -97,10 +101,9 @@ var GTS = {
         this.send(command);
 
     },
-    serial: function () {
+    setSerial: function (portNumber, portFunction, portBaudrate) {
 
-        //TABS.configuration.lastCommand = "get_serial";
-        //this.send("serial\n");
+        this.send("serial " + portNumber + " " + portFunction + " 115200 57600 " + portBaudrate + " 115200\n");
 
     }
 
