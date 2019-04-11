@@ -3665,6 +3665,15 @@
 	"configurationPanMaxGain": {
 		"message": "Max Gain (usec)"
 	},
+	"configurationTilt": {
+		"message": "TILT Servo"
+	},
+	"configurationTilt0": {
+		"message": "Pulse for Horizontal Position (usec)"
+	},
+	"configurationTilt90": {
+		"message": "Pulse for Vertical Position (usec)"
+	},
     "DISPLAY": {
         "message": "DISPLAY"
     }, 

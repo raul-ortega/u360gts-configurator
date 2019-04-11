@@ -3578,7 +3578,7 @@
         "message": "Desplazamiento (grados)"
     },
 	"configurationPan": {
-		"message": "PAN Servo"
+		"message": "Servo PAN"
 	},
 	"configurationPanCalibrationPulse": {
 		"message": "Pulso Inicial de Calibración (usec)"
@@ -3597,6 +3597,15 @@
 	},
 	"configurationPanMaxGain": {
 		"message": "Ganancia Máxima (usec)"
+	},
+	"configurationTilt": {
+		"message": "Servo TILT"
+	},
+	"configurationTilt0": {
+		"message": "Pulso Posición Horizontal (usec)"
+	},
+	"configurationTilt90": {
+		"message": "Pulso Posición Vertical (usec)"
 	},
     "DISPLAY": {
         "message": "MONITOR"
