@@ -681,6 +681,18 @@ li.active .ic_servo {
     background-image: url(../images/icons/cf_icon_gps_white.svg);
 }
 
+.ic_airplane {
+    background-image: url(../images/icons/sim-tab-grey.svg);
+}
+
+.ic_airplane:hover {
+    background-image: url(../images/icons/sim-tab-white.svg);
+}
+
+li.active .ic_airplane {
+    background-image: url(../images/icons/sim-tab-white.svg);
+}
+
 li.active .ic_gps {
     background-image: url(../images/icons/cf_icon_gps_white.svg);
 }
