@@ -40,6 +40,12 @@ TABS.configuration.initialize = function (callback) {
                 //setHeadingPosition($('#pan-output').val());
             }
         });
+		$("#calibrate_mag").click(function(){
+			self.calibrateMag();
+		});
+		$("#calibrate_pan").click(function(){
+			self.calibratePan();
+		});
         GUI.content_ready(callback);
     });
 };
@@ -237,4 +243,19 @@ TABS.configuration.cleanup = function (callback) {
         callback();
 };
 
+TABS.configuration.calibratePan = function(){
+	GTS.send('set pan0_calibrated=0\ncalibrate pan\n');
+	TABS.configuration.lastCommand = "calibrate pan";
+	TABS.configuration.setCheckBox("pan0_calibrated-checkbox",false);
+};
 
+TABS.configuration.calibrateMag = function(){
+	GTS.send('set mag_calibrated=0\ncalibrate mag\n');
+	TABS.configuration.lastCommand = "calibrate mag";
+	TABS.configuration.setCheckBox("mag_calibrated-checkbox",false);
+};
+
+TABS.configuration.setCheckBox = function(id,value){
+	$("#"+id).prop("checked", "" + value + "");
+	GUI.switcheries[id].setPosition(value);//$(id).button("refresh");
+};
