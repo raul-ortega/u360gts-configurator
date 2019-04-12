@@ -271,53 +271,28 @@
                             <input type="checkbox" id="TELEMETRY-feature" name="TELEMETRY-feature" class="toggle" />
                         </div>
                     </div>
-
+                    
                     <div class="select">
 
-                        <label for="relay_telemetry_port-select" style="left:0;">Port</label>
-
-                        <select name="relay_telemetry_port-select" id="relay_telemetry_port-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select port</option>
-                        </select>
-
-                    </div>
-
-                    <div class="select">
-
-                        <label for="relay_telemetry_protocol-select" style="left:0;">Protocol</label>
-
-                        <select name="relay_telemetry_protocol-select" id="relay_telemetry_protocol-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select protocol</option>
-                            <option value='256'>MFD</option>
-                            <option value='512'>MAVLINK</option>
-                            <option value='1024'>NMEA</option>
-                            <option value='2048'>LTM</option>
-                        </select>
+                        <table id="portsTable">
+                            <tr>
+                                <th style="width: 200px;">Puerto</th>
+                                <th style="text-align: center">Protocolo</th>
+                                <th style="text-align: center">Baudios</th>
+                            </tr>                   
+                        </table>
+                        
+                        <div class="note" id="notePortsTable" style="display: none">
+                            <div class="note_spacer">
+                                <p>Ports FEATURE, must be enabled.</p>
+                            </div>
+                        </div>
 
                     </div>    
 
-                    <div class="select">
+                </div> 
 
-                        <label for="relay_telemetry_baud-select" style="left:0;">Baudrate</label>
-
-                        <select name="relay_telemetry_baud-select" id="relay_telemetry_baud-select" style="float:right; width: 200px;">
-                            <option value='' selected='selected'>Select baudrate</option>
-                            <option value='1200'>1200</option>
-                            <option value='2400'>2400</option>
-                            <option value='4800'>4800</option>
-                            <option value='9600'>9600</option>
-                            <option value='19200'>19200</option>
-                            <option value='38400'>38400</option>
-                            <option value='57600'>57600</option>
-                            <option value='115200'>115200</option>
-                            <option value='230400'>230400</option>
-                            <option value='250000'>250000</option>
-                        </select>
-
-                    </div>    
-
-                </div>
-            </div>    
+            </div> 
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">

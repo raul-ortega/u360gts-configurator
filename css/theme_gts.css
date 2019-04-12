@@ -151,8 +151,8 @@ button.active {
 }
 
 .switchery {
-  color: #59aa29;
-  background-color: #c4c4c4 !important;
+    color: #59aa29;
+    background-color: #c4c4c4 !important;
 }
 
 .ic_welcome {
@@ -367,4 +367,18 @@ select {
     border: 1px solid silver;
     border-radius: 3px;
     padding: 1px;
+}
+
+#portsTable {
+
+}
+
+#portsTable th{
+    background: #EF7F1A;
+    color: white;
+
+}
+
+#portsTable td select{
+    width: 150px;    
 }

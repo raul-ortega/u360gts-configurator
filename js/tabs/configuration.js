@@ -1,11 +1,9 @@
 'use strict';
-
 TABS.configuration = {
     lastCommand: ""
 };
 TABS.configuration.initialize = function (callback) {
     var self = this;
-
     if (GUI.active_tab != 'configuration') {
         GUI.active_tab = 'configuration';
     }
@@ -13,24 +11,17 @@ TABS.configuration.initialize = function (callback) {
     $('#content').load("./tabs/configuration.html", function () {
         // translate to user-selected language
         i18n.localizePage();
-
         // Solicitamos datos
         TABS.configuration.getData();
-
         // SAVE
         $("#configurationButtonSave").click(function () {
 
             GTS.save();
-
         });
-
-
-
         $('#tilt-slider').on('change', function () {
             $('#tilt-output').val($('#tilt-slider').val());
             //setTiltPosition($('#tilt-slider').val());
         });
-
         $('#tilt-output').on('change', function () {
             if ($('#tilt-output').val() !== $('#tilt-slider').val()) {
                 console.log("Mueve tilt");
@@ -38,12 +29,10 @@ TABS.configuration.initialize = function (callback) {
                 //setTiltPosition($('#tilt-output').val());
             }
         });
-
         $('#pan-slider').on('change', function () {
             $('#pan-output').val($('#pan-slider').val());
             //setHeadingPosition($('#pan-slider').val());
         });
-
         $('#pan-output').on('change', function () {
             if ($('#pan-output').val() !== $('#pan-slider').val()) {
                 console.log("Mueve pan");
@@ -51,33 +40,25 @@ TABS.configuration.initialize = function (callback) {
                 //setHeadingPosition($('#pan-output').val());
             }
         });
-
         GUI.content_ready(callback);
-
     });
-
 };
-
 TABS.configuration.loadData = function (data) {
 
     $("[id*='-spinner']").each(function () {
 
         var paramId = $(this).attr('id');
         var param = paramId.slice(0, paramId.indexOf("-spinner"));
-
         if (data.startsWith(param + " = ")) {
 
             var paramValue = data.getParamValue(param + " = ");
             $(this).val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-
             $(this).on("change", function (event, ui) {
                 GTS.set(param, this.value);
             });
-
         }
 
     });
-
     $("[id*='-select']").each(function () {
         var thisSelect = $(this);
         var paramId = $(this).attr('id');
@@ -92,95 +73,103 @@ TABS.configuration.loadData = function (data) {
                 }
             });
             $("#" + paramId + " option[value='" + paramValue + "']").attr("selected", true);
-
             $(this).on("change", function (event, ui) {
                 GTS.set(param, this.value);
             });
         }
 
     });
-
     $("[id*='-checkbox']").each(function () {
 
         var paramId = $(this).attr('id');
         var param = paramId.slice(0, paramId.indexOf("-checkbox"));
-
         if (data.startsWith(param + " = ")) {
 
             var paramValue = data.getParamValue(param + " = ");
             paramValue = paramValue.replace(/[\s\n\r]/g, '');
             paramValue = (paramValue === "ON" || paramValue === "1") ? true : false;
-
             $("#" + paramId).val(paramValue);
-
             GUI.switcheries[paramId].setPosition(paramValue);
-
         }
 
     });
-
     // Ejecutamos solo una vez el parseo de los FEATURES
     if (data.contains('Enabled: ')) {
 
         $("[id*='-feature']").each(function () {
 
             var paramId = $(this).attr('id');
-
             var param = paramId.slice(0, paramId.indexOf("-feature"));
             var paramValue = (data.contains(param)) ? true : false;
-
             $("#" + paramId).val(paramValue);
-
             GUI.switcheries[paramId].setPosition(paramValue);
-
         });
-
     }
 
-    if (data.startsWith('serial')) {
+    if (data.startsWith('serial') && GUI.active_tab == "settings") {
 
-        //console.log("Encontramos serial");
-
+        // Parseamos linea Serial
         var portNumber = data.split(' ')[1];
         var portFunction = Number(data.split(' ')[2]);
         var portProtocol = Number(data.split(' ')[3]);
         var portBaudRate = Number(data.split(' ')[5]);
 
-        console.log("Serial:" + portNumber + " Function: " + portFunction + " Protocol: " + portProtocol + " Bauds: " + portBaudRate);
+        if (portNumber > 1) {
 
-        var portPicker = $('#relay_telemetry_port-select');
-        var protocolPicker = $('#relay_telemetry_protocol-select');
-        var baudPicker = $('#relay_telemetry_baud-select');
+            GUI.softserial_count++;
 
-        //$('relay_telemetry_port-select').append($('<option></option>').val(portNumber).html("Serial " + portNumber));
+            var selectProtocolID = "softserial" + GUI.softserial_count + "-protocol";
+            var selectBaudrateID = "softserial" + GUI.softserial_count + "-baudrate";
 
-        //var options = portPicker.attr('options');
-        //options[options.length] = new Option("Serial " + portNumber, portNumber, true, true);
+            // Add port row
+            $('#portsTable tr:last').after('<tr>\n\
+                                            <td>Softserial ' + GUI.softserial_count + '</td>\n\
+                                            <td>\n\
+                                                <select id="' + selectProtocolID + '">\n\
+                                                    <option value="0" >Select protocol</option>\n\
+                                                    <option value="256">MFD</option>\n\
+                                                    <option value="512">MAVLINK</option>\n\
+                                                    <option value="1024">NMEA</option>\n\
+                                                    <option value="2048">LTM</option>\n\
+                                                </select>\n\
+                                            </td>\n\
+                                            <td>\n\
+                                                <select id="' + selectBaudrateID + '">\n\
+                                                    <option value="0" >Select baudrate</option>\n\
+                                                    <option value="1200">1200</option>\n\
+                                                    <option value="2400">2400</option>\n\
+                                                    <option value="4800">4800</option>\n\
+                                                    <option value="9600">9600</option>\n\
+                                                    <option value="19200">19200</option>\n\
+                                                    <option value="38400">38400</option>\n\
+                                                    <option value="57600">57600</option>\n\
+                                                    <option value="115200">115200</option>\n\
+                                                    <option value="230400">230400</option>\n\
+                                                    <option value="250000">250000</option>\n\
+                                                </select>\n\
+                                            </td>\n\
+                                        </tr>');
 
-        portPicker.append(new Option("Serial " + portNumber, portNumber));
+            $("#" + selectProtocolID + " option[value=" + portFunction + "]").attr('selected', 'selected');
+            $("#" + selectBaudrateID + " option[value=" + portBaudRate + "]").attr('selected', 'selected');
 
-//        if (portFunction == 0 || portFunction >= 256) {
-//            var portOption = document.createElement('option');
-//            portOption.value = portOption.innerText = portNumber;
-//            if (portFunction >= 256)
-//                portOption.selected = true;
-//            //selectPicker.appendChild(portOption);
-//            portPicker.append(new Option("Serial " + portNumber, portNumber));
-//        }
-//        if (portFunction >= 256) {
-//            $("#relay_telemetry_protocol-select option").each(function () {
-//                $(this).attr('selected', false);
-//                if ($(this).val() == portFunction) {
-//                    $("#relay_telemetry_protocol-select").val(portFunction);//$(this).attr('selected', true);
-//                }
-//            });
-//            $("#relay_telemetry_baud-select option").each(function () {
-//                $(this).attr('selected', false);
-//                if ($(this).val() == portBaudRate) {
-//                    $("#relay_telemetry_baud-select").val(portBaudRate);//$(this).attr('selected', true);
-//                }
-//            });
-//        }
+            $("#" + selectProtocolID).on('change', function () {
+                GTS.setSerial(portNumber, $("#" + selectProtocolID).val(), $("#" + selectBaudrateID).val());
+            });
+
+            $("#" + selectBaudrateID).on('change', function () {
+                GTS.setSerial(portNumber, $("#" + selectProtocolID).val(), $("#" + selectBaudrateID).val());
+            });
+
+        }
+
+        if (!GUI.softserial_count) {
+            $("#portsTable").hide();
+            $("#notePortsTable").show();
+        } else {
+            $("#portsTable").show();
+            $("#notePortsTable").hide();
+        }
 
     }
 
@@ -201,21 +190,17 @@ TABS.configuration.getData = function () {
 TABS.configuration.switcheryChange = function (elem) {
 
     var elemID = $(elem).attr('id');
-
     if (elemID.contains("-checkbox")) {
 
         var param = elemID.slice(0, elemID.indexOf("-checkbox"));
-
         if (elemID.contains("mag_calibrated") || elemID.contains("pan0_calibrated")) {
 
             var ON = "1";
             var OFF = "0";
-
         } else {
 
             var ON = "ON";
             var OFF = "OFF";
-
         }
 
         if ($(elem).val() === "true") {
@@ -231,8 +216,6 @@ TABS.configuration.switcheryChange = function (elem) {
     if (elemID.contains("-feature")) {
 
         var param = elemID.slice(0, elemID.indexOf("-feature"));
-
-
         if ($(elem).val() === "true") {
             $("#" + elemID).val("false");
             GTS.feature(param, false);
@@ -247,6 +230,9 @@ TABS.configuration.switcheryChange = function (elem) {
 
 TABS.configuration.cleanup = function (callback) {
     console.log("cleanup config");
+
+    GUI.softserial_count = 0;
+
     if (callback)
         callback();
 };
