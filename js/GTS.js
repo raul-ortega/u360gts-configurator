@@ -1,7 +1,5 @@
 var GTS = {
-
     last_received_timestamp: null,
-
     read: function (readInfo) {
 
         this.lineBuffer += ab2str(readInfo.data);
@@ -34,21 +32,17 @@ var GTS = {
                     case "set":
                         TABS.configuration.loadData(line);
                         break;
-					case "calibrate pan":
-						TABS.configuration.parseCalibratePan(line);
-						break;
-					case "calibrate mag":
-						if(line.contains("Calibration finished")){
-							TABS.configuration.setCheckBox("mag_calibrated-checkbox",true);
-							GUI.log(i18n.getMessage("configurationCalibrationFinishedMessage"));
-						}
-						break;
+                    case "calibrate pan":
+                        TABS.configuration.parseCalibratePan(line);
+                        break;
+                    case "calibrate mag":
+                        if (line.contains("Calibration finished")) {
+                            TABS.configuration.setCheckBox("mag_calibrated-checkbox", true);
+                            GUI.log(i18n.getMessage("configurationCalibrationFinishedMessage"));
+                        }
+                        break;
                 }
             }
-            
-//            if (line.startsWith('serial')) {
-//                loadSSerial(line);
-//            }
 
             // ------- --------------------- ----------- //
 
