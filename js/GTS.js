@@ -30,44 +30,20 @@ var GTS = {
 
             // Acciones al recibir estando en la pestaña Configuration o Settings
             if (GUI.active_tab === 'configuration' || GUI.active_tab === 'settings') {
-
                 switch (TABS.configuration.lastCommand) {
-
                     case "set":
-
                         TABS.configuration.loadData(line);
-
                         break;
 					case "calibrate pan":
-					
-						if(line.contains('min ')){
-							var paramValue = line.getParamValue("min ");
-							$("#pan0-spinner").val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-							console.log("<<: " + line); // Remove this line
-						} else if(line.contains('max ')){
-							var paramValue = line.getParamValue("max ");
-							$("#pan0-spinner").val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-							console.log("<<: " + line); // Remove this line
-						} else if(line.contains('pan0=')){
-							var paramValue = line.getParamValue("pan0=");
-							$("#pan0-spinner").val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-							console.log("<<: " + line); // Remove this line
-						} else if(line.contains('min_pan_speed=')){
-							var paramValue = line.getParamValue("min_pan_speed=");
-							$("#min_pan_speed-spinner").val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-							console.log("<<: " + line); // Remove this line
-						} else if(line.contains('pan0_calibrated=0')){
-							TABS.configuration.setCheckBox("pan0_calibrated-checkbox",true);
-							console.log("<<: " + line); // Remove this line
-						}else if(line.contains('pan0_calibrated=1')){
-							TABS.configuration.setCheckBox("pan0_calibrated-checkbox",false);
-							console.log("<<: " + line); // Remove this line
+						TABS.configuration.parseCalibratePan(line);
+						break;
+					case "calibrate mag":
+						if(line.contains("Calibration finished")){
+							TABS.configuration.setCheckBox("mag_calibrated-checkbox",true);
+							GUI.log(i18n.getMessage("configurationCalibrationFinishedMessage"));
 						}
-						
 						break;
                 }
-
-
             }
             
 //            if (line.startsWith('serial')) {
