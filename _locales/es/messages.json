@@ -3577,6 +3577,9 @@
 	"configurationMagOffset": {
         "message": "Desplazamiento (grados)"
     },
+	"configurationMagCalibrationStartedLogMessage": {
+		"message": "Iniciando la calibración del MAG"
+	},
 	"configurationPan": {
 		"message": "Servo PAN"
 	},
@@ -3597,6 +3600,27 @@
 	},
 	"configurationPanMaxGain": {
 		"message": "Ganancia Máxima (usec)"
+	},
+	"configurationPanCalibrationStartedLogMessage": {
+		"message": "Iniciando la calibración del servo PAN"
+	},
+	"configurationCalibrationMinPulseLogMessage": {
+		"message": "Pulso mínimo de parada:"
+	},
+	"configurationCalibrationMaxPulseLogMessage": {
+		"message": "Pulso máximo de parada:"
+	},
+	"configurationCalibrationPan0PulseLogMessage": {
+		"message": "Pulso central de parada:"
+	},
+	"configurationCalibrationMinPanSpeedLogMessage": {
+		"message": "Incremento mínimo para iniciar movimiento:"
+	},
+	"configurationCalibrationCalibratedLogMessage": {
+		"message": "Servo pan y mag calibrados"
+	},
+	"configurationCalibrationFinishedLogMessage": {
+		"message": "Calibración realizada"
 	},
 	"configurationTilt": {
 		"message": "Servo TILT"

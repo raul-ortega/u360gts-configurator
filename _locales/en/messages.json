@@ -3644,6 +3644,9 @@
 	"configurationMagOffset": {
         "message": "Offset (degrees)"
     },
+	"configurationMagCalibrationStartedLogMessage": {
+		"message": "MAG calibración started"
+	},
 	"configurationPan": {
 		"message": "PAN Servo"
 	},
@@ -3664,6 +3667,27 @@
 	},
 	"configurationPanMaxGain": {
 		"message": "Max Gain (usec)"
+	},
+	"configurationPanCalibrationStartedLogMessage": {
+		"message": "Servo PAN calibration started"
+	},
+	"configurationCalibrationMinPulseMessage": {
+		"message": "Min pulse to stop pan servo:"
+	},
+	"configurationCalibrationMaxPulseMessage": {
+		"message": "Max pulse to stop pan servo:"
+	},
+	"configurationCalibrationPan0PulseMessage": {
+		"message": "Calculated pulse to stop pan servo:"
+	},
+	"configurationCalibrationMinPanSpeedMessage": {
+		"message": "Minimum increment to move pan servo:"
+	},
+	"configurationCalibrationCalibrated": {
+		"message": "Pan servo and mag calibrated"
+	},
+	"configurationCalibrationFinishedLogMessage": {
+		"message": "Calibration process has finished"
 	},
 	"configurationTilt": {
 		"message": "TILT Servo"
