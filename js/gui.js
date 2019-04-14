@@ -8,6 +8,7 @@ var GUI_control = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.calibrate_lock = false;
     this.simModeEnabled = false;
     this.active_tab;
     this.tab_switch_in_progress = false;
@@ -16,6 +17,7 @@ var GUI_control = function () {
     this.timeout_array = [];
     this.switcheries = [];
     this.softserial_count = 0;
+    this.status = [];
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
@@ -247,8 +249,8 @@ GUI_control.prototype.switchery = function () {
             secondaryColor: '#c4c4c4',
             size: 'small'
         });
-        $(elem).on("change", function (evt) {        
-            switchery.setPosition();          
+        $(elem).on("change", function (evt) {
+            switchery.setPosition();
         });
         $(elem).removeClass('togglesmall');
     });
@@ -291,17 +293,8 @@ GUI_control.prototype.content_ready = function (callback) {
 
     this.switchery();
 
-    if (CONFIGURATOR.connectionValid) {
-        // Build link to in-use CF version documentation
-//        var documentationButton = $('div#content #button-documentation');
-//        if (CONFIG.flightControllerIdentifier == 'BTFL') {
-//            documentationButton.html("Wiki");
-//            documentationButton.attr("href","https://github.com/betaflight/betaflight/wiki");
-//        }
-//        if (CONFIG.flightControllerIdentifier == 'CLFL') {
-//            documentationButton.html("Documentation for " + CONFIG.flightControllerVersion);
-//            documentationButton.attr("href","https://github.com/cleanflight/cleanflight/tree/CLFL_v{0}/docs".format(CONFIG.flightControllerVersion));
-//        }
+    if (CONFIGURATOR.connectionValid && GUI.active_tab !== 'cli') {
+        this.statusInterval();
     }
 
     // loading tooltip
@@ -327,6 +320,31 @@ GUI_control.prototype.content_ready = function (callback) {
     if (callback)
         callback();
 }
+
+GUI_control.prototype.statusInterval = function () {
+    var self = this;
+    // Start interval for status
+    self.interval_add('status_interval', function () {
+        //console.log(self.status);
+
+        if (self.status.mag) {
+            $('.mag').addClass('on');
+            $('.magicon').addClass('active');
+        } else {
+            $('.mag').removeClass('on');
+            $('.magicon').removeClass('active');
+        }
+
+        $('span.i2c-error').text(self.status.i2c);
+        $('span.cycle-time').text(self.status.cycle);
+        $('span.cpu-freq').text(self.status.cpu);
+
+        if (!GUI.calibrate_lock) {
+            GTS.getStatus();
+        }
+
+    }, 1000);
+};
 
 // initialize object into GUI variable
 var GUI = new GUI_control();

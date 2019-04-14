@@ -43,12 +43,16 @@ TABS.configuration.initialize = function (callback) {
             }
         });
         $("#calibrate_mag").click(function () {
+            GUI.calibrate_lock = true;
             self.calibrateMag();
         });
         $("#calibrate_pan").click(function () {
+            GUI.calibrate_lock = true;
             self.calibratePan();
         });
+        
         GUI.content_ready(callback);
+        
     });
 };
 TABS.configuration.loadData = function (data) {
@@ -185,14 +189,9 @@ TABS.configuration.loadData = function (data) {
 
 };
 
-// Pasar a GTS.. TO DO
-TABS.configuration.getVersion = function () {
-    GTS.send("version\n");
-};
-
 TABS.configuration.getData = function () {
     TABS.configuration.lastCommand = "set";
-    GTS.send("set\nfeature\nserial\n");
+    GTS.send("set\nfeature\nserial\nstatus\n");
 };
 
 TABS.configuration.switcheryChange = function (elem) {
@@ -246,7 +245,7 @@ TABS.configuration.cleanup = function (callback) {
 };
 
 TABS.configuration.calibratePan = function () {
-    TABS.configuration.setCheckBox("mag_calibrated-checkbox", false);
+    //TABS.configuration.setCheckBox("mag_calibrated-checkbox", false);
     TABS.configuration.setCheckBox("pan0_calibrated-checkbox", false);
     TABS.configuration.lastCommand = "calibrate pan";
     GUI.log(i18n.getMessage("configurationPanCalibrationStartedLogMessage"));
@@ -262,6 +261,7 @@ TABS.configuration.calibrateMag = function () {
         TABS.configuration.setCheckBox("mag_calibrated-checkbox", true);
         GUI.interval_remove("calibratemag_interval");
         GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
+        GUI.calibrate_lock = false;
     }, 12000);
 };
 
@@ -292,5 +292,6 @@ TABS.configuration.parseCalibratePan = function (line) {
         GUI.log(i18n.getMessage("configurationCalibrationCalibratedLogMessage"));
     } else if (line.contains("has finished")) {
         GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
+        GUI.calibrate_lock = false;
     }
 }

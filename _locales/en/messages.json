@@ -3444,7 +3444,7 @@
     },
     "tabSwitchDeniedOnSim": {
         "message": "Disable on Simulator Mode."
-    },    
+    },
     "tabSwitchWaitForOperation": {
         "message": "You \u003Cspan class=\"message-negative\">can't\u003C/span> do this right now, please wait for current operation to finish ..."
     },
@@ -3601,7 +3601,7 @@
     },
     "simCourse": {
         "message": "Course"
-    },     
+    },
     "simLatitude": {
         "message": "Latitude"
     },
@@ -3628,117 +3628,120 @@
     },
     "simNotAvailable": {
         "message": "You must to be connected on \u003Cb>Simulator Mode\u003C/b> for use this tab."
-    },    
+    },
     "tabSettings": {
         "message": "Settings"
     },
     "configurationMag": {
         "message": "Compass (MAG)"
     },
-	"configurationMagCalibrateButton": {
+    "configurationMagCalibrateButton": {
         "message": "Calibrate Mag"
     },
     "configurationMagCalibratedCheckbox": {
         "message": "Calibration Done"
     },
-	"configurationMagOffset": {
+    "configurationMagOffset": {
         "message": "Offset (degrees)"
     },
-	"configurationMagCalibrationStartedLogMessage": {
-		"message": "MAG calibración started"
-	},
-	"configurationPan": {
-		"message": "PAN Servo"
-	},
-	"configurationPanCalibrationPulse": {
-		"message": "Starting Calibration Pulse (usec)"
-	},
-	"configurationCalibratePanButton": {
-		"message": "Calibrate PAN"
-	},
-	"configurationPanCalibrated": {
-		"message": "Calibration Done"
-	},
-	"configurationPan0": {
-		"message": "Stop pulse (usec)"
-	},
-	"configurationPanMinSpeed": {
-		"message": "Minimum Increment to Start Movement (usec)"
-	},
-	"configurationPanMaxGain": {
-		"message": "Max Gain (usec)"
-	},
-	"configurationPanCalibrationStartedLogMessage": {
-		"message": "Servo PAN calibration started"
-	},
-	"configurationCalibrationMinPulseMessage": {
-		"message": "Min pulse to stop pan servo:"
-	},
-	"configurationCalibrationMaxPulseMessage": {
-		"message": "Max pulse to stop pan servo:"
-	},
-	"configurationCalibrationPan0PulseMessage": {
-		"message": "Calculated pulse to stop pan servo:"
-	},
-	"configurationCalibrationMinPanSpeedMessage": {
-		"message": "Minimum increment to move pan servo:"
-	},
-	"configurationCalibrationCalibrated": {
-		"message": "Pan servo and mag calibrated"
-	},
-	"configurationCalibrationFinishedLogMessage": {
-		"message": "Calibration process has finished"
-	},
-	"configurationTilt": {
-		"message": "TILT Servo"
-	},
-	"configurationTilt0": {
-		"message": "Pulse for Horizontal Position (usec)"
-	},
-	"configurationTilt90": {
-		"message": "Pulse for Vertical Position (usec)"
-	},
+    "configurationMagCalibrationStartedLogMessage": {
+        "message": "MAG calibración started"
+    },
+    "configurationPan": {
+        "message": "PAN Servo"
+    },
+    "configurationPanCalibrationPulse": {
+        "message": "Starting Calibration Pulse (usec)"
+    },
+    "configurationCalibratePanButton": {
+        "message": "Calibrate PAN"
+    },
+    "configurationPanCalibrated": {
+        "message": "Calibration Done"
+    },
+    "configurationPan0": {
+        "message": "Stop pulse (usec)"
+    },
+    "configurationPanMinSpeed": {
+        "message": "Minimum Increment to Start Movement (usec)"
+    },
+    "configurationPanMaxGain": {
+        "message": "Max Gain (usec)"
+    },
+    "configurationPanCalibrationStartedLogMessage": {
+        "message": "Servo PAN calibration started"
+    },
+    "configurationCalibrationMinPulseMessage": {
+        "message": "Min pulse to stop pan servo:"
+    },
+    "configurationCalibrationMaxPulseMessage": {
+        "message": "Max pulse to stop pan servo:"
+    },
+    "configurationCalibrationPan0PulseMessage": {
+        "message": "Calculated pulse to stop pan servo:"
+    },
+    "configurationCalibrationMinPanSpeedMessage": {
+        "message": "Minimum increment to move pan servo:"
+    },
+    "configurationCalibrationCalibrated": {
+        "message": "Pan servo and mag calibrated"
+    },
+    "configurationCalibrationFinishedLogMessage": {
+        "message": "Calibration process has finished"
+    },
+    "configurationTilt": {
+        "message": "TILT Servo"
+    },
+    "configurationTilt0": {
+        "message": "Pulse for Horizontal Position (usec)"
+    },
+    "configurationTilt90": {
+        "message": "Pulse for Vertical Position (usec)"
+    },
     "DISPLAY": {
         "message": "DISPLAY"
-    }, 
+    },
     "featureEnabled": {
         "message": "Enabled"
     },
     "portsSoftSerial": {
         "message": "Ports (SOFTSERIAL)"
     },
-	"configurationTelemetry": {
+    "configurationTelemetry": {
         "message": "Telemetry"
     },
-	"configurationAutoDetect": {
+    "configurationAutoDetect": {
         "message": "Auto detect protocol"
     },
-	"configurationTelemetryProtocol": {
-		"message": "Protocol (default)"
-	},
-	"configurationTelemetryBaud": {
-		"message": "Baudrate"
-	},
-	"configurationTelemetryMinSats": {
-		"message": "Minimum number of satellites"
-	}
-	,
-	"configurationTelemetryProvider": {
-		"message": "Provider"
-	},
-	"configurationTelemetryHome": {
-		"message": "Set Home"
-	},
-	"configurationTracking": {
-		"message": "Tracking"
-	},
-	"configurationStartTrackingDistance": {
-		"message": "Start Tacking Distance (m)"
-	},
-	"configurationStartTrackingAltitude": {
-		"message": "Start Tacking Altitude (m)"
-	},
-	"configurationMaxSpeedFilter": {
-		"message": "Max Speed Filter (m/s)"
-	}
+    "configurationTelemetryProtocol": {
+        "message": "Protocol (default)"
+    },
+    "configurationTelemetryBaud": {
+        "message": "Baudrate"
+    },
+    "configurationTelemetryMinSats": {
+        "message": "Minimum number of satellites"
+    }
+    ,
+    "configurationTelemetryProvider": {
+        "message": "Provider"
+    },
+    "configurationTelemetryHome": {
+        "message": "Set Home"
+    },
+    "configurationTracking": {
+        "message": "Tracking"
+    },
+    "configurationStartTrackingDistance": {
+        "message": "Start Tacking Distance (m)"
+    },
+    "configurationStartTrackingAltitude": {
+        "message": "Start Tacking Altitude (m)"
+    },
+    "configurationMaxSpeedFilter": {
+        "message": "Max Speed Filter (m/s)"
+    },
+    "cpuFreq": {
+        "message": "CPU:"
+    }
 }

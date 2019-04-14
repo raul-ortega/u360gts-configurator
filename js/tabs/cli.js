@@ -4,7 +4,8 @@ TABS.cli = {
     lineDelayMs: 15,
     profileSwitchDelayMs: 100,
     outputHistory: "",
-    cliBuffer: ""
+    cliBuffer: "",
+    cli_enter_msg: "hola"
 };
 
 function removePromptHash(promptText) {
@@ -55,10 +56,9 @@ TABS.cli.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
-        //CONFIGURATOR.cliActive = true;
-
         var textarea = $('.tab-cli textarea');
-
+        writeToOutput(self.cli_enter_msg);
+        
         $('.tab-cli .save').click(function () {
 
             var prefix = 'cli';
@@ -230,9 +230,7 @@ TABS.cli.read = function (readInfo) {
      Windows understands (both) CRLF
      Chrome OS currently unknown
      */
-    var data = new Uint8Array(readInfo.data),
-            validateText = "",
-            sequenceCharsToSkip = 0;
+    var data = new Uint8Array(readInfo.data),validateText = "",sequenceCharsToSkip = 0;
 
     for (var i = 0; i < data.length; i++) {
         const currentChar = String.fromCharCode(data[i]);
@@ -340,6 +338,7 @@ TABS.cli.send = function (line, callback) {
 
 TABS.cli.cleanup = function (callback) {
     console.log("cleanup cli");
+    
     //if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
         if (callback)
             callback();

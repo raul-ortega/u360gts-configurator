@@ -3531,7 +3531,7 @@
     },
     "simCourse": {
         "message": "Rumbo"
-    },   
+    },
     "simLatitude": {
         "message": "Latitud"
     },
@@ -3561,118 +3561,121 @@
     },
     "simNotAvailable": {
         "message": "Tiene que estar conectado en \u003Cb>Modo Simulador\u003C/b> para usar esta pestaña."
-    },      
+    },
     "tabSettings": {
         "message": "Avanzado"
     },
     "configurationMag": {
         "message": "Brújula (MAG)"
     },
-	"configurationCalibrateMagButton": {
+    "configurationCalibrateMagButton": {
         "message": "Calibrar MAG"
     },
     "configurationMagCalibratedCheckbox": {
         "message": "Calibración Realizada"
     },
-	"configurationMagOffset": {
+    "configurationMagOffset": {
         "message": "Desplazamiento (grados)"
     },
-	"configurationMagCalibrationStartedLogMessage": {
-		"message": "Iniciando la calibración del MAG"
-	},
-	"configurationPan": {
-		"message": "Servo PAN"
-	},
-	"configurationPanCalibrationPulse": {
-		"message": "Pulso Inicial de Calibración (usec)"
-	},
-	"configurationCalibratePanButton": {
-		"message": "Calibrar PAN"
-	},
-	"configurationPanCalibrated": {
-		"message": "Calibración Realizada"
-	},
-	"configurationPan0": {
-		"message": "Pulso Central de Parada (usec)"
-	},
-	"configurationPanMinSpeed": {
-		"message": "Incremento Mínimo para Moverse (usec)"
-	},
-	"configurationPanMaxGain": {
-		"message": "Ganancia Máxima (usec)"
-	},
-	"configurationPanCalibrationStartedLogMessage": {
-		"message": "Iniciando la calibración del servo PAN"
-	},
-	"configurationCalibrationMinPulseLogMessage": {
-		"message": "Pulso mínimo de parada:"
-	},
-	"configurationCalibrationMaxPulseLogMessage": {
-		"message": "Pulso máximo de parada:"
-	},
-	"configurationCalibrationPan0PulseLogMessage": {
-		"message": "Pulso central de parada:"
-	},
-	"configurationCalibrationMinPanSpeedLogMessage": {
-		"message": "Incremento mínimo para iniciar movimiento:"
-	},
-	"configurationCalibrationCalibratedLogMessage": {
-		"message": "Servo pan y mag calibrados"
-	},
-	"configurationCalibrationFinishedLogMessage": {
-		"message": "Calibración realizada"
-	},
-	"configurationTilt": {
-		"message": "Servo TILT"
-	},
-	"configurationTilt0": {
-		"message": "Pulso Posición Horizontal (usec)"
-	},
-	"configurationTilt90": {
-		"message": "Pulso Posición Vertical (usec)"
-	},
+    "configurationMagCalibrationStartedLogMessage": {
+        "message": "Iniciando la calibración del MAG"
+    },
+    "configurationPan": {
+        "message": "Servo PAN"
+    },
+    "configurationPanCalibrationPulse": {
+        "message": "Pulso Inicial de Calibración (usec)"
+    },
+    "configurationCalibratePanButton": {
+        "message": "Calibrar PAN"
+    },
+    "configurationPanCalibrated": {
+        "message": "Calibración Realizada"
+    },
+    "configurationPan0": {
+        "message": "Pulso Central de Parada (usec)"
+    },
+    "configurationPanMinSpeed": {
+        "message": "Incremento Mínimo para Moverse (usec)"
+    },
+    "configurationPanMaxGain": {
+        "message": "Ganancia Máxima (usec)"
+    },
+    "configurationPanCalibrationStartedLogMessage": {
+        "message": "Iniciando la calibración del servo PAN"
+    },
+    "configurationCalibrationMinPulseLogMessage": {
+        "message": "Pulso mínimo de parada:"
+    },
+    "configurationCalibrationMaxPulseLogMessage": {
+        "message": "Pulso máximo de parada:"
+    },
+    "configurationCalibrationPan0PulseLogMessage": {
+        "message": "Pulso central de parada:"
+    },
+    "configurationCalibrationMinPanSpeedLogMessage": {
+        "message": "Incremento mínimo para iniciar movimiento:"
+    },
+    "configurationCalibrationCalibratedLogMessage": {
+        "message": "Servo pan y mag calibrados"
+    },
+    "configurationCalibrationFinishedLogMessage": {
+        "message": "Calibración realizada"
+    },
+    "configurationTilt": {
+        "message": "Servo TILT"
+    },
+    "configurationTilt0": {
+        "message": "Pulso Posición Horizontal (usec)"
+    },
+    "configurationTilt90": {
+        "message": "Pulso Posición Vertical (usec)"
+    },
     "DISPLAY": {
         "message": "MONITOR"
-    }, 
+    },
     "featureEnabled": {
         "message": "Habilitado"
     },
     "portsSoftSerial": {
         "message": "Puertos (SOFTSERIAL)"
     },
-	"configurationTelemetry": {
+    "configurationTelemetry": {
         "message": "Telemetría"
     },
-	"configurationAutoDetect": {
+    "configurationAutoDetect": {
         "message": "Detectar Protocolo Automáticamente"
     },
-	"configurationTelemetryProtocol": {
-		"message": "Protocolo Por Defecto"
-	},
-	"configurationTelemetryBaud": {
-		"message": "Velocidad de Transmisión (Baudios)"
-	},
-	"configurationTelemetryMinSats": {
-		"message": "Número Mínimo de Satélites"
-	}
-	,
-	"configurationTelemetryProvider": {
-		"message": "Proveedor"
-	}
-	,
-	"configurationTelemetryHome": {
-		"message": "Establecer Home"
-	},
-	"configurationTracking": {
-		"message": "Seguimiento"
-	},
-	"configurationStartTrackingDistance": {
-		"message": "Distancia para Iniciar el Seguimiento (m)"
-	},
-	"configurationStartTrackingAltitude": {
-		"message": "Altitud para Iniciar el Seguimiento (m)"
-	},
-	"configurationMaxSpeedFilter": {
-		"message": "Filtro de Velócidad Máxima (m/s)"
-	}
+    "configurationTelemetryProtocol": {
+        "message": "Protocolo Por Defecto"
+    },
+    "configurationTelemetryBaud": {
+        "message": "Velocidad de Transmisión (Baudios)"
+    },
+    "configurationTelemetryMinSats": {
+        "message": "Número Mínimo de Satélites"
+    }
+    ,
+    "configurationTelemetryProvider": {
+        "message": "Proveedor"
+    }
+    ,
+    "configurationTelemetryHome": {
+        "message": "Establecer Home"
+    },
+    "configurationTracking": {
+        "message": "Seguimiento"
+    },
+    "configurationStartTrackingDistance": {
+        "message": "Distancia para Iniciar el Seguimiento (m)"
+    },
+    "configurationStartTrackingAltitude": {
+        "message": "Altitud para Iniciar el Seguimiento (m)"
+    },
+    "configurationMaxSpeedFilter": {
+        "message": "Filtro de Velócidad Máxima (m/s)"
+    },
+    "cpuFreq": {
+        "message": "CPU:"
+    }
 }
