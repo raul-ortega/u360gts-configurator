@@ -58,7 +58,7 @@ TABS.cli.initialize = function (callback) {
 
         var textarea = $('.tab-cli textarea');
         writeToOutput(self.cli_enter_msg);
-        
+
         $('.tab-cli .save').click(function () {
 
             var prefix = 'cli';
@@ -141,12 +141,25 @@ TABS.cli.initialize = function (callback) {
                             self.sendLine(line, function () {
                                 resolve(processingDelay);
                             });
- 
+
                         }, delay)
                     })
                 }, 0);
 
                 textarea.val('');
+
+                if (out_string.contains('save')) {
+                    CONFIGURATOR.cliActive = false;
+                    CONFIGURATOR.cliValid = false;
+                    GUI.log(i18n.getMessage('cliReboot'));
+                    GUI.log(i18n.getMessage('deviceRebooting'));
+
+                    $('a.connect').click();
+                    GUI.timeout_add('start_connection', function start_connection() {
+                        $('a.connect').click();
+                    }, GUI.reboot_delay);
+
+                }
             }
         });
 
@@ -230,7 +243,7 @@ TABS.cli.read = function (readInfo) {
      Windows understands (both) CRLF
      Chrome OS currently unknown
      */
-    var data = new Uint8Array(readInfo.data),validateText = "",sequenceCharsToSkip = 0;
+    var data = new Uint8Array(readInfo.data), validateText = "", sequenceCharsToSkip = 0;
 
     for (var i = 0; i < data.length; i++) {
         const currentChar = String.fromCharCode(data[i]);
@@ -282,29 +295,29 @@ TABS.cli.read = function (readInfo) {
 
         this.outputHistory += currentChar;
 
-        if (this.cliBuffer == 'Rebooting') {
-            CONFIGURATOR.cliActive = false;
-            CONFIGURATOR.cliValid = false;
-            GUI.log(i18n.getMessage('cliReboot'));
-            GUI.log(i18n.getMessage('deviceRebooting'));
-
-//            if (BOARD.find_board_definition(CONFIG.boardIdentifier).vcp) { // VCP-based flight controls may crash old drivers, we catch and reconnect
+//        if (this.cliBuffer === 'Rebooting') {
+//            CONFIGURATOR.cliActive = false;
+//            CONFIGURATOR.cliValid = false;
+//            GUI.log(i18n.getMessage('cliReboot'));
+//            GUI.log(i18n.getMessage('deviceRebooting'));
+//
+////            if (BOARD.find_board_definition(CONFIG.boardIdentifier).vcp) { // VCP-based flight controls may crash old drivers, we catch and reconnect
 //                $('a.connect').click();
 //                GUI.timeout_add('start_connection', function start_connection() {
 //                    $('a.connect').click();
 //                }, 2500);
-//            } else {
-
-            GUI.timeout_add('waiting_for_bootup', function waiting_for_bootup() {
-                //MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
-                GUI.log(i18n.getMessage('deviceReady'));
-                //    if (!GUI.tab_switch_in_progress) {
-                $('#tabs ul.mode-connected .tab_setup a').click();
-                //    }
-                //});
-            }, 1500); // 1500 ms seems to be just the right amount of delay to prevent data request timeouts
-            //}
-        }
+////            } else {
+//
+////            GUI.timeout_add('waiting_for_bootup', function waiting_for_bootup() {
+////                //MSP.send_message(MSPCodes.MSP_STATUS, false, false, function () {
+////                GUI.log(i18n.getMessage('deviceReady'));
+////                //    if (!GUI.tab_switch_in_progress) {
+////                $('#tabs ul.mode-connected .tab_setup a').click();
+////                //    }
+////                //});
+////            }, 1500); // 1500 ms seems to be just the right amount of delay to prevent data request timeouts
+//            //}
+//        }
 
     }
 
@@ -338,13 +351,13 @@ TABS.cli.send = function (line, callback) {
 
 TABS.cli.cleanup = function (callback) {
     console.log("cleanup cli");
-    
+
     //if (!(CONFIGURATOR.connectionValid && CONFIGURATOR.cliValid && CONFIGURATOR.cliActive)) {
-        if (callback)
-            callback();
-        return;
+    if (callback)
+        callback();
+    return;
     //}
-    
+
 //    this.send(getCliCommand('exit\r', this.cliBuffer), function (writeInfo) {
 //        // we could handle this "nicely", but this will do for now
 //        // (another approach is however much more complicated):

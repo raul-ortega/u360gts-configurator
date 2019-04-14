@@ -18,6 +18,7 @@ TABS.configuration.initialize = function (callback) {
         // SAVE
         $("#configurationButtonSave").click(function () {
             GTS.save();
+            GUI.reboot();
         });
 
         $('#tilt-slider').on('change', function () {

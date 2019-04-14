@@ -18,6 +18,7 @@ var GUI_control = function () {
     this.switcheries = [];
     this.softserial_count = 0;
     this.status = [];
+    this.reboot_delay = 3000;
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
@@ -345,6 +346,15 @@ GUI_control.prototype.statusInterval = function () {
 
     }, 1000);
 };
+
+GUI_control.prototype.reboot = function () {
+    var self = this;
+    GUI.log(i18n.getMessage('deviceRebooting'));
+    $('a.connect').click();
+    self.timeout_add('start_connection', function start_connection() {
+        $('a.connect').click();
+    }, self.reboot_delay);
+}
 
 // initialize object into GUI variable
 var GUI = new GUI_control();

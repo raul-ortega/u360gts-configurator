@@ -395,9 +395,9 @@ function notifyOutdatedVersion(releaseData) {
     });
 }
 
-function update_packet_error(caller) {
-    $('span.packet-error').html(caller.packet_error);
-}
+//function update_packet_error(caller) {
+//    $('span.packet-error').html(caller.packet_error);
+//}
 
 function microtime() {
     var now = new Date().getTime() / 1000;

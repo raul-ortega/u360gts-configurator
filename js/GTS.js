@@ -101,10 +101,10 @@ var GTS = {
             bufView[c_key] = line.charCodeAt(c_key);
         }
 
-        if(!line.contains("status")){
+        if (!line.contains("status")) {
             console.log(">>: " + line);
         }
-        
+
         serial.send(bufferOut, callback);
 
     },
@@ -119,8 +119,6 @@ var GTS = {
     save: function () {
 
         this.send("save\n");
-
-        $('div.connect_controls a.connect').click();
 
     },
     feature: function (param, value) {

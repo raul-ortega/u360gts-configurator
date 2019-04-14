@@ -167,33 +167,18 @@ li.active .ic_welcome {
     background-image: url(../images/gts/icons/u360gts-tab-white.svg);
 }
 
-.gyroicon.active {
-    background-image: url(../images/cf/icons/sensor_gyro_on.png);
-    color: #61d514;
-}
-
-.accicon.active {
-    background-image: url(../images/cf/icons/sensor_acc_on.png);
-    color: #61d514;
-}
-
 .magicon.active {
-    background-image: url(../images/cf/icons/sensor_mag_on.png);
+    background-image: url(../images/gts/icons/sensor_mag_on.png);
     color: #EF7F1A;
 }
 
-.baroicon.active {
-    background-image: url(../images/cf/icons/sensor_baro_on.png);
-    color: #61d514;
-}
-
 .gpsicon.active {
-    background-image: url(../images/cf/icons/sensor_sat_on.png);
+    background-image: url(../images/gts/icons/sensor_sat_on.png);
     color: #61d514;
 }
 
-.sonaricon.active {
-    background-image: url(../images/cf/icons/sensor_sonar_on.png);
+.gpsicon.error {
+    background-image: url(../images/gts/icons/sensor_sat_error.png);
     color: #61d514;
 }
 
@@ -240,7 +225,7 @@ li.active .ic_welcome {
 }
 
 .tab-help li {
-    background-image: url(../images/cf/icons/arrow_green.svg);
+    background-image: url(../images/gts/icons/arrow_orange.svg);
 }
 
 .tab-failsafe .pro1 {
