@@ -1,7 +1,7 @@
 'use strict';
 
 var serial = {
-	connected:       false,
+    connected:       false,
     connectionId:    false,
     openRequested:   false,
     openCanceled:    false,
@@ -39,7 +39,7 @@ var serial = {
             }
 
             if (connectionInfo && !self.openCanceled) {
-	            self.connected = true;
+	        self.connected = true;
                 self.connectionId = connectionInfo.connectionId;
                 self.bitrate = connectionInfo.bitrate;
                 self.bytesReceived = 0;

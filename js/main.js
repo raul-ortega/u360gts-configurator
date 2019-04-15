@@ -56,7 +56,7 @@ function startProcess() {
     // log webgl capability
     // it would seem the webgl "enabling" through advanced settings will be ignored in the future
     // and webgl will be supported if gpu supports it by default (canary 40.0.2175.0), keep an eye on this one
-    var canvas = document.createElement('canvas');
+    //var canvas = document.createElement('canvas');
 
     // log library versions in console to make version tracking easier
     console.log('Libraries: jQuery - ' + $.fn.jquery + ', d3 - ' + d3.version + ', three.js - ' + THREE.REVISION);
