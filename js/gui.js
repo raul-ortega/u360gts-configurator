@@ -11,6 +11,7 @@ var GUI_control = function () {
     this.calibrate_lock = false;
     this.simModeEnabled = false;
     this.active_tab;
+    this.referer_tab;
     this.tab_switch_in_progress = false;
     this.operating_system;
     this.interval_array = [];
@@ -339,6 +340,39 @@ GUI_control.prototype.statusInterval = function () {
         $('span.i2c-error').text(self.status.i2c);
         $('span.cycle-time').text(self.status.cycle);
         $('span.cpu-freq').text(self.status.cpu);
+
+        $('.quad-status-contents').show();
+
+        var batTypeRegexp = /(?:.[S]+)/gm;
+        var match = batTypeRegexp.exec(GUI.status.vbat);
+        var batType = match[0];
+
+        var vbatValue = GUI.status.vbat
+                .replace(/\(.*?\)/g, "")
+                .replace("V", "")
+                .replace(" * ", " ")
+                .split(' ');
+
+        var vbatCal = Math.round((vbatValue[0] * vbatValue[1]) * 10) / 10;
+
+        // Batt quad-status-contents css width
+        var maxBatw = 30;
+        var minBatw = 1;
+        
+        if(batType === "3S"){
+            
+            var maxBatCap = 12.6;
+            var minBatCap = 10.8;
+            
+            var batPercent = ((vbatCal - minBatCap) * 100) / (maxBatCap - minBatCap);
+            var batPercentw = ((batPercent * (maxBatw - minBatw) / 100) + minBatw);
+            
+            $('.quad-status-contents').width(batPercentw);
+
+            
+        }
+
+        $('.battery-status').text(vbatCal + "V");
 
         if (!GUI.calibrate_lock) {
             GTS.getStatus();
