@@ -11,13 +11,16 @@ TABS.configuration.initialize = function (callback) {
     $('#content').load("./tabs/configuration.html", function () {
         // translate to user-selected language
         i18n.localizePage();
+
         // Solicitamos datos
         TABS.configuration.getData();
+
         // SAVE
         $("#configurationButtonSave").click(function () {
-
             GTS.save();
+            GUI.reboot();
         });
+
         $('#tilt-slider').on('change', function () {
             $('#tilt-output').val($('#tilt-slider').val());
             //setTiltPosition($('#tilt-slider').val());
@@ -40,13 +43,17 @@ TABS.configuration.initialize = function (callback) {
                 //setHeadingPosition($('#pan-output').val());
             }
         });
-		$("#calibrate_mag").click(function(){
-			self.calibrateMag();
-		});
-		$("#calibrate_pan").click(function(){
-			self.calibratePan();
-		});
+        $("#calibrate_mag").click(function () {
+            GUI.calibrate_lock = true;
+            self.calibrateMag();
+        });
+        $("#calibrate_pan").click(function () {
+            GUI.calibrate_lock = true;
+            self.calibratePan();
+        });
+        
         GUI.content_ready(callback);
+        
     });
 };
 TABS.configuration.loadData = function (data) {
@@ -183,14 +190,9 @@ TABS.configuration.loadData = function (data) {
 
 };
 
-// Pasar a GTS.. TO DO
-TABS.configuration.getVersion = function () {
-    GTS.send("version\n");
-};
-
 TABS.configuration.getData = function () {
     TABS.configuration.lastCommand = "set";
-    GTS.send("set\nfeature\nserial\n");
+    GTS.send("set\nfeature\nserial\nstatus\n");
 };
 
 TABS.configuration.switcheryChange = function (elem) {
@@ -243,52 +245,54 @@ TABS.configuration.cleanup = function (callback) {
         callback();
 };
 
-TABS.configuration.calibratePan = function(){
-	TABS.configuration.setCheckBox("mag_calibrated-checkbox",false);
-	TABS.configuration.setCheckBox("pan0_calibrated-checkbox",false);
-	TABS.configuration.lastCommand = "calibrate pan";
-	GUI.log(i18n.getMessage("configurationPanCalibrationStartedLogMessage"));
-	GTS.send('calibrate pan\n');
+TABS.configuration.calibratePan = function () {
+    //TABS.configuration.setCheckBox("mag_calibrated-checkbox", false);
+    TABS.configuration.setCheckBox("pan0_calibrated-checkbox", false);
+    TABS.configuration.lastCommand = "calibrate pan";
+    GUI.log(i18n.getMessage("configurationPanCalibrationStartedLogMessage"));
+    GTS.send('calibrate pan\n');
 };
 
-TABS.configuration.calibrateMag = function(){
-	TABS.configuration.setCheckBox("mag_calibrated-checkbox",false);
-	TABS.configuration.lastCommand = "calibrate mag";
-	GTS.send('calibrate mag\n');
-	GUI.log(i18n.getMessage("configurationMagCalibrationStartedLogMessage"));
-	GUI.interval_add("calibratemag_interval", function () {
-		TABS.configuration.setCheckBox("mag_calibrated-checkbox",true);
-		GUI.interval_remove("calibratemag_interval");
-		GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
-	},12000);
+TABS.configuration.calibrateMag = function () {
+    TABS.configuration.setCheckBox("mag_calibrated-checkbox", false);
+    TABS.configuration.lastCommand = "calibrate mag";
+    GTS.send('calibrate mag\n');
+    GUI.log(i18n.getMessage("configurationMagCalibrationStartedLogMessage"));
+    GUI.interval_add("calibratemag_interval", function () {
+        TABS.configuration.setCheckBox("mag_calibrated-checkbox", true);
+        GUI.interval_remove("calibratemag_interval");
+        GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
+        GUI.calibrate_lock = false;
+    }, 12000);
 };
 
-TABS.configuration.setCheckBox = function(id,value){
-	$("#" + id).prop("checked",value);//$("#"+id).prop("checked", "" + value + "");
-	GUI.switcheries[id].setPosition(false);//$(id).button("refresh");
+TABS.configuration.setCheckBox = function (id, value) {
+    $("#" + id).prop("checked", value);//$("#"+id).prop("checked", "" + value + "");
+    GUI.switcheries[id].setPosition(false);//$(id).button("refresh");
 };
 
-TABS.configuration.getCalibrationStatus = function (line,lookat,paramId,message){
-	var paramValue = line.getParamValue(lookat);
-	$("#"+ paramId).val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
-	GUI.log(message + " " + paramValue);
+TABS.configuration.getCalibrationStatus = function (line, lookat, paramId, message) {
+    var paramValue = line.getParamValue(lookat);
+    $("#" + paramId).val(paramValue.replace(/(\r\n|\n|\r)/gm, ""));
+    GUI.log(message + " " + paramValue);
 }
-TABS.configuration.parseCalibratePan = function(line){
-	if(line.contains('min ')){
-		TABS.configuration.getCalibrationStatus(line,"min ","pan0-spinner",i18n.getMessage("configurationCalibrationMinPulseLogMessage"));
-	} else if(line.contains('max ')){
-		TABS.configuration.getCalibrationStatus(line,"max ","pan0-spinner",i18n.getMessage("configurationCalibrationMaxPulseLogMessage"));
-	} else if(line.contains('pan0=')){
-		TABS.configuration.getCalibrationStatus(line,"pan0=","pan0-spinner",i18n.getMessage("configurationCalibrationPan0PulseLogMessage"));
-	} else if(line.contains('min_pan_speed=')){
-		TABS.configuration.getCalibrationStatus(line,"min_pan_speed=","min_pan_speed-spinner",i18n.getMessage("configurationCalibrationMinPanSpeedLogMessage"));
-	} else if(line.contains('pan0_calibrated=0')){
-		TABS.configuration.setCheckBox("pan0_calibrated-checkbox",false);
-	}else if(line.contains('pan0_calibrated=1')){
-		TABS.configuration.setCheckBox("mag_calibrated-checkbox",true);
-		TABS.configuration.setCheckBox("pan0_calibrated-checkbox",true);
-		GUI.log(i18n.getMessage("configurationCalibrationCalibratedLogMessage"));
-	}else if(line.contains("has finished")){
-		GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
-	}
+TABS.configuration.parseCalibratePan = function (line) {
+    if (line.contains('min ')) {
+        TABS.configuration.getCalibrationStatus(line, "min ", "pan0-spinner", i18n.getMessage("configurationCalibrationMinPulseLogMessage"));
+    } else if (line.contains('max ')) {
+        TABS.configuration.getCalibrationStatus(line, "max ", "pan0-spinner", i18n.getMessage("configurationCalibrationMaxPulseLogMessage"));
+    } else if (line.contains('pan0=')) {
+        TABS.configuration.getCalibrationStatus(line, "pan0=", "pan0-spinner", i18n.getMessage("configurationCalibrationPan0PulseLogMessage"));
+    } else if (line.contains('min_pan_speed=')) {
+        TABS.configuration.getCalibrationStatus(line, "min_pan_speed=", "min_pan_speed-spinner", i18n.getMessage("configurationCalibrationMinPanSpeedLogMessage"));
+    } else if (line.contains('pan0_calibrated=0')) {
+        TABS.configuration.setCheckBox("pan0_calibrated-checkbox", false);
+    } else if (line.contains('pan0_calibrated=1')) {
+        TABS.configuration.setCheckBox("mag_calibrated-checkbox", true);
+        TABS.configuration.setCheckBox("pan0_calibrated-checkbox", true);
+        GUI.log(i18n.getMessage("configurationCalibrationCalibratedLogMessage"));
+    } else if (line.contains("has finished")) {
+        GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
+        GUI.calibrate_lock = false;
+    }
 }

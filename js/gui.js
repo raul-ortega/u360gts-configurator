@@ -8,14 +8,18 @@ var GUI_control = function () {
     this.connecting_to = false;
     this.connected_to = false;
     this.connect_lock = false;
+    this.calibrate_lock = false;
     this.simModeEnabled = false;
     this.active_tab;
+    this.referer_tab;
     this.tab_switch_in_progress = false;
     this.operating_system;
     this.interval_array = [];
     this.timeout_array = [];
     this.switcheries = [];
     this.softserial_count = 0;
+    this.status = [];
+    this.reboot_delay = 3000;
 
     this.defaultAllowedTabsWhenDisconnected = [
         'landing',
@@ -247,8 +251,8 @@ GUI_control.prototype.switchery = function () {
             secondaryColor: '#c4c4c4',
             size: 'small'
         });
-        $(elem).on("change", function (evt) {        
-            switchery.setPosition();          
+        $(elem).on("change", function (evt) {
+            switchery.setPosition();
         });
         $(elem).removeClass('togglesmall');
     });
@@ -291,17 +295,8 @@ GUI_control.prototype.content_ready = function (callback) {
 
     this.switchery();
 
-    if (CONFIGURATOR.connectionValid) {
-        // Build link to in-use CF version documentation
-//        var documentationButton = $('div#content #button-documentation');
-//        if (CONFIG.flightControllerIdentifier == 'BTFL') {
-//            documentationButton.html("Wiki");
-//            documentationButton.attr("href","https://github.com/betaflight/betaflight/wiki");
-//        }
-//        if (CONFIG.flightControllerIdentifier == 'CLFL') {
-//            documentationButton.html("Documentation for " + CONFIG.flightControllerVersion);
-//            documentationButton.attr("href","https://github.com/cleanflight/cleanflight/tree/CLFL_v{0}/docs".format(CONFIG.flightControllerVersion));
-//        }
+    if (CONFIGURATOR.connectionValid && GUI.active_tab !== 'cli') {
+        this.statusInterval();
     }
 
     // loading tooltip
@@ -326,6 +321,73 @@ GUI_control.prototype.content_ready = function (callback) {
 
     if (callback)
         callback();
+}
+
+GUI_control.prototype.statusInterval = function () {
+    var self = this;
+    // Start interval for status
+    self.interval_add('status_interval', function () {
+        //console.log(self.status);
+
+        if (self.status.mag) {
+            $('.mag').addClass('on');
+            $('.magicon').addClass('active');
+        } else {
+            $('.mag').removeClass('on');
+            $('.magicon').removeClass('active');
+        }
+
+        $('span.i2c-error').text(self.status.i2c);
+        $('span.cycle-time').text(self.status.cycle);
+        $('span.cpu-freq').text(self.status.cpu);
+
+        $('.quad-status-contents').show();
+
+        var batTypeRegexp = /(?:.[S]+)/gm;
+        var match = batTypeRegexp.exec(GUI.status.vbat);
+        var batType = match[0];
+
+        var vbatValue = GUI.status.vbat
+                .replace(/\(.*?\)/g, "")
+                .replace("V", "")
+                .replace(" * ", " ")
+                .split(' ');
+
+        var vbatCal = Math.round((vbatValue[0] * vbatValue[1]) * 10) / 10;
+
+        // Batt quad-status-contents css width
+        var maxBatw = 30;
+        var minBatw = 1;
+        
+        if(batType === "3S"){
+            
+            var maxBatCap = 12.6;
+            var minBatCap = 10.8;
+            
+            var batPercent = ((vbatCal - minBatCap) * 100) / (maxBatCap - minBatCap);
+            var batPercentw = ((batPercent * (maxBatw - minBatw) / 100) + minBatw);
+            
+            $('.quad-status-contents').width(batPercentw);
+
+            
+        }
+
+        $('.battery-status').text(vbatCal + "V");
+
+        if (!GUI.calibrate_lock) {
+            GTS.getStatus();
+        }
+
+    }, 1000);
+};
+
+GUI_control.prototype.reboot = function () {
+    var self = this;
+    GUI.log(i18n.getMessage('deviceRebooting'));
+    $('a.connect').click();
+    self.timeout_add('start_connection', function start_connection() {
+        $('a.connect').click();
+    }, self.reboot_delay);
 }
 
 // initialize object into GUI variable

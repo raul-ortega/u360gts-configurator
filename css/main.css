@@ -185,8 +185,8 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-bottom: 5px;
     color: #ddd;
     position: absolute;
-    margin-top: -59px;
-    margin-left: -187px;
+    margin-top: -60px;
+    margin-left: -200px;
 }
 
 #port-override input {
@@ -1609,7 +1609,6 @@ dialog {
     color: white;
     font-size: 10px;
     margin-top: 20px;
-    width: 90px;
     float: right;
     margin-right: 20px;
     line-height: 12px;
@@ -1633,7 +1632,6 @@ dialog {
 
 
 .battery-legend {
-    display: inline;
     position: relative;
     top: -2px;
     margin-top: 0px;
