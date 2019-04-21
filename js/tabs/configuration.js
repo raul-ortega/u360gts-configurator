@@ -20,27 +20,26 @@ TABS.configuration.initialize = function (callback) {
             GTS.save();
             GUI.reboot();
         });
-
         $('#tilt-slider').on('change', function () {
             $('#tilt-output').val($('#tilt-slider').val());
-            //setTiltPosition($('#tilt-slider').val());
+			TABS.configuration.tilt($('#tilt-output').val());
         });
         $('#tilt-output').on('change', function () {
             if ($('#tilt-output').val() !== $('#tilt-slider').val()) {
                 console.log("Mueve tilt");
                 $('#tilt-slider').val($('#tilt-output').val());
-                //setTiltPosition($('#tilt-output').val());
+				TABS.configuration.tilt($('#tilt-output').val());
             }
         });
         $('#pan-slider').on('change', function () {
             $('#pan-output').val($('#pan-slider').val());
-            //setHeadingPosition($('#pan-slider').val());
+			TABS.configuration.heading($('#pan-output').val());
         });
         $('#pan-output').on('change', function () {
             if ($('#pan-output').val() !== $('#pan-slider').val()) {
                 console.log("Mueve pan");
                 $('#pan-slider').val($('#pan-output').val());
-                //setHeadingPosition($('#pan-output').val());
+				TABS.configuration.heading($('#pan-output').val());
             }
         });
         $("#calibrate_mag").click(function () {
@@ -295,4 +294,14 @@ TABS.configuration.parseCalibratePan = function (line) {
         GUI.log(i18n.getMessage("configurationCalibrationFinishedLogMessage"));
         GUI.calibrate_lock = false;
     }
+}
+
+TABS.configuration.heading = function(angle){
+    TABS.configuration.lastCommand = "heading";
+    GTS.send('heading ' + angle + '\n');
+}
+
+TABS.configuration.tilt = function(angle){
+    TABS.configuration.lastCommand = "tilt";
+    GTS.send('tilt ' + angle + '\n');	
 }
