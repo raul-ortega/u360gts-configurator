@@ -295,12 +295,14 @@ GUI_control.prototype.content_ready = function (callback) {
 
     this.switchery();
 
+    // LIVE DATA STATUS
     if (CONFIGURATOR.connectionValid && GUI.active_tab !== 'cli') {
         this.statusInterval();
     }
 
     // loading tooltip
     jQuery(document).ready(function ($) {
+
         $('cf_tip').each(function () { // Grab all ".cf_tip" elements, and for each...
             log(this); // ...print out "this", which now refers to each ".cf_tip" DOM element
         });
@@ -316,6 +318,7 @@ GUI_control.prototype.content_ready = function (callback) {
                 outside: 'x'
             });
         });
+
     });
 
 
@@ -358,18 +361,18 @@ GUI_control.prototype.statusInterval = function () {
         // Batt quad-status-contents css width
         var maxBatw = 30;
         var minBatw = 1;
-        
-        if(batType === "3S"){
-            
+
+        if (batType === "3S") {
+
             var maxBatCap = 12.6;
             var minBatCap = 10.8;
-            
+
             var batPercent = ((vbatCal - minBatCap) * 100) / (maxBatCap - minBatCap);
             var batPercentw = ((batPercent * (maxBatw - minBatw) / 100) + minBatw);
-            
+
             $('.quad-status-contents').width(batPercentw);
 
-            
+
         }
 
         $('.battery-status').text(vbatCal + "V");
