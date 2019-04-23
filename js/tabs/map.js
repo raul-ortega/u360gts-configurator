@@ -53,12 +53,14 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     var image = {
-        url: '/images/icons/cf_icon_position.png',
-        scaledSize: new google.maps.Size(40, 40)
+        url: '/images/icons/tracker-map-icon.png',
+        scaledSize: new google.maps.Size(40, 40),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(40 / 2, 40 / 2)
     };
 
     var icon = {
-        url: '/images/icons/cf_icon_yaw.svg',
+        url: '/images/icons/tracker-map-icon.png',
         size: new google.maps.Size(40, 40),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(40 / 2, 40 / 2)
