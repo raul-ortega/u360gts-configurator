@@ -2,6 +2,9 @@
 TABS.configuration = {
     lastCommand: ""
 };
+TABS.configuration = {
+    lastCommandDone: true
+};
 TABS.configuration.initialize = function (callback) {
     var self = this;
     if (GUI.active_tab != 'configuration') {
@@ -20,26 +23,33 @@ TABS.configuration.initialize = function (callback) {
             GTS.save();
             GUI.reboot();
         });
-        $('#tilt-slider').on('change', function () {
+		
+        $('#tilt-slider').on('input', function () {
             $('#tilt-output').val($('#tilt-slider').val());
-			TABS.configuration.tilt($('#tilt-output').val());
+			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
         });
-        $('#tilt-output').on('change', function () {
+        $('#tilt-output').on('input', function () {
             if ($('#tilt-output').val() !== $('#tilt-slider').val()) {
                 console.log("Mueve tilt");
                 $('#tilt-slider').val($('#tilt-output').val());
-				TABS.configuration.tilt($('#tilt-output').val());
+				TABS.configuration.moveServo('tilt',$('#tilt-output').val());
             }
         });
-        $('#pan-slider').on('change', function () {
-            $('#pan-output').val($('#pan-slider').val());
-			TABS.configuration.heading($('#pan-output').val());
+		$('#tilt0-spinner').on('input', function () {
+			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
         });
-        $('#pan-output').on('change', function () {
+		$('#tilt90-spinner').on('input', function () {
+			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
+        });
+        $('#pan-slider').on('input', function () {
+            $('#pan-output').val($('#pan-slider').val());
+			TABS.configuration.moveServo('heading',$('#pan-output').val());
+        });
+        $('#pan-output').on('input', function () {
             if ($('#pan-output').val() !== $('#pan-slider').val()) {
                 console.log("Mueve pan");
                 $('#pan-slider').val($('#pan-output').val());
-				TABS.configuration.heading($('#pan-output').val());
+				TABS.configuration.moveServo('heading',$('#pan-output').val());
             }
         });
         $("#calibrate_mag").click(function () {
@@ -296,12 +306,10 @@ TABS.configuration.parseCalibratePan = function (line) {
     }
 }
 
-TABS.configuration.heading = function(angle){
-    TABS.configuration.lastCommand = "heading";
-    GTS.send('heading ' + angle + '\n');
-}
-
-TABS.configuration.tilt = function(angle){
-    TABS.configuration.lastCommand = "tilt";
-    GTS.send('tilt ' + angle + '\n');	
+TABS.configuration.moveServo = function(servo,angle){
+	if (TABS.configuration.lastCommandDone){
+		TABS.configuration.lastCommand = servo;
+		TABS.configuration.lastCommandDone = false;
+		GTS.send(servo + ' ' + angle + '\n');
+	}		
 }
