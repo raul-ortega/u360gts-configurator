@@ -73,6 +73,11 @@ var GTS = {
                             GUI.calibrate_lock = false;
                         }
                         break;
+					case "tilt":
+					case "heading":
+						if (!line.startsWith("#"))
+							TABS.configuration.lastCommandDone = true;
+					break;
                 }
             }
 
