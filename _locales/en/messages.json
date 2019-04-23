@@ -3698,6 +3698,9 @@
     "configurationTilt90": {
         "message": "Pulse for Vertical Position (usec)"
     },
+    "configurationTiltMaxAngle": {
+        "message": "Maximum Allowed Angle (degrees)"
+    },
     "DISPLAY": {
         "message": "DISPLAY"
     },

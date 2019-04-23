@@ -3631,6 +3631,9 @@
     "configurationTilt90": {
         "message": "Pulso Posición Vertical (usec)"
     },
+    "configurationTiltMaxAngle": {
+        "message": "Ángulo Máximo Permitido (grados)"
+    },
     "DISPLAY": {
         "message": "MONITOR"
     },
