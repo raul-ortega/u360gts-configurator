@@ -2,6 +2,7 @@
 /*global $*/
 
 TABS.sim = {};
+
 TABS.sim.initialize = function (callback) {
     var self = this;
 
@@ -9,9 +10,23 @@ TABS.sim.initialize = function (callback) {
         GUI.active_tab = 'sim';
     }
 
+    function set_online() {
+        $('#connect').hide();
+        //$('#waiting').show();
+        $('#loadmap').show();
+    }
+
+    function set_offline() {
+        $('#connect').show();
+        $('#waiting').hide();
+        $('#loadmap').hide();
+    }
+
     $('#content').load("./tabs/sim.html", function () {
         // translate to user-selected language
         i18n.localizePage();
+
+
 
         if (GUI.simModeEnabled) {
             $('#simDisableDiv').hide();
@@ -70,21 +85,15 @@ TABS.sim.initialize = function (callback) {
 
             if (protocol == protocols.MFD)
                 NMEAGPGGA = setHome2MFD();
-			else
-				NMEAGPGGA = buildPacket(p1.lat, p1.lon, altitude, 0, 0);
+            else
+                NMEAGPGGA = buildPacket(p1.lat, p1.lon, altitude, 0, 0);
 
             GTS.send(NMEAGPGGA + '\n');
             $("#simulator-log").append(NMEAGPGGA + '\n');
-//          
+
+            // SIM LOOP
             GUI.interval_add("sim_interval", function () {
-                
-            
-            
-            //simulatorTimer = setInterval(function () {
-//                /*if(debugEnabled) {
-//                 console.log();
-//                 }*/
-//
+
 //                if ($("#simulation-type").val() == 3) {
 //                    if (typeof homePosition == 'undefined')
 //                        return;
@@ -93,8 +102,8 @@ TABS.sim.initialize = function (callback) {
 //                    }
 //                }
 //
-				radius = $("#simulator-distance").val();
-				altitude = $("#simulator-altitude").val();
+                radius = $("#simulator-distance").val();
+                altitude = $("#simulator-altitude").val();
                 if (new Date().getTime() - sendHomeTimer < 5000) {
                     distance = 0;
                     heading = 0;
@@ -162,10 +171,14 @@ TABS.sim.initialize = function (callback) {
                 p1 = p2;
                 calculateDistanceTimer = new Date().getTime();
 
-            //}, timerInterval);
-            
+
+
+                // Update Map
+                //update_map(p2.lat, p2.lon, altitude, $("#simulator-speed").val(), distance2Home, $("#simulator-sats").val(), true)
+                TABS.sim.updateSimMap(p2.lat, p2.lon, altitude, $("#simulator-speed").val(), distance2Home, $("#simulator-sats").val(), true);
+
             }, $("#simulation-frequency").val(), false);
-            
+
         });
 
 
@@ -179,10 +192,84 @@ TABS.sim.initialize = function (callback) {
         });
 
 
+        //check for internet connection on load
+        if (navigator.onLine) {
+            console.log('Online');
+            set_online();
+        } else {
+            console.log('Offline');
+            set_offline();
+        }
+
+//        $("#check").on('click', function () {
+//            if (navigator.onLine) {
+//                console.log('Online');
+//                set_online();
+//            } else {
+//                console.log('Offline');
+//                set_offline();
+//            }
+//        });
+
+        var frame = document.getElementById('map');
+
+        $('#zoom_in').click(function () {
+            console.log('zoom in');
+            var message = {
+                action: 'zoom_in'
+            };
+            frame.contentWindow.postMessage(message, '*');
+        });
+
+        $('#zoom_out').click(function () {
+            console.log('zoom out');
+            var message = {
+                action: 'zoom_out'
+            };
+            frame.contentWindow.postMessage(message, '*');
+        });
+
+        $('#update_map').click(function () {
+            console.log('update map');
+            var defaultHome = new LatLon($("#simulator-home-lat").val(), $("#simulator-home-lon").val());
+            var message = {
+                action: 'center',
+                lat: defaultHome.lat,
+                lon: defaultHome.lon
+            };
+            frame.contentWindow.postMessage(message, '*');
+        });
+        
+        
+
         GUI.content_ready(callback);
+        
     });
 
 };
+
+TABS.sim.updateSimMap = function (lat, lon, alt, speed, distHome, sats, fix) {
+
+    var url = 'https://maps.google.com/?q=' + lat + ',' + lon;
+
+//    $('.GPS_info td.fix').html((fix) ? i18n.getMessage('gpsFixTrue') : i18n.getMessage('gpsFixFalse'));
+//    $('.GPS_info td.alt').text(alt + ' m');
+//    $('.GPS_info td.lat a').prop('href', url).text(lat.toFixed(4) + ' deg');
+//    $('.GPS_info td.lon a').prop('href', url).text(lon.toFixed(4) + ' deg');
+//    $('.GPS_info td.speed').text(speed + ' km/h');
+//    $('.GPS_info td.sats').text(sats);
+//    $('.GPS_info td.distToHome').text(Math.trunc(distHome) + ' m');
+
+    var message = {
+        action: 'center',
+        lat: lat,
+        lon: lon
+    };
+
+    var frame = document.getElementById('map');
+    frame.contentWindow.postMessage(message, '*');
+
+}
 
 TABS.sim.cleanup = function (callback) {
     if (callback)
