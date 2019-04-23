@@ -26,30 +26,30 @@ TABS.configuration.initialize = function (callback) {
 		
         $('#tilt-slider').on('input', function () {
             $('#tilt-output').val($('#tilt-slider').val());
-			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
+	    TABS.configuration.moveServo('tilt',$('#tilt-output').val());
         });
         $('#tilt-output').on('input', function () {
             if ($('#tilt-output').val() !== $('#tilt-slider').val()) {
                 console.log("Mueve tilt");
                 $('#tilt-slider').val($('#tilt-output').val());
-				TABS.configuration.moveServo('tilt',$('#tilt-output').val());
+		TABS.configuration.moveServo('tilt',$('#tilt-output').val());
             }
         });
-		$('#tilt0-spinner').on('input', function () {
-			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
+	$('#tilt0-spinner').on('input', function () {
+	    TABS.configuration.moveServo('tilt',$('#tilt-output').val());
         });
-		$('#tilt90-spinner').on('input', function () {
-			TABS.configuration.moveServo('tilt',$('#tilt-output').val());
+	$('#tilt90-spinner').on('input', function () {
+	    TABS.configuration.moveServo('tilt',$('#tilt-output').val());
         });
         $('#pan-slider').on('input', function () {
             $('#pan-output').val($('#pan-slider').val());
-			TABS.configuration.moveServo('heading',$('#pan-output').val());
+	    TABS.configuration.moveServo('heading',$('#pan-output').val());
         });
         $('#pan-output').on('input', function () {
             if ($('#pan-output').val() !== $('#pan-slider').val()) {
                 console.log("Mueve pan");
                 $('#pan-slider').val($('#pan-output').val());
-				TABS.configuration.moveServo('heading',$('#pan-output').val());
+	        TABS.configuration.moveServo('heading',$('#pan-output').val());
             }
         });
         $("#calibrate_mag").click(function () {
