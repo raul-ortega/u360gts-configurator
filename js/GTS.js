@@ -40,8 +40,12 @@ var GTS = {
                 showOnConsole = false;
             }
             if (line.contains('CPU Clock')) {
-                var result = parseStatus(line, "=");
+                var result = parseStatus(line, "CPU Clock=");
                 GUI.status['cpu'] = result[0];
+                showOnConsole = false;
+            }
+            if (line.contains(', MAG')) {
+                var result = parseStatus(line, "MAG=");
                 GUI.status['mag'] = result[1];
                 showOnConsole = false;
             }
