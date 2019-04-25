@@ -384,6 +384,11 @@ GUI_control.prototype.statusInterval = function () {
     }, 1000);
 };
 
+GUI_control.prototype.clearStatus = function () {
+	var self = this;
+    self.status = [];
+}
+
 GUI_control.prototype.reboot = function () {
     var self = this;
     GUI.log(i18n.getMessage('deviceRebooting'));

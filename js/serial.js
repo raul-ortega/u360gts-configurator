@@ -273,6 +273,7 @@ var serial = {
 
                 if (callback) callback(result);
             });
+			GUI.clearStatus();
         } else {
             // connection wasn't opened, so we won't try to close anything
             // instead we will rise canceled flag which will prevent connect from continueing further after being canceled
