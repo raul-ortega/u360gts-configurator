@@ -381,7 +381,7 @@ GUI_control.prototype.statusInterval = function () {
             GTS.getStatus();
         }
 
-    }, 1000);
+    }, 3000);
 };
 
 GUI_control.prototype.clearStatus = function () {
