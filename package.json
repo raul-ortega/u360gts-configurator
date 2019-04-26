@@ -2,9 +2,9 @@
   "name": "u360gts-configurator",
   "description": "Crossplatform configuration tool for u360gts flight control system.",
   "version": "3.1.0",
-  "main": "main_nwjs.html",
   "bg-script": "js/eventPage.js",
   "default_locale": "en",
+  "main": "main_nwjs.html",
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp.js debug",
     "_postinstall": "node ./node_modules/platform-dependent-modules/cli.js",
@@ -14,7 +14,7 @@
   },
   "window": {
     "show": false,
-    "icon": "images/gts/gts_icon_128.png"
+    "icon": "images/gts/gts_icon_128.png",
     "width": 1280,
     "height": 720
   },
@@ -39,8 +39,7 @@
   "dependencies": {
     "i18next": "^10.3.0",
     "i18next-xhr-backend": "^1.5.1",
-    "lru_map": "^0.3.3",
-    "marked": "^0.3.12"
+    "lru_map": "^0.3.3"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -66,6 +65,7 @@
     "mocha": "^5.2.0",
     "nw-builder": "^3.5.2",
     "os": "^0.1.1",
+    "parcel-bundler": "^1.12.3",
     "platform-dependent-modules": "0.0.14",
     "remove-trailing-path-separator": "^1.0.2",
     "rpm-builder": "^0.7.0",
