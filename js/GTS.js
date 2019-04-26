@@ -45,7 +45,7 @@ var GTS = {
                 showOnConsole = false;
             }
             if (line.contains(', MAG')) {
-                var result = parseStatus(line, "MAG=");
+                var result = line.split("MAG=");
                 GUI.status['mag'] = result[1];
                 showOnConsole = false;
             }
