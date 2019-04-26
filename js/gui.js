@@ -339,6 +339,14 @@ GUI_control.prototype.statusInterval = function () {
             $('.mag').removeClass('on');
             $('.magicon').removeClass('active');
         }
+		
+		if (self.status.gps) {
+            $('.gps').addClass('on');
+            $('.gpsicon').addClass('active');
+        } else {
+            $('.gps').removeClass('on');
+            $('.gpsicon').removeClass('active');
+        }
 
         $('span.i2c-error').text(self.status.i2c);
         $('span.cycle-time').text(self.status.cycle);
