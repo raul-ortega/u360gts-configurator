@@ -3701,8 +3701,11 @@
     "configurationTiltMaxAngle": {
         "message": "Maximum Allowed Angle (degrees)"
     },
-    "DISPLAY": {
+    "featureDisplay": {
         "message": "DISPLAY"
+    },
+    "featureDebug": {
+        "message": "DEBUG (Only exprets)"
     },
     "featureEnabled": {
         "message": "Enabled"
