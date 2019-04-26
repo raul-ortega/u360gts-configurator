@@ -49,6 +49,11 @@ var GTS = {
                 GUI.status['mag'] = result[1];
                 showOnConsole = false;
             }
+			if (line.contains(', GPS')) {
+                var result = line.split("GPS=");
+                GUI.status['gps'] = result[1];
+                showOnConsole = false;
+            }
             if (line.contains('Cycle Time')) {
                 var result = parseStatus(line, ":");
                 GUI.status['cycle'] = result[0];
