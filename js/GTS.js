@@ -28,37 +28,34 @@ var GTS = {
                 GUI.log(line);
 
             }
-
             // Update Status array
             if (line.contains('# status')) {
                 showOnConsole = false;
             }
-            if (line.contains('System Uptime')) {
-                var result = parseStatus(line, ":");
-                GUI.status['uptime'] = result[0];
-                GUI.status['vbat'] = result[1];
-                showOnConsole = false;
-            }
+			if (line.contains('System Uptime')) {
+				GUI.status['uptime'] = parseStatus(line,"Uptime",": ")[0].replace(/^\s+|\s+$/g, '');
+				showOnConsole = false;
+			}
+			if (line.contains('Voltage')) {
+				GUI.status['vbat'] = parseStatus(line,"Voltage",": ")[0].replace(/^\s+|\s+$/g, '');
+				showOnConsole = false;
+			}
             if (line.contains('CPU Clock')) {
-                var result = parseStatus(line, "CPU Clock=");
-                GUI.status['cpu'] = result[0];
+                GUI.status['cpu'] = parseStatus(line,"CPU Clock","=")[0];
                 showOnConsole = false;
             }
-            if (line.contains(', MAG')) {
-                var result = line.split("MAG=");
-                GUI.status['mag'] = result[1];
+            if (line.contains('MAG')) {
+                GUI.status['mag'] =  parseStatus(line,"MAG","=")[0];
                 showOnConsole = false;
             }
-			if (line.contains(', GPS')) {
-                var result = line.split("GPS=");
-                GUI.status['gps'] = result[1];
+            if (line.contains('GPS')) {
+                GUI.status['gps'] =  parseStatus(line,"GPS","=")[0];
                 showOnConsole = false;
             }
-            if (line.contains('Cycle Time')) {
-                var result = parseStatus(line, ":");
-                GUI.status['cycle'] = result[0];
-                GUI.status['i2c'] = result[1];
-                GUI.status['config'] = result[2];
+			if (line.contains('Cycle Time')) {
+                GUI.status['cycle'] =  parseStatus(line,"Time",":")[0];
+				GUI.status['i2c'] =  parseStatus(line,"Errors",":")[0];
+				GUI.status['config'] =  parseStatus(line,"size",":")[0];
                 showOnConsole = false;
             }
 
@@ -160,17 +157,15 @@ var GTS = {
 
 };
 
-function parseStatus(line, operator) {
-
+function parseStatus(line, search, operator) {
     var result = [];
     var i = 0;
     line.split(', ').forEach(function (x) {
-        var arr = x.split(operator);
-        arr[1] && (result[i] = arr[1].replace(/^\s+|\s+$/g, ''));
+		if(x.contains(search)){
+			var arr = x.split(search + operator);
+			result[0] = arr[1];
+		}
         i++;
     });
-
     return result;
-
 }
-
