@@ -174,7 +174,7 @@ li.active .ic_welcome {
 
 .gpsicon.active {
     background-image: url(../images/gts/icons/sensor_sat_on.png);
-    color: #61d514;
+    color: #EF7F1A;
 }
 
 .gpsicon.error {
