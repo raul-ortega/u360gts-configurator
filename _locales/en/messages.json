@@ -3635,7 +3635,7 @@
     "configurationMag": {
         "message": "Compass (MAG)"
     },
-    "configurationMagCalibrateButton": {
+    "configurationCalibrateMagButton": {
         "message": "Calibrate Mag"
     },
     "configurationMagCalibratedCheckbox": {
