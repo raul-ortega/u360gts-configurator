@@ -354,37 +354,38 @@ GUI_control.prototype.statusInterval = function () {
 
         $('.quad-status-contents').show();
 
-        var batTypeRegexp = /(?:.[S]+)/gm;
-        var match = batTypeRegexp.exec(GUI.status.vbat);
-        var batType = match[0];
+		if (GUI.status.vbat){
+			var batTypeRegexp = /(?:.[S]+)/gm;
+			var match = batTypeRegexp.exec(GUI.status.vbat);
+			var batType = match[0];
 
-        var vbatValue = GUI.status.vbat
-                .replace(/\(.*?\)/g, "")
-                .replace("V", "")
-                .replace(" * ", " ")
-                .split(' ');
+			var vbatValue = GUI.status.vbat
+					.replace(/\(.*?\)/g, "")
+					.replace("V", "")
+					.replace(" * ", " ")
+					.split(' ');
 
-        var vbatCal = Math.round((vbatValue[0] * vbatValue[1]) * 10) / 10;
+			var vbatCal = Math.round((vbatValue[0] * vbatValue[1]) * 10) / 10;
 
-        // Batt quad-status-contents css width
-        var maxBatw = 30;
-        var minBatw = 1;
+			// Batt quad-status-contents css width
+			var maxBatw = 30;
+			var minBatw = 1;
 
-        if (batType === "3S") {
+			if (batType === "3S") {
 
-            var maxBatCap = 12.6;
-            var minBatCap = 10.8;
+				var maxBatCap = 12.6;
+				var minBatCap = 10.8;
 
-            var batPercent = ((vbatCal - minBatCap) * 100) / (maxBatCap - minBatCap);
-            var batPercentw = ((batPercent * (maxBatw - minBatw) / 100) + minBatw);
+				var batPercent = ((vbatCal - minBatCap) * 100) / (maxBatCap - minBatCap);
+				var batPercentw = ((batPercent * (maxBatw - minBatw) / 100) + minBatw);
 
-            $('.quad-status-contents').width(batPercentw);
+				$('.quad-status-contents').width(batPercentw);
 
 
-        }
+			}
 
-        $('.battery-status').text(vbatCal + "V");
-
+			$('.battery-status').text(vbatCal + "V");
+		}
         if (!GUI.calibrate_lock) {
             GTS.getStatus();
         }
