@@ -3761,5 +3761,11 @@
     },
     "settingsEASINGMinAngle": {
         "message": "Angulo Mínimo (1 - 10º)"
+    },
+	"settingsSOFTSERIAL": {
+        "message": "Puertos SoftSerial"
+    },
+	"settingsTelemetryRelaying": {
+        "message": "Reenviar Telemetría"
     }
 }
