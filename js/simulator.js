@@ -54,7 +54,7 @@ function buildPacket(lat, lon, altitude, distance, heading) {
 			GTS.send(packet + '\n');
     } else if (protocol == protocols.MAVLINK) {
         packet = build_mavlink_msg_gps_raw_int(lat, lon, altitude, Speed($("#simulator-speed").val()), forceError);
-        GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n')
+        GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
         if (!debugEnabled)
             GTS.send('\n');
     } else if (protocol == protocols.PITLAB) {
