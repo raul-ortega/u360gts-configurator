@@ -3746,5 +3746,20 @@
     },
     "settingsNOPIDMaxSpeed": {
         "message": "Máximo Incremento del Pulso (0 - 500 usec)"
+    },
+    "settingsEASING": {
+        "message": "AMORTIGUACIÓN Servo Tilt"
+    },
+    "settingsEASINGFunction": {
+        "message": "Función"
+    },
+    "settingsEASINGSteps": {
+        "message": "Pasos (0 - 100)"
+    },
+    "settingsEASINGMilliseconds": {
+        "message": "Milisegundos por Paso (1 - 100)"
+    },
+    "settingsEASINGMinAngle": {
+        "message": "Angulo Mínimo (1 - 10º)"
     }
 }

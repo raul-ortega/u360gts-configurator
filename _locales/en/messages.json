@@ -3812,5 +3812,20 @@
     },
     "settingsNOPIDMaxSpeed": {
         "message": "Max Increment of Pulse (0 - 500 usec)"
+    },
+    "settingsEASING": {
+        "message": "Tilt EASING"
+    },
+    "settingsEASINGFunction": {
+        "message": "Function"
+    },
+    "settingsEASINGSteps": {
+        "message": "Steps (0 - 100)"
+    },
+    "settingsEASINGMilliseconds": {
+        "message": "Milliseconds per Step (1 - 100)"
+    },
+    "settingsEASINGMinAngle": {
+        "message": "Min Angle (1 - 10º)"
     }
 }
