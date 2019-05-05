@@ -3734,5 +3734,17 @@
     },
     "settingsRSSIZoom": {
         "message": "Zoom (1 - 100)"
+    },
+    "settingsNOPID": {
+        "message": "Control NOPID"
+    },
+    "settingsNOPIDMinDelta": {
+        "message": "Angulo Mínimo (0.0 - 100.0º)"
+    },
+    "settingsNOPIDMapAngle": {
+        "message": "Angulo Mapeado (0 - 180º)"
+    },
+    "settingsNOPIDMaxSpeed": {
+        "message": "Máximo Incremento del Pulso (0 - 500 usec)"
     }
 }
