@@ -3776,5 +3776,29 @@
     },
     "settingsBeeper": {
         "message": "Buzzer"
+    },
+    "settingsVBAT": {
+        "message": "BATTERY Voltage"
+    },
+    "settingsVBATScale": {
+        "message": "Scale (1 - 255)"
+    },
+    "settingsVBATMinCellVoltage": {
+        "message": "Min Cell Voltage (I.e.: 3.3v => 33)"
+    },
+    "settingsVBATMaxCellVoltage": {
+        "message": "Max Cell Voltage (I.e.: 4.2v => 42)"
+    },
+    "settingsVBATWarningCellVoltage": {
+        "message": "Warning Cell Voltage (I.e.:  3.7v => 37)"
+    },
+    "settingsRSSI": {
+        "message": "RSSI Strength"
+    },
+    "settingsRSSIScale": {
+        "message": "Scale (1 - 255)"
+    },
+    "settingsRSSIZoom": {
+        "message": "Zoom (1 - 100)"
     }
 }

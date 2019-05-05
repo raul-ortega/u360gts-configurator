@@ -3697,7 +3697,7 @@
         "message": "Auto Configurar Baudios"
     },
     "settingsGPSBaudRate": {
-        "message": "Baudios"
+        "message": "Velocidad de Transmisión (Baudios)"
     },
     "settingsGPSMinSats": {
         "message": "Número Mínimo de Satéltes"
@@ -3710,5 +3710,29 @@
     },
     "settingsBeeper": {
         "message": "Alarma Sonora al Hacer Home"
+    },
+    "settingsVBAT": {
+        "message": "Voltaje Batería"
+    },
+    "settingsVBATScale": {
+        "message": "Escala (1 - 255)"
+    },
+    "settingsVBATMinCellVoltage": {
+        "message": "Voltaje Mínimo por Celda (Ejemplo: 3.3v => 33)"
+    },
+    "settingsVBATMaxCellVoltage": {
+        "message": "Voltaje Máximo por Celda (Ejemplo: 4.2v => 42)"
+    },
+    "settingsVBATWarningCellVoltage": {
+        "message": "Voltaje de Alarma por Celda (Ejemplo: 3.7v => 37)"
+    },
+    "settingsRSSI": {
+        "message": "Señal RSSI"
+    },
+    "settingsRSSIScale": {
+        "message": "Escala (1 - 255)"
+    },
+    "settingsRSSIZoom": {
+        "message": "Zoom (1 - 100)"
     }
 }
