@@ -3634,11 +3634,8 @@
     "configurationTiltMaxAngle": {
         "message": "Ángulo Máximo Permitido (grados)"
     },
-    "featureDisplay": {
-        "message": "MONITOR"
-    },
     "featureDebug": {
-        "message": "DEBUG"
+        "message": "DEBUG (Sólo expertos)"
     },
     "featureEnabled": {
         "message": "Habilitado"
@@ -3683,5 +3680,35 @@
     },
     "cpuFreq": {
         "message": "CPU:"
+    },
+    "settingsDisplay": {
+        "message": "MONITOR"
+    },
+    "settingsGPS": {
+        "message": "GPS Local"
+    },
+    "settingsGPSProvider": {
+        "message": "Protocolo"
+    },
+    "settingsGPSAutoConfigure": {
+        "message": "Auto Configurar Protocolo"
+    },
+    "settingsGPSAutoBaud": {
+        "message": "Auto Configurar Baudios"
+    },
+    "settingsGPSBaudRate": {
+        "message": "Baudios"
+    },
+    "settingsGPSMinSats": {
+        "message": "Número Mínimo de Satéltes"
+    },
+    "settingsMagneticDeclination": {
+        "message": "Declinación Magnética (Ejemplo.: -1.19º => -119)\u003C/br>\u003Ca href=\"http://www.magnetic-declination.com\" target=\"_blank\">http://www.magnetic-declination.com/\u003C/a>"
+    },
+    "settingsUpdateHome": {
+        "message": "Actualizar Home Continuamente"
+    },
+    "settingsBeeper": {
+        "message": "Alarma Sonora al Hacer Home"
     }
 }

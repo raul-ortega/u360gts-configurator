@@ -7,7 +7,7 @@
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" i18n="featureDisplay"></div>
+                    <div class="spacer_box_title" i18n="settingsDisplay"></div>
                 </div>
                 <div class="spacer_box">
 
@@ -24,12 +24,12 @@
 
             <div class="config-section gui_box grey">
                 <div class="gui_box_titlebar">
-                    <div class="spacer_box_title" data-i18n="configurationHome">Local GPS</div>
+                    <div class="spacer_box_title" i18n="settingsGPS"></div>
                 </div>
                 <div class="spacer_box">
 
                     <div class="checkbox">
-                        <label for="GPS-feature" style="left:0;">Enabled</label>
+                        <label for="GPS-feature" style="left:0;" i18n="featureEnabled"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="GPS-feature" name="GPS-feature" class="toggle" />
@@ -38,7 +38,7 @@
 
                     <div class="select">
 
-                        <label for="gps_provider-select" style="left:0;">Provider</label>
+                        <label for="gps_provider-select" style="left:0;" i18n="settingsGPSProvider"></label>
 
                         <select name="gps_provider-select" id="gps_provider-select" style="float:right; width: 160px;">
                             <option value='' selected='selected'>Select provider</option>
@@ -47,26 +47,10 @@
                         </select>
 
                     </div>
-
-					<div class="checkbox">
-                        <label for="gps_auto_config-checkbox" style="left:0;">Auto Conigure</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="gps_auto_config-checkbox" name="gps_auto_config-checkbox" class="toggle" />
-                        </div>
-                    </div>
-					
-					<div class="checkbox">
-                        <label for="gps_auto_baud-checkbox" style="left:0;">Auto Baud Rate</label>
-
-                        <div style="left:0;float:right;">
-                            <input type="checkbox" id="gps_auto_baud-checkbox" name="gps_auto_baud-checkbox" class="toggle" />
-                        </div>
-                    </div>
 					
                     <div class="select">
 
-                        <label for="gps_baud-select" style="left:0;">Baudrate</label>
+                        <label for="gps_baud-select" style="left:0;" i18n="settingsGPSBaudRate"></label>
 
                         <select name="gps_baud-select" id="gps_baud-select" style="float:right; width: 160px;">                        
                             <option value=''>Select baudrate</option>
@@ -84,18 +68,34 @@
 
                     </div>                     
 
+					<div class="checkbox">
+                        <label for="gps_auto_config-checkbox" style="left:0;" i18n="settingsGPSAutoConfigure"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="gps_auto_config-checkbox" name="gps_auto_config-checkbox" class="toggle" />
+                        </div>
+                    </div>
+					
+					<div class="checkbox">
+                        <label for="gps_auto_baud-checkbox" style="left:0;" i18n="settingsGPSAutoBaud"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="gps_auto_baud-checkbox" name="gps_auto_baud-checkbox" class="toggle" />
+                        </div>
+                    </div>
+					
                     <div class="number">
-                        <label for="gps_min_sats-spinner" style="left:0;">Min Sats</label>
+                        <label for="gps_min_sats-spinner" style="left:0;" i18n="settingsGPSMinSats">Min Sats</label>
                         <input type="number" id="gps_min_sats-spinner" name="gps_min_sats-spinner" value="0" style="float:right;margin-right: 0px;" />
                     </div>
 					
 					<div class="number">
-                        <label for="mag_declination-spinner" style="left:0;">Magnetic Declination</label>
+                        <label for="mag_declination-spinner" style="left:0;" i18n="settingsMagneticDeclination"></label>
                         <input type="number" id="mag_declination-spinner" name="mag_declination-spinner" value="0" style="float:right;margin-right: 0px;" />
                     </div>
 					
                     <div class="checkbox">
-                        <label for="update_home_by_local_gps-checkbox" style="left:0;">Update Home</label>
+                        <label for="update_home_by_local_gps-checkbox" style="left:0;" i18n="settingsUpdateHome"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="update_home_by_local_gps-checkbox" name="update_home_by_local_gps-checkbox" class="toggle" />
@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="checkbox">
-                        <label for="gps_home_beeper-checkbox" style="left:0;">Beeper</label>
+                        <label for="gps_home_beeper-checkbox" style="left:0;" i18n="settingsBeeper"></label>
 
                         <div style="left:0;float:right;">
                             <input type="checkbox" id="gps_home_beeper-checkbox" name="gps_home_beeper-checkbox" class="toggle" />

@@ -3701,9 +3701,6 @@
     "configurationTiltMaxAngle": {
         "message": "Maximum Allowed Angle (degrees)"
     },
-    "featureDisplay": {
-        "message": "DISPLAY"
-    },
     "featureDebug": {
         "message": "DEBUG (Only exprets)"
     },
@@ -3749,5 +3746,35 @@
     },
     "cpuFreq": {
         "message": "CPU:"
+    },
+    "settingsDisplay": {
+        "message": "DISPLAY"
+    },
+    "settingsGPS": {
+        "message": "LOCAL GPS"
+    },
+    "settingsGPSProvider": {
+        "message": "Protocol"
+    },
+    "settingsGPSAutoConfigure": {
+        "message": "Auto Configure Protocol"
+    },
+    "settingsGPSAutoBaud": {
+        "message": "Auto Configure Baud Rate"
+    },
+    "settingsGPSBaudRate": {
+        "message": "Baud Rate"
+    },
+    "settingsGPSMinSats": {
+        "message": "Mínimun Number of Satellites"
+    },
+    "settingsMagneticDeclination": {
+        "message": "Magnetic Declination (i.e.: -1.19º => -119)\u003C/br>\u003Ca href=\"http://www.magnetic-declination.com\" target=\"_blank\">http://www.magnetic-declination.com/\u003C/a>"
+    },
+    "settingsUpdateHome": {
+        "message": "Continuous Home Update"
+    },
+    "settingsBeeper": {
+        "message": "Buzzer"
     }
 }
