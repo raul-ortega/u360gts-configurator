@@ -3702,7 +3702,7 @@
         "message": "Maximum Allowed Angle (degrees)"
     },
     "featureDebug": {
-        "message": "DEBUG (Only exprets)"
+        "message": "Debug (Only exprets)"
     },
     "featureEnabled": {
         "message": "Enabled"
@@ -3748,10 +3748,10 @@
         "message": "CPU:"
     },
     "settingsDisplay": {
-        "message": "DISPLAY"
+        "message": "Display"
     },
     "settingsGPS": {
-        "message": "LOCAL GPS"
+        "message": "Local GPS"
     },
     "settingsGPSProvider": {
         "message": "Protocol"
@@ -3778,7 +3778,7 @@
         "message": "Buzzer"
     },
     "settingsVBAT": {
-        "message": "BATTERY Voltage"
+        "message": "Battery Voltage"
     },
     "settingsVBATScale": {
         "message": "Scale (1 - 255)"
@@ -3814,7 +3814,7 @@
         "message": "Max Increment of Pulse (0 - 500 usec)"
     },
     "settingsEASING": {
-        "message": "Tilt EASING"
+        "message": "Tilt Easing"
     },
     "settingsEASINGFunction": {
         "message": "Function"

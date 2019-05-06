@@ -3635,7 +3635,7 @@
         "message": "Ángulo Máximo Permitido (grados)"
     },
     "featureDebug": {
-        "message": "DEBUG (Sólo expertos)"
+        "message": "Debug (Sólo expertos)"
     },
     "featureEnabled": {
         "message": "Habilitado"
@@ -3682,7 +3682,7 @@
         "message": "CPU:"
     },
     "settingsDisplay": {
-        "message": "MONITOR"
+        "message": "Monitor"
     },
     "settingsGPS": {
         "message": "GPS Local"
@@ -3748,7 +3748,7 @@
         "message": "Máximo Incremento del Pulso (0 - 500 usec)"
     },
     "settingsEASING": {
-        "message": "AMORTIGUACIÓN Servo Tilt"
+        "message": "Amortiguación Servo Tilt"
     },
     "settingsEASINGFunction": {
         "message": "Función"
