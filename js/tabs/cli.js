@@ -148,18 +148,6 @@ TABS.cli.initialize = function (callback) {
 
                 textarea.val('');
 
-                if (out_string.contains('save')) {
-                    CONFIGURATOR.cliActive = false;
-                    CONFIGURATOR.cliValid = false;
-                    GUI.log(i18n.getMessage('cliReboot'));
-                    GUI.log(i18n.getMessage('deviceRebooting'));
-
-                    $('a.connect').click();
-                    GUI.timeout_add('start_connection', function start_connection() {
-                        $('a.connect').click();
-                    }, GUI.reboot_delay);
-
-                }
             }
         });
 
@@ -347,6 +335,19 @@ TABS.cli.send = function (line, callback) {
     }
 
     serial.send(bufferOut, callback);
+	
+	if (line.contains('save')) {
+		CONFIGURATOR.cliActive = false;
+		CONFIGURATOR.cliValid = false;
+		GUI.log(i18n.getMessage('cliReboot'));
+		GUI.log(i18n.getMessage('deviceRebooting'));
+
+		$('a.connect').click();
+		GUI.timeout_add('start_connection', function start_connection() {
+			$('a.connect').click();
+		}, GUI.reboot_delay);
+
+	}
 };
 
 TABS.cli.cleanup = function (callback) {
