@@ -3767,5 +3767,17 @@
     },
 	"settingsTelemetryRelaying": {
         "message": "Reenviar Telemetría"
+    },
+	"settingsTelemetryRelayingPort": {
+        "message": "Puerto"
+    },
+	"settingsTelemetryRelayingProtocol": {
+        "message": "Protocolo"
+    },
+	"settingsTelemetryRelayingBauds": {
+        "message": "Baudios"
+    },
+	"settingsTelemetryRelayingWarning": {
+        "message": "Habilite los puertos SOFTSERIAL."
     }
 }

@@ -3833,5 +3833,17 @@
     },
 	"settingsTelemetryRelaying": {
         "message": "Telemetry Relaying"
+    },
+	"settingsTelemetryRelayingPort": {
+        "message": "Port"
+    },
+	"settingsTelemetryRelayingProtocol": {
+        "message": "Protocol"
+    },
+	"settingsTelemetryRelayingBauds": {
+        "message": "Baudrate"
+    },
+	"settingsTelemetryRelayingWarning": {
+        "message": "Ports FEATURE, must be enabled."
     }
 }
