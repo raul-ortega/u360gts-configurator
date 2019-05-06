@@ -3845,5 +3845,26 @@
     },
 	"settingsTelemetryRelayingWarning": {
         "message": "Ports FEATURE, must be enabled."
+    },
+	"settingsEPS": {
+        "message": "Position Estimation"
+    },
+	"settingsEPSMode": {
+        "message": "Mode"
+    },
+	"settingsEPSDistanceGain": {
+        "message": "Distance Gain (1 - 1000)"
+    },
+	"settingsEPSFrequency": {
+        "message": "Frequency (100 - 1000 msec)"
+    },
+	"settingsEPSInterpolation": {
+        "message": "Interpolation"
+    },
+	"settingsEPSHeadingGain": {
+        "message": "Heading Gain (1 - 1000)"
+    },
+	"settingsEPSSpeedGain": {
+        "message": "Speed Gain (1 - 1000)"
     }
 }

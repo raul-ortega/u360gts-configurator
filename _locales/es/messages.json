@@ -3779,5 +3779,26 @@
     },
 	"settingsTelemetryRelayingWarning": {
         "message": "Habilite los puertos SOFTSERIAL."
+    },
+	"settingsEPS": {
+        "message": "Estimación de Posición"
+    },
+	"settingsEPSMode": {
+        "message": "Modo"
+    },
+	"settingsEPSDistanceGain": {
+        "message": "Ganancia de Distancia (1 - 1000)"
+    },
+	"settingsEPSFrequency": {
+        "message": "Frequencia (100 - 1000 msec)"
+    },
+	"settingsEPSInterpolation": {
+        "message": "Interpolación"
+    },
+	"settingsEPSHeadingGain": {
+        "message": "Ganancia de Rumbo (1 - 1000)"
+    },
+	"settingsEPSSpeedGain": {
+        "message": "Ganancia de Velocidad (1 - 1000)"
     }
 }
