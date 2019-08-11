@@ -1,0 +1,96 @@
+
+# version
+# u360gts / BLUEPILL 10.1.3 Jul 31 2019 / 00:07:40 (c444206)
+
+# serial
+serial 0 1 57600 57600 0 115200
+serial 1 2 115200 9600 0 115200
+
+# feature
+feature -VBAT
+feature SERVO_TILT
+feature -SOFTSERIAL
+feature -GPS
+feature -TELEMETRY
+feature DISPLAY
+feature EASING
+feature -NOPID
+feature -DEBUG
+feature -EPS
+feature AUTODETECT
+
+# set
+set looptime=1000
+set emf_avoidance=OFF
+set rssi_channel=0
+set rssi_scale=30
+set rssi_zoom=35
+set servo_pwm_rate=50
+set gps_baud=4
+set gps_provider=UBLOX
+set gps_sbas_mode=AUTO
+set gps_auto_config=ON
+set gps_auto_baud=ON
+set gps_min_sats=6
+set gps_home_beeper=ON
+set telemetry_inversion=OFF
+set battery_capacity=0
+set vbat_scale=110
+set vbat_max_cell_voltage=43
+set vbat_min_cell_voltage=33
+set vbat_warning_cell_voltage=35
+set align_gyro=DEFAULT
+set align_mag=DEFAULT
+set align_board_roll=0
+set align_board_pitch=0
+set align_board_yaw=0
+set gyro_lpf=42
+set magzero_x=202
+set magzero_y=28
+set magzero_z=66
+set p=3200
+set i=20
+set d=20
+set max_pid_error=10
+set max_pid_accumulator=5000
+set max_pid_gain=500
+set pid_divider=15
+set pan_pin=0
+set pan0=1523
+set pan0_calibrated=1
+set pan_calibration_pulse=1400
+set min_pan_speed=4
+set offset=90
+set offset_trim=0
+set init_servos=0
+set tilt_pin=1
+set tilt0=575
+set tilt90=1500
+set tilt_max_angle=0
+set easing=2
+set easing_steps=60
+set easing_min_angle=4
+set easing_millis=15
+set telemetry_baud=7
+set telemetry_protocol=8
+set telemetry_min_sats=6
+set telemetry_provider=INAV
+set telemetry_home=AUTO
+set start_tracking_distance=5
+set start_tracking_altitude=4
+set mag_declination=-119
+set mag_calibrated=1
+set min_logic_level=60
+set nopid_min_delta= 0.200
+set nopid_map_angle=90
+set nopid_max_speed=200
+set eps=1
+set eps_distance_gain=100
+set eps_heading_gain=50
+set eps_speed_gain=60
+set eps_frequency=250
+set eps_interpolation=OFF
+set eps_interpolation_points=3
+set update_home_by_local_gps=ON
+set max_speed_filter=0
+set telemetry_altitude_priority=BARO
