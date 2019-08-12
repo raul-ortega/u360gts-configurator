@@ -14,7 +14,7 @@
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn78lctmOHVZShiQ8N3Va2xTBTb6pTbH0/qX0EqJJUJv63AoIoLu5KIHGroQ7EK28WdNOli6vIgBENTvHlgb4O3PvVtbzRBdrTm8AxdzIB4kgdJe4TNZ1A/l/CF0MK56tyQ0m/NzDR8et1WQXC7saROQCOs8+yTcsCezFhsldYx80IKvEp95CbQjsOM/QNzyEE/AZIV3aRxa/OOPZvzhfMUzjWcm2Zgk0vlxl6phw/H/ncXP64uJslduTMbYnJ23AT9KVVn+R/nrU7LbR38tmAPJXSv4bG02gj6JC0ah5a1+7OwdjqFVzv+NvTzhSjtRcUTldEy0MmsP+OGYWuMBQ1wIDAQAB",
    "manifest_version": 2,
    "minimum_chrome_version": "38",
-   "name": "u360gts - Configurator",
+   "name": "u360gts configurator",
    "offline_enabled": true,
    "permissions": [ "https://www.google-analytics.com/", "https://maps.googleapis.com/*", "https://*.github.com/", "https://*.githubusercontent.com/", "http://*.u360gts.com/", "https://*.amazonaws.com/", "https://u360gts.slack.com/*", "serial", "usb", "storage", "fileSystem", "fileSystem.write", "fileSystem.retainEntries", "notifications", "alwaysOnTopWindows", {
       "usbDevices": [ {
@@ -22,7 +22,7 @@
          "vendorId": 1155
       } ]
    }, "webview", "unlimitedStorage" ],
-   "short_name": "u360gts v4.0.0",
+   "short_name": "u360gts configurator v4.0.0",
    "sockets": {
       "tcp": {
          "connect": "*:*"
