@@ -340,7 +340,7 @@ GUI_control.prototype.statusInterval = function () {
             $('.magicon').removeClass('active');
         }
 		
-		if (self.status.gps) {
+		if (self.status.gps > 1) {
             $('.gps').addClass('on');
             $('.gpsicon').addClass('active');
         } else {
