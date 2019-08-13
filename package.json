@@ -29,7 +29,10 @@
         "accessible_resources": [
           "tabs/map.html",
           "js/tabs/map.js",
-          "/images/gts/gts_icon_position.png"
+		  "/js/libraries/openlayer/css/ol.css",
+		  "/js/libraries/openlayer/build/ol.js",
+		  "/js/libraries/openlayer/build/ol.js.map",
+          "/images/icons/tracker-map-icon.png"
         ]
       }
     ]
