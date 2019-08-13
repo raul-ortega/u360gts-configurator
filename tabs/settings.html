@@ -1,0 +1,402 @@
+<div class="tab-configuration toolbar_fixed_bottom">
+    <div class="content_wrapper">
+
+        <div class="tab_title" i18n="tabSettings"></div>
+
+        <div class="leftWrapper">
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsDisplay"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="DISPLAY-feature" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="DISPLAY-feature" name="DISPLAY-feature" class="toggle" />
+                        </div>
+                    </div> 
+
+                </div>
+            </div> 
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsGPS"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="GPS-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="GPS-feature" name="GPS-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="select">
+
+                        <label for="gps_provider-select" style="left:0;" i18n="settingsGPSProvider"></label>
+
+                        <select name="gps_provider-select" id="gps_provider-select" style="float:right; width: 160px;">
+                            <option value='' selected='selected'>Select provider</option>
+                            <option value='NMEA'>NMEA</option>
+                            <option value='UBLOX'>UBLOX</option>
+                        </select>
+
+                    </div>
+					
+                    <div class="select">
+
+                        <label for="gps_baud-select" style="left:0;" i18n="settingsGPSBaudRate"></label>
+
+                        <select name="gps_baud-select" id="gps_baud-select" style="float:right; width: 160px;">                        
+                            <option value=''>Select baudrate</option>
+                            <option value='1'>1200</option>
+                            <option value='2'>2400</option>
+                            <option value='3'>4800</option>
+                            <option value='4'>9600</option>
+                            <option value='5'>19200</option>
+                            <option value='6'>38400</option>
+                            <option value='7'>57600</option>
+                            <option value='8'>115200</option>
+                            <option value='9'>230400</option>
+                            <option value='10'>250000</option>
+                        </select>
+
+                    </div>                     
+
+					<div class="checkbox">
+                        <label for="gps_auto_config-checkbox" style="left:0;" i18n="settingsGPSAutoConfigure"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="gps_auto_config-checkbox" name="gps_auto_config-checkbox" class="toggle" />
+                        </div>
+                    </div>
+					
+					<div class="checkbox">
+                        <label for="gps_auto_baud-checkbox" style="left:0;" i18n="settingsGPSAutoBaud"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="gps_auto_baud-checkbox" name="gps_auto_baud-checkbox" class="toggle" />
+                        </div>
+                    </div>
+					
+                    <div class="number">
+                        <label for="gps_min_sats-spinner" style="left:0;" i18n="settingsGPSMinSats">Min Sats</label>
+                        <input type="number" id="gps_min_sats-spinner" name="gps_min_sats-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+					
+					<div class="number">
+                        <label for="mag_declination-spinner" style="left:0;" i18n="settingsMagneticDeclination"></label>
+                        <input type="number" id="mag_declination-spinner" name="mag_declination-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+					
+                    <div class="checkbox">
+                        <label for="update_home_by_local_gps-checkbox" style="left:0;" i18n="settingsUpdateHome"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="update_home_by_local_gps-checkbox" name="update_home_by_local_gps-checkbox" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="checkbox">
+                        <label for="gps_home_beeper-checkbox" style="left:0;" i18n="settingsBeeper"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="gps_home_beeper-checkbox" name="gps_home_beeper-checkbox" class="toggle" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsVBAT"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="VBAT-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="VBAT-feature" name="VBAT-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="vbat_scale-spinner" style="left:0;" i18n="settingsVBATScale"></label>
+                        <input type="text" id="vbat_scale-spinner" name="vbat_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div> 
+
+                    <div class="number">
+                        <label for="vbat_min_cell_voltage-spinner" style="left:0;" i18n="settingsVBATMinCellVoltage"></label>
+                        <input type="text" id="vbat_min_cell_voltage-spinner" name="vbat_min_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div> 
+
+                    <div class="number">
+                        <label for="vbat_max_cell_voltage-spinner" style="left:0;" i18n="settingsVBATMaxCellVoltage"></label>
+                        <input type="text" id="vbat_max_cell_voltage-spinner" name="vbat_max_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div> 
+
+                    <div class="number">
+                        <label for="vbat_warning_cell_voltage-spinner" style="left:0;" i18n="settingsVBATWarningCellVoltage"></label>
+                        <input type="text" id="vbat_warning_cell_voltage-spinner" name="vbat_warning_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div> 
+
+                </div>
+            </div>  
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsRSSI"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="RSSI_ADC-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="RSSI_ADC-feature" name="RSSI_ADC-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="rssi_scale-spinner" style="left:0;" i18n="settingsRSSIScale"></label>
+                        <input type="text" id="rssi_scale-spinner" name="rssi_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="rssi_zoom-spinner" style="left:0;" i18n="settingsRSSIZoom"></label>
+                        <input type="number" id="rssi_zoom-spinner" name="rssi_zoom-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>                      
+
+                </div>
+            </div>      
+
+        </div>
+
+        <div class="rightWrapper">
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsNOPID"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="NOPID-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="NOPID-feature" name="NOPID-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="nopid_min_delta-spinner" style="left:0;" i18n="settingsNOPIDMinDelta"></label>
+                        <input type="text" id="nopid_min_delta-spinner" name="nopid_min_delta-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="nopid_map_angle-spinner" style="left:0;" i18n="settingsNOPIDMapAngle"></label>
+                        <input type="number" id="nopid_map_angle-spinner" name="nopid_map_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>   
+
+                    <div class="number">
+                        <label for="nopid_max_speed-spinner" style="left:0;" i18n="settingsNOPIDMaxSpeed"></label>
+                        <input type="number" id="nopid_max_speed-spinner" name="nopid_max_speed-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>                     
+
+                </div>
+            </div> 
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsEASING"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="EASING-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="EASING-feature" name="EASING-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="select">
+
+                        <label for="gps_provider-select" style="left:0;" i18n="settingsEASINGFunction"></label>
+
+                        <select name="easing-select" id="easing-select" style="float:right; width: 160px;">
+                            <option value='' selected='selected'>Select function</option>
+                            <option value='1'>EASE_OUT_QRT</option>
+                            <option value='2'>EASE_OUT_CIRC</option>
+                            <option value='3'>EASE_OUT_EXPO</option>
+                            <option value='4'>EASE_OUT_CUBIC</option>
+                        </select>
+
+                    </div>                
+
+                    <div class="number">
+                        <label for="easing_steps-spinner" style="left:0;" i18n="settingsEASINGSteps"></label>
+                        <input type="number" id="easing_steps-spinner" name="easing_steps-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="easing_millis-spinner" style="left:0;" i18n="settingsEASINGMilliseconds"></label>
+                        <input type="number" id="easing_millis-spinner" name="easing_millis-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="easing_min_angle-spinner" style="left:0;" i18n="settingsEASINGMinAngle"></label>
+                        <input type="number" id="easing_min_angle-spinner" name="easing_min_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+
+
+                </div>
+            </div> 
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsSOFTSERIAL"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="SOFTSERIAL-feature" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="SOFTSERIAL-feature" name="SOFTSERIAL-feature" class="toggle" />
+                        </div>
+                    </div>                      
+
+                </div>
+            </div> 
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsTelemetryRelaying"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="TELEMETRY-feature" style="left:0;" i18n="featureEnabled"</label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="TELEMETRY-feature" name="TELEMETRY-feature" class="toggle" />
+                        </div>
+                    </div>
+                    
+                    <div class="select">
+
+                        <table id="portsTable">
+                            <tr>
+                                <th style="width: 200px;" i18n="settingsTelemetryRelayingPort"></th>
+                                <th style="text-align: center" i18n="settingsTelemetryRelayingProtocol"></th>
+                                <th style="text-align: center" i18n="settingsTelemetryRelayingBauds"></th>
+                            </tr>                   
+                        </table>
+                        
+                        <div class="note" id="notePortsTable" style="display: none">
+                            <div class="note_spacer">
+                                <p i18n="settingsTelemetryRelayingWarning">Ports FEATURE, must be enabled.</p>
+                            </div>
+                        </div>
+
+                    </div>    
+
+                </div> 
+
+            </div> 
+
+            <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="settingsEPS"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="EPS-feature" style="left:0;" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="EPS-feature" name="EPS-feature" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="select">
+
+                        <label for="eps-select" style="left:0;" i18n="settingsEPSMode"></label>
+
+                        <select name="eps-select" id="eps-select" style="float:right; width: 200px;">
+                            <option value='' selected='selected'>Select EPS mode</option>
+                            <option value='1'>Mode 1</option>
+                            <option value='2'>Mode 2</option>
+                            <option value='3'>Mode 1 + 2</option>
+                        </select>
+
+                    </div> 
+
+                    <div class="number">
+                        <label for="eps_distance_gain-spinner" style="left:0;" i18n="settingsEPSDistanceGain"></label>
+                        <input type="text" id="eps_distance_gain-spinner" name="eps_distance_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="eps_frequency-spinner" style="left:0;" i18n="settingsEPSFrequency"></label>
+                        <input type="number" id="eps_frequency-spinner" name="eps_frequency-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>   
+
+                    <div class="checkbox">
+                        <label for="eps_interpolation-checkbox" style="left:0;" i18n="settingsEPSInterpolation"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="eps_interpolation-checkbox" name="eps_interpolation-checkbox" class="toggle" />
+                        </div>
+                    </div>
+
+                    <div class="number">
+                        <label for="eps_heading_gain-spinner" style="left:0;" i18n="settingsEPSHeadingGain"></label>
+                        <input type="text" id="eps_heading_gain-spinner" name="eps_heading_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>
+
+                    <div class="number">
+                        <label for="eps_speed_gain-spinner" style="left:0;" i18n="settingsEPSSpeedGain"></label>
+                        <input type="number" id="eps_speed_gain-spinner" name="eps_speed_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
+                    </div>                     
+
+                </div>
+            </div>     
+
+		    <div class="config-section gui_box grey">
+                <div class="gui_box_titlebar">
+                    <div class="spacer_box_title" i18n="featureDebug"></div>
+                </div>
+                <div class="spacer_box">
+
+                    <div class="checkbox">
+                        <label for="DEBUG-feature" i18n="featureEnabled"></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="DEBUG-feature" name="DEGUB-feature" class="toggle" />
+                        </div>
+                    </div> 
+
+                </div>
+            </div> 
+			
+        </div>
+		
+        <div class="clear-both"></div>
+
+    </div>
+    <div class="content_toolbar">
+        <div class="btn save_btn">
+            <a class="save" href="#" data-i18n="configurationButtonSave" id="configurationButtonSave" i18n="settingsSave"></a>
+        </div>
+    </div>
+</div>

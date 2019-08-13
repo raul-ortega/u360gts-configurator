@@ -1,0 +1,216 @@
+<div class="tab-sim">
+    <div class="content_wrapper">
+        <div class="tab_title" i18n="tabSim"></div>
+
+        <div id="simDisableDiv">
+            <p i18n="simNotAvailable"></p>
+        </div>
+
+        <div id="simDiv" style="display: none;">
+
+            <div class="cf_column threefourth_left">
+
+                <div class="gui_box grey gps_map">
+                    <div class="gui_box_titlebar" style="margin-bottom: 0px;">
+                        <div class="spacer_box_title" i18n="gpsMapHead"></div>
+                    </div>
+                    <div id="connect" i18n="gpsMapMessage1">
+                        <div class="default_btn" style="width:50px; margin-left:auto; margin-right:auto; float:none;"><a id="check">retry</a></div>
+                    </div>
+                    <div id="waiting" >
+                        <div class="info" i18n="gpsMapMessage2"></span>
+                        </div>
+                    </div>
+                    <div id="loadmap">
+                        <webview id="map" class="map" src="tabs/map.html" partition="persist:map"></webview>
+                        <div class="controls" style="display:none">
+                            <a href="#" id="zoom_in">+</a>
+                            <a href="#" id="zoom_out">–</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spacer_right" style="display: none;">
+                    <div class="backdrop">
+                        <div class="window">
+                            <div class="wrapper" id="simulator-log"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="cf_column fourth">
+
+                <div class="config-section gui_box grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="settings"></div>
+                    </div>
+                    <div class="spacer_box">
+
+                        <div class="select">
+
+                            <label for="simulation-type" style="left:0;" i18n="simType"></label>
+
+                            <select name="simulation-type" id="simulation-type" style="float:right; width: 150px;">
+                                <option value='1' i18n="simTypeCircle"></option>
+                                <option value='2' i18n="simTypeParallel"></option>
+                                <option value='3' style="display:none;">Custom</option>
+                            </select>
+
+                        </div>
+
+                        <div class="select">
+
+                            <label for="simulation-protocol" style="left:0;" i18n="configurationGPSProtocol"></label>
+
+                            <select name="simulation-protocol" id="simulation-protocol" style="float:right; width: 150px;">
+                                <option value='' i18n="simSelectProtocol"></option>
+                                <option value='1' selected='selected'>NMEA</option>
+                                <option value='2'>MAVLINK</option>
+                                <option value='3'>PITLAB</option>
+                                <option value='4'>MFD</option>
+                            </select>
+
+                        </div>  
+
+                        <div class="select">
+
+                            <label for="simulation-frequency" style="left:0;" i18n="pidTuningFilterFrequency">Frequency </label>
+
+                            <select name="simulation-frequency" id="simulation-frequency" style="float:right; width: 150px;">
+                                <option value='' i18n="simSelectFrequency"></option>
+                                <option value='1000'>1 Hz (1000 ms)</option>
+                                <option value='500'>2 Hz (500 ms)</option>
+                                <option value='333'>3 Hz (333 ms)</option>
+                                <option value='250'>4 Hz (250 ms)</option>
+                                <option value='200' selected='selected'>5 Hz (200 ms)</option>
+                                <option value='166'>6 Hz (166 ms)</option>
+                                <option value='142'>7 Hz (142 ms)</option>
+                                <option value='125'>8 Hz (125 ms)</option>
+                                <option value='111'>9 Hz (111 ms)</option>
+                                <option value='100'>10 Hz (100 ms)</option>
+                            </select>
+
+                        </div>    
+
+                        <div class="number">
+                            <label for="simulation-sats" style="left:0;" i18n="simSatellites">Satellites</label>
+
+                            <div style="left:0;float:right;">
+                                <input type="number" id="simulation-sats" name="simulation-sats" min="0" max="20" value="6" style="margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="select">
+
+                            <label for="simulation-fixtype" style="left:0;" i18n="simFixType"></label>
+
+                            <select name="simulation-fixtype" id="simulation-fixtype" style="float:right; width: 150px;">
+                                <option value='' i18n="simSelectFixType"></option>
+                                <option value='0'>0</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3' selected='selected'>3</option>
+                                <option value='4'>4</option>
+                                <option value='5'>5</option>
+                                <option value='6'>6</option>
+                                <option value='7'>7</option>
+                                <option value='8'>8</option>
+                            </select>
+
+                        </div> 
+
+
+                        <div class="number">
+                            <label for="simulator-speed" style="left:0;" i18n="simSpeed"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="number" id="simulator-speed" name="simulator-speed" min="0" value="40" style="margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="number">
+                            <label for="simulator-distance" style="left:0;" i18n="simRadius"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="number" id="simulator-distance" name="simulator-distance" min="0" max="360" value="20" style="margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="number">
+                            <label for="simulator-altitude" style="left:0;" i18n="simAltitude"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="number" id="simulator-altitude" name="simulator-altitude" min="0" value="0" style="margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="number">
+                            <label for="course" style="left:0;" i18n="simCourse"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="number" id="course" name="course" min="0" max="360" value="0" style="margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="number">
+                            <label for="simulator-home-lat" style="left:0;" i18n="simLatitude"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="text" id="simulator-home-lat" name="simulator-home-lat" value="47.403583" style="width:100px;margin-right: 0;" />
+                            </div>
+                        </div>
+
+                        <div class="number">
+                            <label for="simulator-home-lon" style="left:0;" i18n="simLongitude"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="text" id="simulator-home-lon" name="simulator-home-lon" value="8.535850" style="width:100px;margin-right: 0;" />
+                            </div>
+                        </div>
+
+
+                        <div class="checkbox">
+                            <label for="simulator-force-error" style="left:0;" i18n="simForceError"></label>
+
+                            <div style="left:0;float:right;">
+                                <input type="checkbox" id="simulator-force-error" name="simulator-force-error" class="toggle" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="config-section gui_box grey">
+                    <div class="gui_box_titlebar">
+                        <div class="spacer_box_title" i18n="simControl"></div>
+                    </div>
+                    <div class="spacer_box">
+
+                        <div class="default_btn">
+                            <div style="margin-right: 60px;float:right;">
+                                <a class="simulator-start" href="#" i18n="simStart"></a>
+                            </div>
+                            <div style="margin-right: 60px;float:right;">
+                                <a class="simulator-stop" href="#" style="display: none;" i18n="simStop"></a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
