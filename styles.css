@@ -1,0 +1,54 @@
+body {
+  background-color: #f8f8f8;
+  font-family: "helvetica neue", helvetica, sans-serif;
+  font-size: 16px;
+  /*overflow: hidden;*/
+  min-width: 1060px;
+}
+
+label {
+  display: block;
+  padding: 20px;
+  padding:right:10px;
+  border-bottom: solid 1px #ddd;
+  border-right: solid 1px #ddd;
+  width: auto;
+}
+
+label {
+  color: #999;
+}
+
+#port-picker,
+#status {
+  color: #000;
+}
+
+#port-picker {
+  max-width: 250px;
+  margin-right: 10px;
+}
+
+#position-input {
+  display: block;
+   -webkit-appearance:none !important;
+  width: 90%;
+  margin: 20px auto;
+  height: 6px;
+  background: rgb(13, 168, 97);
+}
+
+#position-input::-webkit-slider-thumb {
+  -webkit-appearance:none !important;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: rgb(67, 135, 253);
+}
+
+#container {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
