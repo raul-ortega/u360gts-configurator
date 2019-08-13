@@ -267,7 +267,7 @@ TABS.firmware_flasher.initialize = function (callback) {
         });
 
         showOrHideBuildTypeSelect();
-        $('input.show_development_releases').change(showOrHideBuildTypeSelect);
+        //$('input.show_development_releases').change(showOrHideBuildTypeSelect);
 
         // translate to user-selected language
         i18n.localizePage();
