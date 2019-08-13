@@ -798,16 +798,19 @@
         "message": "u360gts documentation is available in Markdown and PDF formats.\u003Cbr />\u003Cbr />"
     },
     "defaultDocumentation1": {
-        "message": "The wiki is a great resource for information, it can be found \u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">here\u003C/a>."
+        "message": "The wiki is a great resource for information, it can be found \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/index.md\" target=\"_blank\">here\u003C/a>."
     },
     "defaultDocumentation2": {
         "message": "The release notes for the firmware can be read at github releases page, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">here\u003C/a>."
     },
     "defaultDocumentation3": {
-        "message": "The PDF manual appropriate to the firmware can be downloaded from the github releases page, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">here\u003C/a>."
+        "message": "The wiring schematics appropriate to the board can be read at github wiring schematics page, \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/install-wiring-schematics.md\" target=\"_blank\">here\u003C/a>."
     },
     "defaultDocumentation4": {
-        "message": "The Markdown latest online documentation is available \u003Ca href=\"https://github.com/raul-ortega/u360gts/tree/master/docs\" target=\"_blank\">here\u003C/a> - you can switch to the appropriate version of the documentation by selecting the tag."
+        "message": "The official 3D printted frame stl files can be found \u003Ca href=\"https://www.thingiverse.com/thing:3203850\" target=\"_blank\">here\u003C/a>."
+    },
+	"defaultDocumentation5": {
+        "message": "The full list of commponets can be found \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/hardware-list-of-components.md\" target=\"_blank\">here\u003C/a>."
     },
     "defaultDocumentationHead": {
         "message": "Documentation / Manual"
@@ -828,19 +831,19 @@
         "message": "For support please search the forums/wiki first or contact your vendor.\u003Cbr />\u003Cbr />"
     },
     "defaultSupport1": {
-        "message": "\u003Ca href=\"http://www.rcgroups.com/forums/showthread.php?t=2249574&page=1\" target=\"_blank\">RC Groups thread\u003C/a>"
+        "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/index.md\" target=\"_blank\">u360gts Wiki\u003C/a>"
     },
     "defaultSupport2": {
-        "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">u360gts Wiki\u003C/a>"
+        "message": "\u003Ca href=\"https://www.facebook.com/groups/u360gts\" target=\"_blank\">u360gts Facebook Group\u003C/a>"
     },
     "defaultSupport3": {
-        "message": "\u003Ca href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\">Joshua Bardwell Betaflight Videos\u003C/a>"
+        "message": "\u003Ca href=\"https://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o\" target=\"_blank\">ZONA FPV Spanish Community Forum\u003C/a>"
     },
     "defaultSupport4": {
-        "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts\" target=\"_blank\">GitHub\u003C/a>"
+        "message": "\u003Ca href=\"https://github.com/raul-ortega/u360gts\" target=\"_blank\">u360gts GitHub Repository\u003C/a>"
     },
     "defaultSupport5": {
-        "message": "\u003Ca href=\"http://u360gts.com/slack\" target=\"_blank\">u360gts devs on slack\u003C/a>"
+        "message": "\u003Ca href=\"https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker\" target=\"_blank\">u360gts RC Groups Thread\u003C/a>"
     },
     "defaultSupportHead": {
         "message": "Support"
@@ -3866,5 +3869,8 @@
     },
 	"settingsEPSSpeedGain": {
         "message": "Speed Gain (1 - 1000)"
+    },
+	"settingsSave": {
+        "message": "Save"
     }
 }

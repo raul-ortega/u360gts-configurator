@@ -780,10 +780,19 @@
         "message": "La documentación de u360gts está disponible en las notas de la versión y en la wiki.\u003Cbr />\u003Cbr />"
     },
     "defaultDocumentation1": {
-        "message": "La wiki de u360gts es un gran recurso de información, puedes encontrarla \u003Ca href=\"https://github.com/raul-ortega/u360gts/wiki\" target=\"_blank\">aquí\u003C/a>."
+        "message": "La wiki de u360gts es un gran recurso de información, puedes encontrarla \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/index.md\" target=\"_blank\">aquí\u003C/a>."
     },
     "defaultDocumentation2": {
         "message": "Las notas de la versión del firmware pueden leerse en la página de versiones de GitHub, \u003Ca href=\"https://github.com/raul-ortega/u360gts/releases\" target=\"_blank\">aquí\u003C/a>."
+    },
+	"defaultDocumentation3": {
+        "message": "Los esquemas de cableado para las distintas controladoras se encuentran \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/install-wiring-schematics.md\" target=\"_blank\">aquí\u003C/a>."
+    },
+    "defaultDocumentation4": {
+        "message": "Los archivos STL de la mecánica impresa 3D se encuentran \u003Ca href=\"https://www.thingiverse.com/thing:3203850\" target=\"_blank\">aquí\u003C/a>."
+    },
+    "defaultDocumentation5": {
+        "message": "La lista de componentes completa se encuetnra \u003Ca href=\"https://github.com/raul-ortega/u360gts/blob/master/wiki/hardware-list-of-components.md\" target=\"_blank\">aquí\u003C/a>."
     },
     "defaultDocumentationHead": {
         "message": "Documentación / Manual"
@@ -3800,5 +3809,8 @@
     },
 	"settingsEPSSpeedGain": {
         "message": "Ganancia de Velocidad (1 - 1000)"
+    },
+	"settingsSave": {
+        "message": "Guardar"
     }
 }
