@@ -86,12 +86,12 @@
 					
                     <div class="number">
                         <label for="gps_min_sats-spinner" style="left:0;" i18n="settingsGPSMinSats">Min Sats</label>
-                        <input type="number" id="gps_min_sats-spinner" name="gps_min_sats-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="gps_min_sats-spinner" name="gps_min_sats-spinner" value="0" min="4" max="20" style="float:right;margin-right: 0px;" />
                     </div>
 					
 					<div class="number">
                         <label for="mag_declination-spinner" style="left:0;" i18n="settingsMagneticDeclination"></label>
-                        <input type="number" id="mag_declination-spinner" name="mag_declination-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="mag_declination-spinner" name="mag_declination-spinner" value="0" min="-18000" max="18000" style="float:right;margin-right: 0px;" />
                     </div>
 					
                     <div class="checkbox">
@@ -129,22 +129,22 @@
 
                     <div class="number">
                         <label for="vbat_scale-spinner" style="left:0;" i18n="settingsVBATScale"></label>
-                        <input type="text" id="vbat_scale-spinner" name="vbat_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="vbat_scale-spinner" name="vbat_scale-spinner" value="0" min="1" max="255" style="float:right;margin-right: 0px;" />
                     </div> 
 
                     <div class="number">
                         <label for="vbat_min_cell_voltage-spinner" style="left:0;" i18n="settingsVBATMinCellVoltage"></label>
-                        <input type="text" id="vbat_min_cell_voltage-spinner" name="vbat_min_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="vbat_min_cell_voltage-spinner" name="vbat_min_cell_voltage-spinner" value="0" min="10" max="50" style="float:right;margin-right: 0px;" />
                     </div> 
 
                     <div class="number">
                         <label for="vbat_max_cell_voltage-spinner" style="left:0;" i18n="settingsVBATMaxCellVoltage"></label>
-                        <input type="text" id="vbat_max_cell_voltage-spinner" name="vbat_max_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="vbat_max_cell_voltage-spinner" name="vbat_max_cell_voltage-spinner" value="0" min="10" max="50" style="float:right;margin-right: 0px;" />
                     </div> 
 
                     <div class="number">
                         <label for="vbat_warning_cell_voltage-spinner" style="left:0;" i18n="settingsVBATWarningCellVoltage"></label>
-                        <input type="text" id="vbat_warning_cell_voltage-spinner" name="vbat_warning_cell_voltage-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="vbat_warning_cell_voltage-spinner" name="vbat_warning_cell_voltage-spinner" value="0" min="10" max="50" style="float:right;margin-right: 0px;" />
                     </div> 
 
                 </div>
@@ -166,12 +166,12 @@
 
                     <div class="number">
                         <label for="rssi_scale-spinner" style="left:0;" i18n="settingsRSSIScale"></label>
-                        <input type="text" id="rssi_scale-spinner" name="rssi_scale-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="rssi_scale-spinner" name="rssi_scale-spinner" value="0" min="1" max="255" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="number">
                         <label for="rssi_zoom-spinner" style="left:0;" i18n="settingsRSSIZoom"></label>
-                        <input type="number" id="rssi_zoom-spinner" name="rssi_zoom-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="rssi_zoom-spinner" name="rssi_zoom-spinner" value="0" min="1" max="100" style="float:right;margin-right: 0px;" />
                     </div>                      
 
                 </div>
@@ -197,17 +197,17 @@
 
                     <div class="number">
                         <label for="nopid_min_delta-spinner" style="left:0;" i18n="settingsNOPIDMinDelta"></label>
-                        <input type="text" id="nopid_min_delta-spinner" name="nopid_min_delta-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="nopid_min_delta-spinner" name="nopid_min_delta-spinner" value="0" min="0" max="180" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="number">
                         <label for="nopid_map_angle-spinner" style="left:0;" i18n="settingsNOPIDMapAngle"></label>
-                        <input type="number" id="nopid_map_angle-spinner" name="nopid_map_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="nopid_map_angle-spinner" name="nopid_map_angle-spinner" value="0" min="0" max="180" style="float:right;margin-right: 0px;" />
                     </div>   
 
                     <div class="number">
                         <label for="nopid_max_speed-spinner" style="left:0;" i18n="settingsNOPIDMaxSpeed"></label>
-                        <input type="number" id="nopid_max_speed-spinner" name="nopid_max_speed-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="nopid_max_speed-spinner" name="nopid_max_speed-spinner" value="0" min="0" max="500" style="float:right;margin-right: 0px;" />
                     </div>                     
 
                 </div>
@@ -243,17 +243,17 @@
 
                     <div class="number">
                         <label for="easing_steps-spinner" style="left:0;" i18n="settingsEASINGSteps"></label>
-                        <input type="number" id="easing_steps-spinner" name="easing_steps-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="easing_steps-spinner" name="easing_steps-spinner" value="0" min="0" max="100" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="number">
                         <label for="easing_millis-spinner" style="left:0;" i18n="settingsEASINGMilliseconds"></label>
-                        <input type="number" id="easing_millis-spinner" name="easing_millis-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="easing_millis-spinner" name="easing_millis-spinner" value="0" min="1" max="100" style="float:right;margin-right: 0px;" />
                     </div>
 
                     <div class="number">
                         <label for="easing_min_angle-spinner" style="left:0;" i18n="settingsEASINGMinAngle"></label>
-                        <input type="number" id="easing_min_angle-spinner" name="easing_min_angle-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="easing_min_angle-spinner" name="easing_min_angle-spinner" value="0" min="1" max="10" style="float:right;margin-right: 0px;" />
                     </div>
 
 
@@ -348,7 +348,7 @@
 
                     <div class="number">
                         <label for="eps_frequency-spinner" style="left:0;" i18n="settingsEPSFrequency"></label>
-                        <input type="number" id="eps_frequency-spinner" name="eps_frequency-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="eps_frequency-spinner" name="eps_frequency-spinner" value="0" min="100" max="1000" style="float:right;margin-right: 0px;" />
                     </div>   
 
                     <div class="checkbox">
@@ -366,7 +366,7 @@
 
                     <div class="number">
                         <label for="eps_speed_gain-spinner" style="left:0;" i18n="settingsEPSSpeedGain"></label>
-                        <input type="number" id="eps_speed_gain-spinner" name="eps_speed_gain-spinner" value="0" style="float:right;margin-right: 0px;" />
+                        <input type="number" id="eps_speed_gain-spinner" name="eps_speed_gain-spinner" value="0" min="1" max="1000" style="float:right;margin-right: 0px;" />
                     </div>                     
 
                 </div>
