@@ -352,9 +352,8 @@ GUI_control.prototype.statusInterval = function () {
         $('span.cycle-time').text(self.status.cycle);
         $('span.cpu-freq').text(self.status.cpu);
 
-        $('.quad-status-contents').show();
-
-		if (GUI.status.vbat){
+        if (GUI.status.vbat){
+			$('.quad-status-contents').show();
 			var batTypeRegexp = /(?:.[S]+)/gm;
 			var match = batTypeRegexp.exec(GUI.status.vbat);
 			var batType = match[0];
@@ -396,6 +395,11 @@ GUI_control.prototype.statusInterval = function () {
 GUI_control.prototype.clearStatus = function () {
 	var self = this;
     self.status = [];
+	$('.gps').removeClass('on');
+    $('.gpsicon').removeClass('active');
+	$('.mag').removeClass('on');
+    $('.magicon').removeClass('active');
+	$('.quad-status-contents').hide();
 }
 
 GUI_control.prototype.reboot = function () {
