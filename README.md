@@ -45,7 +45,7 @@ If you prefer to have the application in English or any other language, you can 
 ## How To Get Help:
 
 - [Submitting a new issue](https://github.com/raul-ortega/u360gts-configurator/issues)
-- [Asking in u360 facebook group](https://www.facebook.com/groups/u360gts/)
+- [Asking in u360gts facebook group](https://www.facebook.com/groups/u360gts/)
 - [Posting in the spanish community (español)](http://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o/)
 - [Posting in Jelle737's Build Log u360gts: 360° antenna tracker on rcgropus](https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker)
 
