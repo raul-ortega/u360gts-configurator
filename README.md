@@ -56,5 +56,7 @@ We accept clean and reasonable patches, submit them!
 ## Authors
 
 Raúl Ortega/raul-ortega - maintainer of the u360gts firmware and configurator.
+
 Héctor Narbona/Amigache - whose contribution has been essential for the creation of version 4.0 of the configurator.
+
 Dominic Clifton/hydra - maintainer of the Cleanflight firmware and configurator, from which u360gts project is based on.
