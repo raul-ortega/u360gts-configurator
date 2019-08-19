@@ -1,22 +1,6 @@
 # u360gts Configurator
 
-This is the crossplatform configuration tool for [u360gts](http://www.u360gts.com), the Universal 360º Continous Rotation Tracker System for Drones (UAVs, RPAs and FPV).
-
-It runs as an app within Google Chrome and allows you to configure the u360gts firmware.
-
-## Install
-
- 1.- Download the zip file from the repository.
- 
- 2.- Open Chrome's extensions page in your browser by pasting chrome://chrome/extensions/ into your address bar and pressing Enter.
- 
- 3.- Drag and drop the extension you just downloaded into the Chrome extensions page.
- 
-
- 
- # u360gts Configurator
-
-u360gts configurator is a crossplatform configuration tool for [u360gts](http://www.u360gts.com), the Universal 360º Continous Rotation Tracker System for Drones (UAVs, RPAs and FPV).
+u360gts configurator is a crossplatform configuration tool for [u360gts](http://www.u360gts.com), the Universal 360Âº Continous Rotation Tracker System for Drones (UAVs, RPAs and FPV).
 
 It allows you to configure the u360gts software firmware on any [supported u360gts board](https://github.com/raul-ortega/u360gts/blob/master/wiki/install-wiring-schematics.md).
 
@@ -61,8 +45,8 @@ If you prefer to have the application in English or any other language, you can 
 
 - [Submitting a new issue](https://github.com/raul-ortega/u360gts-configurator/issues)
 - [Asking in u360 facebook group](https://www.facebook.com/groups/u360gts/)
-- [Posting in the spanish community (español)](http://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o/)
-- [Posting in Jelle737's Build Log u360gts: 360° antenna tracker on rcgropus](https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker)
+- [Posting in the spanish community (espaÃ±ol)](http://www.zonafpv.com/foro/estacion-de-tierra/u360gts-seguidor-de-antena-de-rotacion-continua-360o/)
+- [Posting in Jelle737's Build Log u360gts: 360Â° antenna tracker on rcgropus](https://www.rcgroups.com/forums/showthread.php?2964122-u360gts-360%C2%B0-antenna-tracker)
 
 ## Developers
 
@@ -70,6 +54,6 @@ We accept clean and reasonable patches, submit them!
 
 ## Authors
 
-Raúl Ortega/raul-ortega - maintainer of the u360gts firmware and configurator.
-Héctor Narbona/Amigache - whose contribution has been essential for the creation of version 4.0 of the configurator.
+RaÃºl Ortega/raul-ortega - maintainer of the u360gts firmware and configurator.
+HÃ©ctor Narbona/Amigache - whose contribution has been essential for the creation of version 4.0 of the configurator.
 Dominic Clifton/hydra - maintainer of the Cleanflight firmware and configurator, from which u360gts project is based on.
