@@ -10,9 +10,10 @@ There is also now a standalone version available.  The old Google Chrome Apps ve
 
 ## Project History
 
-u360gts configurator was originally a [fork](#credits) of Cleanflight Configurator with support for Cleanfilght.
+u360gts configurator was originally based on  Cleanflight Configurator with support for Cleanfilght.
 
-This configurator is the only configurator with support for u360gts specific features. It will likely require that you run the latest firmware on the flight controller.
+This configurator is the only configurator with support for u360gts specific features. It will likely require that you run the latest firmware on your board.
+
 If you are experiencing any problems please make sure you are running the [latest firmware version](https://github.com/raul-ortega/u360gts/releases/latest).
 
 ## Installation
