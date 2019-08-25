@@ -3674,19 +3674,19 @@
     "configurationPanCalibrationStartedLogMessage": {
         "message": "Servo PAN calibration started"
     },
-    "configurationCalibrationMinPulseMessage": {
+    "configurationCalibrationMinPulseLogMessage": {
         "message": "Min pulse to stop pan servo:"
     },
-    "configurationCalibrationMaxPulseMessage": {
+    "configurationCalibrationMaxPulseLogMessage": {
         "message": "Max pulse to stop pan servo:"
     },
-    "configurationCalibrationPan0PulseMessage": {
+    "configurationCalibrationPan0PulseLogMessage": {
         "message": "Calculated pulse to stop pan servo:"
     },
-    "configurationCalibrationMinPanSpeedMessage": {
+    "configurationCalibrationMinPanSpeedLogMessage": {
         "message": "Minimum increment to move pan servo:"
     },
-    "configurationCalibrationCalibrated": {
+    "configurationCalibrationCalibratedLogMessage": {
         "message": "Pan servo and mag calibrated"
     },
     "configurationCalibrationFinishedLogMessage": {
