@@ -1,7 +1,7 @@
 'use strict';
 
 TABS.cli = {
-    lineDelayMs: 15,
+    lineDelayMs: 50,
     profileSwitchDelayMs: 100,
     outputHistory: "",
     cliBuffer: "",
@@ -319,7 +319,10 @@ TABS.cli.read = function (readInfo) {
 };
 
 TABS.cli.sendLine = function (line, callback) {
-    this.send(line + '\n', callback);
+	if(line.startsWith('#') || line.length == 0)
+		callback();
+	else
+		this.send(line + '\n', callback);
 };
 
 TABS.cli.sendAutoComplete = function (line, callback) {

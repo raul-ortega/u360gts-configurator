@@ -22,6 +22,16 @@ TABS.settings.initialize = function (callback) {
             GTS.save();
             GUI.reboot();
         });
+		
+		$('#nopid_min_delta-spinner').on('change',function(){
+			var value = $('#nopid_min_delta-spinner').val();
+			if($.isNumeric(value)){
+				if(value < 0) value = 0;
+				if(value > 180) value = 180;
+			} else
+				value = 0;
+			$('#nopid_min_delta-spinner').val(value);
+		});
 
         GUI.content_ready(callback);
 
