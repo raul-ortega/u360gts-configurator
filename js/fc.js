@@ -5,7 +5,6 @@ var CONFIG;
 var FEATURE_CONFIG;
 var SERIAL_CONFIG;
 var PARAMETERS_CONFIG;
-console.log('fc.js');
 var FC = {
     resetState: function() {
         CONFIG = {
