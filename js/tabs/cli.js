@@ -88,7 +88,11 @@ TABS.cli.initialize = function (callback) {
 
                     writer.onwriteend = function () {
                         if (writer.length === 0) {
-                            writer.write(new Blob([self.outputHistory], {type: 'text/plain'}));
+							var historyToSave = self.outputHistory;
+							// removing undesired lines
+							historyToSave = historyToSave.replace("Entering CLI Mode, type 'exit' to return, or 'help'" + '\r', '');
+							historyToSave = historyToSave.replace('dump' + '\r','');
+                            writer.write(new Blob([historyToSave.replace("Entering CLI Mode, type 'exit' to return, or 'help'" + '\r' + 'dump' + '\r','')], {type: 'text/plain'}));
                         } else {
                             console.log('write complete');
                         }
