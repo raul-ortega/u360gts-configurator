@@ -210,6 +210,7 @@ const carriageReturnCode = 13;
 function writeToOutput(text) {
     $('.tab-cli .window .wrapper').append(text);
     $('.tab-cli .window').scrollTop($('.tab-cli .window .wrapper').height());
+	TABS.cli.outputHistory += text;
 }
 
 function writeLineToOutput(text) {
