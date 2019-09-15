@@ -287,6 +287,9 @@
     "cliSaveToFileBtn": {
         "message": "Guardar en Archivo"
     },
+	"cliLoadFromFileBtn": {
+        "message": "Cargar desde Archivo"
+    },
     "close": {
         "message": "Cerrar"
     },

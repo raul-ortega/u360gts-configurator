@@ -290,6 +290,9 @@
     "cliSaveToFileBtn": {
         "message": "Save to File"
     },
+	"cliLoadFromFileBtn": {
+        "message": "Load from File"
+    },
     "close": {
         "message": "Close"
     },

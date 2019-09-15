@@ -104,7 +104,9 @@ TABS.cli.initialize = function (callback) {
                 });
             });
         });
-
+        $('.tab-cli .load').click(function () {
+            self.restoreConfig();			
+		});
         // Tab key detection must be on keydown,
         // `keypress`/`keyup` happens too late, as `textarea` will have already lost focus.
         textarea.keydown(function (event) {
@@ -378,4 +380,75 @@ TABS.cli.cleanup = function (callback) {
 //        }, 1000); // if we dont allow enough time to reboot, CRC of "first" command sent will fail, keep an eye for this one
 //        CONFIGURATOR.cliActive = false;
 //    });
+};
+
+TABS.cli.restoreConfig = function(callback) {
+    var chosenFileEntry = null;
+
+    var accepts = [{
+        extensions: ['txt']
+    }];
+
+    // load up the file
+    chrome.fileSystem.chooseEntry({type: 'openFile', accepts: accepts}, function (fileEntry) {
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError.message);
+            return;
+        }
+
+        if (!fileEntry) {
+            console.log('No file selected, restore aborted.');
+            return;
+        }
+
+        chosenFileEntry = fileEntry;
+
+        // echo/console log path specified
+        chrome.fileSystem.getDisplayPath(chosenFileEntry, function (path) {
+            console.log('Restore file path: ' + path);
+        });
+
+        // read contents into variable
+        chosenFileEntry.file(function (file) {
+            var reader = new FileReader();
+
+            reader.onprogress = function (e) {
+                if (e.total > 1048576) { // 1 MB
+                    // dont allow reading files bigger then 1 MB
+                    console.log('File limit (1 MB) exceeded, aborting');
+                    reader.abort();
+                }
+            };
+
+            reader.onloadend = function (e) {
+                if (e.total != 0 && e.total == e.loaded) {
+                    console.log('Read SUCCESSFUL');
+					var textarea = $('.tab-cli textarea');
+                    try { // check if string provided is a valid JSON
+					    textarea.val(e.target.result + '\r' + 'save' + '\r');
+						var textareaEvent = jQuery.Event("keypress");
+						textareaEvent.which = carriageReturnCode; // # Some key code value
+						$('.tab-cli textarea').trigger(textareaEvent);
+                    } catch (e) {
+                        // data provided != valid json object
+                        $('.tab-cli textarea').val('Data provided not valid, restore aborted.');
+
+                        return;
+                    }
+
+                    /*// validate
+                    if (typeof generatedBy !== 'undefined' && compareVersions(generatedBy,backupFileMinVersionAccepted)) {
+                                                
+                        uploadConfiguration(configuration);
+                        
+                    } else {
+                        $('#cli-receiver').html('Configuration file version not accepted, restore aborted.');
+                    }*/
+                    
+                }
+            };
+
+            reader.readAsText(file);
+        });
+    });
 };
