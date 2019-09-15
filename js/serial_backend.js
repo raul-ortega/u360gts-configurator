@@ -200,6 +200,7 @@ function onOpen(openInfo) {
             }
         }, 10000);
 
+		FC.resetState();
         // OJO ESTO NO VA AQUÍ
         finishOpen();
 

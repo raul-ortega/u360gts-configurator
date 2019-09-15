@@ -446,12 +446,15 @@ function generateFilename(prefix, suffix) {
     var filename = prefix;
 
     if (CONFIG) {
-        if (CONFIG.flightControllerIdentifier) {
-            filename = CONFIG.flightControllerIdentifier + '_' + filename;
+        if (CONFIG.targetName) {
+            filename = CONFIG.targetName + '_' + filename;
         }
-        if (CONFIG.name && CONFIG.name.trim() !== '') {
+        if (CONFIG.firmwareName) {
+            filename = CONFIG.firmwareName + '_' + filename;
+        }
+        /*if (CONFIG.name && CONFIG.name.trim() !== '') {
             filename = filename + '_' + CONFIG.name.trim().replace(' ', '_');
-        }
+        }*/
     }
 
     filename = filename + '_' + date.getFullYear()

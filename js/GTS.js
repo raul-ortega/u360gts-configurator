@@ -24,10 +24,17 @@ var GTS = {
 
             // Si recivimos versión
             if (line.contains('u360gts') || line.contains('amv-open360tracker')) {
-
+    
                 GUI.log(line);
-
+                /*var i = 0;
+                var version_line = line.split(' ');
+				version_line.forEach(function (x) {
+					console.log('i: ' + i + ' x: ' + x);
+                    i++;
+                });*/
+				this.parseConfigFirmwareInfo(line.split(' '));
             }
+			
             // Update Status array
             if (line.contains('# status')) {
                 showOnConsole = false;
@@ -153,7 +160,17 @@ var GTS = {
     },
     getStatus: function () {
         this.send("status\n");
-    }
+    },
+	parseConfigFirmwareInfo: function(data){
+	    CONFIG.firmwareName = data[1];
+        CONFIG.targetName = data[3];
+        CONFIG.firmwareVersion = data[4];
+        CONFIG.buildMonth = data[5];
+        CONFIG.buildDay = data[6];
+        CONFIG.buildYear = data[7];
+        CONFIG.buildDate = data[9];
+        CONFIG.buildId = data[10];
+	}
 
 };
 
