@@ -70,7 +70,7 @@ window.addEventListener('message', function (e) {
                 break;
             case 'center':
                 iconFeature.setGeometry(new ol.geom.Point(ol.proj.transform([e.data.lon, e.data.lat], 'EPSG:4326', 'EPSG:3857')));
-                //view.setCenter(ol.proj.transform([e.data.lon, e.data.lat], 'EPSG:4326', 'EPSG:3857'));
+                view.setCenter(ol.proj.transform([e.data.lon, e.data.lat], 'EPSG:4326', 'EPSG:3857'));
         }
     } catch (e) {
         console.log('message error');

@@ -239,7 +239,17 @@ TABS.sim.initialize = function (callback) {
             frame.contentWindow.postMessage(message, '*');
         });
         
-        
+        chrome.storage.local.get('userHomeLat', function (result) {
+			if (result.userHomeLat) {
+				$("#simulator-home-lat").val(result.userHomeLat);
+			}
+		});
+		
+		chrome.storage.local.get('userHomeLon', function (result) {
+			if (result.userHomeLon) {
+				$("#simulator-home-lon").val(result.userHomeLon);
+			}
+		});
 
         GUI.content_ready(callback);
         
