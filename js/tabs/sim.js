@@ -199,24 +199,21 @@ TABS.sim.initialize = function (callback) {
             frame.contentWindow.postMessage(message, '*');
         });
         
-        chrome.storage.local.get('userHomeLat', function (result) {
-			if (result.userHomeLat) {
-				$("#simulator-home-lat").val(result.userHomeLat);
-			}
-		});
-		
 		$("#simulator-home-lat").on('change',function(){
-			chrome.storage.local.set({'userHomeLat': $("#simulator-home-lat").val()});
-		});
-		$("#simulator-home-lon").on('change',function(){
-			chrome.storage.local.set({'userHomeLon': $("#simulator-home-lon").val()});
+			TABS.sim.storeCustomLatLon();
 		});
 		
-		chrome.storage.local.get('userHomeLon', function (result) {
-			if (result.userHomeLon) {
-				$("#simulator-home-lon").val(result.userHomeLon);
-			}
+		$("#simulator-home-lon").on('change',function(){
+			TABS.sim.storeCustomLatLon();
 		});
+		
+		chrome.storage.local.get('userHomeLatLon', function (result) {
+			if (result.userHomeLatLon) {
+				var latlon = result.userHomeLatLon.split(',');
+				$("#simulator-home-lat").val(latlon[0]);
+				$("#simulator-home-lon").val(latlon[1]);
+			}
+		});		
 
         GUI.content_ready(callback);
         
@@ -242,3 +239,9 @@ TABS.sim.cleanup = function (callback) {
         callback();
 };
 
+TABS.sim.storeCustomLatLon = function (){
+	var lat = $("#simulator-home-lat").val();
+	var lon = $("#simulator-home-lon").val();
+	var latlon = lat + ',' + lon;
+	chrome.storage.local.set({'userHomeLatLon': latlon});
+};
