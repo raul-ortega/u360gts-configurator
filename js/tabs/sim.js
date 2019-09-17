@@ -205,6 +205,13 @@ TABS.sim.initialize = function (callback) {
 			}
 		});
 		
+		$("#simulator-home-lat").on('change',function(){
+			chrome.storage.local.set({'userHomeLat': $("#simulator-home-lat").val()});
+		});
+		$("#simulator-home-lon").on('change',function(){
+			chrome.storage.local.set({'userHomeLon': $("#simulator-home-lon").val()});
+		});
+		
 		chrome.storage.local.get('userHomeLon', function (result) {
 			if (result.userHomeLon) {
 				$("#simulator-home-lon").val(result.userHomeLon);
