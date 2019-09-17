@@ -21,6 +21,7 @@ TABS.configuration.initialize = function (callback) {
         // SAVE
         $("#configurationButtonSave").click(function () {
             GTS.save();
+			GUI.setLastBaud();
             GUI.reboot();
         });
 		
@@ -99,7 +100,7 @@ TABS.configuration.loadData = function (data) {
                 GTS.set(param, this.value);
 				if(param == 'telemetry_baud'){
 					var baud = $('#' + $(thisSelect).attr('id') + ' :selected').text();
-					GUI.setLastBaud(baud);
+					GUI.connected_baud = baud;
 				}
             });
         }

@@ -20,6 +20,7 @@ TABS.settings.initialize = function (callback) {
         // SAVE
         $("#configurationButtonSave").click(function () {
             GTS.save();
+			GUI.setLastBaud();
             GUI.reboot();
         });
 		

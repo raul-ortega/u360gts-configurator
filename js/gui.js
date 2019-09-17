@@ -429,7 +429,8 @@ GUI_control.prototype.selectLastBaud = function () {
 	});
 }
 
-GUI_control.prototype.setLastBaud = function (baud) {
+GUI_control.prototype.setLastBaud = function () {
+	var baud = this.connected_baud;
 	chrome.storage.local.get('last_used_baud', function (result) {
 		if (result.last_used_baud) {
 			if (result.last_used_baud != baud) {
