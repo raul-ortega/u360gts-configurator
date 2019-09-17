@@ -7,6 +7,7 @@ var GUI_control = function () {
     this.auto_connect = false;
     this.connecting_to = false;
     this.connected_to = false;
+	this.connected_baud = 0;
     this.connect_lock = false;
     this.calibrate_lock = false;
     this.simModeEnabled = false;
@@ -50,6 +51,9 @@ var GUI_control = function () {
         this.operating_system = "UNIX";
     else
         this.operating_system = "Unknown";
+	
+	this.selectLastBaud();
+	
 };
 
 // Timer managing methods
@@ -411,6 +415,35 @@ GUI_control.prototype.reboot = function () {
     }, self.reboot_delay);
 }
 
+GUI_control.prototype.selectLastBaud = function () {
+	chrome.storage.local.get('last_used_baud', function (result) {
+		// if last_used_baud was set, we try to select it
+		if (result.last_used_baud) {
+			if (result.last_used_baud != GUI.connected_baud) {
+					console.log('Selecting last used baud: ' + result.last_used_baud);
+					$('div#port-picker #baud').val(result.last_used_baud);
+			}
+		} else {
+			console.log('Last used port wasn\'t saved "yet", auto-select disabled.');
+		}
+	});
+}
+
+GUI_control.prototype.setLastBaud = function (baud) {
+	chrome.storage.local.get('last_used_baud', function (result) {
+		if (result.last_used_baud) {
+			if (result.last_used_baud != baud) {
+				// last used baud doesn't match the one found in local db, we will store the new one
+				chrome.storage.local.set({'last_used_baud': baud});
+				GUI.connected_baud = baud;
+				$('div#port-picker #baud').val(baud);
+			}
+		} else {
+			// variable isn't stored yet, saving
+			chrome.storage.local.set({'last_used_baud': GUI.connected_baud});
+		}
+	});	
+};
 // initialize object into GUI variable
 var GUI = new GUI_control();
 

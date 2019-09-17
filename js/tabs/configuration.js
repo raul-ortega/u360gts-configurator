@@ -97,6 +97,10 @@ TABS.configuration.loadData = function (data) {
             $("#" + paramId + " option[value='" + paramValue + "']").attr("selected", true);
             $(this).on("change", function (event, ui) {
                 GTS.set(param, this.value);
+				if(param == 'telemetry_baud'){
+					var baud = $('#' + $(thisSelect).attr('id') + ' :selected').text();
+					GUI.setLastBaud(baud);
+				}
             });
         }
 

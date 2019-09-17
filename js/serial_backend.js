@@ -170,6 +170,7 @@ function onOpen(openInfo) {
     if (openInfo) {
         // update connected_to
         GUI.connected_to = GUI.connecting_to;
+		GUI.connected_baud =  $('div#port-picker #baud').val();
 
         // reset connecting_to
         GUI.connecting_to = false;
@@ -186,6 +187,18 @@ function onOpen(openInfo) {
             } else {
                 // variable isn't stored yet, saving
                 chrome.storage.local.set({'last_used_port': GUI.connected_to});
+            }
+        });
+		
+		chrome.storage.local.get('last_used_baud', function (result) {
+            if (result.last_used_baud) {
+                if (result.last_used_baud != GUI.connected_baud) {
+                    // last used baud doesn't match the one found in local db, we will store the new one
+                    chrome.storage.local.set({'last_used_baud': GUI.connected_baud});
+                }
+            } else {
+                // variable isn't stored yet, saving
+                chrome.storage.local.set({'last_used_baud': GUI.connected_baud});
             }
         });
 
