@@ -26,17 +26,10 @@ TABS.sim.initialize = function (callback) {
         // translate to user-selected language
         i18n.localizePage();
 
-
-
         if (GUI.simModeEnabled) {
             $('#simDisableDiv').hide();
             $('#simDiv').show();
         }
-
-//        window.addEventListener('message', handleResponseFromMissionPlanner, false);
-//        $("#simulator-force-error").click(function () {
-//
-//        });
 
         $(".simulator-start").on('click', function (e) {
 
@@ -48,13 +41,6 @@ TABS.sim.initialize = function (callback) {
             home0[0] = $("#simulator-home-lat").val();
             home0[1] = $("#simulator-home-lon").val();
 
-//            if ($("#simulation-type").val() == 3) {
-//                sendMessageToMissionPlanner('getHome');
-//                //sendMessageToMissionPlanner('getPath');
-//            }
-//            /*else
-//             sendMessageToMissionPlanner('setHome');*/
-
             accDistance = 0;
             radius = $("#simulator-distance").val();
             altitude = $("#simulator-altitude").val();
@@ -64,10 +50,6 @@ TABS.sim.initialize = function (callback) {
             lastPoint = new LatLon(home0[0], home0[1]);
             course = 0;
             protocol = $("#simulation-protocol").val();
-
-            //enableDisableSimulationButtons();
-
-
 
             var timerInterval = $("#simulation-frequency").val();
             var home = new LatLon(home0[0], home0[1]);
@@ -93,15 +75,6 @@ TABS.sim.initialize = function (callback) {
 
             // SIM LOOP
             GUI.interval_add("sim_interval", function () {
-
-//                if ($("#simulation-type").val() == 3) {
-//                    if (typeof homePosition == 'undefined')
-//                        return;
-//                    else {
-//                        p1 = new LatLon(homePosition.x, homePosition.y)
-//                    }
-//                }
-//
                 radius = $("#simulator-distance").val();
                 altitude = $("#simulator-altitude").val();
                 if (new Date().getTime() - sendHomeTimer < 5000) {
@@ -171,10 +144,7 @@ TABS.sim.initialize = function (callback) {
                 p1 = p2;
                 calculateDistanceTimer = new Date().getTime();
 
-
-
                 // Update Map
-                //update_map(p2.lat, p2.lon, altitude, $("#simulator-speed").val(), distance2Home, $("#simulator-sats").val(), true)
                 TABS.sim.updateSimMap(p2.lat, p2.lon, altitude, $("#simulator-speed").val(), distance2Home, $("#simulator-sats").val(), true);
 
             }, $("#simulation-frequency").val(), false);
@@ -199,16 +169,6 @@ TABS.sim.initialize = function (callback) {
             console.log('Offline');
             set_offline();
         }
-
-//        $("#check").on('click', function () {
-//            if (navigator.onLine) {
-//                console.log('Online');
-//                set_online();
-//            } else {
-//                console.log('Offline');
-//                set_offline();
-//            }
-//        });
 
         var frame = document.getElementById('map');
 
@@ -258,16 +218,6 @@ TABS.sim.initialize = function (callback) {
 };
 
 TABS.sim.updateSimMap = function (lat, lon, alt, speed, distHome, sats, fix) {
-
-    var url = 'https://maps.google.com/?q=' + lat + ',' + lon;
-
-//    $('.GPS_info td.fix').html((fix) ? i18n.getMessage('gpsFixTrue') : i18n.getMessage('gpsFixFalse'));
-//    $('.GPS_info td.alt').text(alt + ' m');
-//    $('.GPS_info td.lat a').prop('href', url).text(lat.toFixed(4) + ' deg');
-//    $('.GPS_info td.lon a').prop('href', url).text(lon.toFixed(4) + ' deg');
-//    $('.GPS_info td.speed').text(speed + ' km/h');
-//    $('.GPS_info td.sats').text(sats);
-//    $('.GPS_info td.distToHome').text(Math.trunc(distHome) + ' m');
 
     var message = {
         action: 'center',
