@@ -3665,6 +3665,9 @@
     "configurationPanCalibrated": {
         "message": "Calibration Done"
     },
+	"configurationPanInverted": {
+        "message": "Inverted Servo"
+    },
     "configurationPan0": {
         "message": "Stop pulse (usec)"
     },

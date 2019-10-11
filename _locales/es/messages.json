@@ -3604,6 +3604,9 @@
     "configurationPanCalibrated": {
         "message": "Calibración Realizada"
     },
+	"configurationPanInverted": {
+        "message": "Servo Invertido"
+    },
     "configurationPan0": {
         "message": "Pulso Central de Parada (usec)"
     },
