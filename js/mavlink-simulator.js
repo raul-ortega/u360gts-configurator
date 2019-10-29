@@ -1,24 +1,5 @@
 var magic_number = 254;
 var seq = -1;
-/*$(document).ready(function(){
-	var system_id = 100;
-	var component_id = 200;
-	var seq = 0;
-	var timeUsec = 0; //new Date().getTime() * 1000;
-	var fixType = 2;
-	var latitude = 474035790;
-	var longitude = 85358460;
-	var altitude = 0;
-	var eph = 0;
-	var epv = 0;
-	var vel = 1000;
-	var cog = 0;
-	var satellites = 7;
-	msg = new mavlink_msg_gps_raw_int(system_id,component_id,seq,timeUsec,fixType,latitude,longitude,altitude,eph,epv,vel,cog,satellites);
-	$.each(msg.buffer,function(e){
-		$("body").append('<p>' + msg.buffer[e] + '</p>')
-	});
-})*/
 
 function build_mavlink_msg_gps_raw_int(lat,lon,altitude,ground_speed,force_error){
 	var system_id = 100;
