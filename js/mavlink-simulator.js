@@ -68,6 +68,68 @@ mavlink_msg_gps_raw_int = function(system_id, component_id, seq, timeUsec, fixTy
 	return bytes;
 }
 
+//uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, uint32_t time_boot_ms, float roll, float pitch, float yaw, float rollspeed, float pitchspeed, float yawspeed
+//mavlink_msg_attitude_pack (100, 200, &msg, 0, telemetry_roll, telemetry_pitch, radians(telemetry_course), 0.0, 0.0, 0.0);
+function build_mavlink_msg_attitude_pack(roll,pitch,yaw,roll_speed,pitch_speed,yaw_speed,force_error){
+	var system_id = 100;
+	var component_id = 200;
+	var timeMsec = 0; //new Date().getTime() * 1000;
+	var roll = 0.0;
+	var pitch = 0.0;
+	var yaw = course * (Math.PI/180);
+	var roll_speed = 0.0;
+	var pitch_speed = 0.0;
+	var yaw_speed = 0.0;
+
+	seq++;
+	if(seq > 255) seq = 0;
+
+	msg = new mavlink_msg_attitude_pack(system_id,component_id,seq,timeMsec,roll,pitch,yaw,roll_speed,pitch_speed,yaw_speed,force_error);
+	return msg;		
+}
+
+mavlink_msg_attitude_pack = function(system_id,component_id,seq,timeMsec,roll,pitch,yaw,roll_speed,pitch_speed,yaw_speed,force_error) {
+	
+	var payload_length = 28;
+	var crc = 65535;
+	var msg_id = 30;
+    var crc_extra = 39;
+	var header = [magic_number];
+	var msgBuffer = [];
+	var msgIndex = 0;
+
+	var tmp = "";
+	var msgIndex = 0;
+	
+	msgBuffer = packToBuffer(numberToBuffer(payload_length,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(seq,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(system_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(component_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(msg_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(timeMsec,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(roll,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(pitch,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(yaw,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(roll_speed,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(pitch_speed,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(yaw_speed,4), msgBuffer);
+
+	if(force_error)
+		crc = 0xab01;
+	
+	crc = calculateCRC(msgBuffer,crc)
+	crc = calculateCRC([crc_extra],crc)
+	
+	msgBuffer = packToBuffer(numberToBuffer(crc,2), msgBuffer);
+	
+	msgBuffer = header.concat(msgBuffer);
+
+	var bytes = new Uint8Array(msgBuffer.length);
+	for (var i = 0; i < msgBuffer.length; ++i) {
+		bytes[i] = msgBuffer[i];
+	}
+	return bytes;
+}
 function build_mavlink_msg_heartbeat_pack(){
 	//mavlink_msg_heartbeat_pack (100, 200, &msg, 1, 1, 1, 0, 1);
 	var system_id = 100;
