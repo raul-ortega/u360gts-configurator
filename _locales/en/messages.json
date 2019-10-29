@@ -3617,6 +3617,9 @@
     "simForceError": {
         "message": "Force Error"
     },
+	"simMavlinkHeartbeat": {
+        "message": "Send Heartbeat (mavlink only)"
+    },
     "simControl": {
         "message": "Control"
     },

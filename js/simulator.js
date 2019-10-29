@@ -25,6 +25,8 @@ var nmeaPackets = {
     rmc: 2
 };
 var lastNmeaPacket = nmeaPackets.rmc;
+var sendHeartBeat = 0;
+var heartbeatTimer = 0;
 
 function Speed(value) {
     var speed = (value / 3600) * 1000;
@@ -53,10 +55,19 @@ function buildPacket(lat, lon, altitude, distance, heading) {
         if (!debugEnabled)
 			GTS.send(packet + '\n');
     } else if (protocol == protocols.MAVLINK) {
-        packet = build_mavlink_msg_gps_raw_int(lat, lon, altitude, Speed($("#simulator-speed").val()), forceError);
-        GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
-        if (!debugEnabled)
-            GTS.send('\n');
+		//Mavlink Heartbeat
+		if((new Date().getTime() - heartbeatTimer >= 2000) && sendHeartBeat){
+			packet = build_mavlink_msg_heartbeat_pack();
+			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+			if (!debugEnabled)
+				GTS.send('\n');
+			heartbeatTimer = new Date().getTime();
+		} else {
+			packet = build_mavlink_msg_gps_raw_int(lat, lon, altitude, Speed($("#simulator-speed").val()), forceError);
+			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+			if (!debugEnabled)
+				GTS.send('\n');
+		}
     } else if (protocol == protocols.PITLAB) {
         packet = Data2Pitlab(11, altitude, lat, lon);
         if (!debugEnabled)

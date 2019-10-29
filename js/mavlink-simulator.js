@@ -87,6 +87,59 @@ mavlink_msg_gps_raw_int = function(system_id, component_id, seq, timeUsec, fixTy
 	return bytes;
 }
 
+function build_mavlink_msg_heartbeat_pack(){
+	//mavlink_msg_heartbeat_pack (100, 200, &msg, 1, 1, 1, 0, 1);
+	var system_id = 100;
+	var component_id = 200;
+	var custom_mode = 1;
+	var type = 1;
+	var autopilot = 1;
+	var base_mode = 0;
+	var system_status = 1;
+	var mavlink_version = 3;
+	
+	seq++;
+	if(seq > 255) seq = 0;
+
+	msg = new mavlink_msg_heartbeat_pack(system_id,component_id,custom_mode,type,autopilot,base_mode,system_status,mavlink_version);
+	return msg;	
+}
+
+mavlink_msg_heartbeat_pack = function(system_id,component_id,custom_mode,type,autopilot,base_mode,system_status,mavlink_version) {
+
+	var payload_length = 9;
+	var crc = 65535;
+	var msg_id = 0; // MAVLINK_MSG_ID_HEARTBEAT
+    var crc_extra = 50; // MAVLINK_MSG_ID_HEARTBEAT
+	var header = [magic_number];
+	var msgBuffer = [];
+	
+	msgBuffer = packToBuffer(numberToBuffer(payload_length,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(seq,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(system_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(component_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(msg_id,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(custom_mode,4), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(type,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(autopilot,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(base_mode,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(system_status,1), msgBuffer);
+	msgBuffer = packToBuffer(numberToBuffer(mavlink_version,1), msgBuffer);
+
+	crc = calculateCRC(msgBuffer,crc)
+	crc = calculateCRC([crc_extra],crc)
+	
+	msgBuffer = packToBuffer(numberToBuffer(crc,2), msgBuffer);
+	
+	msgBuffer = header.concat(msgBuffer);
+
+	var bytes = new Uint8Array(msgBuffer.length);
+	for (var i = 0; i < msgBuffer.length; ++i) {
+		bytes[i] = msgBuffer[i];
+	}
+	return bytes;
+}
+
 function numberToBuffer(number,byteslenght){
 	    var bytes = [];
 	    var i = byteslenght;

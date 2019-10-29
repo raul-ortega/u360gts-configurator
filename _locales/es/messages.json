@@ -3553,6 +3553,9 @@
     "simForceError": {
         "message": "Forzar Error"
     },
+	"simMavlinkHeartbeat": {
+        "message": "Enviar Heartbeat (mavlink)"
+    },
     "simControl": {
         "message": "Control"
     },
