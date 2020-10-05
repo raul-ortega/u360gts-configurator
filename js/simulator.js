@@ -56,7 +56,7 @@ function buildPacket(lat, lon, altitude, distance, heading) {
 			GTS.send(packet + '\n');
     } else if (protocol == protocols.MAVLINK) {
 		//Mavlink Heartbeat
-		if((new Date().getTime() - heartbeatTimer >= 2000) && sendHeartBeat){
+		if((new Date().getTime() - heartbeatTimer >= 5000) && sendHeartBeat){
 			packet = build_mavlink_msg_heartbeat_pack();
 			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
 			if (!debugEnabled)
@@ -67,6 +67,11 @@ function buildPacket(lat, lon, altitude, distance, heading) {
 			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
 			if (!debugEnabled)
 				GTS.send('\n');
+			//packet = build_mavlink_msg_global_position_int_pack(lat, lon, altitude, $("#course").val(),forceError);
+			/*build_mavlink_msg_attitude_pack(0,0,$("#course").val(),0,0,0,forceError);
+			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+			if (!debugEnabled)
+				GTS.send('\n');*/
 		}
     } else if (protocol == protocols.PITLAB) {
         packet = Data2Pitlab(11, altitude, lat, lon);
