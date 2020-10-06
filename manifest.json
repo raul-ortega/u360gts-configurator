@@ -22,14 +22,14 @@
          "vendorId": 1155
       } ]
    }, "webview", "unlimitedStorage" ],
-   "short_name": "u360gts configurator v4.0.3",
+   "short_name": "u360gts configurator v4.1.0",
    "sockets": {
       "tcp": {
          "connect": "*:*"
       }
    },
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "4.0.3",
+   "version": "4.1.0",
    "webview": {
       "partitions": [ {
          "accessible_resources": [ "tabs/map.html", "/js/tabs/map.js", "/images/icons/tracker-map-icon.png", "/js/libraries/openlayer/css/ol.css", "/js/libraries/openlayer/build/ol.js", "/js/libraries/openlayer/build/ol.js.map" ],
