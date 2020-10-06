@@ -63,6 +63,8 @@ TABS.sim.initialize = function (callback) {
             var p2 = new LatLon(home.lat, home.lon);
             var heading = 0;
 
+			sendHeartBeat = $("#simulator-mavlink-heartbeat").prop('checked');
+			heartbeatTimer = new Date().getTime();
 
 
             if (protocol == protocols.MFD)

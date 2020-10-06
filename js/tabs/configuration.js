@@ -141,16 +141,19 @@ TABS.configuration.loadData = function (data) {
         var portProtocol = Number(data.split(' ')[3]);
         var portBaudRate = Number(data.split(' ')[5]);
 
-        if (portNumber > 1) {
+        if (portFunction != 1 && portFunction != 2) { // Serial 0 for telemetry, Serial 1 for GPS
+			var portName = "serial";
+			if(portNumber >=30)
+				portName = "softserial";
 
             GUI.softserial_count++;
 
-            var selectProtocolID = "softserial" + GUI.softserial_count + "-protocol";
-            var selectBaudrateID = "softserial" + GUI.softserial_count + "-baudrate";
+            var selectProtocolID = portName + GUI.softserial_count + "-protocol";
+            var selectBaudrateID = portName + GUI.softserial_count + "-baudrate";
 
             // Add port row
             $('#portsTable tr:last').after('<tr>\n\
-                                            <td>Softserial ' + GUI.softserial_count + '</td>\n\
+                                            <td>' + portName + ' ' + portNumber + '</td>\n\
                                             <td>\n\
                                                 <select id="' + selectProtocolID + '">\n\
                                                     <option value="0" >Select protocol</option>\n\

@@ -3553,6 +3553,9 @@
     "simForceError": {
         "message": "Forzar Error"
     },
+	"simMavlinkHeartbeat": {
+        "message": "Enviar Heartbeat (mavlink)"
+    },
     "simControl": {
         "message": "Control"
     },
@@ -3603,6 +3606,9 @@
     },
     "configurationPanCalibrated": {
         "message": "Calibración Realizada"
+    },
+	"configurationPanInverted": {
+        "message": "Servo Invertido"
     },
     "configurationPan0": {
         "message": "Pulso Central de Parada (usec)"

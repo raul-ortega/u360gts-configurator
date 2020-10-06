@@ -3617,6 +3617,9 @@
     "simForceError": {
         "message": "Force Error"
     },
+	"simMavlinkHeartbeat": {
+        "message": "Send Heartbeat (mavlink only)"
+    },
     "simControl": {
         "message": "Control"
     },
@@ -3664,6 +3667,9 @@
     },
     "configurationPanCalibrated": {
         "message": "Calibration Done"
+    },
+	"configurationPanInverted": {
+        "message": "Inverted Servo"
     },
     "configurationPan0": {
         "message": "Stop pulse (usec)"
