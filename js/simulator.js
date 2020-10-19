@@ -56,7 +56,7 @@ function buildPacket(lat, lon, altitude, distance, heading) {
 			GTS.send(packet + '\n');
     } else if (protocol == protocols.MAVLINK) {
 		//Mavlink Heartbeat
-		if((new Date().getTime() - heartbeatTimer >= 5000) && sendHeartBeat){
+		if((new Date().getTime() - heartbeatTimer >= 2000) && sendHeartBeat){
 			packet = build_mavlink_msg_heartbeat_pack();
 			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
 			if (!debugEnabled)
