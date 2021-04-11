@@ -161,6 +161,7 @@ TABS.configuration.loadData = function (data) {
                                                     <option value="512">MAVLINK</option>\n\
                                                     <option value="1024">NMEA</option>\n\
                                                     <option value="2048">LTM</option>\n\
+													<option value="8192">FORWARD</option>\n\
                                                 </select>\n\
                                             </td>\n\
                                             <td>\n\
