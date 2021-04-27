@@ -14,11 +14,14 @@ var homePosition;
 var lastPoint;
 var course;
 var protocol;
+var tick = false;
+
 var protocols = {
     NMEA: 1,
     MAVLINK: 2,
     PITLAB: 3,
-    MFD: 4
+    MFD: 4,
+	FRSKY_X: 5
 };
 var nmeaPackets = {
     gga: 1,
@@ -81,7 +84,38 @@ function buildPacket(lat, lon, altitude, distance, heading) {
         packet = Data2MFD(distance, altitude, heading, forceError);
         if (!debugEnabled)
             GTS.send(packet + '\n');
-    }
+    } else if (protocol == protocols.FRSKY_X) {
+		
+		//packet = build_smartport_msg_altitude_pack($("#simulator-altitude").val() * 100);
+		
+		
+			/*packet = build_smartport_msg_sats_pack($("#simulator-sats").val());
+			GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+			if (!debugEnabled)
+					GTS.send('\n');	*/
+			if((new Date().getTime() - heartbeatTimer >= 1000/$("#simulation-frequency").val()/2)){
+				tick = !tick;
+				if(tick == true) {
+					packet = build_smartport_msg_latlon_pack(0,lat,lon);
+					GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+						if (!debugEnabled)
+							GTS.send('\n');
+					
+				} else {
+					packet = build_smartport_msg_latlon_pack(1,lat,lon);
+					GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+						if (!debugEnabled)
+							GTS.send('\n');
+				}
+				heartbeatTimer = new Date().getTime();
+				packet = build_smartport_msg_gpsstatus_pack($("#simulation-fixtype").val(),$("#simulation-sats").val(),$("#simulator-altitude").val() * 100);
+				GTS.send(String.fromCharCode.apply(null, new Uint8Array(packet)) + '\n');
+				if (!debugEnabled)
+				GTS.send('\n');
+			}
+
+
+	}
     return packet;
 }
 

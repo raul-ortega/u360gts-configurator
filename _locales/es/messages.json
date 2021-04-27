@@ -3559,6 +3559,9 @@
     "simControl": {
         "message": "Control"
     },
+	"simStartDelay": {
+        "message": "Iniciar vuelo tras (segundos)"
+    },
     "simStart": {
         "message": "Iniciar Simulación"
     },
