@@ -79,7 +79,7 @@ TABS.sim.initialize = function (callback) {
             GUI.interval_add("sim_interval", function () {
                 radius = $("#simulator-distance").val();
                 altitude = $("#simulator-altitude").val();
-                if (new Date().getTime() - sendHomeTimer < 5000) {
+                if (new Date().getTime() - sendHomeTimer < $("#simulation-start-delay").val() * 1000) {
                     distance = 0;
                     heading = 0;
                     p2 = home.destinationPoint(distance, heading);
