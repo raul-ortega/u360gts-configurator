@@ -71,6 +71,7 @@
                                 <option value='2'>MAVLINK</option>
                                 <option value='3'>PITLAB</option>
                                 <option value='4'>MFD</option>
+								<option value='5'>FRSKY_X Passthrough</option>
                             </select>
 
                         </div>  
@@ -197,8 +198,11 @@
                         <div class="spacer_box_title" i18n="simControl"></div>
                     </div>
                     <div class="spacer_box">
-
-                        <div class="default_btn">
+						<label for="simulation-start-delay" style="left:0;" i18n="simStartDelay"></label>
+                        <div style="left:0;float:right;">
+                            <input type="number" id="simulation-start-delay" name="simulation-start-delay" min="0" max="120" value="30" style="margin-right: 0;" />
+                        </div>
+                        <div class="default_btn" style="margin-top: 10px;">
                             <div style="margin-right: 60px;float:right;">
                                 <a class="simulator-start" href="#" i18n="simStart"></a>
                             </div>

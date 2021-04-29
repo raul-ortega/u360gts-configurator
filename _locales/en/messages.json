@@ -3623,6 +3623,9 @@
     "simControl": {
         "message": "Control"
     },
+	"simStartDelay": {
+        "message": "Start flight after (seconds)"
+    },
     "simStart": {
         "message": "Start Simulation"
     },
@@ -3744,6 +3747,9 @@
     "configurationTelemetryHome": {
         "message": "Set Home"
     },
+	"configurationRestoreLastHome": {
+		"message": "Restore Last Known Home"
+	},
     "configurationTracking": {
         "message": "Tracking"
     },
