@@ -3687,6 +3687,9 @@
     "configurationTelemetryHome": {
         "message": "Establecer Home"
     },
+	"configurationRestoreLastHome": {
+		"message": "Restaurar Último Home Conocido"
+	},
     "configurationTracking": {
         "message": "Seguimiento"
     },

@@ -255,7 +255,31 @@
                             <option value='AUTO'>AUTO (from telemetry)</option>
                         </select>
 
-                    </div> 
+                    </div>
+					
+					<div class="checkbox">
+                        <label for="restore_last_home-checkbox" i18n="configurationRestoreLastHome" ></label>
+
+                        <div style="left:0;float:right;">
+                            <input type="checkbox" id="restore_last_home-checkbox" name="restore_last_home-checkbox" class="toggle" />
+                        </div>
+                    </div>
+					
+					<div class="number">
+                        <label for="home_lat" style="left:0;">lat <span>(eg: 37.259863 => 37259863)</span></label>
+                        <input type="number" id="home_lat-spinner" name="home_lat" step="1" min="-90000000" max="90000000" value="0" style="float:right;margin-right: 0px;width:100px;" />
+                    </div>
+					
+					<div class="number">
+                        <label for="home_lon" style="left:0;">lon <span>(eg: -6.535602 => -6535602)</span></label>
+                        <input type="number" id="home_lon-spinner" name="home_lon" step="1" min="-180000000" max="180000000" value="0" style="float:right;margin-right: 0px;width:100px;" />
+                    </div>
+					
+					<div class="number">
+                        <label for="home_alt" style="left:0;">alt (m)</label>
+                        <input type="number" id="home_alt-spinner" name="home_alt" step="1" min="0" max="65535" value="0" style="float:right;margin-right: 0px;width:100px;" />
+                    </div>
+					
                 </div>
 
             </div>
