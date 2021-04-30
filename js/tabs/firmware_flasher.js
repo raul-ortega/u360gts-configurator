@@ -130,102 +130,23 @@ TABS.firmware_flasher.initialize = function (callback) {
                 }
             });
         }
+		
+		function parseFilename(filename) {
+            var targetFromFilenameExpression = /amv-open360tracker_([\d.]+)?_?([^.]+)\.(.*)/;
+            //var targetFromFilenameExpression = /amv-open360tracker_([\d.]+(?:-rc\d+)?)?_?([^.]+)\.(.*)/;
+            var match = targetFromFilenameExpression.exec(filename);
 
-        function buildBoardOptions(releaseData, showDevReleases) {
-            if (!releaseData) {
-                $('select[name="board"]').empty().append('<option value="0">Offline</option>');
-                $('select[name="firmware_version"]').empty().append('<option value="0">Offline</option>');
-            } else {
-                var boards_e = $('select[name="board"]');
-                var versions_e = $('select[name="firmware_version"]');
-
-                var releases = {};
-                var sortedTargets = [];
-                var unsortedTargets = [];
-                releaseData.forEach(function(release){
-                    release.assets.forEach(function(asset){
-                        var targetFromFilenameExpression = /amv-open360tracker_([\d.]+(?:-rc\d+)?)?_?([^.]+)\.(.*)/;
-                        var match = targetFromFilenameExpression.exec(asset.name);
-
-                        if ((!showDevReleases && release.prerelease) || !match) {
-                            return;
-                        }
-                        var target = match[2];
-                        if($.inArray(target, unsortedTargets) == -1) {
-                            unsortedTargets.push(target);
-                        }
-                    });
-                    sortedTargets = unsortedTargets.sort();
-                });
-                sortedTargets.forEach(function(release) {
-                    releases[release] = [];
-                });
-
-                releaseData.forEach(function(release){
-                    var versionFromTagExpression = /v?(.*)/;
-                    var matchVersionFromTag = versionFromTagExpression.exec(release.tag_name);
-                    var version = matchVersionFromTag[1];
-
-                    release.assets.forEach(function(asset){
-                        var targetFromFilenameExpression = /amv-open360tracker_([\d.]+(?:-rc\d+)?)?_?([^.]+)\.(.*)/;
-                        var match = targetFromFilenameExpression.exec(asset.name);
-
-                        if ((!showDevReleases && release.prerelease) || !match) {
-                            return;
-                        }
-
-                        var target = match[2];
-                        var format = match[3];
-
-                        if (format != 'hex') {
-                            return;
-                        }
-
-                        var date = new Date(release.published_at);
-                        var formattedDate = ("0" + date.getDate()).slice(-2) + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
-
-                        var descriptor = {
-                            "releaseUrl": release.html_url,
-                            "name"      : version,
-                            "version"   : version,
-                            "url"       : asset.browser_download_url,
-                            "file"      : asset.name,
-                            "target"    : target,
-                            "date"      : formattedDate,
-                            "notes"     : release.body,
-                            "status"    : release.prerelease ? "release-candidate" : "stable"
-                        };
-                        releases[target].push(descriptor);
-                    });
-                });
-                var selectTargets = [];
-                Object.keys(releases)
-                    .sort()
-                    .forEach(function(target, i) {
-                        var descriptors = releases[target];
-                        descriptors.forEach(function(descriptor){
-                            if($.inArray(target, selectTargets) == -1) {
-                                selectTargets.push(target);
-                                var select_e =
-                                        $("<option value='{0}'>{0}</option>".format(
-                                                descriptor.target
-                                        )).data('summary', descriptor);
-                                boards_e.append(select_e);
-                            }
-                        });
-                    });
-                TABS.firmware_flasher.releases = releases;
-
-                chrome.storage.local.get('selected_board', function (result) {
-                    if (result.selected_board) {
-                        var boardReleases = releases[result.selected_board]
-                        $('select[name="board"]').val(boardReleases ? result.selected_board : 0).trigger('change');
-                    }
-                });
+            if (!match) {
+                return null;
             }
-        };
 
-        function showOrHideBuildTypeSelect() {
+            return {
+                target: match[2].replace("_", " "),
+                format: match[3],
+            };
+        }
+
+        /*function showOrHideBuildTypeSelect() {
             var showDevReleases = $(this).is(':checked');
 
             if (showDevReleases) {
@@ -234,45 +155,65 @@ TABS.firmware_flasher.initialize = function (callback) {
                 $('tr.build_type').hide();
                 buildType_e.val(0).trigger('change');
             }
-        }
+        }*/
 
-        var buildTypes = [
-            {
-                tag: 'firmwareFlasherOptionLabelBuildTypeRelease',
-                loader: () => self.releaseChecker.loadReleaseData(releaseData => buildBoardOptions(releaseData, false))
-            },
-            {
-                tag: 'firmwareFlasherOptionLabelBuildTypeReleaseCandidate',
-                loader: () => self.releaseChecker.loadReleaseData(releaseData => buildBoardOptions(releaseData, true))
-            },
-            /*
-            {
-                tag: 'firmwareFlasherOptionLabelBuildTypeDevelopment',
-                loader: () => new JenkinsLoader('https://ci.betaflight.tech', 'Betaflight').loadBuilds(buildJenkinsBoardOptions)
-            },
-            {
-                tag: 'firmwareFlasherOptionLabelBuildTypeAKK3_3',
-                loader: () => new JenkinsLoader('https://ci.betaflight.tech', 'Betaflight Maintenance 3.3 (AKK - RDQ VTX Patch)').loadBuilds(buildJenkinsBoardOptions)
-            },
-            {
-                tag: 'firmwareFlasherOptionLabelBuildTypeAKK3_4',
-                loader: () => new JenkinsLoader('https://ci.betaflight.tech', 'Betaflight Maintenance 3.4 (AKK - RDQ VTX Patch)').loadBuilds(buildJenkinsBoardOptions)
+        $.get('https://api.github.com/repos/raul-ortega/u360gts/releases', function (releasesData){
+            TABS.firmware_flasher.releasesData = releasesData;
+            buildBoardOptions();
+
+            // bind events
+            $('select[name="board"]').change(function() {
+
+                $("a.load_remote_file").addClass('disabled');
+                var target = $(this).val();
+
+                if (!GUI.connect_lock) {
+                    $('.progress').val(0).removeClass('valid invalid');
+                    $('span.progressLabel').text(chrome.i18n.getMessage('firmwareFlasherLoadFirmwareFile'));
+                    $('div.git_info').slideUp();
+                    $('div.release_info').slideUp();
+                    $('a.flash_firmware').addClass('disabled');
+
+                    var versions_e = $('select[name="firmware_version"]').empty();
+                    if(target == 0) {
+                        versions_e.append($("<option value='0'>{0}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersion'))));
+                    } else {
+                        versions_e.append($("<option value='0'>{0} {1}</option>".format(chrome.i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersionFor'), target)));
+                    }
+
+                    TABS.firmware_flasher.releases[target].forEach(function(descriptor) {
+                        var select_e =
+                                $("<option value='{0}'>{0} - {1} - {2} ({3})</option>".format(
+                                        descriptor.version,
+                                        descriptor.target,
+                                        descriptor.date,
+                                        descriptor.status
+                                )).data('summary', descriptor);
+
+                        versions_e.append(select_e);
+                    });
+                }
+            });
+
+        }).fail(function (data){
+            if (data["responseJSON"]){
+                GUI.log("<b>GITHUB Query Failed: <code>{0}</code></b>".format(data["responseJSON"].message));
             }
-            */
-        ];
-
-        var buildType_e = $('select[name="build_type"]');
-        buildTypes.forEach((build, index) => {
-            buildType_e.append($("<option value='{0}' selected>{1}</option>".format(index, i18n.getMessage(build.tag))))
+            $('select[name="release"]').empty().append('<option value="0">Offline</option>');
         });
 
-        showOrHideBuildTypeSelect();
+        /*var buildType_e = $('select[name="build_type"]');
+        buildTypes.forEach((build, index) => {
+            buildType_e.append($("<option value='{0}' selected>{1}</option>".format(index, i18n.getMessage(build.tag))))
+        });*/
+
+        /*showOrHideBuildTypeSelect();*/
         //$('input.show_development_releases').change(showOrHideBuildTypeSelect);
 
         // translate to user-selected language
         i18n.localizePage();
 
-        buildType_e.change(function() {
+        /*buildType_e.change(function() {
             $("a.load_remote_file").addClass('disabled');
             var build_type = $(this).val();
 
@@ -287,8 +228,99 @@ TABS.firmware_flasher.initialize = function (callback) {
             }
 
             chrome.storage.local.set({'selected_build_type': build_type});
-        });
+        });*/
 
+		$('input.show_development_releases').click(function(){
+			buildBoardOptions();
+        });
+		
+		var buildBoardOptions = function(){
+
+            var boards_e = $('select[name="board"]').empty();
+            var showDevReleases = ($('input.show_development_releases').is(':checked'));
+            boards_e.append($("<option value='0'>{0}</option>".format(i18n.getMessage('firmwareFlasherOptionLabelSelectBoard'))));
+
+            var versions_e = $('select[name="firmware_version"]').empty();
+            versions_e.append($("<option value='0'>{0}</option>".format(i18n.getMessage('firmwareFlasherOptionLabelSelectFirmwareVersion'))));
+
+            var releases = {};
+            var sortedTargets = [];
+            var unsortedTargets = [];
+            TABS.firmware_flasher.releasesData.forEach(function(release){
+                release.assets.forEach(function(asset){
+                    var result = parseFilename(asset.name);
+
+                    if ((!showDevReleases && release.prerelease) || !result) {
+                        return;
+                    }
+                    if($.inArray(result.target, unsortedTargets) == -1) {
+                        unsortedTargets.push(result.target);
+                    }
+                });
+                sortedTargets = unsortedTargets.sort();
+            });
+            sortedTargets.forEach(function(release) {
+                releases[release] = [];
+            });
+
+            TABS.firmware_flasher.releasesData.forEach(function(release){
+
+                var versionFromTagExpression = /v?(.*)/;
+                var matchVersionFromTag = versionFromTagExpression.exec(release.tag_name);
+                var version = matchVersionFromTag[1];
+
+                release.assets.forEach(function(asset){
+                    var result = parseFilename(asset.name);
+                    if ((!showDevReleases && release.prerelease) || !result) {
+                        return;
+                    }
+
+                    if (result.format != 'hex') {
+                        return;
+                    }
+
+                    var date = new Date(release.published_at);
+                    var formattedDate = "{0}-{1}-{2} {3}:{4}".format(
+                            date.getFullYear(),
+                            date.getMonth() + 1,
+                            date.getDate(),
+                            date.getUTCHours(),
+                            date.getMinutes()
+                    );
+
+                    var descriptor = {
+                        "releaseUrl": release.html_url,
+                        "name"      : semver.clean(release.name),
+                        "version"   : release.tag_name,
+                        "url"       : asset.browser_download_url,
+                        "file"      : asset.name,
+                        "target"    : result.target,
+                        "date"      : formattedDate,
+                        "notes"     : release.body,
+                        "status"    : release.prerelease ? "release-candidate" : "stable"
+                    };
+                    releases[result.target].push(descriptor);
+                });
+            });
+            var selectTargets = [];
+            Object.keys(releases)
+                .sort()
+                .forEach(function(target, i) {
+                    var descriptors = releases[target];
+                    descriptors.forEach(function(descriptor){
+                        if($.inArray(target, selectTargets) == -1) {
+                            selectTargets.push(target);
+                            var select_e =
+                                    $("<option value='{0}'>{0}</option>".format(
+                                            descriptor.target
+                                    )).data('summary', descriptor);
+                            boards_e.append(select_e);
+                        }
+                    });
+                });
+            TABS.firmware_flasher.releases = releases;
+        };
+		
         $('select[name="board"]').change(function() {
             $("a.load_remote_file").addClass('disabled');
             var target = $(this).val();
@@ -513,10 +545,10 @@ TABS.firmware_flasher.initialize = function (callback) {
             });
         });
 
-        chrome.storage.local.get('selected_build_type', function (result) {
+        /*chrome.storage.local.get('selected_build_type', function (result) {
             // ensure default build type is selected
             buildType_e.val(result.selected_build_type || 0).trigger('change');
-        });
+        });*/
 
         chrome.storage.local.get('no_reboot_sequence', function (result) {
             if (result.no_reboot_sequence) {
