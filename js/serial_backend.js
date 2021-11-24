@@ -7,8 +7,12 @@ function initializeSerialBackend() {
         var selected_port = $('div#port-picker #port option:selected');
         if (selected_port.data().isManual) {
             $('#port-override-option').show();
+        } else if (selected_port.data().isUDP) {
+            $('#server-override-option').show();
+            $('#port-override-option').show();
         } else {
             $('#port-override-option').hide();
+            $('#server-override-option').hide();
         }
         if (selected_port.data().isDFU) {
             $('select#baud').hide();
@@ -42,11 +46,23 @@ function initializeSerialBackend() {
             };
 
             var selected_baud = parseInt($('div#port-picker #baud').val());
-            var selected_port = $('div#port-picker #port option:selected').data().isManual ?
+            var selected_port = $('div#port-picker #port option:selected').val();
+            selected_port = (selected_port == 'udp' ?
+                'udp://' + String($('#server-override').val()) + ':' + String($('#port-override').val()):
+                $('div#port-picker #port option:selected').data().isManual ?
                     $('#port-override').val() :
-                    String($('div#port-picker #port').val());
+                    String($('div#port-picker #port').val()));
             if (selected_port === 'DFU') {
                 GUI.log(i18n.getMessage('dfu_connect_message'));
+            /*} else if (selected_port == 'udp') {
+            
+                var udp_server = $('#server-override').val();
+                var udp_port = $('#port-override').val();
+                GUI.log('udp - ' + udp_server + ':' + udp_port);
+                var dgram = require('dgram');
+                var s = dgram.createSocket('udp4');
+                s.send(Buffer.from('RRR'), udp_port, udp_server);*/
+
             } else if (selected_port != '0') {
                 if (!clicks) {
                     console.log('Connecting to: ' + selected_port);

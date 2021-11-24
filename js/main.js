@@ -15,6 +15,13 @@ var debugEnabled = false;
 //Process to execute to real start the app
 function startProcess() {
 
+/*
+var dgram = require('dgram');
+var s = dgram.createSocket('udp4');
+s.send(Buffer.from('RRR'), 9876, '192.168.1.1');
+*/
+
+
     // translate to user-selected language
     i18n.localizePage();
 

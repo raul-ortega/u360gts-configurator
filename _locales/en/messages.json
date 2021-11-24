@@ -2636,6 +2636,9 @@
     "portOverrideText": {
         "message": "Port:"
     },
+    "portOverrideServerText": {
+        "message": "Server:"
+    },
     "portsButtonSave": {
         "message": "Save and Reboot"
     },

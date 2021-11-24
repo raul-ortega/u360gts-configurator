@@ -26,6 +26,11 @@
    "sockets": {
       "tcp": {
          "connect": "*:*"
+      },
+      "udp": {
+        "bind": ["*"],
+        "send": ["*"],
+        "bind": ["*"]
       }
    },
    "update_url": "https://clients2.google.com/service/update2/crx",
