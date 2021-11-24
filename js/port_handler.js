@@ -172,6 +172,7 @@ PortHandler.update_port_select = function (ports) {
     }
 
     $('div#port-picker #port').append($("<option/>", {value: 'manual', text: i18n.getMessage('portsSelectManual'), data: {isManual: true}}));
+    $('div#port-picker #port').append($("<option/>", {value: 'udp', text: 'udp', data: {isUDP: true}}));
 };
 
 PortHandler.port_detected = function(name, code, timeout, ignore_timeout) {
