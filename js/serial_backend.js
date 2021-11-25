@@ -1,6 +1,19 @@
 'use strict';
 var mspHelper;
-
+function buildIpPicker(){
+	chrome.system.network.getNetworkInterfaces(function(interfaces){
+		console.log(interfaces);
+		$('div#client-override-option #client-override-select').html('');
+		if(interfaces.length) {
+			interfaces.forEach(element => {
+				if (element['prefixLength'] < 64 && !self.connected) {
+					$('div#client-override-option #client-override-select').append($("<option/>", {value: element['address'], text: element['address']}));
+				}
+			});
+		} else
+			GUI.log("No network interfaces found");
+	});
+}
 function initializeSerialBackend() {
 
     GUI.updateManualPortVisibility = function () {
@@ -9,9 +22,12 @@ function initializeSerialBackend() {
             $('#port-override-option').show();
         } else if (selected_port.data().isUDP) {
             $('#server-override-option').show();
+			$('#client-override-option').show();
             $('#port-override-option').show();
+			buildIpPicker();
         } else {
             $('#port-override-option').hide();
+			$('#client-override-option').hide();
             $('#server-override-option').hide();
         }
         if (selected_port.data().isDFU) {

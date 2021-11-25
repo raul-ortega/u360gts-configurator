@@ -16,13 +16,13 @@
    "minimum_chrome_version": "38",
    "name": "u360gts configurator",
    "offline_enabled": true,
-   "permissions": [ "https://www.google-analytics.com/", "https://maps.googleapis.com/*", "https://*.github.com/", "https://*.githubusercontent.com/", "http://*.u360gts.com/", "https://*.amazonaws.com/", "https://u360gts.slack.com/*", "serial", "usb", "storage", "fileSystem", "fileSystem.write", "fileSystem.retainEntries", "notifications", "alwaysOnTopWindows", {
+   "permissions": [ "https://www.google-analytics.com/", "https://maps.googleapis.com/*", "https://*.github.com/", "https://*.githubusercontent.com/", "http://*.u360gts.com/", "https://*.amazonaws.com/", "https://u360gts.slack.com/*", "serial", "usb", "storage", "fileSystem", "fileSystem.write", "fileSystem.retainEntries", "notifications", "alwaysOnTopWindows", "system.network", {
       "usbDevices": [ {
          "productId": 57105,
          "vendorId": 1155
       } ]
    }, "webview", "unlimitedStorage" ],
-   "short_name": "u360gts configurator v4.2.1",
+   "short_name": "u360gts configurator v4.3.0",
    "sockets": {
       "tcp": {
          "connect": "*:*"
@@ -34,7 +34,7 @@
       }
    },
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "4.2.1",
+   "version": "4.3.0",
    "webview": {
       "partitions": [ {
          "accessible_resources": [ "tabs/map.html", "/js/tabs/map.js", "/images/icons/tracker-map-icon.png", "/js/libraries/openlayer/css/ol.css", "/js/libraries/openlayer/build/ol.js", "/js/libraries/openlayer/build/ol.js.map" ],

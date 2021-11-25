@@ -9,9 +9,10 @@ var serial = {
     bytesReceived:   0,
     bytesSent:       0,
     failed:          0,
-    connectionType:  'serial', // 'serial' or 'tcp'
+    connectionType:  'serial', // 'serial', 'tcp', 'udp' 
     connectionIP:    '127.0.0.1',
     connectionPort:  2323,
+	localIp:		 '192.168.1.100',
 
     transmitting:   false,
     outputBuffer:  [],
@@ -191,45 +192,48 @@ var serial = {
                 self.openRequested = false;
             }
 
-            chrome.sockets.udp.bind(createInfo.socketId, '192.168.1.100', 9876, function (result){
-                console.log('onConnectedCallback', result)
-                if(result == 0) {
-			 self.connected = true;
-                        self.onReceive.addListener(function log_bytesReceived(info) {
-                            if (info.socketId != self.connectionId) return;
+			self.localIp = $('div#client-override-option #client-override-select').val();
+			 
+			chrome.sockets.udp.bind(createInfo.socketId, self.localIp, 9876, function (result){
+				console.log('onConnectedCallback', result)
+				if(result == 0) {
+						self.connected = true;
+						self.onReceive.addListener(function log_bytesReceived(info) {
+							if (info.socketId != self.connectionId) return;
 
-                            self.bytesReceived += info.data.byteLength;
-                        });
-                        self.onReceiveError.addListener(function watch_for_on_receive_errors(info) {
-                            console.error(info);
-                            if (info.socketId != self.connectionId) return;
+							self.bytesReceived += info.data.byteLength;
+						});
+						self.onReceiveError.addListener(function watch_for_on_receive_errors(info) {
+							console.error(info);
+							if (info.socketId != self.connectionId) return;
 
-                            // TODO: better error handle
-                            // error code: https://cs.chromium.org/chromium/src/net/base/net_error_list.h?sq=package:chromium&l=124
-                            switch (info.resultCode) {
-                                case -100: // CONNECTION_CLOSED
-                                case -102: // CONNECTION_REFUSED
-                                    if (GUI.connected_to || GUI.connecting_to) {
-                                        $('a.connect').click();
-                                    } else {
-                                        self.disconnect();
-                                    }
-                                    break;
+							// TODO: better error handle
+							// error code: https://cs.chromium.org/chromium/src/net/base/net_error_list.h?sq=package:chromium&l=124
+							switch (info.resultCode) {
+								case -100: // CONNECTION_CLOSED
+								case -102: // CONNECTION_REFUSED
+									if (GUI.connected_to || GUI.connecting_to) {
+										$('a.connect').click();
+									} else {
+										self.disconnect();
+									}
+									break;
 
-                            }
-                        });
+							}
+						});
 
-                        console.log(self.logHead + 'Connection opened with ID: ' + createInfo.socketId + ', url: ' + self.connectionIP + ':' + self.connectionPort);
-                        if (callback) callback(createInfo);
+						console.log(self.logHead + 'Connection opened with ID: ' + createInfo.socketId + ', url: ' + self.connectionIP + ':' + self.connectionPort);
+						GUI.log('Binded to ' + self.localIp);
+						if (callback) callback(createInfo);
 
-                } else {
-                    self.openRequested = false;
-                    console.log(self.logHead + 'Failed to connect');
+				} else {
+					self.openRequested = false;
+					console.log(self.logHead + 'Failed to connect');
 
-                    if (callback) callback(false);
-                }
+					if (callback) callback(false);
+				}
 
-            });
+			});
         });
     },
     connectTcp: function (ip, port, options, callback) {

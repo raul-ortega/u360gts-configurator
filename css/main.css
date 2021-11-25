@@ -179,13 +179,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #port-override-option label {
-    background-color: #2b2b2b;
+    background-color: transparent;
     border-radius: 3px;
     padding: 3px;
     margin-bottom: 5px;
     color: #ddd;
     position: absolute;
-    margin-top: -30px;
+    margin-top: -32px;
     margin-left: -200px;
 }
 
@@ -207,7 +207,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #server-override-option label {
-    background-color: #2b2b2b;
+    background-color: transparent;
     border-radius: 3px;
     padding: 3px;
     margin-bottom: 5px;
@@ -219,6 +219,30 @@ input[type="number"]::-webkit-inner-spin-button {
 
 #server-override input {
     width: 136px;
+}
+
+#client-override {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #888888;
+    width: 130px;
+    margin-left: 2px;
+    margin-top: -2px;
+    padding: 1px;
+    border-radius: 3px;
+    height: 15px;
+    float: right;
+    font-size: 12px;
+}
+
+#client-override-option label {
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 3px;
+    margin-bottom: 5px;
+    color: #ddd;
+    position: absolute;
+    margin-top: -6px;
+    margin-left: -200px;
 }
 
 #port-picker .auto_connect, #port-picker .sim_mode, .gray {

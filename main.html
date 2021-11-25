@@ -127,10 +127,19 @@
                             </select>
                         </div>
                         <div id="server-override-option">
-                            <label for="server-override"><span i18n="portOverrideServerText">Server:</span> <input id="server-override" type="text" value="192.168.1.1"/></label></div>
+                            <label for="server-override"><span i18n="portOverrideServerText">Server:</span> <input id="server-override" type="text" value="192.168.1.1"/></label>
+						</div>
                         <div id="port-override-option">
                             <label for="port-override"><span i18n="portOverrideText">Port:</span> <input id="port-override" type="text" value="/dev/rfcomm0"/></label>
                         </div>
+						<div id="client-override-option">
+							<label for="client-override"><span i18n="portOverrideClientText">Client:</span>
+								<div class="dropdown dropdown-dark" id="client-override">
+										<select class="dropdown-select" id="client-override-select" i18n_title="portOverrideClientText">
+										</select>
+								</div>
+							</label>
+						</div>
                         <div>
                             <!--<label><input class="auto_connect togglesmall" type="checkbox"/><span class="auto_connect" i18n="autoConnect"></span></label>-->
                             <label><input id="simModeSwitch" class="togglesmall" type="checkbox"/><span class="sim_mode" i18n="simMode"></span></label>
