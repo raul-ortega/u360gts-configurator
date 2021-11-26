@@ -22,9 +22,8 @@ function initializeSerialBackend() {
             $('#port-override-option').show();
         } else if (selected_port.data().isUDP) {
             $('#server-override-option').show();
-			$('#client-override-option').show();
+            $('#client-override-option').show();
             $('#port-override-option').show();
-			buildIpPicker();
         } else {
             $('#port-override-option').hide();
 			$('#client-override-option').hide();
@@ -38,6 +37,9 @@ function initializeSerialBackend() {
     };
 
     GUI.updateManualPortVisibility();
+    
+    if ($('div#port-picker #port option:selected').data().isUDP)
+    	buildIpPicker();
 
     $('#port-override').change(function () {
         chrome.storage.local.set({'portOverride': $('#port-override').val()});
@@ -49,6 +51,8 @@ function initializeSerialBackend() {
 
     $('div#port-picker #port').change(function (target) {
         GUI.updateManualPortVisibility();
+        if ($('div#port-picker #port option:selected').data().isUDP)
+    		buildIpPicker();
     });
 
     $('div.connect_controls a.connect').click(function () {
