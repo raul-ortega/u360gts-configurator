@@ -24,7 +24,6 @@ function initializeSerialBackend() {
             $('#server-override-option').show();
 			$('#client-override-option').show();
             $('#port-override-option').show();
-			buildIpPicker();
         } else {
             $('#port-override-option').hide();
 			$('#client-override-option').hide();
@@ -36,6 +35,8 @@ function initializeSerialBackend() {
             $('select#baud').show();
         }
     };
+
+    buildIpPicker();
 
     GUI.updateManualPortVisibility();
 

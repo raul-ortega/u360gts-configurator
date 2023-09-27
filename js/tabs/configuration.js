@@ -61,6 +61,12 @@ TABS.configuration.initialize = function (callback) {
             GUI.calibrate_lock = true;
             self.calibratePan();
         });
+
+        // Agrega un manejador de eventos para el cambio en el dropdown
+        $('div#client-override-option #client-override-select').on('change', function() {
+            // Actualiza self.localIp con el valor seleccionado por el usuario
+            TABS.serial.localIp = $(this).val();
+        });
         
         GUI.content_ready(callback);
         
